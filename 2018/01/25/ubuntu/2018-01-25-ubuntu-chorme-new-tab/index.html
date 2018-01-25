@@ -5,14 +5,19 @@
   
 
   
-  <title>Archiv: 2018 | Hexo</title>
+  <title>Chorme打开链接时在新窗口打开空白页问题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="在Ubuntu安装Chrome，并将其设置为默认浏览器。从其他地方打开链接时，Chrome会打开一个新的空白窗口并显示空白网页。">
+<meta name="keywords" content="Ubuntu,Chrome,tab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chorme打开链接时在新窗口打开空白页问题">
+<meta property="og:url" content="http://yoursite.com/2018/01/25/ubuntu/2018-01-25-ubuntu-chorme-new-tab/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在Ubuntu安装Chrome，并将其设置为默认浏览器。从其他地方打开链接时，Chrome会打开一个新的空白窗口并显示空白网页。">
+<meta property="og:updated_time" content="2018-01-25T21:40:36.167Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Chorme打开链接时在新窗口打开空白页问题">
+<meta name="twitter:description" content="在Ubuntu安装Chrome，并将其设置为默认浏览器。从其他地方打开链接时，Chrome会打开一个新的空白窗口并显示空白网页。">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,116 +64,67 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/25/ubuntu/2018-01-25-ubuntu-chorme-new-tab/" class="archive-article-date">
-  <time datetime="2018-01-25T21:40:36.175Z" itemprop="datePublished">Jan 25</time>
+        <section id="main"><article id="post-ubuntu/2018-01-25-ubuntu-chorme-new-tab" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/25/ubuntu/2018-01-25-ubuntu-chorme-new-tab/" class="article-date">
+  <time datetime="2018-01-25T21:40:36.175Z" itemprop="datePublished">2018-01-25</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Ubuntu/">Ubuntu</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/25/ubuntu/2018-01-25-ubuntu-chorme-new-tab/">Chorme打开链接时在新窗口打开空白页问题</a>
+    <h1 class="article-title" itemprop="name">
+      Chorme打开链接时在新窗口打开空白页问题
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/25/ubuntu/2018-01-25-ubuntu-thunderbird/" class="archive-article-date">
-  <time datetime="2018-01-25T21:40:22.179Z" itemprop="datePublished">Jan 25</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/25/ubuntu/2018-01-25-ubuntu-thunderbird/">Thunderbird接收常用邮箱设置</a>
-    </h1>
-  
+        <h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>我最近把自己的笔记本系统从Win10换到了Ubuntu 16.04。Chrome是我在Ubuntu系统上的默认浏览器。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>安装Chrome完成打开之后使用都很正常，但就是有一个地方很蛋疼：<br>当你打开一个链接的时候，它会生成一个新的Chrome窗口(window)，然后在那个窗口显示的也是一个空白网页(tab)。</p>
+<p>如果想让链接在原来已经打开的Chrome窗口中的一个新tab打开时，我必须使用以下操作：右击链接-&gt;拷贝链接地址-&gt;在空白网页粘贴链接</p>
+<p>对于我这种经常需要从邮件里面打开链接的人来说，这种复杂的操作让我难以忍受。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>还好，国外已经有大佬帮我解决了这个<a href="https://askubuntu.com/questions/689449/external-links-are-opened-as-blank-tabs-in-new-browser-window-in-chrome" target="_blank" rel="noopener">问题</a>。</p>
+<p>只需要打开<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$HOME</span>/.<span class="built_in">local</span>/share/applications/google-chrome.desktop</span><br></pre></td></tr></table></figure></p>
+<p>这个文件，<br>在<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exec=/opt/google/chrome/chrome</span><br></pre></td></tr></table></figure></p>
+<p>这一行后面添加一个 <code>%U</code>再保存一下文件就OK了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exec=/opt/google/chrome/chrome %U</span><br></pre></td></tr></table></figure></p>
+<p>我重装系统后又遇到了这个问题，结果忘了上次再哪而找的答案，结果又花了好久从找到。这次学聪明点，直接把答案搬运过来，翻译好，以后再遇到这个问题就不怕了。</p>
+<p>我也遇到过要修改的那个文件名称不一致的情况，存在多个看着像那个文件但不是的文件。我索性直接把所有的相似的文件都加上了那个<code>%U</code>，这样问题解决。</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/25/ubuntu/2018-01-25-ubuntu-academic-tools/" class="archive-article-date">
-  <time datetime="2018-01-25T21:40:06.354Z" itemprop="datePublished">Jan 25</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/25/ubuntu/2018-01-25-ubuntu-academic-tools/">我的Ubuntu装机必备软件</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/25/life/2018-01-25-first-blog/" class="archive-article-date">
-  <time datetime="2018-01-25T21:39:43.342Z" itemprop="datePublished">Jan 25</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/25/ubuntu/2018-01-25-ubuntu-chorme-new-tab/" data-id="cjcv12sk70006bc36y1rduwlg" class="article-share-link">Teilen</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/25/life/2018-01-25-first-blog/">博客迁移计划</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/25/hello-world/" class="archive-article-date">
-  <time datetime="2018-01-25T21:16:51.211Z" itemprop="datePublished">Jan 25</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/25/hello-world/">Hello World</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Chrome/">Chrome</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tab/">tab</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/01/25/ubuntu/2018-01-25-ubuntu-thunderbird/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Thunderbird接收常用邮箱设置</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         
