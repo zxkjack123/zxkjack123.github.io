@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Thunderbird接收常用邮箱设置]]></title>
+      <url>/2018/01/27/ubuntu/thunderbird-set/</url>
+      <content type="html"><![CDATA[<h2 id="163邮箱"><a href="#163邮箱" class="headerlink" title="163邮箱"></a>163邮箱</h2><p>Thunderbird接收163免费邮箱设置：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">服务器名称</th>
+<th style="text-align:center">服务器地址</th>
+<th style="text-align:center">SSL协议端口号</th>
+<th style="text-align:center">非SSL协议端口号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IMAP</td>
+<td style="text-align:center">imap.163.com</td>
+<td style="text-align:center">993</td>
+<td style="text-align:center">143</td>
+</tr>
+<tr>
+<td style="text-align:center">SMTP</td>
+<td style="text-align:center">smtp.163.com</td>
+<td style="text-align:center">465/994</td>
+<td style="text-align:center">25</td>
+</tr>
+<tr>
+<td style="text-align:center">POP3</td>
+<td style="text-align:center">pop.163.com</td>
+<td style="text-align:center">995</td>
+<td style="text-align:center">110</td>
+</tr>
+</tbody>
+</table>
+<p>163免费邮客户端设置的POP3、SMTP、IMAP设置<a href="http://help.163.com/09/1223/14/5R7P3QI100753VB8.html" target="_blank" rel="noopener">参考链接</a>。</p>
+<h2 id="中科院邮箱"><a href="#中科院邮箱" class="headerlink" title="中科院邮箱"></a>中科院邮箱</h2><p>Thunderbird接收中科院系统邮箱设置：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">服务器名称</th>
+<th style="text-align:center">服务器地址</th>
+<th style="text-align:center">安全链接</th>
+<th style="text-align:center">端口</th>
+<th style="text-align:center">验证方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IMAP</td>
+<td style="text-align:center">imap.cstnet.cn</td>
+<td style="text-align:center">None</td>
+<td style="text-align:center">143</td>
+<td style="text-align:center">用户名与密码</td>
+</tr>
+<tr>
+<td style="text-align:center">SMTP</td>
+<td style="text-align:center">smtp.cstnet.cn</td>
+<td style="text-align:center">None</td>
+<td style="text-align:center">25</td>
+<td style="text-align:center">用户名与密码</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://help.cstnet.cn/changjianwenti/youjianshoufa/Mozilla%20Thunderbird%20imap.html" target="_blank" rel="noopener">参考链接</a></p>
+<h2 id="中科大学生邮箱"><a href="#中科大学生邮箱" class="headerlink" title="中科大学生邮箱"></a>中科大学生邮箱</h2><p>Thunderbird接收中科大学生邮箱设置：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">服务器名称</th>
+<th style="text-align:center">服务器地址</th>
+<th style="text-align:center">加密方式</th>
+<th style="text-align:center">端口</th>
+<th style="text-align:center">Clear text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IMAP</td>
+<td style="text-align:center">mail.ustc.edu.cn</td>
+<td style="text-align:center">SSL</td>
+<td style="text-align:center">993</td>
+<td style="text-align:center">143</td>
+</tr>
+<tr>
+<td style="text-align:center">SMTP</td>
+<td style="text-align:center">mail.ustc.edu.cn</td>
+<td style="text-align:center">SSL</td>
+<td style="text-align:center">465</td>
+<td style="text-align:center">25</td>
+</tr>
+<tr>
+<td style="text-align:center">POP</td>
+<td style="text-align:center">mail.ustc.edu.cn</td>
+<td style="text-align:center">SSL</td>
+<td style="text-align:center">995</td>
+<td style="text-align:center">110</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://mail.ustc.edu.cn/coremail/help/index.jsp" target="_blank" rel="noopener">参考链接</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> ubuntu </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> thunderbird </tag>
+            
+            <tag> email </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[安装PyNE的开发版本]]></title>
+      <url>/2018/01/27/neutronics/pyne-developer-install/</url>
+      <content type="html"><![CDATA[<h2 id="PyNE简介"><a href="#PyNE简介" class="headerlink" title="PyNE简介"></a>PyNE简介</h2><p><a href="http://pyne.io/" target="_blank" rel="noopener">PyNE</a> 是一系列计算核工程领域的工具组成的一个系统工具平台。</p>
+<p>我是用PyNE配合DAGMC来进行停机剂量计算工作。现在正在进行一部分的改进工作，需要添加一部分代码，因此需要安装PyNE的开发版本。</p>
+<h2 id="Ubuntu-16-04系统下安装PyNE开发者版本"><a href="#Ubuntu-16-04系统下安装PyNE开发者版本" class="headerlink" title="Ubuntu 16.04系统下安装PyNE开发者版本"></a>Ubuntu 16.04系统下安装PyNE开发者版本</h2><p>前段时间，我的系统因为一次partial upgrade而崩溃，所有工具都需要重新装。很多工具安装起来都很麻烦，会遇到各种各种的问题，所以借此机会把整个流程梳理一下，记录在这份文档中，方便以后再遇到类似情况，可以比较快捷的重装PyNE。</p>
+<p>PyNE已经写了针对不同系统使用的<a href="https://github.com/pyne/install_scripts" target="_blank" rel="noopener">安装脚本</a>。比如我是Ubuntu 16.04的系统，就使用<code>ubuntu_16.04.sh</code>。在安装过程中,还会自动安装所依赖的软件。</p>
+<p>但是，这个安装脚步是针对使用着的，对于开发者，尤其是需要使用DAGMC的开发者，不能直接使用这个脚本。</p>
+<p>另外，现在PyNE最高支持MOAB 4.9.1 版，然而DAGMC需要使用MOAB 5.0版。也就是说，使用DAGMC的PyNE开发者需要在电脑上同时安装MOAB 4.9.1 和5.0版本。必须分别安装并设定，使用时还需要指定所使用库的路径。</p>
+<h3 id="安装依赖软件"><a href="#安装依赖软件" class="headerlink" title="安装依赖软件"></a>安装依赖软件</h3><p>在<a href="https://github.com/pyne/install_scripts" target="_blank" rel="noopener">pyne/install_scripts</a>下找到<a href="https://github.com/pyne/install_scripts/blob/master/ubuntu_16.04.sh" target="_blank" rel="noopener"><strong>ubuntu_16.04.sh</strong></a>这个文件，其中的<em>package_list</em>就是安装pyne前需要安装的工具。使用下面的命令安装这些软件：</p>
+<pre><code class="bash">sudo apt-get install software-properties-common python-software-properties wget \
+             build-essential python-numpy python-scipy cython \
+             python-nose git cmake vim emacs gfortran libblas-dev \
+             liblapack-dev libhdf5-dev gfortran python-tables  \
+             python-matplotlib python-jinja2 autoconf libtool
+</code></pre>
+<h3 id="安装MOAB4-9-1"><a href="#安装MOAB4-9-1" class="headerlink" title="安装MOAB4.9.1"></a>安装MOAB4.9.1</h3><p>按照下面的命令安装MOAB4.9.1（下面的命令将把MOAB4.9.1安装在<strong>$HOME/opt/MOAB4.9.1</strong>，如果要换文件家，改掉export MOAB_DIR的命令即可)。</p>
+<pre><code class="bash">cd $HOME/opt
+mkdir MOAB4.9.1
+cd MOAB4.9.1
+export MOAB_DIR=$HOME/opt/MOAB4.9.1
+git clone --branch Version4.9.1 --single-branch https://bitbucket.org/fathomteam/moab moab-repo
+cd moab-repo
+autoreconf -fi
+mkdir -p build
+cd build
+../configure --enable-shared --enable-dagmc --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial --prefix=$MOAB_DIR
+make
+make install
+echo &quot;export LD_LIBRARY_PATH=$MOAB_DIR/lib:\$LD_LIBRARY_PATH&quot; &gt;&gt; ~/.bashrc
+echo &quot;export LIBRARY_PATH=$MOAB_DIR/lib:\$LIBRARY_PATH&quot; &gt;&gt; ~/.bashrc
+echo &quot;export CPLUS_INCLUDE_PATH=$MOAB_DIR/include:\$CPLUS_INCLUDE_PATH&quot; &gt;&gt; ~/.bashrc
+echo &quot;export C_INCLUDE_PATH=$MOAB_DIR/include:\$C_INCLUDE_PATH&quot; &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<h3 id="安装pytaps"><a href="#安装pytaps" class="headerlink" title="安装pytaps"></a>安装pytaps</h3><p>安装下面命令将pytaps安装在$HOME/opt文件夹下：</p>
+<pre><code class="bash">cd $install_dir
+wget https://pypi.python.org/packages/source/P/PyTAPS/PyTAPS-1.4.tar.gz
+tar zxvf PyTAPS-1.4.tar.gz
+rm PyTAPS-1.4.tar.gz
+cd PyTAPS-1.4/
+# export MOAB_DIR=$HOME/MOAB4.9.1
+python setup.py --iMesh-path=$MOAB_DIR --without-iRel --without-iGeom install --user
+</code></pre>
+<h3 id="安装PyNE"><a href="#安装PyNE" class="headerlink" title="安装PyNE"></a>安装PyNE</h3><pre><code class="bash"># export MOAB_DIR=$HOME/opt/MOAB4.9.1
+python setup.py install --user --hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial/ -DMOAB_LIBRARY=$MOAB_DIR/lib/libMOAB.so -DMOAB_INCLUDE_DIR=$MOAB_DIR/include
+echo &quot;export PATH=$HOME/.local/bin:\$PATH&quot; &gt;&gt; ~/.bashrc
+echo &quot;export LD_LIBRARY_PATH=$HOME/.local/lib:\$LD_LIBRARY_PATH&quot; &gt;&gt; ~/.bashrc
+</code></pre>
+<h4 id="核数据"><a href="#核数据" class="headerlink" title="核数据"></a>核数据</h4><pre><code class="bash">./scripts/nuc_data_make
+</code></pre>
+<p>2018年1月26日执行该操作时出现除零错误，下周复现问题并提交issue.</p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>PyNE在开发过程中，功能性函数都配置了unit test进入pyne/tests问价夹下：</p>
+<pre><code class="bash">nosetests test_xxx
+</code></pre>
+<h2 id="重新编译安装PyNE"><a href="#重新编译安装PyNE" class="headerlink" title="重新编译安装PyNE"></a>重新编译安装PyNE</h2><p>当开发者对原代码进行修改后，在提交Pull Request前，必须对代码进行测试。此时需要重新编译PyNE，然后进行测试。在重新编译PyNE前，必须将原来的安装文件清除掉，再重新编译。为了方便操作，将下面两条命名写入~/.bashrc中：</p>
+<pre><code class="bash">echo &quot;alias pyne_build=&#39;python setup.py install --user --hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial/ -DMOAB_LIBRARY=$MOAB_DIR/lib/libMOAB.so -DMOAB_INCLUDE_DIR=$MOAB_DIR/include&#39;&quot; &gt;&gt; ~/.bashrc
+$ echo &quot;alias pyne_clean=&#39;rm -rf $HOME/opt/pyne/build/ $HOME/.local/lib/python2.7/site-packages/pyne* $HOME/.local/lib/libpyne.so $HOME/opt/pyne/build_nuc_data&#39;&quot;
+# source ~/.bashrc
+</code></pre>
+<p>之后需要重新编译PyNE的时候，只需要执行下面的命令即可：</p>
+<pre><code class="bash">pyne_clean
+pyne_build
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> neutronics </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> neutronics </tag>
+            
+            <tag> PyNE </tag>
+            
+            <tag> developer </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[为什么写博客？为什么放到GitHub？]]></title>
+      <url>/2018/01/26/life/why-blog/</url>
+      <content type="html"><![CDATA[<p>所有的记忆都会被时间冲淡，不论这件事情在当时是多么重要。</p>
+<p>看过的书，里面的内容很快就忘了，只记得曾经看过某本书。思考过的事情，也只有在再次遇到类似的内容时才能想起自己曾经思考过，可是具体细节却已忘记。不记录下来，就会遗忘。</p>
+<p>即便是记过的笔记，日后想翻看时，早已不知道放在哪里，更不论里面的内容。记录的东西如果没办法方便的查找和回顾，那也没有意义。</p>
+<p>就连自己的过去，也会被自己忘记。</p>
+<p>回忆自己小时候的样子，却只能想起零星的几件事情，而且对这些事情的记忆也回来越模糊。而且还有更可怕的事情，回忆以前，细节总是记不清的，然而总会下意识的“脑补”一些细节填充进去，一段时间后，我已无法分辨那些细节到底是否真实发生过。</p>
+<p>另外，生活中我也时常会主动说一些谎言来掩护我当时的行为或言论。当有类似的情况需要撒谎时，为了保证谎言不被拆穿，我便会撒同样的慌，甚至杜撰出更多的细节来支撑这个谎言。以至于那个谎言已经几乎成为我过去的真实经历。</p>
+<p>我已无法通过记忆来认识真实的自己了。因为真实的记忆被逐渐淡忘，下意识脑补出细节来补充，自己编纂出的谎言也混入记忆中。我的记忆慢慢的成为了我与外界交流的工具，可以用来和朋友吹逼，可以到知乎上分享故事，可以为自己的观点编造一些论据，也可以为自己的失败找一些理由。然而，它却没法再用来认识我自己。</p>
+<p>我现在才二十来岁了，记忆仿佛已经不属于我自己。这让我感到害怕，有一种失去自我的感觉。我是怎样一步步发展成现在的我的？我想不起来的，而且越是思考这个问题，怕是又有更多的脑补细节填充到我的记忆中来了。我希望能有一个地方，能够记录下自己的轨迹，而且，即便被将来的我篡改了，也能留下清晰的痕迹。</p>
+<p>用GitHub pages作为博客，可以记录下我每一个博客版本，正好满足我的需求。同时，这里也可以存放一些自己用得到的步骤比较复杂的东西的文档，是一个不错的博客工具。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> life </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> life </tag>
+            
+            <tag> 生活 </tag>
+            
+            <tag> memory </tag>
+            
+            <tag> 记忆 </tag>
+            
+            <tag> past </tag>
+            
+            <tag> 过去 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[博客迁移计划]]></title>
+      <url>/2018/01/26/life/first-blog-move/</url>
+      <content type="html"><![CDATA[<p>一直在寻找一种适合自己的博客写作方式，在<a href="https://zhuanlan.zhihu.com/p/22191919" target="_blank" rel="noopener">知乎</a>上发现了这个方式，Hexo + github的写作方式。于是决定用这个来作为我以后的博客写作方式。</p>
+<p>以前的博客是在网易博客上写的，东西也不多，就几篇内容，这个博客还可以<a href="http://zxkjack123.blog.163.com/#m=0&amp;t=0" target="_blank" rel="noopener">访问</a>，不过不打算更新了。选择更换的原因有：</p>
+<ul>
+<li><p>用了几次网易的博客，内容看着还行，但是登陆页面真的很渣，登陆自己的博客都很麻烦</p>
+</li>
+<li><p>没有办法做到离线提交，离线写博客</p>
+</li>
+<li><p>对公式之类的东西支持太差，和LaTeX内容兼容太差</p>
+</li>
+<li><p>在GitHub上搭建博客，远程异地同步很方便，我用GitHub也越来越多，很方便 </p>
+</li>
+</ul>
+<p>特别是最近发现的了<a href="https://github.com/Moeditor/Moeditor" target="_blank" rel="noopener">moeditor</a>这个神器，用这个来写Markdown的内容非常方便，体验极佳。</p>
+<p>一直想要一种好看的，跨平台的，方便同步，对公式和图片支持比较好的博客写作方式。现在，我感觉我的平台已经有了，剩下的就是坚持用博客记录自己的生活和学习了。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> life </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> life </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Chorme打开链接时在新窗口打开空白页问题]]></title>
+      <url>/2018/01/26/ubuntu/chrome-new-tab/</url>
+      <content type="html"><![CDATA[<h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>我最近把自己的笔记本系统从Win10换到了Ubuntu 16.04。Chrome是我在Ubuntu系统上的默认浏览器。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>安装Chrome完成打开之后使用都很正常，但就是有一个地方很蛋疼：<br>当你打开一个链接的时候，它会生成一个新的Chrome窗口(window)，然后在那个窗口显示的也是一个空白网页(tab)。</p>
+<p>如果想让链接在原来已经打开的Chrome窗口中的一个新tab打开时，我必须使用以下操作：右击链接-&gt;拷贝链接地址-&gt;在空白网页粘贴链接</p>
+<p>对于我这种经常需要从邮件里面打开链接的人来说，这种复杂的操作让我难以忍受。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>还好，国外已经有大佬帮我解决了这个<a href="https://askubuntu.com/questions/689449/external-links-are-opened-as-blank-tabs-in-new-browser-window-in-chrome" target="_blank" rel="noopener">问题</a>。</p>
+<p>只需要打开</p>
+<pre><code class="bash">$HOME/.local/share/applications/google-chrome.desktop
+</code></pre>
+<p>这个文件，<br>在</p>
+<pre><code class="bash">Exec=/opt/google/chrome/chrome
+</code></pre>
+<p>这一行后面添加一个 <code>%U</code>再保存一下文件就OK了。</p>
+<pre><code class="bash">Exec=/opt/google/chrome/chrome %U
+</code></pre>
+<p>我重装系统后又遇到了这个问题，结果忘了上次再哪而找的答案，结果又花了好久从找到。这次学聪明点，直接把答案搬运过来，翻译好，以后再遇到这个问题就不怕了。</p>
+<p>我也遇到过要修改的那个文件名称不一致的情况，存在多个看着像那个文件但不是的文件。我索性直接把所有的相似的文件都加上了那个<code>%U</code>，这样问题解决。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> ubuntu </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> chrome </tag>
+            
+            <tag> tab </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[我的Ubuntu装机必备软件]]></title>
+      <url>/2018/01/26/ubuntu/academic-tools/</url>
+      <content type="html"><![CDATA[<h2 id="重装系统的恐怖回忆"><a href="#重装系统的恐怖回忆" class="headerlink" title="重装系统的恐怖回忆"></a>重装系统的恐怖回忆</h2><p>2017年的时候因为想在ubuntu上装个IE浏览器，然后网上找了一下，需要装个wine这个东西。然后一装，结果就把系统搞坏了，装任何软件或者卸载任何软件，都会莫名其妙的弹出一个窗口，告诉我在配置什么东西，下面一个“确定”按钮还点不了。<br>哎，我对ubuntu也不是特别熟，网上搜索了一下也没找到好的解决办法，心一横就把电脑重装系统了。</p>
+<p>2018年1月23号，Ubuntu系统弹出提示，告诉我有更新，但是是什么partial update。心想着是系统提示的更新，就更新吧，确定，授权，更新，重启，整个流程都没有在意。然而当Boot Menu的开机页面蹦出来的时候，我傻眼了。什么鬼，进不去系统了！<br><img src="https://i.imgur.com/pZNBVCF.jpg" alt="开机页面"><br>我只能挥泪重装系统，好在最近的工作都同步在GitHub上，损失不大，只不过需要花点时间把东西都安装回来而已。</p>
+<h2 id="额，具体要装哪些软件？"><a href="#额，具体要装哪些软件？" class="headerlink" title="额，具体要装哪些软件？"></a>额，具体要装哪些软件？</h2><p>在准备重装系统的时候，我意识到一个问题，我之前安装到底安装了哪些软件？</p>
+<p>完了，我也记不清楚了。而且有些东西，安装之后又卸载，又装不同版本之类的，折腾来折腾去，压根不知道具体该装啥了。</p>
+<p>只好凭借这回忆，把需要用的工具整理一番，将来万一系统又蹦了，也好用这个清单再一个个装回来。</p>
+<ul>
+<li>vim: 一个通用的文本编辑器。功能强大，配合各种插件，可以写各种代码。</li>
+<li>Chrome: 浏览器，支持各种扩展应用和插件，比如google scholar插件，google dictionary插件，Todoist插件，Unblock boundary插件，Zotero插件，Ginger插件等。</li>
+<li>Unblock boundary: 翻回国内看番剧的神器（需要购买会员），妈妈再也不用担心我在国外看不了bilibili了！</li>
+<li>Lantern: 我一直用的科学上网利器。把~/.profile里面写上nohup /usr/bin/lantern &amp;，开机登陆就自动可以翻墙了，很方便。最近人在国外，暂时用不到。</li>
+<li>Thunderbird: 收发邮件。即便是重装系统时本地文件全部清除后也不会丢失自己对邮件的处理记录，比如存档的邮件。点击<a href="https://zxkjack123.github.io/2018/01/25/ubuntu-thunderbird.html">这里</a>查看Thunderbird接收我常用邮箱的设置。</li>
+<li>Mendeley: 科研文献管理软件，跨平台，能方便同步，能把文献生成bib文件，配合LaTeX写作很方便。不过最近已经转移到zotero了。</li>
+<li>Zotero: 科研文献管理软件，跨平台，开源，方便同步。外导课题组使用zotero，我现在已经从mendeley切换到zotero了。</li>
+<li>Tex live &amp; Texstudio: 很好用的LaTeX书写软件,配合GitHub保存一切书写记录和版本控制。LaTeX + GitHub写论文，版本控制很轻松，修改记录一直记录着。</li>
+<li>kolourpaint4 &amp; Gimp: 画图用的。ubuntu平台没有adobe PS &amp; AI可用，可以用这两个替代用来处理简单的图形。</li>
+<li>git:这个东西配合github，可以把其他各类代码放到github管理与同步，很方便。LaTeX文档(没错，论文也能)放上面。</li>
+<li>pycharm: 写python代码用的。最近都用vim在写python代码，基本不怎么用了。</li>
+</ul>
+<p>下面是几个常用的工具：</p>
+<ul>
+<li><a href="https://convertio.co/zh/" target="_blank" rel="noopener">Convertio</a> 各种文件格式转换，写论文的时候用这个把图片转pdf,pdf转图片什么的。</li>
+<li><a href="http://detexify.kirelabs.org/classify.html" target="_blank" rel="noopener">Detexify</a> LaTeX符合检测与转换。手画一个LaTeX符号，Detexify输出LaTeX代码，对那些都叫不出名字的符号，用这个比自己在列表里找方便多了</li>
+<li><a href="http://linggle.com/" target="_blank" rel="noopener">Linggle</a> 写论文的时候时常纠结某个词用的对不对，这里是接to还是for，用a还是the还是不要。这些常用的搭配，用linggle的推荐基本就没错了，减少很多烦恼</li>
+<li><a href="http://www.gingersoftware.com/" target="_blank" rel="noopener">Ginger</a> 身为中国人，对自己说的英语没自信，对自己写的英语也没自信。现在在国外访学，用这个工具来帮助检查自己的英语书写的语法错误，很方便。</li>
+</ul>
+<p>以后遇到其他给力的软件再放上来。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> ubuntu </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> software </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>/2018/01/25/hello-world/</url>
+      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+      
+        
+    </entry>
+    
+  
+  
+</search>
