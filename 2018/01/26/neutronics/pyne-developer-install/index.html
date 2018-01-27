@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://zxkjack123.github.io/2018/01/26/neutronics/pyne-developer-install/index.html">
 <meta property="og:site_name" content="zxkjack123&#39;s blog">
 <meta property="og:description" content="Install PyNE as a developer">
-<meta property="og:updated_time" content="2018-01-27T04:55:22.468Z">
+<meta property="og:updated_time" content="2018-01-27T05:16:03.356Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装PyNE的开发版本">
 <meta name="twitter:description" content="Install PyNE as a developer">
@@ -74,7 +74,7 @@ ga('send', 'pageview');
 	        
 				<li><a href="/tags/ubuntu/">Ubuntu</a></li>
 	        
-				<li><a href="/tags/life">Life</a></li>
+				<li><a href="/tags/life/">Life</a></li>
 	        
 				<li><a href="/tags/neutronics/">Neutronics</a></li>
 	        
@@ -158,7 +158,7 @@ ga('send', 'pageview');
 		        
 					<li style="width: 25%"><a href="/tags/ubuntu/">Ubuntu</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/life">Life</a></li>
+					<li style="width: 25%"><a href="/tags/life/">Life</a></li>
 		        
 					<li style="width: 25%"><a href="/tags/neutronics/">Neutronics</a></li>
 		        
@@ -188,7 +188,7 @@ ga('send', 'pageview');
 
         
         <a href="/2018/01/26/neutronics/pyne-developer-install/" class="archive-article-date">
-  	<time datetime="2018-01-27T04:55:22.480Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-26</time>
+  	<time datetime="2018-01-27T05:16:03.356Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-26</time>
 </a>
         
       </header>
@@ -201,14 +201,14 @@ ga('send', 'pageview');
 <p>PyNE已经写了针对不同系统使用的<a href="https://github.com/pyne/install_scripts" target="_blank" rel="noopener">安装脚本</a>。比如我是Ubuntu 16.04的系统，就使用<code>ubuntu_16.04.sh</code>。在安装过程中,还会自动安装所依赖的软件。</p>
 <p>但是，这个安装脚步是针对使用着的，对于开发者，尤其是需要使用DAGMC的开发者，不能直接使用这个脚本。</p>
 <p>另外，现在PyNE最高支持MOAB 4.9.1 版，然而DAGMC需要使用MOAB 5.0版。也就是说，使用DAGMC的PyNE开发者需要在电脑上同时安装MOAB 4.9.1 和5.0版本。必须分别安装并设定，使用时还需要指定所使用库的路径。</p>
-<h2 id="安装依赖软件"><a href="#安装依赖软件" class="headerlink" title="安装依赖软件"></a>安装依赖软件</h2><p>在<a href="https://github.com/pyne/install_scripts" target="_blank" rel="noopener">pyne/install_scripts</a>下找到<a href="https://github.com/pyne/install_scripts/blob/master/ubuntu_16.04.sh" target="_blank" rel="noopener"><strong>ubuntu_16.04.sh</strong></a>这个文件，其中的<em>package_list</em>就是安装pyne前需要安装的工具。使用下面的命令安装这些软件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install software-properties-common python-software-properties wget \</span><br><span class="line">             build-essential python-numpy python-scipy cython \</span><br><span class="line">             python-nose git cmake vim emacs gfortran libblas-dev \</span><br><span class="line">             liblapack-dev libhdf5-dev gfortran python-tables  \</span><br><span class="line">             python-matplotlib python-jinja2 autoconf libtool</span><br></pre></td></tr></table></figure></p>
-<h2 id="安装MOAB4-9-1"><a href="#安装MOAB4-9-1" class="headerlink" title="安装MOAB4.9.1"></a>安装MOAB4.9.1</h2><p>按照下面的命令安装MOAB4.9.1（下面的命令将把MOAB4.9.1安装在<strong>$HOME/opt/MOAB4.9.1</strong>，如果要换文件家，改掉export MOAB_DIR的命令即可)。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> <span class="variable">$HOME</span>/opt</span><br><span class="line">$ mkdir MOAB4.9.1</span><br><span class="line">$ <span class="built_in">cd</span> MOAB4.9.1</span><br><span class="line">$ <span class="built_in">export</span> MOAB_DIR=<span class="variable">$HOME</span>/opt/MOAB4.9.1</span><br><span class="line">$ git <span class="built_in">clone</span> --branch Version4.9.1 --single-branch https://bitbucket.org/fathomteam/moab moab-repo</span><br><span class="line">$ <span class="built_in">cd</span> moab-repo</span><br><span class="line">$ autoreconf -<span class="keyword">fi</span></span><br><span class="line">$ mkdir -p build</span><br><span class="line">$ <span class="built_in">cd</span> build</span><br><span class="line">$ ../configure --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-dagmc --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial --prefix=<span class="variable">$MOAB_DIR</span></span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export LD_LIBRARY_PATH=<span class="variable">$MOAB_DIR</span>/lib:\$LD_LIBRARY_PATH"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export LIBRARY_PATH=<span class="variable">$MOAB_DIR</span>/lib:\$LIBRARY_PATH"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export CPLUS_INCLUDE_PATH=<span class="variable">$MOAB_DIR</span>/include:\$CPLUS_INCLUDE_PATH"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export C_INCLUDE_PATH=<span class="variable">$MOAB_DIR</span>/include:\$C_INCLUDE_PATH"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
-<h2 id="安装pytaps"><a href="#安装pytaps" class="headerlink" title="安装pytaps"></a>安装pytaps</h2><p>安装下面命令将pytaps安装在$HOME/opt文件夹下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> <span class="variable">$install_dir</span></span><br><span class="line">$ wget https://pypi.python.org/packages/<span class="built_in">source</span>/P/PyTAPS/PyTAPS-1.4.tar.gz</span><br><span class="line">$ tar zxvf PyTAPS-1.4.tar.gz</span><br><span class="line">$ rm PyTAPS-1.4.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> PyTAPS-1.4/</span><br><span class="line"><span class="comment"># export MOAB_DIR=$HOME/MOAB4.9.1</span></span><br><span class="line">$ python setup.py --iMesh-path=<span class="variable">$MOAB_DIR</span> --without-iRel --without-iGeom install --user</span><br></pre></td></tr></table></figure></p>
-<h2 id="安装PyNE"><a href="#安装PyNE" class="headerlink" title="安装PyNE"></a>安装PyNE</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># export MOAB_DIR=$HOME/opt/MOAB4.9.1</span></span><br><span class="line">$ python setup.py install --user --hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial/ -DMOAB_LIBRARY=<span class="variable">$MOAB_DIR</span>/lib/libMOAB.so -DMOAB_INCLUDE_DIR=<span class="variable">$MOAB_DIR</span>/include</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export PATH=<span class="variable">$HOME</span>/.local/bin:\$PATH"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export LD_LIBRARY_PATH=<span class="variable">$HOME</span>/.local/lib:\$LD_LIBRARY_PATH"</span> &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
-<h3 id="核数据"><a href="#核数据" class="headerlink" title="核数据"></a>核数据</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./scripts/nuc_data_make</span><br></pre></td></tr></table></figure>
+<h3 id="安装依赖软件"><a href="#安装依赖软件" class="headerlink" title="安装依赖软件"></a>安装依赖软件</h3><p>在<a href="https://github.com/pyne/install_scripts" target="_blank" rel="noopener">pyne/install_scripts</a>下找到<a href="https://github.com/pyne/install_scripts/blob/master/ubuntu_16.04.sh" target="_blank" rel="noopener"><strong>ubuntu_16.04.sh</strong></a>这个文件，其中的<em>package_list</em>就是安装pyne前需要安装的工具。使用下面的命令安装这些软件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install software-properties-common python-software-properties wget \</span><br><span class="line">             build-essential python-numpy python-scipy cython \</span><br><span class="line">             python-nose git cmake vim emacs gfortran libblas-dev \</span><br><span class="line">             liblapack-dev libhdf5-dev gfortran python-tables  \</span><br><span class="line">             python-matplotlib python-jinja2 autoconf libtool</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装MOAB4-9-1"><a href="#安装MOAB4-9-1" class="headerlink" title="安装MOAB4.9.1"></a>安装MOAB4.9.1</h3><p>按照下面的命令安装MOAB4.9.1（下面的命令将把MOAB4.9.1安装在<strong>$HOME/opt/MOAB4.9.1</strong>，如果要换文件家，改掉export MOAB_DIR的命令即可)。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> <span class="variable">$HOME</span>/opt</span><br><span class="line">$ mkdir MOAB4.9.1</span><br><span class="line">$ <span class="built_in">cd</span> MOAB4.9.1</span><br><span class="line">$ <span class="built_in">export</span> MOAB_DIR=<span class="variable">$HOME</span>/opt/MOAB4.9.1</span><br><span class="line">$ git <span class="built_in">clone</span> --branch Version4.9.1 --single-branch https://bitbucket.org/fathomteam/moab moab-repo</span><br><span class="line">$ <span class="built_in">cd</span> moab-repo</span><br><span class="line">$ autoreconf -<span class="keyword">fi</span></span><br><span class="line">$ mkdir -p build</span><br><span class="line">$ <span class="built_in">cd</span> build</span><br><span class="line">$ ../configure --<span class="built_in">enable</span>-shared --<span class="built_in">enable</span>-dagmc --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial --prefix=<span class="variable">$MOAB_DIR</span></span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export LD_LIBRARY_PATH=<span class="variable">$MOAB_DIR</span>/lib:\$LD_LIBRARY_PATH"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export LIBRARY_PATH=<span class="variable">$MOAB_DIR</span>/lib:\$LIBRARY_PATH"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export CPLUS_INCLUDE_PATH=<span class="variable">$MOAB_DIR</span>/include:\$CPLUS_INCLUDE_PATH"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export C_INCLUDE_PATH=<span class="variable">$MOAB_DIR</span>/include:\$C_INCLUDE_PATH"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装pytaps"><a href="#安装pytaps" class="headerlink" title="安装pytaps"></a>安装pytaps</h3><p>安装下面命令将pytaps安装在$HOME/opt文件夹下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> <span class="variable">$install_dir</span></span><br><span class="line">$ wget https://pypi.python.org/packages/<span class="built_in">source</span>/P/PyTAPS/PyTAPS-1.4.tar.gz</span><br><span class="line">$ tar zxvf PyTAPS-1.4.tar.gz</span><br><span class="line">$ rm PyTAPS-1.4.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> PyTAPS-1.4/</span><br><span class="line"><span class="comment"># export MOAB_DIR=$HOME/MOAB4.9.1</span></span><br><span class="line">$ python setup.py --iMesh-path=<span class="variable">$MOAB_DIR</span> --without-iRel --without-iGeom install --user</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装PyNE"><a href="#安装PyNE" class="headerlink" title="安装PyNE"></a>安装PyNE</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># export MOAB_DIR=$HOME/opt/MOAB4.9.1</span></span><br><span class="line">$ python setup.py install --user --hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial/ -DMOAB_LIBRARY=<span class="variable">$MOAB_DIR</span>/lib/libMOAB.so -DMOAB_INCLUDE_DIR=<span class="variable">$MOAB_DIR</span>/include</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export PATH=<span class="variable">$HOME</span>/.local/bin:\$PATH"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"export LD_LIBRARY_PATH=<span class="variable">$HOME</span>/.local/lib:\$LD_LIBRARY_PATH"</span> &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
+<h4 id="核数据"><a href="#核数据" class="headerlink" title="核数据"></a>核数据</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./scripts/nuc_data_make</span><br></pre></td></tr></table></figure>
 <p>2018年1月26日执行该操作时出现除零错误，下周复现问题并提交issue.</p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>PyNE在开发过程中，功能性函数都配置了unit test进入pyne/tests问价夹下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nosetests test_xxx</span><br></pre></td></tr></table></figure></p>
-<h2 id="重新编译PyNE"><a href="#重新编译PyNE" class="headerlink" title="重新编译PyNE"></a>重新编译PyNE</h2><p>当开发者对原代码进行修改后，在提交Pull Request前，必须对代码进行测试。此时需要重新编译PyNE，然后进行测试。在重新编译PyNE前，必须将原来的安装文件清除掉，再重新编译。为了方便操作，将下面两条命名写入~/.bashrc中：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"alias pyne_build='python setup.py install --user --hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial/ -DMOAB_LIBRARY=<span class="variable">$MOAB_DIR</span>/lib/libMOAB.so -DMOAB_INCLUDE_DIR=<span class="variable">$MOAB_DIR</span>/include'"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"alias pyne_clean='rm -rf <span class="variable">$HOME</span>/opt/pyne/build/ <span class="variable">$HOME</span>/.local/lib/python2.7/site-packages/pyne* <span class="variable">$HOME</span>/.local/lib/libpyne.so <span class="variable">$HOME</span>/opt/pyne/build_nuc_data'"</span></span><br><span class="line"><span class="comment"># source ~/.bashrc</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>PyNE在开发过程中，功能性函数都配置了unit test进入pyne/tests问价夹下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nosetests test_xxx</span><br></pre></td></tr></table></figure></p>
+<h2 id="重新编译安装PyNE"><a href="#重新编译安装PyNE" class="headerlink" title="重新编译安装PyNE"></a>重新编译安装PyNE</h2><p>当开发者对原代码进行修改后，在提交Pull Request前，必须对代码进行测试。此时需要重新编译PyNE，然后进行测试。在重新编译PyNE前，必须将原来的安装文件清除掉，再重新编译。为了方便操作，将下面两条命名写入~/.bashrc中：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"alias pyne_build='python setup.py install --user --hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial/ -DMOAB_LIBRARY=<span class="variable">$MOAB_DIR</span>/lib/libMOAB.so -DMOAB_INCLUDE_DIR=<span class="variable">$MOAB_DIR</span>/include'"</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"alias pyne_clean='rm -rf <span class="variable">$HOME</span>/opt/pyne/build/ <span class="variable">$HOME</span>/.local/lib/python2.7/site-packages/pyne* <span class="variable">$HOME</span>/.local/lib/libpyne.so <span class="variable">$HOME</span>/opt/pyne/build_nuc_data'"</span></span><br><span class="line"><span class="comment"># source ~/.bashrc</span></span><br></pre></td></tr></table></figure></p>
 <p>之后需要重新编译PyNE的时候，只需要执行下面的命令即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pyne_clean</span><br><span class="line">$ pyne_build</span><br></pre></td></tr></table></figure></p>
 
       
@@ -333,6 +333,19 @@ ga('send', 'pageview');
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PyNE简介"><span class="toc-number">1.</span> <span class="toc-text">PyNE简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu-16-04系统下安装PyNE开发者版本"><span class="toc-number">2.</span> <span class="toc-text">Ubuntu 16.04系统下安装PyNE开发者版本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装依赖软件"><span class="toc-number">2.1.</span> <span class="toc-text">安装依赖软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装MOAB4-9-1"><span class="toc-number">2.2.</span> <span class="toc-text">安装MOAB4.9.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装pytaps"><span class="toc-number">2.3.</span> <span class="toc-text">安装pytaps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装PyNE"><span class="toc-number">2.4.</span> <span class="toc-text">安装PyNE</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#核数据"><span class="toc-number">2.4.1.</span> <span class="toc-text">核数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#测试"><span class="toc-number">2.4.2.</span> <span class="toc-text">测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重新编译安装PyNE"><span class="toc-number">3.</span> <span class="toc-text">重新编译安装PyNE</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -501,18 +514,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">neutronics</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">PyNE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">developer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">chrome</a>
               </li>
              
@@ -526,6 +527,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">email</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">neutronics</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">PyNE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">developer</a>
               </li>
             
             <div class="clearfix"></div>
