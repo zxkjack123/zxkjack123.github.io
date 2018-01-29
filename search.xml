@@ -95,8 +95,22 @@ git clone https://github.com/svalinn/DAGMC
 cd DAGMC
 git checkout develop
 </code></pre>
-<h3 id="安装DAGMC-1"><a href="#安装DAGMC-1" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h3><p><strong>这个步骤需要相应的物理计算部分的源代码</strong>。请参考<a href="https://svalinn.github.io/DAGMC/install/dagmc.html" target="_blank" rel="noopener">官方文档</a>选择相应版本执行后续安装步骤。</p>
-]]></content>
+<h3 id="安装DAGMC-1"><a href="#安装DAGMC-1" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h3><p><strong>这个步骤需要相应的物理计算部分的源代码</strong>。请参考<a href="https://svalinn.github.io/DAGMC/install/dagmc.html" target="_blank" rel="noopener">官方文档</a>选择相应版本执行后续安装步骤。<br>下面以安装DAG-MCNP v1.xx为例说明安装过程</p>
+<h4 id="patch"><a href="#patch" class="headerlink" title="patch"></a>patch</h4><pre><code class="bash">cd mcnp/mcnp5
+cp -r &lt;path_to_dvd&gt;/MCNP5/Source .
+chmod -R u+rw Source
+patch -p0 &lt; patch/dagmc.5.1.xx.patch
+</code></pre>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="bash">cd $HOME/opt/DAGMC/DAGMC
+mkdir bld
+cd bld
+cmake ../. -DBUILD_MCNP5=ON -DMPI_BUILD=ON -DCMAKE_INSTALL_PREFIX=$HOME/opt/DAGMC -DHDF5_LIBRARIES=/usr/lib/x86_64-linux-gnu/hdf5/serial/lib -DHDF5_INCLUDE_DIRS=/usr/lib/x86_64-linux-gnu/hdf5/serial/include -DMCNP5_DATAPATH=$HOME/opt/MCNPDATA
+make
+make install
+</code></pre>
+<h4 id="添加路径到-bashrc"><a href="#添加路径到-bashrc" class="headerlink" title="添加路径到~/.bashrc"></a>添加路径到~/.bashrc</h4><pre><code>export PATH=$PATH:$HOME/opt/DAGMC/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
+</code></pre>]]></content>
       
         <categories>
             
