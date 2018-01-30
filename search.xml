@@ -3,6 +3,108 @@
   
     
     <entry>
+      <title><![CDATA[日语动词变形学习]]></title>
+      <url>/2018/01/30/Japanese/verb-conjugation/</url>
+      <content type="html"><![CDATA[<p>因为很喜欢日语动漫，所以我现在在学习日语。网上找了一些日语入门的攻略，觉得这篇<a href="你有什么相见恨晚的日语学习方法？ - Hayami的回答 - 知乎
+https://www.zhihu.com/question/26939890/answer/36393970">大神的日语学习方法，10天入门，2个月达到N3水平，7个月突破N1，颠覆了我学习语言的思维</a>写的很好，我非常认同里面的内容。因此我也正在按照这个攻略进行入门阶段的学习，现在正学习到新编日语初级下册。学习的重点是掌握日语动词的变形。</p>
+<p>这两天刚刚学习到动词的使役被动态，算是基本接触到了日语动词所有的变形了。在巩固学习日语动词变形的过程中，又发现了一些其他的很好的资源。</p>
+<ol>
+<li><p>日语老师宵寒在其知乎日语学习专栏中发表的文章<a href="https://zhuanlan.zhihu.com/p/23853643" target="_blank" rel="noopener">巴拉拉变身！！！史上最全日语动词变形大汇总</a>中总结了日语的各种变形的规律。<br><img src="https://pic2.zhimg.com/v2-026133e770956e146eb0a07e9dd46f0b_r.jpg" alt="日语变形树形图"></p>
+</li>
+<li><p>李特务在知乎的<a href="你有什么相见恨晚的日语学习方法？ - 李特务的回答 - 知乎
+https://www.zhihu.com/question/26939890/answer/34763273">回答</a>中给出的一张动词或用练习表格：<img src="https://pic4.zhimg.com/8a902b350a7b819c1b9eb9647d130e06_r.jpg" alt="动词活用练习表格"></p>
+</li>
+</ol>
+<p>我之前也想按照表格的形式来练习日语动词变形，但是发现这样有一些缺点：</p>
+<ol>
+<li>表格的连续性导致，在一列中不需要怎么动脑，按五十音图朝下读就出来了，动词变形效果不佳</li>
+<li>检查答案不方便，自己错了都不容易发现</li>
+<li>练习到的动词有限。对表上的这些动词的确是非常熟悉了，但是碰到不在表格内的动词就比较慌。最不好的是，碰到表格外的动词，变形前居然会先联想到对应的表格内的动词，用表格内动词的变形规律，再去对应到表格外动词的变形。这无疑大大降低了变形的速度</li>
+<li>动词的联系频率不变。对自己常出错的单词和变形形式应该通过增加联系次数来巩固，而对于已经掌握的动词变形形式，就应该降低练习次数。使用表格练习法，显然无法做到动态的调整动词变形练习次数。</li>
+</ol>
+<p>因此，我自己写了一个练习动词变形的<a href="https://github.com/zxkjack123/JapaneseVerbPractice" target="_blank" rel="noopener">小软件</a>。<br>这个小软件实现的功能是：随机生成一些动词练习的题目，由练习者输入答案，并反馈和记录练习结果。<br>小软件具备以下特性：</p>
+<ol>
+<li>可以自己定义想练习的动词。比如只练习新标日初级上的动词</li>
+<li>可以自己定义想联系的变形形式。比如只练习ます形，て形和た形。（在Japanese_verb_form.jvp中指定即可)</li>
+<li>错误的及时反馈。你输错答案的话，它立马告诉你你错了，并会告诉你正确答案。</li>
+<li>动态调整动词变形练习频率。对于你犯错的动词变形，它在以后出现的概率会大大增加。对于你出错的动词变形，它在以后出现的频率会降低。</li>
+</ol>
+<p>在练习动词变形的时候，我经常把可能态和假定形搞混，被动和使役搞混。因此我觉得有必要再找找方法让这些变形规律更好记忆一些。<br>先总结一个动词变形涉及到的表格(て形和た形规律不同）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">あ</th>
+<th style="text-align:center">い</th>
+<th style="text-align:center">う</th>
+<th style="text-align:center">え</th>
+<th style="text-align:center">お</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ない形</td>
+<td style="text-align:center">ます形</td>
+<td style="text-align:center">字典形</td>
+<td style="text-align:center">命令形</td>
+<td style="text-align:center">意志形</td>
+</tr>
+<tr>
+<td style="text-align:center">被动态</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">假定形</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">使役态</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">可能态</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">使役被动态</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> verb </tag>
+            
+            <tag> 动词 </tag>
+            
+            <tag> 動詞 </tag>
+            
+            <tag> conjugation </tag>
+            
+            <tag> 变形 </tag>
+            
+            <tag> 活用 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[安装DAGMC]]></title>
       <url>/2018/01/29/neutronics/dagmc-install/</url>
       <content type="html"><![CDATA[<h2 id="DAGMC简介"><a href="#DAGMC简介" class="headerlink" title="DAGMC简介"></a>DAGMC简介</h2><p><a href="https://svalinn.github.io/DAGMC/" target="_blank" rel="noopener">DAGMC</a>是Direct Accelerated Geometry Monte Carlo的缩写，如其名字所示，DAGMC设计了一套方便高效的几何手段，用于蒙特卡罗方法的计算。DAGMC已经有了与MCNP5, MCNP6, Geant4, FLUKA, Tripoli4和Shift结合的相应工具。即使用DAGMC的几何处理部分，配合其他工具的物理计算部分代码，实现蒙特卡罗计算。</p>
