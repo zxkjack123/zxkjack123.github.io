@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            使用Trelis, DAGMC和PyNE计算停机计量的例子 | 
+        
+        zxkjack123&#39;s blog
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.jpg">
+    <link rel="icon" href="/img/favicon.jpg">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="None">
+    <meta name="keywords" content="zxkjack123,DAGMC,PyNE,Trelis,R2S,shutdown dose rate,停机计量">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?MKetZV3cUTfDxvMffaOezg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="zxkjack123&#39;s blog">
+    <meta name="msapplication-starturl" content="http://zxkjack123.github.io/neutronics/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="zxkjack123&#39;s blog">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.jpg">
+
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="JHEEEyylS4g-v_hhF-L1a1mgp9itS98C5jDANE-2PGs" />
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://zxkjack123.github.io/neutronics/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="使用Trelis, DAGMC和PyNE计算停机计量的例子 | zxkjack123&#39;s blog">
+    <meta property="og:image" content="/img/favicon.jpg">
+    <meta property="og:description" content="None">
+    <meta property="og:article:tag" content="DAGMC"> <meta property="og:article:tag" content="PyNE"> <meta property="og:article:tag" content="Trelis"> <meta property="og:article:tag" content="R2S"> <meta property="og:article:tag" content="shutdown dose rate"> <meta property="og:article:tag" content="停机计量"> 
+
+    
+        <meta property="article:published_time" content="Thu Feb 01 2018 14:44:47 GMT-0600">
+        <meta property="article:modified_time" content="Thu Feb 01 2018 14:44:47 GMT-0600">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://zxkjack123.github.io/neutronics/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://zxkjack123.github.io/neutronics/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/index.html",
+    "headline": "使用Trelis, DAGMC和PyNE计算停机计量的例子",
+    "datePublished": "Thu Feb 01 2018 14:44:47 GMT-0600",
+    "dateModified": "Thu Feb 01 2018 14:44:47 GMT-0600",
+    "author": {
+        "@type": "Person",
+        "name": "zxkjack123",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.jpg"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "zxkjack123&#39;s blog",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.jpg"
+        }
+    },
+    "keywords": ",DAGMC,PyNE,Trelis,R2S,shutdown dose rate,停机计量zxkjack123",
+    "description": "None",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-113129784-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子的重要性"><span class="post-toc-number">2.</span> <span class="post-toc-text">例子的重要性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题描述"><span class="post-toc-number">3.</span> <span class="post-toc-text">例题描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输入文件准备"><span class="post-toc-number">4.</span> <span class="post-toc-text">输入文件准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Trelis建模"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Trelis建模</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#几何体的建立"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">几何体的建立</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分组并赋材料"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">分组并赋材料</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置问题边界"><span class="post-toc-number">4.1.3.</span> <span class="post-toc-text">设置问题边界</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#终止边界：graveyard"><span class="post-toc-number">4.1.3.1.</span> <span class="post-toc-text">终止边界：graveyard</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#反射边界"><span class="post-toc-number">4.1.3.2.</span> <span class="post-toc-text">反射边界</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#imprint-amp-merge"><span class="post-toc-number">4.1.4.</span> <span class="post-toc-text">imprint &amp; merge</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#导出几何文件"><span class="post-toc-number">4.1.5.</span> <span class="post-toc-text">导出几何文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#制作材料"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">制作材料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合几何与材料"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">整合几何与材料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DAGMC-input文件准备"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">DAGMC input文件准备</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中子输运计算"><span class="post-toc-number">5.</span> <span class="post-toc-text">中子输运计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#活化计算"><span class="post-toc-number">6.</span> <span class="post-toc-text">活化计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#光子输运计算"><span class="post-toc-number">7.</span> <span class="post-toc-text">光子输运计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结果绘图"><span class="post-toc-number">8.</span> <span class="post-toc-text">结果绘图</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                使用Trelis, DAGMC和PyNE计算停机计量的例子
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/favicon.jpg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>zxkjack123</strong>
+        <span>Feb 01, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/DAGMC/">DAGMC</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/PyNE/">PyNE</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/R2S/">R2S</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Trelis/">Trelis</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/shutdown-dose-rate/">shutdown dose rate</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/停机计量/">停机计量</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=使用Trelis, DAGMC和PyNE计算停机计量的例子&url=http://zxkjack123.github.io/neutronics/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/index.html&pic=http://zxkjack123.github.io/img/favicon.jpg&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=使用Trelis, DAGMC和PyNE计算停机计量的例子&url=http://zxkjack123.github.io/neutronics/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/index.html&via=zxkjack123" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://zxkjack123.github.io/neutronics/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=zxkjack123&#39;s blog&title=使用Trelis, DAGMC和PyNE计算停机计量的例子&summary=&pics=http://zxkjack123.github.io/img/favicon.jpg&url=http://zxkjack123.github.io/neutronics/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本篇文章使用例子来说明使用Trelis, DAGMC和PyNE计算停机剂量率的流程。<br>本流程需要提前安装Trelis, DAGMC和PyNE。</p>
+<h2 id="例子的重要性"><a href="#例子的重要性" class="headerlink" title="例子的重要性"></a>例子的重要性</h2><p>使用的工具功能越多，那么使用起来一般就越复杂，新手就越难上手，新手总会在各种环节出现各种开发者意想不到的困难。即便软件官网上介绍了软件的各个工具的使用方法，但如果没有一个生动的例子来把这些应用工具的使用方法串起来的话，还是非常难的。</p>
+<p>我自己作为一个PyNE系统的使用者，现在也参与了其中的部分开发工作，对此深有体会。对于新手的教学，告诉他们这个软件的各种功能是远远不够的，必须辅以实例，手把手的教会他们怎么用这个功能。用例子来说明这些问题是比较容易让新手接受的。我作为一个PyNE的使用者，也是一个新手。</p>
+<p>这篇文章介绍了我如何从Trelis开始，一步一步实现计算一个简单模型的停机计量的过程的。</p>
+<h2 id="例题描述"><a href="#例题描述" class="headerlink" title="例题描述"></a>例题描述</h2><p>现有如下形状的几何体：<br><img src="https://i.imgur.com/BqeUfka.png" alt="test_case1"><br>图中每个小快代表着$ 10 \times 10 \times 10 \, \mathrm{cm}^3$的立方体。简单起见，我们把栅元1和3的材料设为密度为$1.0 \, \mathrm{g/cm^3}$的水(Water)，栅元2的材料设为密度为$7.8 \, \mathrm{g/cm^3}$的不锈钢(Stainless Steel)。除了这几个栅元外其它区域都是真空。栅元1的正中心有一个点中子源，各项同性的发射能量为14 MeV的中子。</p>
+<p>让点中子源以$10^{10}$个中子每秒的中子发射率辐照这几个栅元1年，然后停止辐照，考察停止辐照后1小时的栅元1, 2, 3的停机剂量率。</p>
+<h2 id="输入文件准备"><a href="#输入文件准备" class="headerlink" title="输入文件准备"></a>输入文件准备</h2><p>要进行蒙特卡罗输运计算，我们需要提供以下信息：</p>
+<ol>
+<li>几何信息，包括栅元和曲面。</li>
+<li>材料信息。每个区域（栅元）是什么材料（材料的组成份额）</li>
+<li>中子源信息。</li>
+<li>Tally信息。想统计的东西</li>
+<li>其他信息。如截断卡，权重及权窗，计算终止条件等。</li>
+</ol>
+<p>与普通MCNP计算不同，使用DAGMC计算时这些信息并不是全部都由一个输入文件提供，而是分别通过不同的文件提供。一个加载了几何和材料信息的h5m文件提供几何和材料信息。而其他信息则通过另一个input文本文件提供。</p>
+<h3 id="Trelis建模"><a href="#Trelis建模" class="headerlink" title="Trelis建模"></a>Trelis建模</h3><h4 id="几何体的建立"><a href="#几何体的建立" class="headerlink" title="几何体的建立"></a>几何体的建立</h4><p>使用Trelis建立3个立方体，并在立方体外围设置一个graveyard区域，所有到达graveyard区域的中子将被杀死。graveyard的设置可以参考DAGMC关于<a href="https://svalinn.github.io/DAGMC/usersguide/codes/dag-mcnp.html?highlight=graveyard" target="_blank" rel="noopener">graveyard的官方说明</a>。<br><img src="https://i.imgur.com/WLozRdH.png" alt="test_case1_model"><br>上图所示的三个小立方体块而就是我们建立的几个栅元，外面一个稍大的立方体薄壳就是我们想要的graveyard。<br>几何体分别标记为：</p>
+<ol>
+<li>蓝色小立方体，cell 1， trelis vol id: 1, 材料为密度为1的水，材料号设定为1</li>
+<li>黄色小立方体，cell 2, trelis vol id: 2, 材料为密度为7.8的铁，材料号设定为2</li>
+<li>红色小立方体块，cell 3, trelis vol id: 3， 材料为密度为1的水，材料号设定为1</li>
+<li>黄色大立方体薄壳，graveyard, trelis vol id: 8</li>
+</ol>
+<h4 id="分组并赋材料"><a href="#分组并赋材料" class="headerlink" title="分组并赋材料"></a>分组并赋材料</h4><p>几何体设置好了之后，对这几个栅元进行分组并赋材料。<br>在trelis界面输入下面命令：</p>
+<pre><code>trelis&gt; group &quot;mat:Water/rho:1.0&quot; add vol 1 3
+trelis&gt; group &quot;mat:Stainless Steel/rho:7.8&quot; add vol 2
+</code></pre><p><strong>备注1</strong>：’trelis&gt;’代表该命令是在trelis窗口中执行。<br><strong>备注2</strong>：这里使用的材料名必须在PyNE的材料库中存在才可以。可以使用</p>
+<pre><code class="bash">
+$ strings $HOME/.local/lib/python2.7/site-packages/pyne/nuc_data.h5 | grep name
+</code></pre>
+<p>来查看材料库中有哪些材料。使用两次grep可以用来搜索相关材料，比如查看材料库中有哪些”Steel”可供选择:</p>
+<pre><code class="bash">$ strings $HOME/.local/lib/python2.7/site-packages/pyne/nuc_data.h5 | grep name | grep &quot;Steel&quot;
+</code></pre>
+<h4 id="设置问题边界"><a href="#设置问题边界" class="headerlink" title="设置问题边界"></a>设置问题边界</h4><p>边界包括终止边界和反射边界等。终止边界指的是我们不关心的区域，中子进入到终止边界后就会被杀死，这和MCNP中<em>imp=0</em>的区域相似。反射边界就是反射面，中子到达反射面后会被反射回去，在对称几何中很常用。</p>
+<h5 id="终止边界：graveyard"><a href="#终止边界：graveyard" class="headerlink" title="终止边界：graveyard"></a>终止边界：graveyard</h5><p>终止边界的设置实际上是通过对这个区域设置特殊材料实现的。比如此例题中需要将8号volume (可以简写为vol)设置为graveyard,可以使用下面命令进行设置：</p>
+<pre><code>trelis&gt; group &quot;mat:Graveyard&quot; add volume 8
+</code></pre><h5 id="反射边界"><a href="#反射边界" class="headerlink" title="反射边界"></a>反射边界</h5><p>反射边界是通过指定反射面的方式来设置的。与volume类似，我们可以把一些面加入到一个group，然后将这个group设置为反射面即可。反射面属性的设置也是通过把group名字设置为特殊字符串的方式实现。<br>比如将10, 11号曲面设置为反射面，可以通过下面的命令：</p>
+<pre><code>trelis&gt; group &quot;boundary:Reflecting&quot; add surf 10 11
+</code></pre><p>本例题中不需要将任何曲面设置为反射面。</p>
+<h4 id="imprint-amp-merge"><a href="#imprint-amp-merge" class="headerlink" title="imprint &amp; merge"></a>imprint &amp; merge</h4><p>Imprint和merge是trelis中处理曲面的两个操作，他们的作用包括合并重合曲面和将无穷大的曲面根据几何体分割为总多的小的facet。功能说明可以参考<a href="https://svalinn.github.io/DAGMC/usersguide/trelis_basics.html" target="_blank" rel="noopener">trelis imprint and merge说明</a>。</p>
+<p>我们需要做的是，在trelis界面执行下面的操作：</p>
+<pre><code>trelis&gt; imprint body all
+trelis&gt; merge all
+</code></pre><h4 id="导出几何文件"><a href="#导出几何文件" class="headerlink" title="导出几何文件"></a>导出几何文件</h4><p>安装了DAGMC插件的trelis可以使用内置命令到处几何文件，使用方法可以通过下面命令查看帮助信息：</p>
+<pre><code>trelis&gt; help dagmc
+</code></pre><p>也可以参考<a href="https://svalinn.github.io/DAGMC/usersguide/codes/dag-mcnp.html" target="_blank" rel="noopener">官方文档</a>。</p>
+<p>对于本例题，我们可以在trelis中执行下面命令将几何信息存放到”geometry1.h5m”中：</p>
+<pre><code>trelis&gt; export dagmc geometry1.h5m
+</code></pre><p>至此，我们完成了几何文件的制作。</p>
+<p><strong>注意：在没有设置trelis默认导出文件路径的情况下，此时生成的”geometry1.h5m”文件并不一定在当前文件夹，可能存放于$HOME/Documents中，也可能在其他常用默认文件夹中</strong></p>
+<h3 id="制作材料"><a href="#制作材料" class="headerlink" title="制作材料"></a>制作材料</h3><p>按照UWUW流程制作材料，使用UWUW_preprocessor：</p>
+<pre><code class="bash">$ uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;
+</code></pre>
+<p>对于本例题：</p>
+<pre><code class="bash">$ uwuw_preproc geometry1.h5m -l \
+      $HOME/.local/lib/python2.7/site-packages/pyne/nuc_data.h5
+</code></pre>
+<p>输出提示信息：</p>
+<pre><code>Loading file geometry1.h5m
+Initializing the GeomQueryTool...
+Using faceting tolerance: 0.001
+Implicit Complement assumed to be Vacuum
+material Stainless Steel was not found in the material library
+</code></pre><h3 id="整合几何与材料"><a href="#整合几何与材料" class="headerlink" title="整合几何与材料"></a>整合几何与材料</h3><h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><h2 id="中子输运计算"><a href="#中子输运计算" class="headerlink" title="中子输运计算"></a>中子输运计算</h2><h2 id="活化计算"><a href="#活化计算" class="headerlink" title="活化计算"></a>活化计算</h2><h2 id="光子输运计算"><a href="#光子输运计算" class="headerlink" title="光子输运计算"></a>光子输运计算</h2><h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://zxkjack123.github.io/neutronics/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://zxkjack123.github.io/neutronics/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+<script type="text/ls-javascript" id="disqus-thread-script">
+    queue.offer(function() {
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//https-zxkjack123-github-io.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/neutronics/neutronics/make-pyne-material-lib/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/life/life/why-listen/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/favicon.jpg" alt="zxkjack123's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        zxkjack123@163.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto: zxkjack123@163.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">12</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Japanese/">Japanese<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/career/">career<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/life/">life<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/neutronics/">neutronics<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/ubuntu/">ubuntu<span class="sidebar_archives-count">3</span></a>
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            Theme - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/tw_zxkjack123" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://www.weibo.com/1941896854" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/zxkjack123" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+        <a href="https://www.zhihu.com/people/zhang-xiao-kang-19-67/activities" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
+                <span class="visuallyhidden">Zhihu</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>zxkjack123's blog
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?V/53wGualMuiPM3xoetD5Q==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   <!-- 使用 DISQUS js 代码 -->
+<script id="dsq-count-scr" src="//https-zxkjack123-github-io.disqus.com/count.js" async></script>
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+    <script src="https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.2 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
