@@ -3,6 +3,220 @@
   
     
     <entry>
+      <title><![CDATA[安装DAGMC]]></title>
+      <url>/neutronics/dagmc-install/</url>
+      <content type="html"><![CDATA[<h2 id="DAGMC简介"><a href="#DAGMC简介" class="headerlink" title="DAGMC简介"></a>DAGMC简介</h2><p><a href="https://svalinn.github.io/DAGMC/" target="_blank" rel="noopener">DAGMC</a>是Direct Accelerated Geometry Monte Carlo的缩写，如其名字所示，DAGMC设计了一套方便高效的几何手段，用于蒙特卡罗方法的计算。DAGMC已经有了与MCNP5, MCNP6, Geant4, FLUKA, Tripoli4和Shift结合的相应工具。即使用DAGMC的几何处理部分，配合其他工具的物理计算部分代码，实现蒙特卡罗计算。</p>
+<h2 id="DAGMC依赖软件安装"><a href="#DAGMC依赖软件安装" class="headerlink" title="DAGMC依赖软件安装"></a>DAGMC依赖软件安装</h2><p>DAGMC可以用来和PyNE配合来进行停机剂量计算工作。但是，现在PyNE最高支持MOAB 4.9.1 版，然而DAGMC需要使用MOAB 5.0版。也就是说，使用DAGMC的PyNE开发者需要在电脑上同时安装MOAB 4.9.1 和5.0版本。必须分别安装并设定，使用时还需要指定所使用库的路径。PyNE的安装可以参考<a href="https://zxkjack123.github.io/neutronics/pyne-developer-install/">PyNE的开发版本安装</a>。DAGMC的安装可以参考<a href="https://svalinn.github.io/DAGMC/install/index.html" target="_blank" rel="noopener">官方安装指导</a>。但是官方指导的安装步骤存在几个缺点：</p>
+<ol>
+<li>对于HDF5的安装和库的使用有一处会出现找不到hdf5的情况</li>
+<li>虽然说明了需要安装MOAB5.0,但并没有明确的和MOAB4.9.1做区分，导致使用PyNE的人会面临困扰</li>
+<li>部分系统上，如Ubuntu 16.04，安装MOAB时会出现bug，暂时需要手动解决</li>
+</ol>
+<p>我也正在梳理适合我实际的安装流程，同时争取把官方安装指导完善一下。不过由于PyNE和DAGMC都还在不断的开发和完善过程中，将来对于MOAB的配置问题如果得到解决，那么整个安装流程就又会发生改变。安装流程需要与时俱进。</p>
+<h3 id="安装HDF5"><a href="#安装HDF5" class="headerlink" title="安装HDF5"></a>安装HDF5</h3><p>电脑中可能已经安装了HDF5了，我们可以通过下面的命令来检查它的版本：</p>
+<pre><code class="bash">dpkg -s libhdf5-dev
+</code></pre>
+<p>如果没有安装的话，通过下面的命令安装：</p>
+<pre><code class="bash">sudo apt-get install hdf5-dev
+</code></pre>
+<h3 id="安装MOAB5-0"><a href="#安装MOAB5-0" class="headerlink" title="安装MOAB5.0"></a>安装MOAB5.0</h3><p>假定我们将MOAB5.0安装在$HOME/opt/MOAB5.0下，按照以下步骤进行安装。</p>
+<h4 id="获取源代码"><a href="#获取源代码" class="headerlink" title="获取源代码"></a>获取源代码</h4><pre><code class="bash"># 下载源代码
+cd ~/opt
+mkdir MOAB5.0
+cd MOAB5.0
+git clone https://bitbucket.org/fathomteam/moab
+cd moab
+git checkout Version5.0
+autoreconf -fi
+cd ..
+ln -s moab src
+</code></pre>
+<h4 id="配置安装"><a href="#配置安装" class="headerlink" title="配置安装"></a>配置安装</h4><pre><code>mkdir bld
+cd bld
+export MOAB_DIR=$HOME/opt/MOAB5.0
+../src/configure --enable-optimize \
+                   --enable-shared \
+                   --disable-debug \
+                   --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial \
+                   --prefix=$MOAB_DIR
+make
+</code></pre><p>目前由于MOAB的配置文件存在bug,执行到这一步时，会出现下面的报错：</p>
+<pre><code>../../src/src/moab/Matrix3.hpp:62:2: error: #error Need either Eigen3 or BLAS/LAPACK libraries
+</code></pre><p>解决方法：</p>
+<pre><code class="bash">cd $MOAB_DIR/src/src/moab
+</code></pre>
+<p>打开<strong>Matrix3.hpp</strong>,找到下面的一段内容：</p>
+<pre><code class="hpp">// We will rely on LAPACK directly
+#ifndef MOAB_HAVE_LAPACK
+#error Need either Eigen3 or BLAS/LAPACK libraries
+#endif
+</code></pre>
+<p>将<strong>#error Need either Eigen3 or BLAS/LAPACK libraries</strong>注释掉：</p>
+<pre><code class="hpp">// We will rely on LAPACK directly
+#ifndef MOAB_HAVE_LAPACK
+//#error Need either Eigen3 or BLAS/LAPACK libraries
+#endif
+</code></pre>
+<p>然后清空bld文件家下的所有内容，重新配置安装：</p>
+<pre><code class="bash">cd $MOAB_DIR/bld
+rm -rf ./*
+../src/configure --enable-optimize \
+                   --enable-shared \
+                   --disable-debug \
+                   --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial \
+                   --prefix=$MOAB_DIR
+make
+make check
+make install
+</code></pre>
+<p>至此，我们完成了MOAB5.0的安装，但是要调用它，必须让系统能够找到相关的文件。由于系统中可能同时安装了MOAB4.9.1和MOAB5.0，因此我们需要设置好MOAB的路径。</p>
+<h4 id="路径设置"><a href="#路径设置" class="headerlink" title="路径设置"></a>路径设置</h4><p>MOAB路径配置,将下面的内容拷贝至~/.bashrc文件：</p>
+<pre><code># MOAB
+export MOAB_DIR=$HOME/opt/MOAB5.0
+#export MOAB_DIR=$HOME/opt/MOAB4.9.1
+export PATH=$PATH:$MOAB_DIR/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOAB_DIR/lib
+export LIBRARY_PATH=$LIBRARY_PATH:$MOAB_DIR/lib
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$MOAB_DIR/include
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$MOAB_DIR/include
+</code></pre><p>这样，当需要使用DAGMC的时候，将~/.bashrc中的MOAB4.9.1路径注释掉，保留MOAB5.0，然后打开一个新的terminal（刷新~/.bashrc设置），新terminal中MOAB便是MOAB5.0。</p>
+<pre><code>export MOAB_DIR=$HOME/opt/MOAB5.0
+#export MOAB_DIR=$HOME/opt/MOAB4.9.1
+</code></pre><p>当需要使用PyNE的时候，将~/.bashrc中的MOAB5.0注释掉，保留MOAB4.9.1，然后打开一个新的terminal，新的terminal中MOAB便是MOAB4.9.1。</p>
+<pre><code>#export MOAB_DIR=$HOME/opt/MOAB5.0
+export MOAB_DIR=$HOME/opt/MOAB4.9.1
+</code></pre><h2 id="安装DAGMC"><a href="#安装DAGMC" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h2><p>完成HDF5和MOAB5.0的安装后，我们可以安装DAGMC了。</p>
+<p>假设我们要把DAGMC安装在$HOME/opt/DAGMC文件夹下，可以按照下面的步骤进行。</p>
+<h3 id="获取DAGMC源代码"><a href="#获取DAGMC源代码" class="headerlink" title="获取DAGMC源代码"></a>获取DAGMC源代码</h3><pre><code class="bash">cd $HOME/opt
+mkdir DAGMC
+cd DAGMC
+git clone https://github.com/svalinn/DAGMC
+# 此处会在DAGMC文件夹下再生成一个DAGMC文件夹-&gt; DAGMC/DAGMC
+cd DAGMC
+git checkout develop
+</code></pre>
+<h3 id="安装DAGMC-1"><a href="#安装DAGMC-1" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h3><p><strong>这个步骤需要相应的物理计算部分的源代码</strong>。请参考<a href="https://svalinn.github.io/DAGMC/install/dagmc.html" target="_blank" rel="noopener">官方文档</a>选择相应版本执行后续安装步骤。<br>下面以安装DAG-MCNP v1.xx为例说明安装过程</p>
+<h4 id="patch"><a href="#patch" class="headerlink" title="patch"></a>patch</h4><pre><code class="bash">cd mcnp/mcnp5
+cp -r &lt;path_to_dvd&gt;/MCNP5/Source .
+chmod -R u+rw Source
+patch -p0 &lt; patch/dagmc.5.1.xx.patch
+</code></pre>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="bash">cd $HOME/opt/DAGMC/DAGMC
+mkdir bld
+cd bld
+cmake ../. -DBUILD_MCNP5=ON -DMPI_BUILD=ON -DCMAKE_INSTALL_PREFIX=$HOME/opt/DAGMC -DHDF5_LIBRARIES=/usr/lib/x86_64-linux-gnu/hdf5/serial/lib -DHDF5_INCLUDE_DIRS=/usr/lib/x86_64-linux-gnu/hdf5/serial/include -DMCNP5_DATAPATH=$HOME/opt/MCNPDATA
+make
+make install
+</code></pre>
+<h4 id="添加路径到-bashrc"><a href="#添加路径到-bashrc" class="headerlink" title="添加路径到~/.bashrc"></a>添加路径到~/.bashrc</h4><pre><code>export PATH=$PATH:$HOME/opt/DAGMC/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> neutronics </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> DAGMC </tag>
+            
+            <tag> install </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[使用Trelis, DAGMC和PyNE计算停机计量的例子]]></title>
+      <url>/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/</url>
+      <content type="html"><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本篇文章使用例子来说明使用Trelis, DAGMC和PyNE计算停机剂量率的流程。<br>本流程需要提前安装Trelis, DAGMC和PyNE。</p>
+<h2 id="例子的重要性"><a href="#例子的重要性" class="headerlink" title="例子的重要性"></a>例子的重要性</h2><p>使用的工具功能越多，那么使用起来一般就越复杂，新手就越难上手，新手总会在各种环节出现各种开发者意想不到的困难。即便软件官网上介绍了软件的各个工具的使用方法，但如果没有一个生动的例子来把这些应用工具的使用方法串起来的话，还是非常难的。</p>
+<p>我自己作为一个PyNE系统的使用者，现在也参与了其中的部分开发工作，对此深有体会。对于新手的教学，告诉他们这个软件的各种功能是远远不够的，必须辅以实例，手把手的教会他们怎么用这个功能。用例子来说明这些问题是比较容易让新手接受的。我作为一个PyNE的使用者，也是一个新手。</p>
+<p>这篇文章介绍了我如何从Trelis开始，一步一步实现计算一个简单模型的停机计量的过程的。</p>
+<h2 id="例题描述"><a href="#例题描述" class="headerlink" title="例题描述"></a>例题描述</h2><p>现有如下形状的几何体：<br><img src="https://i.imgur.com/BqeUfka.png" alt="test_case1"><br>图中每个小快代表着$ 10 \times 10 \times 10 \, \mathrm{cm}^3$的立方体。简单起见，我们把栅元1和3的材料设为密度为$1.0 \, \mathrm{g/cm^3}$的水(Water)，栅元2的材料设为密度为$7.8 \, \mathrm{g/cm^3}$的钢(Steel)。除了这几个栅元外其它区域都是真空。栅元1的正中心有一个点中子源，各项同性的发射能量为14 MeV的中子。</p>
+<p>让点中子源以$10^{10}$个中子每秒的中子发射率辐照这几个栅元1年，然后停止辐照，考察停止辐照后1小时的栅元1, 2, 3的停机剂量率。</p>
+<h2 id="输入文件准备"><a href="#输入文件准备" class="headerlink" title="输入文件准备"></a>输入文件准备</h2><p>要进行蒙特卡罗输运计算，我们需要提供以下信息：</p>
+<ol>
+<li>几何信息，包括栅元和曲面。</li>
+<li>材料信息。每个区域（栅元）是什么材料（材料的组成份额）</li>
+<li>中子源信息。</li>
+<li>Tally信息。想统计的东西</li>
+<li>其他信息。如截断卡，权重及权窗，计算终止条件等。</li>
+</ol>
+<p>与普通MCNP计算不同，使用DAGMC计算时这些信息并不是全部都由一个输入文件提供，而是分别通过不同的文件提供。一个加载了几何和材料信息的h5m文件提供几何和材料信息。而其他信息则通过另一个input文本文件提供。</p>
+<h3 id="Trelis建模"><a href="#Trelis建模" class="headerlink" title="Trelis建模"></a>Trelis建模</h3><h4 id="几何体的建立"><a href="#几何体的建立" class="headerlink" title="几何体的建立"></a>几何体的建立</h4><p>使用Trelis建立3个立方体，并在立方体外围设置一个graveyard区域，所有到达graveyard区域的中子将被杀死。graveyard的设置可以参考DAGMC关于<a href="https://svalinn.github.io/DAGMC/usersguide/codes/dag-mcnp.html?highlight=graveyard" target="_blank" rel="noopener">graveyard的官方说明</a>。<br><img src="https://i.imgur.com/WLozRdH.png" alt="test_case1_model"><br>上图所示的三个小立方体块而就是我们建立的几个栅元，外面一个稍大的立方体薄壳就是我们想要的graveyard。<br>几何体分别标记为：</p>
+<ol>
+<li>蓝色小立方体，cell 1， trelis vol id: 1, 材料为密度为1的水，材料号设定为1</li>
+<li>黄色小立方体，cell 2, trelis vol id: 2, 材料为密度为7.8的铁，材料号设定为2</li>
+<li>红色小立方体块，cell 3, trelis vol id: 3， 材料为密度为1的水，材料号设定为1</li>
+<li>黄色大立方体薄壳，graveyard, trelis vol id: 8</li>
+</ol>
+<h4 id="分组并赋材料"><a href="#分组并赋材料" class="headerlink" title="分组并赋材料"></a>分组并赋材料</h4><p>几何体设置好了之后，对这几个栅元进行分组并赋材料。<br>在trelis界面输入下面命令：</p>
+<pre><code>trelis&gt; group &quot;mat:Water/rho:1.0&quot; add vol 1 3
+trelis&gt; group &quot;mat:Steel/rho:7.8&quot; add vol 2
+</code></pre><p><strong>备注1</strong>：’trelis&gt;’代表该命令是在trelis窗口中执行。<br><strong>备注2</strong>：这里使用的材料名必须在PyNE的材料库中存在才可以。可以使用</p>
+<pre><code class="bash">
+$ strings $HOME/.local/lib/python2.7/site-packages/pyne/nuc_data.h5 | grep name
+</code></pre>
+<p>来查看材料库中有哪些材料。使用两次grep可以用来搜索相关材料，比如查看材料库中有哪些”Steel”可供选择:</p>
+<pre><code class="bash">$ strings $HOME/.local/lib/python2.7/site-packages/pyne/nuc_data.h5 | grep name | grep &quot;Steel&quot;
+</code></pre>
+<h4 id="设置问题边界"><a href="#设置问题边界" class="headerlink" title="设置问题边界"></a>设置问题边界</h4><p>边界包括终止边界和反射边界等。终止边界指的是我们不关心的区域，中子进入到终止边界后就会被杀死，这和MCNP中<em>imp=0</em>的区域相似。反射边界就是反射面，中子到达反射面后会被反射回去，在对称几何中很常用。</p>
+<h5 id="终止边界：graveyard"><a href="#终止边界：graveyard" class="headerlink" title="终止边界：graveyard"></a>终止边界：graveyard</h5><p>终止边界的设置实际上是通过对这个区域设置特殊材料实现的。比如此例题中需要将8号volume (可以简写为vol)设置为graveyard,可以使用下面命令进行设置：</p>
+<pre><code>trelis&gt; group &quot;mat:Graveyard&quot; add volume 8
+</code></pre><h5 id="反射边界"><a href="#反射边界" class="headerlink" title="反射边界"></a>反射边界</h5><p>反射边界是通过指定反射面的方式来设置的。与volume类似，我们可以把一些面加入到一个group，然后将这个group设置为反射面即可。反射面属性的设置也是通过把group名字设置为特殊字符串的方式实现。<br>比如将10, 11号曲面设置为反射面，可以通过下面的命令：</p>
+<pre><code>trelis&gt; group &quot;boundary:Reflecting&quot; add surf 10 11
+</code></pre><p>本例题中不需要将任何曲面设置为反射面。</p>
+<h4 id="imprint-amp-merge"><a href="#imprint-amp-merge" class="headerlink" title="imprint &amp; merge"></a>imprint &amp; merge</h4><p>Imprint和merge是trelis中处理曲面的两个操作，他们的作用包括合并重合曲面和将无穷大的曲面根据几何体分割为总多的小的facet。功能说明可以参考<a href="https://svalinn.github.io/DAGMC/usersguide/trelis_basics.html" target="_blank" rel="noopener">trelis imprint and merge说明</a>。</p>
+<p>我们需要做的是，在trelis界面执行下面的操作：</p>
+<pre><code>trelis&gt; imprint body all
+trelis&gt; merge all
+</code></pre><h4 id="导出几何文件"><a href="#导出几何文件" class="headerlink" title="导出几何文件"></a>导出几何文件</h4><p>安装了DAGMC插件的trelis可以使用内置命令到处几何文件，使用方法可以通过下面命令查看帮助信息：</p>
+<pre><code>trelis&gt; help dagmc
+</code></pre><p>也可以参考<a href="https://svalinn.github.io/DAGMC/usersguide/codes/dag-mcnp.html" target="_blank" rel="noopener">官方文档</a>。</p>
+<p>对于本例题，我们可以在trelis中执行下面命令将几何信息存放到”geometry1.h5m”中：</p>
+<pre><code>trelis&gt; export dagmc geometry1.h5m
+</code></pre><p>至此，我们完成了几何文件的制作。</p>
+<p><strong>注意：在没有设置trelis默认导出文件路径的情况下，此时生成的”geometry1.h5m”文件并不一定在当前文件夹，可能存放于$HOME/Documents中，也可能在其他常用默认文件夹中</strong></p>
+<h3 id="制作材料"><a href="#制作材料" class="headerlink" title="制作材料"></a>制作材料</h3><p>我们需要首先制作本例题需要使用的材料库，包括Water和Steel两种材料。可以参考<a href="https://zxkjack123.github.io/neutronics/make-pyne-material-lib/">PyNE材料库制作</a>。</p>
+<h3 id="整合几何与材料"><a href="#整合几何与材料" class="headerlink" title="整合几何与材料"></a>整合几何与材料</h3><p>按照UWUW流程制作材料，使用UWUW_preprocessor：</p>
+<pre><code class="bash">$ uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;
+</code></pre>
+<p>假设我们制作了材料库并存放在”material_lib1.h5”中，我们接下来就可以执行：</p>
+<pre><code class="bash">$ uwuw_preproc geometry1.h5m -v -l material_lib1.h5
+</code></pre>
+<h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><h2 id="中子输运计算"><a href="#中子输运计算" class="headerlink" title="中子输运计算"></a>中子输运计算</h2><h2 id="活化计算"><a href="#活化计算" class="headerlink" title="活化计算"></a>活化计算</h2><h2 id="光子输运计算"><a href="#光子输运计算" class="headerlink" title="光子输运计算"></a>光子输运计算</h2><h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
+]]></content>
+      
+        <categories>
+            
+            <category> neutronics </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> PyNE </tag>
+            
+            <tag> DAGMC </tag>
+            
+            <tag> Trelis </tag>
+            
+            <tag> R2S </tag>
+            
+            <tag> shutdown dose rate </tag>
+            
+            <tag> 停机计量 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[使用PyNE制作材料库]]></title>
       <url>/neutronics/make-pyne-material-lib/</url>
       <content type="html"><![CDATA[<p>在使用DAGMC进行输运计算的时候，其几何文件中，已经通过trelis定义了材料名称和密度，但并没有定义这些材料的具体组成成分。在进行计算之前，需要制作相应的材料数据库，把材料数据写入到h5文件中，再跟几何文件整合起来。这样，DAGMC就知道这个栅元的材料成分了。</p>
@@ -75,99 +289,6 @@ print &quot;All done!&quot;
             <tag> material </tag>
             
             <tag> library </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[使用Trelis, DAGMC和PyNE计算停机计量的例子]]></title>
-      <url>/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/</url>
-      <content type="html"><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本篇文章使用例子来说明使用Trelis, DAGMC和PyNE计算停机剂量率的流程。<br>本流程需要提前安装Trelis, DAGMC和PyNE。</p>
-<h2 id="例子的重要性"><a href="#例子的重要性" class="headerlink" title="例子的重要性"></a>例子的重要性</h2><p>使用的工具功能越多，那么使用起来一般就越复杂，新手就越难上手，新手总会在各种环节出现各种开发者意想不到的困难。即便软件官网上介绍了软件的各个工具的使用方法，但如果没有一个生动的例子来把这些应用工具的使用方法串起来的话，还是非常难的。</p>
-<p>我自己作为一个PyNE系统的使用者，现在也参与了其中的部分开发工作，对此深有体会。对于新手的教学，告诉他们这个软件的各种功能是远远不够的，必须辅以实例，手把手的教会他们怎么用这个功能。用例子来说明这些问题是比较容易让新手接受的。我作为一个PyNE的使用者，也是一个新手。</p>
-<p>这篇文章介绍了我如何从Trelis开始，一步一步实现计算一个简单模型的停机计量的过程的。</p>
-<h2 id="例题描述"><a href="#例题描述" class="headerlink" title="例题描述"></a>例题描述</h2><p>现有如下形状的几何体：<br><img src="https://i.imgur.com/BqeUfka.png" alt="test_case1"><br>图中每个小快代表着$ 10 \times 10 \times 10 \, \mathrm{cm}^3$的立方体。简单起见，我们把栅元1和3的材料设为密度为$1.0 \, \mathrm{g/cm^3}$的水(Water)，栅元2的材料设为密度为$7.8 \, \mathrm{g/cm^3}$的不锈钢(Stainless Steel)。除了这几个栅元外其它区域都是真空。栅元1的正中心有一个点中子源，各项同性的发射能量为14 MeV的中子。</p>
-<p>让点中子源以$10^{10}$个中子每秒的中子发射率辐照这几个栅元1年，然后停止辐照，考察停止辐照后1小时的栅元1, 2, 3的停机剂量率。</p>
-<h2 id="输入文件准备"><a href="#输入文件准备" class="headerlink" title="输入文件准备"></a>输入文件准备</h2><p>要进行蒙特卡罗输运计算，我们需要提供以下信息：</p>
-<ol>
-<li>几何信息，包括栅元和曲面。</li>
-<li>材料信息。每个区域（栅元）是什么材料（材料的组成份额）</li>
-<li>中子源信息。</li>
-<li>Tally信息。想统计的东西</li>
-<li>其他信息。如截断卡，权重及权窗，计算终止条件等。</li>
-</ol>
-<p>与普通MCNP计算不同，使用DAGMC计算时这些信息并不是全部都由一个输入文件提供，而是分别通过不同的文件提供。一个加载了几何和材料信息的h5m文件提供几何和材料信息。而其他信息则通过另一个input文本文件提供。</p>
-<h3 id="Trelis建模"><a href="#Trelis建模" class="headerlink" title="Trelis建模"></a>Trelis建模</h3><h4 id="几何体的建立"><a href="#几何体的建立" class="headerlink" title="几何体的建立"></a>几何体的建立</h4><p>使用Trelis建立3个立方体，并在立方体外围设置一个graveyard区域，所有到达graveyard区域的中子将被杀死。graveyard的设置可以参考DAGMC关于<a href="https://svalinn.github.io/DAGMC/usersguide/codes/dag-mcnp.html?highlight=graveyard" target="_blank" rel="noopener">graveyard的官方说明</a>。<br><img src="https://i.imgur.com/WLozRdH.png" alt="test_case1_model"><br>上图所示的三个小立方体块而就是我们建立的几个栅元，外面一个稍大的立方体薄壳就是我们想要的graveyard。<br>几何体分别标记为：</p>
-<ol>
-<li>蓝色小立方体，cell 1， trelis vol id: 1, 材料为密度为1的水，材料号设定为1</li>
-<li>黄色小立方体，cell 2, trelis vol id: 2, 材料为密度为7.8的铁，材料号设定为2</li>
-<li>红色小立方体块，cell 3, trelis vol id: 3， 材料为密度为1的水，材料号设定为1</li>
-<li>黄色大立方体薄壳，graveyard, trelis vol id: 8</li>
-</ol>
-<h4 id="分组并赋材料"><a href="#分组并赋材料" class="headerlink" title="分组并赋材料"></a>分组并赋材料</h4><p>几何体设置好了之后，对这几个栅元进行分组并赋材料。<br>在trelis界面输入下面命令：</p>
-<pre><code>trelis&gt; group &quot;mat:Water/rho:1.0&quot; add vol 1 3
-trelis&gt; group &quot;mat:Stainless Steel/rho:7.8&quot; add vol 2
-</code></pre><p><strong>备注1</strong>：’trelis&gt;’代表该命令是在trelis窗口中执行。<br><strong>备注2</strong>：这里使用的材料名必须在PyNE的材料库中存在才可以。可以使用</p>
-<pre><code class="bash">
-$ strings $HOME/.local/lib/python2.7/site-packages/pyne/nuc_data.h5 | grep name
-</code></pre>
-<p>来查看材料库中有哪些材料。使用两次grep可以用来搜索相关材料，比如查看材料库中有哪些”Steel”可供选择:</p>
-<pre><code class="bash">$ strings $HOME/.local/lib/python2.7/site-packages/pyne/nuc_data.h5 | grep name | grep &quot;Steel&quot;
-</code></pre>
-<h4 id="设置问题边界"><a href="#设置问题边界" class="headerlink" title="设置问题边界"></a>设置问题边界</h4><p>边界包括终止边界和反射边界等。终止边界指的是我们不关心的区域，中子进入到终止边界后就会被杀死，这和MCNP中<em>imp=0</em>的区域相似。反射边界就是反射面，中子到达反射面后会被反射回去，在对称几何中很常用。</p>
-<h5 id="终止边界：graveyard"><a href="#终止边界：graveyard" class="headerlink" title="终止边界：graveyard"></a>终止边界：graveyard</h5><p>终止边界的设置实际上是通过对这个区域设置特殊材料实现的。比如此例题中需要将8号volume (可以简写为vol)设置为graveyard,可以使用下面命令进行设置：</p>
-<pre><code>trelis&gt; group &quot;mat:Graveyard&quot; add volume 8
-</code></pre><h5 id="反射边界"><a href="#反射边界" class="headerlink" title="反射边界"></a>反射边界</h5><p>反射边界是通过指定反射面的方式来设置的。与volume类似，我们可以把一些面加入到一个group，然后将这个group设置为反射面即可。反射面属性的设置也是通过把group名字设置为特殊字符串的方式实现。<br>比如将10, 11号曲面设置为反射面，可以通过下面的命令：</p>
-<pre><code>trelis&gt; group &quot;boundary:Reflecting&quot; add surf 10 11
-</code></pre><p>本例题中不需要将任何曲面设置为反射面。</p>
-<h4 id="imprint-amp-merge"><a href="#imprint-amp-merge" class="headerlink" title="imprint &amp; merge"></a>imprint &amp; merge</h4><p>Imprint和merge是trelis中处理曲面的两个操作，他们的作用包括合并重合曲面和将无穷大的曲面根据几何体分割为总多的小的facet。功能说明可以参考<a href="https://svalinn.github.io/DAGMC/usersguide/trelis_basics.html" target="_blank" rel="noopener">trelis imprint and merge说明</a>。</p>
-<p>我们需要做的是，在trelis界面执行下面的操作：</p>
-<pre><code>trelis&gt; imprint body all
-trelis&gt; merge all
-</code></pre><h4 id="导出几何文件"><a href="#导出几何文件" class="headerlink" title="导出几何文件"></a>导出几何文件</h4><p>安装了DAGMC插件的trelis可以使用内置命令到处几何文件，使用方法可以通过下面命令查看帮助信息：</p>
-<pre><code>trelis&gt; help dagmc
-</code></pre><p>也可以参考<a href="https://svalinn.github.io/DAGMC/usersguide/codes/dag-mcnp.html" target="_blank" rel="noopener">官方文档</a>。</p>
-<p>对于本例题，我们可以在trelis中执行下面命令将几何信息存放到”geometry1.h5m”中：</p>
-<pre><code>trelis&gt; export dagmc geometry1.h5m
-</code></pre><p>至此，我们完成了几何文件的制作。</p>
-<p><strong>注意：在没有设置trelis默认导出文件路径的情况下，此时生成的”geometry1.h5m”文件并不一定在当前文件夹，可能存放于$HOME/Documents中，也可能在其他常用默认文件夹中</strong></p>
-<h3 id="制作材料"><a href="#制作材料" class="headerlink" title="制作材料"></a>制作材料</h3><p>按照UWUW流程制作材料，使用UWUW_preprocessor：</p>
-<pre><code class="bash">$ uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;
-</code></pre>
-<p>对于本例题：</p>
-<pre><code class="bash">$ uwuw_preproc geometry1.h5m -l \
-      $HOME/.local/lib/python2.7/site-packages/pyne/nuc_data.h5
-</code></pre>
-<p>输出提示信息：</p>
-<pre><code>Loading file geometry1.h5m
-Initializing the GeomQueryTool...
-Using faceting tolerance: 0.001
-Implicit Complement assumed to be Vacuum
-material Stainless Steel was not found in the material library
-</code></pre><h3 id="整合几何与材料"><a href="#整合几何与材料" class="headerlink" title="整合几何与材料"></a>整合几何与材料</h3><h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><h2 id="中子输运计算"><a href="#中子输运计算" class="headerlink" title="中子输运计算"></a>中子输运计算</h2><h2 id="活化计算"><a href="#活化计算" class="headerlink" title="活化计算"></a>活化计算</h2><h2 id="光子输运计算"><a href="#光子输运计算" class="headerlink" title="光子输运计算"></a>光子输运计算</h2><h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
-]]></content>
-      
-        <categories>
-            
-            <category> neutronics </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> DAGMC </tag>
-            
-            <tag> PyNE </tag>
-            
-            <tag> Trelis </tag>
-            
-            <tag> R2S </tag>
-            
-            <tag> shutdown dose rate </tag>
-            
-            <tag> 停机计量 </tag>
             
         </tags>
         
@@ -307,133 +428,6 @@ https://www.zhihu.com/question/26939890/answer/34763273">回答</a>中给出的�
             <tag> 变形 </tag>
             
             <tag> 活用 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[安装DAGMC]]></title>
-      <url>/neutronics/dagmc-install/</url>
-      <content type="html"><![CDATA[<h2 id="DAGMC简介"><a href="#DAGMC简介" class="headerlink" title="DAGMC简介"></a>DAGMC简介</h2><p><a href="https://svalinn.github.io/DAGMC/" target="_blank" rel="noopener">DAGMC</a>是Direct Accelerated Geometry Monte Carlo的缩写，如其名字所示，DAGMC设计了一套方便高效的几何手段，用于蒙特卡罗方法的计算。DAGMC已经有了与MCNP5, MCNP6, Geant4, FLUKA, Tripoli4和Shift结合的相应工具。即使用DAGMC的几何处理部分，配合其他工具的物理计算部分代码，实现蒙特卡罗计算。</p>
-<h2 id="DAGMC依赖软件安装"><a href="#DAGMC依赖软件安装" class="headerlink" title="DAGMC依赖软件安装"></a>DAGMC依赖软件安装</h2><p>DAGMC可以用来和PyNE配合来进行停机剂量计算工作。但是，现在PyNE最高支持MOAB 4.9.1 版，然而DAGMC需要使用MOAB 5.0版。也就是说，使用DAGMC的PyNE开发者需要在电脑上同时安装MOAB 4.9.1 和5.0版本。必须分别安装并设定，使用时还需要指定所使用库的路径。PyNE的安装可以参考<a href="https://zxkjack123.github.io/2018/01/27/neutronics/pyne-developer-install/">PyNE的开发版本安装</a>。DAGMC的安装可以参考<a href="https://svalinn.github.io/DAGMC/install/index.html" target="_blank" rel="noopener">官方安装指导</a>。但是官方指导的安装步骤存在几个缺点：</p>
-<ol>
-<li>对于HDF5的安装和库的使用有一处会出现找不到hdf5的情况</li>
-<li>虽然说明了需要安装MOAB5.0,但并没有明确的和MOAB4.9.1做区分，导致使用PyNE的人会面临困扰</li>
-<li>部分系统上，如Ubuntu 16.04，安装MOAB时会出现bug，暂时需要手动解决</li>
-</ol>
-<p>我也正在梳理适合我实际的安装流程，同时争取把官方安装指导完善一下。不过由于PyNE和DAGMC都还在不断的开发和完善过程中，将来对于MOAB的配置问题如果得到解决，那么整个安装流程就又会发生改变。安装流程需要与时俱进。</p>
-<h3 id="安装HDF5"><a href="#安装HDF5" class="headerlink" title="安装HDF5"></a>安装HDF5</h3><p>电脑中可能已经安装了HDF5了，我们可以通过下面的命令来检查它的版本：</p>
-<pre><code class="bash">dpkg -s libhdf5-dev
-</code></pre>
-<p>如果没有安装的话，通过下面的命令安装：</p>
-<pre><code class="bash">sudo apt-get install hdf5-dev
-</code></pre>
-<h3 id="安装MOAB5-0"><a href="#安装MOAB5-0" class="headerlink" title="安装MOAB5.0"></a>安装MOAB5.0</h3><p>假定我们将MOAB5.0安装在$HOME/opt/MOAB5.0下，按照以下步骤进行安装。</p>
-<h4 id="获取源代码"><a href="#获取源代码" class="headerlink" title="获取源代码"></a>获取源代码</h4><pre><code class="bash"># 下载源代码
-cd ~/opt
-mkdir MOAB5.0
-cd MOAB5.0
-git clone https://bitbucket.org/fathomteam/moab
-cd moab
-git checkout Version5.0
-autoreconf -fi
-cd ..
-ln -s moab src
-</code></pre>
-<h4 id="配置安装"><a href="#配置安装" class="headerlink" title="配置安装"></a>配置安装</h4><pre><code>mkdir bld
-cd bld
-export MOAB_DIR=$HOME/opt/MOAB5.0
-../src/configure --enable-optimize \
-                   --enable-shared \
-                   --disable-debug \
-                   --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial \
-                   --prefix=$MOAB_DIR
-make
-</code></pre><p>目前由于MOAB的配置文件存在bug,执行到这一步时，会出现下面的报错：</p>
-<pre><code>../../src/src/moab/Matrix3.hpp:62:2: error: #error Need either Eigen3 or BLAS/LAPACK libraries
-</code></pre><p>解决方法：</p>
-<pre><code class="bash">cd $MOAB_DIR/src/src/moab
-</code></pre>
-<p>打开<strong>Matrix3.hpp</strong>,找到下面的一段内容：</p>
-<pre><code class="hpp">// We will rely on LAPACK directly
-#ifndef MOAB_HAVE_LAPACK
-#error Need either Eigen3 or BLAS/LAPACK libraries
-#endif
-</code></pre>
-<p>将<strong>#error Need either Eigen3 or BLAS/LAPACK libraries</strong>注释掉：</p>
-<pre><code class="hpp">// We will rely on LAPACK directly
-#ifndef MOAB_HAVE_LAPACK
-//#error Need either Eigen3 or BLAS/LAPACK libraries
-#endif
-</code></pre>
-<p>然后清空bld文件家下的所有内容，重新配置安装：</p>
-<pre><code class="bash">cd $MOAB_DIR/bld
-rm -rf ./*
-../src/configure --enable-optimize \
-                   --enable-shared \
-                   --disable-debug \
-                   --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial \
-                   --prefix=$MOAB_DIR
-make
-make check
-make install
-</code></pre>
-<p>至此，我们完成了MOAB5.0的安装，但是要调用它，必须让系统能够找到相关的文件。由于系统中可能同时安装了MOAB4.9.1和MOAB5.0，因此我们需要设置好MOAB的路径。</p>
-<h4 id="路径设置"><a href="#路径设置" class="headerlink" title="路径设置"></a>路径设置</h4><p>MOAB路径配置,将下面的内容拷贝至~/.bashrc文件：</p>
-<pre><code># MOAB
-export MOAB_DIR=$HOME/opt/MOAB5.0
-#export MOAB_DIR=$HOME/opt/MOAB4.9.1
-export PATH=$PATH:$MOAB_DIR/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOAB_DIR/lib
-export LIBRARY_PATH=$LIBRARY_PATH:$MOAB_DIR/lib
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$MOAB_DIR/include
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:$MOAB_DIR/include
-</code></pre><p>这样，当需要使用DAGMC的时候，将~/.bashrc中的MOAB4.9.1路径注释掉，保留MOAB5.0，然后打开一个新的terminal（刷新~/.bashrc设置），新terminal中MOAB便是MOAB5.0。</p>
-<pre><code>export MOAB_DIR=$HOME/opt/MOAB5.0
-#export MOAB_DIR=$HOME/opt/MOAB4.9.1
-</code></pre><p>当需要使用PyNE的时候，将~/.bashrc中的MOAB5.0注释掉，保留MOAB4.9.1，然后打开一个新的terminal，新的terminal中MOAB便是MOAB4.9.1。</p>
-<pre><code>#export MOAB_DIR=$HOME/opt/MOAB5.0
-export MOAB_DIR=$HOME/opt/MOAB4.9.1
-</code></pre><h2 id="安装DAGMC"><a href="#安装DAGMC" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h2><p>完成HDF5和MOAB5.0的安装后，我们可以安装DAGMC了。</p>
-<p>假设我们要把DAGMC安装在$HOME/opt/DAGMC文件夹下，可以按照下面的步骤进行。</p>
-<h3 id="获取DAGMC源代码"><a href="#获取DAGMC源代码" class="headerlink" title="获取DAGMC源代码"></a>获取DAGMC源代码</h3><pre><code class="bash">cd $HOME/opt
-mkdir DAGMC
-cd DAGMC
-git clone https://github.com/svalinn/DAGMC
-# 此处会在DAGMC文件夹下再生成一个DAGMC文件夹-&gt; DAGMC/DAGMC
-cd DAGMC
-git checkout develop
-</code></pre>
-<h3 id="安装DAGMC-1"><a href="#安装DAGMC-1" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h3><p><strong>这个步骤需要相应的物理计算部分的源代码</strong>。请参考<a href="https://svalinn.github.io/DAGMC/install/dagmc.html" target="_blank" rel="noopener">官方文档</a>选择相应版本执行后续安装步骤。<br>下面以安装DAG-MCNP v1.xx为例说明安装过程</p>
-<h4 id="patch"><a href="#patch" class="headerlink" title="patch"></a>patch</h4><pre><code class="bash">cd mcnp/mcnp5
-cp -r &lt;path_to_dvd&gt;/MCNP5/Source .
-chmod -R u+rw Source
-patch -p0 &lt; patch/dagmc.5.1.xx.patch
-</code></pre>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="bash">cd $HOME/opt/DAGMC/DAGMC
-mkdir bld
-cd bld
-cmake ../. -DBUILD_MCNP5=ON -DMPI_BUILD=ON -DCMAKE_INSTALL_PREFIX=$HOME/opt/DAGMC -DHDF5_LIBRARIES=/usr/lib/x86_64-linux-gnu/hdf5/serial/lib -DHDF5_INCLUDE_DIRS=/usr/lib/x86_64-linux-gnu/hdf5/serial/include -DMCNP5_DATAPATH=$HOME/opt/MCNPDATA
-make
-make install
-</code></pre>
-<h4 id="添加路径到-bashrc"><a href="#添加路径到-bashrc" class="headerlink" title="添加路径到~/.bashrc"></a>添加路径到~/.bashrc</h4><pre><code>export PATH=$PATH:$HOME/opt/DAGMC/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
-</code></pre>]]></content>
-      
-        <categories>
-            
-            <category> neutronics </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> DAGMC </tag>
-            
-            <tag> install </tag>
             
         </tags>
         

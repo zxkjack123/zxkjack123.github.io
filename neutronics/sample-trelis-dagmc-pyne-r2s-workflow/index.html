@@ -54,7 +54,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="None">
-    <meta name="keywords" content="zxkjack123,DAGMC,PyNE,Trelis,R2S,shutdown dose rate,停机计量">
+    <meta name="keywords" content="zxkjack123,PyNE,DAGMC,Trelis,R2S,shutdown dose rate,停机计量">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -240,11 +240,11 @@
     <meta property="og:title" content="使用Trelis, DAGMC和PyNE计算停机计量的例子 | zxkjack123&#39;s blog">
     <meta property="og:image" content="/img/favicon.jpg">
     <meta property="og:description" content="None">
-    <meta property="og:article:tag" content="DAGMC"> <meta property="og:article:tag" content="PyNE"> <meta property="og:article:tag" content="Trelis"> <meta property="og:article:tag" content="R2S"> <meta property="og:article:tag" content="shutdown dose rate"> <meta property="og:article:tag" content="停机计量"> 
+    <meta property="og:article:tag" content="PyNE"> <meta property="og:article:tag" content="DAGMC"> <meta property="og:article:tag" content="Trelis"> <meta property="og:article:tag" content="R2S"> <meta property="og:article:tag" content="shutdown dose rate"> <meta property="og:article:tag" content="停机计量"> 
 
     
-        <meta property="article:published_time" content="Thu Feb 01 2018 14:44:47 GMT-0600">
-        <meta property="article:modified_time" content="Thu Feb 01 2018 14:44:47 GMT-0600">
+        <meta property="article:published_time" content="Thu Feb 01 2018 21:27:18 GMT-0600">
+        <meta property="article:modified_time" content="Thu Feb 01 2018 21:27:18 GMT-0600">
     
 
     <!-- The Twitter Card protocol -->
@@ -266,8 +266,8 @@
     "@type": "BlogPosting",
     "mainEntityOfPage": "http://zxkjack123.github.io/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/index.html",
     "headline": "使用Trelis, DAGMC和PyNE计算停机计量的例子",
-    "datePublished": "Thu Feb 01 2018 14:44:47 GMT-0600",
-    "dateModified": "Thu Feb 01 2018 14:44:47 GMT-0600",
+    "datePublished": "Thu Feb 01 2018 21:27:18 GMT-0600",
+    "dateModified": "Thu Feb 01 2018 21:27:18 GMT-0600",
     "author": {
         "@type": "Person",
         "name": "zxkjack123",
@@ -285,7 +285,7 @@
             "url": "/img/favicon.jpg"
         }
     },
-    "keywords": ",DAGMC,PyNE,Trelis,R2S,shutdown dose rate,停机计量zxkjack123",
+    "keywords": ",PyNE,DAGMC,Trelis,R2S,shutdown dose rate,停机计量zxkjack123",
     "description": "None",
 }
 </script>
@@ -507,7 +507,7 @@
 <h2 id="例子的重要性"><a href="#例子的重要性" class="headerlink" title="例子的重要性"></a>例子的重要性</h2><p>使用的工具功能越多，那么使用起来一般就越复杂，新手就越难上手，新手总会在各种环节出现各种开发者意想不到的困难。即便软件官网上介绍了软件的各个工具的使用方法，但如果没有一个生动的例子来把这些应用工具的使用方法串起来的话，还是非常难的。</p>
 <p>我自己作为一个PyNE系统的使用者，现在也参与了其中的部分开发工作，对此深有体会。对于新手的教学，告诉他们这个软件的各种功能是远远不够的，必须辅以实例，手把手的教会他们怎么用这个功能。用例子来说明这些问题是比较容易让新手接受的。我作为一个PyNE的使用者，也是一个新手。</p>
 <p>这篇文章介绍了我如何从Trelis开始，一步一步实现计算一个简单模型的停机计量的过程的。</p>
-<h2 id="例题描述"><a href="#例题描述" class="headerlink" title="例题描述"></a>例题描述</h2><p>现有如下形状的几何体：<br><img src="https://i.imgur.com/BqeUfka.png" alt="test_case1"><br>图中每个小快代表着$ 10 \times 10 \times 10 \, \mathrm{cm}^3$的立方体。简单起见，我们把栅元1和3的材料设为密度为$1.0 \, \mathrm{g/cm^3}$的水(Water)，栅元2的材料设为密度为$7.8 \, \mathrm{g/cm^3}$的不锈钢(Stainless Steel)。除了这几个栅元外其它区域都是真空。栅元1的正中心有一个点中子源，各项同性的发射能量为14 MeV的中子。</p>
+<h2 id="例题描述"><a href="#例题描述" class="headerlink" title="例题描述"></a>例题描述</h2><p>现有如下形状的几何体：<br><img src="https://i.imgur.com/BqeUfka.png" alt="test_case1"><br>图中每个小快代表着$ 10 \times 10 \times 10 \, \mathrm{cm}^3$的立方体。简单起见，我们把栅元1和3的材料设为密度为$1.0 \, \mathrm{g/cm^3}$的水(Water)，栅元2的材料设为密度为$7.8 \, \mathrm{g/cm^3}$的钢(Steel)。除了这几个栅元外其它区域都是真空。栅元1的正中心有一个点中子源，各项同性的发射能量为14 MeV的中子。</p>
 <p>让点中子源以$10^{10}$个中子每秒的中子发射率辐照这几个栅元1年，然后停止辐照，考察停止辐照后1小时的栅元1, 2, 3的停机剂量率。</p>
 <h2 id="输入文件准备"><a href="#输入文件准备" class="headerlink" title="输入文件准备"></a>输入文件准备</h2><p>要进行蒙特卡罗输运计算，我们需要提供以下信息：</p>
 <ol>
@@ -527,7 +527,7 @@
 </ol>
 <h4 id="分组并赋材料"><a href="#分组并赋材料" class="headerlink" title="分组并赋材料"></a>分组并赋材料</h4><p>几何体设置好了之后，对这几个栅元进行分组并赋材料。<br>在trelis界面输入下面命令：</p>
 <pre><code>trelis&gt; group &quot;mat:Water/rho:1.0&quot; add vol 1 3
-trelis&gt; group &quot;mat:Stainless Steel/rho:7.8&quot; add vol 2
+trelis&gt; group &quot;mat:Steel/rho:7.8&quot; add vol 2
 </code></pre><p><strong>备注1</strong>：’trelis&gt;’代表该命令是在trelis窗口中执行。<br><strong>备注2</strong>：这里使用的材料名必须在PyNE的材料库中存在才可以。可以使用</p>
 <pre><code class="bash">
 $ strings $HOME/.local/lib/python2.7/site-packages/pyne/nuc_data.h5 | grep name
@@ -552,20 +552,14 @@ trelis&gt; merge all
 <pre><code>trelis&gt; export dagmc geometry1.h5m
 </code></pre><p>至此，我们完成了几何文件的制作。</p>
 <p><strong>注意：在没有设置trelis默认导出文件路径的情况下，此时生成的”geometry1.h5m”文件并不一定在当前文件夹，可能存放于$HOME/Documents中，也可能在其他常用默认文件夹中</strong></p>
-<h3 id="制作材料"><a href="#制作材料" class="headerlink" title="制作材料"></a>制作材料</h3><p>按照UWUW流程制作材料，使用UWUW_preprocessor：</p>
+<h3 id="制作材料"><a href="#制作材料" class="headerlink" title="制作材料"></a>制作材料</h3><p>我们需要首先制作本例题需要使用的材料库，包括Water和Steel两种材料。可以参考<a href="https://zxkjack123.github.io/neutronics/make-pyne-material-lib/">PyNE材料库制作</a>。</p>
+<h3 id="整合几何与材料"><a href="#整合几何与材料" class="headerlink" title="整合几何与材料"></a>整合几何与材料</h3><p>按照UWUW流程制作材料，使用UWUW_preprocessor：</p>
 <pre><code class="bash">$ uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;
 </code></pre>
-<p>对于本例题：</p>
-<pre><code class="bash">$ uwuw_preproc geometry1.h5m -l \
-      $HOME/.local/lib/python2.7/site-packages/pyne/nuc_data.h5
+<p>假设我们制作了材料库并存放在”material_lib1.h5”中，我们接下来就可以执行：</p>
+<pre><code class="bash">$ uwuw_preproc geometry1.h5m -v -l material_lib1.h5
 </code></pre>
-<p>输出提示信息：</p>
-<pre><code>Loading file geometry1.h5m
-Initializing the GeomQueryTool...
-Using faceting tolerance: 0.001
-Implicit Complement assumed to be Vacuum
-material Stainless Steel was not found in the material library
-</code></pre><h3 id="整合几何与材料"><a href="#整合几何与材料" class="headerlink" title="整合几何与材料"></a>整合几何与材料</h3><h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><h2 id="中子输运计算"><a href="#中子输运计算" class="headerlink" title="中子输运计算"></a>中子输运计算</h2><h2 id="活化计算"><a href="#活化计算" class="headerlink" title="活化计算"></a>活化计算</h2><h2 id="光子输运计算"><a href="#光子输运计算" class="headerlink" title="光子输运计算"></a>光子输运计算</h2><h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
+<h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><h2 id="中子输运计算"><a href="#中子输运计算" class="headerlink" title="中子输运计算"></a>中子输运计算</h2><h2 id="活化计算"><a href="#活化计算" class="headerlink" title="活化计算"></a>活化计算</h2><h2 id="光子输运计算"><a href="#光子输运计算" class="headerlink" title="光子输运计算"></a>光子输运计算</h2><h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
 
         
     
@@ -615,7 +609,7 @@ material Stainless Steel was not found in the material library
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/neutronics/make-pyne-material-lib/" id="post_nav-newer" class="prev-content">
+        <a href="/neutronics/dagmc-install/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -629,7 +623,7 @@ material Stainless Steel was not found in the material library
 
     <!-- Next Nav -->
     
-        <a href="/life/why-listen/" id="post_nav-older" class="next-content">
+        <a href="/neutronics/make-pyne-material-lib/" id="post_nav-older" class="next-content">
             Older
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
@@ -723,7 +717,7 @@ material Stainless Steel was not found in the material library
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">12</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">11</span></a>
             </ul>
         </li>
         

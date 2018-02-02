@@ -243,8 +243,8 @@
     <meta property="og:article:tag" content="DAGMC"> <meta property="og:article:tag" content="install"> 
 
     
-        <meta property="article:published_time" content="Mon Jan 29 2018 14:05:50 GMT-0600">
-        <meta property="article:modified_time" content="Mon Jan 29 2018 14:05:50 GMT-0600">
+        <meta property="article:published_time" content="Thu Feb 01 2018 21:31:12 GMT-0600">
+        <meta property="article:modified_time" content="Thu Feb 01 2018 21:31:12 GMT-0600">
     
 
     <!-- The Twitter Card protocol -->
@@ -266,8 +266,8 @@
     "@type": "BlogPosting",
     "mainEntityOfPage": "http://zxkjack123.github.io/neutronics/dagmc-install/index.html",
     "headline": "安装DAGMC",
-    "datePublished": "Mon Jan 29 2018 14:05:50 GMT-0600",
-    "dateModified": "Mon Jan 29 2018 14:05:50 GMT-0600",
+    "datePublished": "Thu Feb 01 2018 21:31:12 GMT-0600",
+    "dateModified": "Thu Feb 01 2018 21:31:12 GMT-0600",
     "author": {
         "@type": "Person",
         "name": "zxkjack123",
@@ -410,7 +410,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>zxkjack123</strong>
-        <span>Jan 29, 2018</span>
+        <span>Feb 01, 2018</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -504,7 +504,7 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h2 id="DAGMC简介"><a href="#DAGMC简介" class="headerlink" title="DAGMC简介"></a>DAGMC简介</h2><p><a href="https://svalinn.github.io/DAGMC/" target="_blank" rel="noopener">DAGMC</a>是Direct Accelerated Geometry Monte Carlo的缩写，如其名字所示，DAGMC设计了一套方便高效的几何手段，用于蒙特卡罗方法的计算。DAGMC已经有了与MCNP5, MCNP6, Geant4, FLUKA, Tripoli4和Shift结合的相应工具。即使用DAGMC的几何处理部分，配合其他工具的物理计算部分代码，实现蒙特卡罗计算。</p>
-<h2 id="DAGMC依赖软件安装"><a href="#DAGMC依赖软件安装" class="headerlink" title="DAGMC依赖软件安装"></a>DAGMC依赖软件安装</h2><p>DAGMC可以用来和PyNE配合来进行停机剂量计算工作。但是，现在PyNE最高支持MOAB 4.9.1 版，然而DAGMC需要使用MOAB 5.0版。也就是说，使用DAGMC的PyNE开发者需要在电脑上同时安装MOAB 4.9.1 和5.0版本。必须分别安装并设定，使用时还需要指定所使用库的路径。PyNE的安装可以参考<a href="https://zxkjack123.github.io/2018/01/27/neutronics/pyne-developer-install/">PyNE的开发版本安装</a>。DAGMC的安装可以参考<a href="https://svalinn.github.io/DAGMC/install/index.html" target="_blank" rel="noopener">官方安装指导</a>。但是官方指导的安装步骤存在几个缺点：</p>
+<h2 id="DAGMC依赖软件安装"><a href="#DAGMC依赖软件安装" class="headerlink" title="DAGMC依赖软件安装"></a>DAGMC依赖软件安装</h2><p>DAGMC可以用来和PyNE配合来进行停机剂量计算工作。但是，现在PyNE最高支持MOAB 4.9.1 版，然而DAGMC需要使用MOAB 5.0版。也就是说，使用DAGMC的PyNE开发者需要在电脑上同时安装MOAB 4.9.1 和5.0版本。必须分别安装并设定，使用时还需要指定所使用库的路径。PyNE的安装可以参考<a href="https://zxkjack123.github.io/neutronics/pyne-developer-install/">PyNE的开发版本安装</a>。DAGMC的安装可以参考<a href="https://svalinn.github.io/DAGMC/install/index.html" target="_blank" rel="noopener">官方安装指导</a>。但是官方指导的安装步骤存在几个缺点：</p>
 <ol>
 <li>对于HDF5的安装和库的使用有一处会出现找不到hdf5的情况</li>
 <li>虽然说明了需要安装MOAB5.0,但并没有明确的和MOAB4.9.1做区分，导致使用PyNE的人会面临困扰</li>
@@ -657,21 +657,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/Japanese/verb-conjugation/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Newer
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/career/get-higher-salary/" id="post_nav-older" class="next-content">
+        <a href="/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/" id="post_nav-older" class="next-content">
             Older
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
@@ -765,7 +757,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">12</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">11</span></a>
             </ul>
         </li>
         
