@@ -3,6 +3,97 @@
   
     
     <entry>
+      <title><![CDATA[日语句子成分的名词化]]></title>
+      <url>/Japanese/nonize/</url>
+      <content type="html"><![CDATA[<p>日语句子中，名词是很重要的一个成分。<br>日语中存在很多将原本不是名词的成分转化成为可以当作名词使用的表达方式。</p>
+<p>如果把句子成分的两个属性：词性和意义分开来看，句子成分的化形式就是将这个成分的词性变成名词的过程。<br>这个过程有时侯还会为这个句子成分增加一层额外的意义。<br>比如将动词或者小句转化为名词词性的<strong>の</strong>和将一类形转化为名词的<strong>さ</strong>，他们都没有给词汇本身增加额外的含义。<br>而其他的很多词，比如<strong>ほう</strong>，<strong>ため</strong>等等，则给原来的句子或核心词汇增加了额外的含义。<br>我感觉这额外增加的含义，就是<strong>ほう</strong>，<strong>ため</strong>他们本身作为名词的含义。<br>也就是说，<strong>ほう</strong>，<strong>ため</strong>这些词并不是单纯的将动词或小句转化为名词的句子，反而更像是其前面的动词或者小句是<strong>ほう</strong>，<strong>ため</strong>的定语，用来修饰<strong>ほう</strong>，<strong>ため</strong>这些名词的定语。</p>
+<p>特别是当我们把这些假名对应的汉字标注出来的时候，能够更加直观的理解到这其中增加的含义。</p>
+<p>下面是在《标准日本语》（初级）课本中包含的一些将句子成分名词化的例子。</p>
+<ul>
+<li><strong>こと</strong> <a href="http://jisho.org/search/%E3%81%93%E3%81%A8" target="_blank" rel="noopener">日本語：事, こと</a><ul>
+<li>第20課：<strong>动(基本形)</strong>+<strong>ことができます</strong>，表示能力。「例」:私の趣味は切手を<strong>集めること</strong>です。</li>
+<li>第21課：<strong>动(た形)</strong>+<strong>ことがあります</strong>，表示过去经历。「例」：私はすき焼きを<strong>食べたことがあります</strong>。</li>
+<li>第31課：<strong>动(基本形/ない形)</strong>+<strong>ことがあります</strong>，表示有时会发生某种事态，<em>与21课的句型是完全不同的句型</em>。「例」：たまに朝ご飯を食<strong>べないことがあります</strong>。</li>
+<li>第32課：<strong>动(基本形/ない形)</strong>+<strong>ことにします/ことにしました</strong>，表示说话人自己决定实施某种行为时使用。「例」：明日から毎日<strong>運動することにします</strong>。</li>
+<li>第32課：<strong>动(基本形/ない形)</strong>+<strong>ことになりました</strong>，表示由于某种外在的原因导致形成了某种决定。「例」：来月から給料が<strong>上がることになりました</strong>。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>の</strong><ul>
+<li>第26课：<strong>小句(动词简体形)</strong>+<strong>の</strong>，使小句名词化，表示<strong>做某动作</strong>的意思。「例」：<strong>自転車に二人で乗るの</strong>は危ないです。</li>
+<li>第36課：<strong>动(基本形)</strong>+<strong>の</strong>+<strong>に</strong>,表示用途和基准。「例」：この写真はパスポートを<strong>申請するのに</strong>使います。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>ほう</strong>　<a href="http://jisho.org/search/%E3%81%BB%E3%81%86" target="_blank" rel="noopener">日本語：方、ほう</a><ul>
+<li>第21課：<strong>动(た形)</strong>+<strong>ほう</strong>，用于在两种事物中进行选择。「例」：もっと野菜を<strong>食べたほう</strong>がいいですよ。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>そう</strong>    （很奇怪，没找到对应汉字，而<a href="http://jisho.org/search/%E3%81%9D%E3%81%86" target="_blank" rel="noopener">そう</a>怎么查了是个动词？)<ul>
+<li>第33課： <strong>动/形</strong>+<strong>そう</strong>，事物样态或者推测。动词使用ます连用形加そう，一类形去い加そう，二类形直接加そう。「例」：<strong>おいしそう</strong>なケーキですね。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>ため</strong> <a href="http://jisho.org/search/%E3%81%9F%E3%82%81" target="_blank" rel="noopener">日本語：為、ため</a><ul>
+<li><strong>小句1(基本形)+ために, 小句2</strong>，小句1是小句2的<strong>目的</strong>。「例」：<strong>日本に留学するために</strong>、お金をためています。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>よう</strong>　<a href="http://jisho.org/search/%E3%82%88%E3%81%86" target="_blank" rel="noopener">日本語：様、よう</a><ul>
+<li>第38課：<strong>小句(基本形/ない形)</strong>+<strong>よう</strong>，表示状态。「例」：<strong>よく見えるように</strong>、大きく書きました。  </li>
+<li>第44課：<strong>小句(简体形)</strong>+<strong>ようです</strong>，表示根据说话人感知的某种情况进行推测。「例」：玄関のところにだれか<strong>いるようです</strong>。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>まま</strong> <a href="http://jisho.org/search/まま" target="_blank" rel="noopener">日本語：儘、侭、まま</a><ul>
+<li>第42課：<strong>小句1(动词た形/ない形)</strong>+<strong>まま</strong>,<strong>小句2</strong>，表示将理应改变的状态保持着去进行另外的动作。「例」：テレビをつけたまま、出かけてしまいました。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>はず</strong> <a href="http://jisho.org/search/はず" target="_blank" rel="noopener">日本語：筈、はず</a> <ul>
+<li>第42課：<strong>小句(简体形)</strong>+<strong>はずです</strong>，表示根据某种理由做出某种推断。「例」：会議は五時までですから、もうすぐ<strong>終わるはずです</strong>。 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>さ</strong><ul>
+<li>第44課：<strong>一类形</strong>+<strong>さ</strong>，构成一种表示某种状态的名词。构成方式是一类形词尾的<strong>い</strong>换成<strong>さ</strong>。「例」：この<strong>暑さ</strong>はいつまで続くんでしょう。</li>
+</ul>
+</li>
+</ul>
+<p>つづく…</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> 名词化 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[日语词汇的修饰方法]]></title>
       <url>/Japanese/words_modifier/</url>
       <content type="html"><![CDATA[<p>最近开始学习《标准日本语》初级下册。<br>在学习第25课《これは明日会議で使う資料です》的时候，语法解释部分总结了动词，动词小句后接名词的用法关系。<br>我发现动词小句修饰名词时，结尾的动词形式和普通动词修饰名词一样。<br>同样，一类形容词结尾的小句其形容词形式跟普通一类形容词修饰名词一样；二类形容词及名词同理。<br>就是说，小句的句法使用形式和小句的结尾词的形式一样即可。</p>
