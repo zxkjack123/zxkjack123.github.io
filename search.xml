@@ -69,6 +69,12 @@
 </ul>
 </li>
 </ul>
+<ul>
+<li>动词ます形去ます<ul>
+<li>部分动词的ます形去ます之后，形成名词。「例」：休み、申し出</li>
+</ul>
+</li>
+</ul>
 <p>つづく…</p>
 ]]></content>
       
@@ -318,9 +324,9 @@ tot_phtn_src_intensities : total_photon_source_intensites.txt
         
         <tags>
             
-            <tag> PyNE </tag>
-            
             <tag> DAGMC </tag>
+            
+            <tag> PyNE </tag>
             
             <tag> Trelis </tag>
             
