@@ -5,8 +5,8 @@
     <entry>
       <title><![CDATA[日语句子成分的名词化]]></title>
       <url>/Japanese/nonize/</url>
-      <content type="html"><![CDATA[<p>日语句子中，名词是很重要的一个成分。<br>日语中存在很多将原本不是名词的成分转化成为可以当作名词使用的表达方式。</p>
-<p>如果把句子成分的两个属性：词性和意义分开来看，句子成分的化形式就是将这个成分的词性变成名词的过程。<br>这个过程有时侯还会为这个句子成分增加一层额外的意义。<br>比如将动词或者小句转化为名词词性的<strong>の</strong>和将一类形转化为名词的<strong>さ</strong>，他们都没有给词汇本身增加额外的含义。<br>而其他的很多词，比如<strong>ほう</strong>，<strong>ため</strong>等等，则给原来的句子或核心词汇增加了额外的含义。<br>我感觉这额外增加的含义，就是<strong>ほう</strong>，<strong>ため</strong>他们本身作为名词的含义。<br>也就是说，<strong>ほう</strong>，<strong>ため</strong>这些词并不是单纯的将动词或小句转化为名词的句子，反而更像是其前面的动词或者小句是<strong>ほう</strong>，<strong>ため</strong>的定语，用来修饰<strong>ほう</strong>，<strong>ため</strong>这些名词的定语。</p>
+      <content type="html"><![CDATA[<p>日语句子中，名词是很重要的一个成分。日语中存在很多将原本不是名词的成分转化成为可以当作名词使用的表达方式。</p>
+<p>如果把句子成分的两个属性：词性和意义分开来看，句子成分的化形式就是将这个成分的词性变成名词的过程。这个过程有时侯还会为这个句子成分增加一层额外的意义。比如将动词或者小句转化为名词词性的<strong>の</strong>和将一类形转化为名词的<strong>さ</strong>，他们都没有给词汇本身增加额外的含义。而其他的很多词，比如<strong>ほう</strong>，<strong>ため</strong>等等，则给原来的句子或核心词汇增加了额外的含义。我感觉这额外增加的含义，就是<strong>ほう</strong>，<strong>ため</strong>他们本身作为名词的含义。也就是说，<strong>ほう</strong>，<strong>ため</strong>这些词并不是单纯的将动词或小句转化为名词的句子，反而更像是其前面的动词或者小句是<strong>ほう</strong>，<strong>ため</strong>的定语，用来修饰<strong>ほう</strong>，<strong>ため</strong>这些名词的定语。</p>
 <p>特别是当我们把这些假名对应的汉字标注出来的时候，能够更加直观的理解到这其中增加的含义。</p>
 <p>下面是在《标准日本语》（初级）课本中包含的一些将句子成分名词化的例子。</p>
 <ul>
@@ -100,17 +100,119 @@
     </entry>
     
     <entry>
+      <title><![CDATA[日语动词变形学习]]></title>
+      <url>/Japanese/verb-conjugation/</url>
+      <content type="html"><![CDATA[<p>因为很喜欢日语动漫，所以我现在在学习日语。网上找了一些日语入门的攻略，觉得这篇<a href="你有什么相见恨晚的日语学习方法？ - Hayami的回答 - 知乎
+https://www.zhihu.com/question/26939890/answer/36393970">大神的日语学习方法，10天入门，2个月达到N3水平，7个月突破N1，颠覆了我学习语言的思维</a>写的很好，我非常认同里面的内容。因此我也正在按照这个攻略进行入门阶段的学习，现在正学习到新编日语初级下册。学习的重点是掌握日语动词的变形。</p>
+<p>这两天刚刚学习到动词的使役被动态，算是基本接触到了日语动词所有的变形了。在巩固学习日语动词变形的过程中，又发现了一些其他的很好的资源。</p>
+<ol>
+<li><p>日语老师宵寒在其知乎日语学习专栏中发表的文章<a href="https://zhuanlan.zhihu.com/p/23853643" target="_blank" rel="noopener">巴拉拉变身！！！史上最全日语动词变形大汇总</a>中总结了日语的各种变形的规律。<br><img src="https://pic2.zhimg.com/v2-026133e770956e146eb0a07e9dd46f0b_r.jpg" alt="日语变形树形图"></p>
+</li>
+<li><p>李特务在知乎的<a href="你有什么相见恨晚的日语学习方法？ - 李特务的回答 - 知乎
+https://www.zhihu.com/question/26939890/answer/34763273">回答</a>中给出的一张动词或用练习表格：<img src="https://pic4.zhimg.com/8a902b350a7b819c1b9eb9647d130e06_r.jpg" alt="动词活用练习表格"></p>
+</li>
+</ol>
+<p>我之前也想按照表格的形式来练习日语动词变形，但是发现这样有一些缺点：</p>
+<ol>
+<li>表格的连续性导致，在一列中不需要怎么动脑，按五十音图朝下读就出来了，动词变形效果不佳</li>
+<li>检查答案不方便，自己错了都不容易发现</li>
+<li>练习到的动词有限。对表上的这些动词的确是非常熟悉了，但是碰到不在表格内的动词就比较慌。最不好的是，碰到表格外的动词，变形前居然会先联想到对应的表格内的动词，用表格内动词的变形规律，再去对应到表格外动词的变形。这无疑大大降低了变形的速度</li>
+<li>动词的联系频率不变。对自己常出错的单词和变形形式应该通过增加联系次数来巩固，而对于已经掌握的动词变形形式，就应该降低练习次数。使用表格练习法，显然无法做到动态的调整动词变形练习次数。</li>
+</ol>
+<p>因此，我自己写了一个练习动词变形的<a href="https://github.com/zxkjack123/JapaneseVerbPractice" target="_blank" rel="noopener">小软件</a>。<br>这个小软件实现的功能是：随机生成一些动词练习的题目，由练习者输入答案，并反馈和记录练习结果。<br>小软件具备以下特性：</p>
+<ol>
+<li>可以自己定义想练习的动词。比如只练习新标日初级上的动词</li>
+<li>可以自己定义想联系的变形形式。比如只练习ます形，て形和た形。（在Japanese_verb_form.jvp中指定即可)</li>
+<li>错误的及时反馈。你输错答案的话，它立马告诉你你错了，并会告诉你正确答案。</li>
+<li>动态调整动词变形练习频率。对于你犯错的动词变形，它在以后出现的概率会大大增加。对于你出错的动词变形，它在以后出现的频率会降低。</li>
+</ol>
+<p>在练习动词变形的时候，我经常把可能态和假定形搞混，被动和使役搞混。因此我觉得有必要再找找方法让这些变形规律更好记忆一些。先总结一个动词变形涉及到的表格(て形和た形规律不同）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">あ</th>
+<th style="text-align:center">い</th>
+<th style="text-align:center">う</th>
+<th style="text-align:center">え</th>
+<th style="text-align:center">お</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ない形</td>
+<td style="text-align:center">ます形</td>
+<td style="text-align:center">字典形</td>
+<td style="text-align:center">命令形</td>
+<td style="text-align:center">意志形</td>
+</tr>
+<tr>
+<td style="text-align:center">被动态</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">假定形</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">使役态</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">可能态</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">使役被动态</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> verb </tag>
+            
+            <tag> 动词 </tag>
+            
+            <tag> 動詞 </tag>
+            
+            <tag> conjugation </tag>
+            
+            <tag> 变形 </tag>
+            
+            <tag> 活用 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[日语词汇的修饰方法]]></title>
       <url>/Japanese/words_modifier/</url>
-      <content type="html"><![CDATA[<p>最近开始学习《标准日本语》初级下册。<br>在学习第25课《これは明日会議で使う資料です》的时候，语法解释部分总结了动词，动词小句后接名词的用法关系。<br>我发现动词小句修饰名词时，结尾的动词形式和普通动词修饰名词一样。<br>同样，一类形容词结尾的小句其形容词形式跟普通一类形容词修饰名词一样；二类形容词及名词同理。<br>就是说，小句的句法使用形式和小句的结尾词的形式一样即可。</p>
-<p>那么，掌握最小单位的修饰形式就可以了。<br>具体形式包括：</p>
+      <content type="html"><![CDATA[<p>最近开始学习《标准日本语》初级下册。在学习第25课《これは明日会議で使う資料です》的时候，语法解释部分总结了动词，动词小句后接名词的用法关系。我发现动词小句修饰名词时，结尾的动词形式和普通动词修饰名词一样。同样，一类形容词结尾的小句其形容词形式跟普通一类形容词修饰名词一样；二类形容词及名词同理。就是说，小句的句法使用形式和小句的结尾词的形式一样即可。</p>
+<p>那么，掌握最小单位的修饰形式就可以了。具体形式包括：</p>
 <ol>
 <li>动词修饰名词：<strong>动(简体形)</strong>+<strong>名</strong></li>
 <li>一类形修饰名词：<strong>一类形</strong>+<strong>名</strong></li>
 <li>二类形修饰名词：<strong>二类形</strong>+<strong>な</strong>+<strong>名</strong></li>
 <li>名词修饰名词：<strong>名</strong>+<strong>の</strong>+<strong>名</strong></li>
 </ol>
-<p>同理，不同类型的词汇后面连接动词时，也有相应的比较固定的形式。<br>我现在的学习程度还太浅，不知道这种形式能否算作<strong>修饰</strong>动词，为了避免错误，这里只称之为<strong>后接</strong>动词。<br>形容词和名词后不能直接接动词，需要转化为副词来后接动词。<br>具体形式包括：</p>
+<p>同理，不同类型的词汇后面连接动词时，也有相应的比较固定的形式。我现在的学习程度还太浅，不知道这种形式能否算作<strong>修饰</strong>动词，为了避免错误，这里只称之为<strong>后接</strong>动词。形容词和名词后不能直接接动词，需要转化为副词来后接动词。具体形式包括：</p>
 <ol>
 <li>动词转化为副词后接动词：不知道有没有这个，为了形式对称，先占个位置</li>
 <li>一类形转化为副词后接动词：<strong>一类形词尾い变く</strong>+<strong>动</strong></li>
@@ -145,6 +247,130 @@
             <tag> modifier </tag>
             
             <tag> 修饰语 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Cython调用C++函数例子]]></title>
+      <url>/cython/cython-hello-world/</url>
+      <content type="html"><![CDATA[<p>最近的的科研工作涉及到Cython的应用。以前没有接触过Cython,对这个基本不了解。如果不涉及到代码接口的改变，那么我可以学习前辈们的代码，照葫芦画瓢来改代码。可是那样的代码不够简介美观，Pull Request的Reviewer指出代码接口需要调整简化。</p>
+<p>没办法，只能硬着头皮改。然而前辈们的代码中没有找到合适的参照，自己假象着改几下结果错误越來越多。不能像无头苍蝇一样改了，必须得学会Cython的基础使用方法。</p>
+<p>我需要实现的功能是：有一个C++的程序，写一个Cython的接口，在python中调用C++中的函数。参考相关的<a href="http://cython.readthedocs.io/en/latest/src/userguide/wrapping_CPlusPlus.html#create-cython-wrapper-class" target="_blank" rel="noopener">官方文档</a>，这是一个简单的几何方面的库。按照官方文档走，结果还是走了不少弯路，有写东西官方文档上也没有写的很详细。</p>
+<p>下面就将我学习这个例子的过程及需要注意的细节总结一下。</p>
+<h2 id="C-代码部分"><a href="#C-代码部分" class="headerlink" title="C++代码部分"></a>C++代码部分</h2><h3 id="h文件"><a href="#h文件" class="headerlink" title="h文件"></a>h文件</h3><pre><code class="C++">namespace shapes {
+    class Rectangle {
+    public:
+        int x0, y0, x1, y1;
+        Rectangle();
+        Rectangle(int x0, int y0, int x1, int y1);
+        ~Rectangle();
+        int getArea();
+        void getSize(int* width, int* height);
+        void move(int dx, int dy);
+    };
+}
+</code></pre>
+<h3 id="cpp文件"><a href="#cpp文件" class="headerlink" title="cpp文件"></a>cpp文件</h3><pre><code class="C++">#include &quot;Rectangle.h&quot;
+
+namespace shapes {
+
+  Rectangle::Rectangle() { }
+
+    Rectangle::Rectangle(int X0, int Y0, int X1, int Y1) {
+        x0 = X0;
+        y0 = Y0;
+        x1 = X1;
+        y1 = Y1;
+    }
+
+    Rectangle::~Rectangle() { }
+
+    int Rectangle::getArea() {
+        return (x1 - x0) * (y1 - y0);
+    }
+
+    void Rectangle::getSize(int *width, int *height) {
+        (*width) = x1 - x0;
+        (*height) = y1 - y0;
+    }
+
+    void Rectangle::move(int dx, int dy) {
+        x0 += dx;
+        y0 += dy;
+        x1 += dx;
+        y1 += dy;
+    }
+
+}
+</code></pre>
+<h2 id="pyx文件"><a href="#pyx文件" class="headerlink" title="pyx文件"></a>pyx文件</h2><pre><code class="python">cdef extern from &quot;Rectangle.h&quot; namespace &quot;shapes&quot;:
+    cdef cppclass Rectangle:
+        Rectangle() except +
+        Rectangle(int, int, int, int) except +
+        int x0, y0, x1, y1
+        int getArea()
+        void getSize(int* width, int* height)
+        void move(int, int)
+
+cdef class PyRectangle:
+    cdef Rectangle c_rect      # hold a C++ instance which we&#39;re wrapping
+    def __cinit__(self, int x0, int y0, int x1, int y1):
+        self.c_rect = Rectangle(x0, y0, x1, y1)
+    def get_area(self):
+        return self.c_rect.getArea()
+    def get_size(self):
+        cdef int width, height
+        self.c_rect.getSize(&amp;width, &amp;height)
+        return width, height
+    def move(self, dx, dy):
+        self.c_rect.move(dx, dy)
+</code></pre>
+<h2 id="setup-py文件"><a href="#setup-py文件" class="headerlink" title="setup.py文件"></a>setup.py文件</h2><pre><code class="python">from distutils.core import setup
+from Cython.Build import cythonize
+
+setup(ext_modules = cythonize(
+           &quot;rect.pyx&quot;,                 # our Cython source
+           sources=[&quot;Rectangle.cpp&quot;],  # additional source file(s)
+           language=&quot;c++&quot;,             # generate C++ code
+      ))
+</code></pre>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>前面的文件内容在官方文档上写的还算清楚，但编译和使用部分，官方文档写的就很不清楚了。尤其是官方文档这里没有介绍编译cpp文件，只说不链接这个东西会出现undefine symbol的错误。这部分内容参考了<a href="https://stackoverflow.com/questions/28366147/how-can-i-manually-compile-cython-code-that-uses-c" target="_blank" rel="noopener">这里</a>。</p>
+<h3 id="编译C-文件"><a href="#编译C-文件" class="headerlink" title="编译C++文件"></a>编译C++文件</h3><p>编译C++文件生成.o文件，C++ Objects在这个文件里面。</p>
+<pre><code class="bash">$ gcc -c Rectangle.cpp
+</code></pre>
+<h3 id="运行setup"><a href="#运行setup" class="headerlink" title="运行setup"></a>运行setup</h3><pre><code class="bash">$ python setup.py build_ext --inplace
+</code></pre>
+<p>这一步会生成<strong>rect.so</strong>，但是这个文件暂时还不能使用，在python中import rect的话会出现<strong>ImportError: ./rect.so: undefined symbol</strong>错误。</p>
+<h3 id="链接rect-so与Rectangle-o"><a href="#链接rect-so与Rectangle-o" class="headerlink" title="链接rect.so与Rectangle.o"></a>链接rect.so与Rectangle.o</h3><pre><code class="bash">$ gcc -shared -fPIC -I/usr/include/python2.7 rect.cpp Rectangle.o -lstdc++ -o rect.so
+</code></pre>
+<h2 id="测试运行"><a href="#测试运行" class="headerlink" title="测试运行"></a>测试运行</h2><p>下一个脚本<strong>run.py</strong>，放入如下内容：</p>
+<pre><code class="python">import rect
+print(rect.PyRectangle(0, 0, 1, 2).get_area())
+</code></pre>
+<p>运行该脚本，如果流程正确，应该会得到输出：</p>
+<pre><code>2
+</code></pre><h2 id="总结反思"><a href="#总结反思" class="headerlink" title="总结反思"></a>总结反思</h2><p>通过这个例子，不难看出：</p>
+<ol>
+<li>Cython连接C++的函数是是通过Python类的函数-&gt;cppclass-&gt;C++函数实现的。</li>
+<li>Python类的函数名称不一定要和C++函数名称一直，只要接口定义好到底调用哪个函数就行。</li>
+<li>Python类的函数数目也不一定要和C++函数一致，只需要保证Python想调用的C++函数已经定义且能够找到就行。</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Cython </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Cython </tag>
+            
+            <tag> Hello world </tag>
             
         </tags>
         
@@ -577,108 +803,6 @@ print &quot;All done!&quot;
             <tag> listening </tag>
             
             <tag> 倾听 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[日语动词变形学习]]></title>
-      <url>/Japanese/verb-conjugation/</url>
-      <content type="html"><![CDATA[<p>因为很喜欢日语动漫，所以我现在在学习日语。网上找了一些日语入门的攻略，觉得这篇<a href="你有什么相见恨晚的日语学习方法？ - Hayami的回答 - 知乎
-https://www.zhihu.com/question/26939890/answer/36393970">大神的日语学习方法，10天入门，2个月达到N3水平，7个月突破N1，颠覆了我学习语言的思维</a>写的很好，我非常认同里面的内容。因此我也正在按照这个攻略进行入门阶段的学习，现在正学习到新编日语初级下册。学习的重点是掌握日语动词的变形。</p>
-<p>这两天刚刚学习到动词的使役被动态，算是基本接触到了日语动词所有的变形了。在巩固学习日语动词变形的过程中，又发现了一些其他的很好的资源。</p>
-<ol>
-<li><p>日语老师宵寒在其知乎日语学习专栏中发表的文章<a href="https://zhuanlan.zhihu.com/p/23853643" target="_blank" rel="noopener">巴拉拉变身！！！史上最全日语动词变形大汇总</a>中总结了日语的各种变形的规律。<br><img src="https://pic2.zhimg.com/v2-026133e770956e146eb0a07e9dd46f0b_r.jpg" alt="日语变形树形图"></p>
-</li>
-<li><p>李特务在知乎的<a href="你有什么相见恨晚的日语学习方法？ - 李特务的回答 - 知乎
-https://www.zhihu.com/question/26939890/answer/34763273">回答</a>中给出的一张动词或用练习表格：<img src="https://pic4.zhimg.com/8a902b350a7b819c1b9eb9647d130e06_r.jpg" alt="动词活用练习表格"></p>
-</li>
-</ol>
-<p>我之前也想按照表格的形式来练习日语动词变形，但是发现这样有一些缺点：</p>
-<ol>
-<li>表格的连续性导致，在一列中不需要怎么动脑，按五十音图朝下读就出来了，动词变形效果不佳</li>
-<li>检查答案不方便，自己错了都不容易发现</li>
-<li>练习到的动词有限。对表上的这些动词的确是非常熟悉了，但是碰到不在表格内的动词就比较慌。最不好的是，碰到表格外的动词，变形前居然会先联想到对应的表格内的动词，用表格内动词的变形规律，再去对应到表格外动词的变形。这无疑大大降低了变形的速度</li>
-<li>动词的联系频率不变。对自己常出错的单词和变形形式应该通过增加联系次数来巩固，而对于已经掌握的动词变形形式，就应该降低练习次数。使用表格练习法，显然无法做到动态的调整动词变形练习次数。</li>
-</ol>
-<p>因此，我自己写了一个练习动词变形的<a href="https://github.com/zxkjack123/JapaneseVerbPractice" target="_blank" rel="noopener">小软件</a>。<br>这个小软件实现的功能是：随机生成一些动词练习的题目，由练习者输入答案，并反馈和记录练习结果。<br>小软件具备以下特性：</p>
-<ol>
-<li>可以自己定义想练习的动词。比如只练习新标日初级上的动词</li>
-<li>可以自己定义想联系的变形形式。比如只练习ます形，て形和た形。（在Japanese_verb_form.jvp中指定即可)</li>
-<li>错误的及时反馈。你输错答案的话，它立马告诉你你错了，并会告诉你正确答案。</li>
-<li>动态调整动词变形练习频率。对于你犯错的动词变形，它在以后出现的概率会大大增加。对于你出错的动词变形，它在以后出现的频率会降低。</li>
-</ol>
-<p>在练习动词变形的时候，我经常把可能态和假定形搞混，被动和使役搞混。因此我觉得有必要再找找方法让这些变形规律更好记忆一些。<br>先总结一个动词变形涉及到的表格(て形和た形规律不同）：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">あ</th>
-<th style="text-align:center">い</th>
-<th style="text-align:center">う</th>
-<th style="text-align:center">え</th>
-<th style="text-align:center">お</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ない形</td>
-<td style="text-align:center">ます形</td>
-<td style="text-align:center">字典形</td>
-<td style="text-align:center">命令形</td>
-<td style="text-align:center">意志形</td>
-</tr>
-<tr>
-<td style="text-align:center">被动态</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">假定形</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">使役态</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">可能态</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">使役被动态</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-]]></content>
-      
-        <categories>
-            
-            <category> Japanese </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Japanese </tag>
-            
-            <tag> 日语 </tag>
-            
-            <tag> 日本語 </tag>
-            
-            <tag> verb </tag>
-            
-            <tag> 动词 </tag>
-            
-            <tag> 動詞 </tag>
-            
-            <tag> conjugation </tag>
-            
-            <tag> 变形 </tag>
-            
-            <tag> 活用 </tag>
             
         </tags>
         
