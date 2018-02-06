@@ -3,6 +3,189 @@
   
     
     <entry>
+      <title><![CDATA[Cython返回Python类对象]]></title>
+      <url>/cython/cython-return-object/</url>
+      <content type="html"><![CDATA[<p>在之前的一篇博客<a href="https://zxkjack123.github.io/cython/cython-hello-world/">Cython调用C++函数例子</a>中，我参照Cython文档练习了用Python通过Cython调用C++库中的函数的例子。不过这个例子中，只有一个C++类，而且所有返回对象都是系统预定义的<strong>int</strong>,<strong>void</strong>之类的。</p>
+<p>然而我的目标是<strong>返回一个可以调用C++类函数的Python类对象。而且是在类A中生成一个类B的对象返回。</strong></p>
+<p>摸索一番后，我终于学会了实现这个功能的方法。<br>下面是把<a href="http://cython.readthedocs.io/en/latest/src/userguide/wrapping_CPlusPlus.html#create-cython-wrapper-class" target="_blank" rel="noopener">官方文档</a>的例子简单扩展一下用来联系的例题。</p>
+<h2 id="C-代码"><a href="#C-代码" class="headerlink" title="C++代码"></a>C++代码</h2><h3 id="h文件"><a href="#h文件" class="headerlink" title="h文件"></a>h文件</h3><p>在官方文档的基础上，添加了一个Triangle类。另外把所有的int类型变量换成了double类型。<br>Rectangle.h:</p>
+<pre><code class="C++">namespace shapes {
+    class Triangle {
+    public:
+        double x0, y0, x1, y1, x2, y2;
+        Triangle();
+        Triangle(double x0, double y0, double x1, double y1, double x2, double y2);
+        ~Triangle();
+        double getArea();
+    };
+
+    class Rectangle {
+    public:
+        double x0, y0, x1, y1;
+        Rectangle();
+        Rectangle(double x0, double y0, double x1, double y1);
+        ~Rectangle();
+        double getArea();
+        void getSize(double* width, double* height);
+        void move(double dx, double dy);
+    };
+
+
+}
+</code></pre>
+<h3 id="cpp文件"><a href="#cpp文件" class="headerlink" title="cpp文件"></a>cpp文件</h3><p>Rectangle.cpp:</p>
+<pre><code class="C++">#include &lt;math.h&gt;
+#include &quot;Rectangle.h&quot;
+
+namespace shapes {
+
+  Rectangle::Rectangle() { }
+
+    Rectangle::Rectangle(double X0, double Y0, double X1, double Y1) {
+        x0 = X0;
+        y0 = Y0;
+        x1 = X1;
+        y1 = Y1;
+    }
+
+    Rectangle::~Rectangle() { }
+
+    double Rectangle::getArea() {
+        return (x1 - x0) * (y1 - y0);
+    }
+
+    void Rectangle::getSize(double *width, double *height) {
+        (*width) = x1 - x0;
+        (*height) = y1 - y0;
+    }
+
+    void Rectangle::move(double dx, double dy) {
+        x0 += dx;
+        y0 += dy;
+        x1 += dx;
+        y1 += dy;
+    }
+
+    Triangle::Triangle(){
+
+    }
+
+    Triangle::Triangle(double x0, double y0, double x1, double y1, double x2, double y2) {
+        this-&gt;x0 = x0;
+        this-&gt;y0 = y0;
+        this-&gt;x1 = x1;
+        this-&gt;y1 = y1;
+        this-&gt;x2 = x2;
+        this-&gt;y2 = y2;
+    }
+
+    Triangle::~Triangle() {}
+
+    double Triangle::getArea() {
+        return fabs(0.5*((x1-x0)*(y2-y0) - (x2-x0)*(y1-y0)));
+    }
+}
+</code></pre>
+<h2 id="pyx文件"><a href="#pyx文件" class="headerlink" title="pyx文件"></a>pyx文件</h2><p>rect.pyx:</p>
+<pre><code class="python">cdef extern from &quot;Rectangle.h&quot; namespace &quot;shapes&quot;:
+    cdef cppclass Triangle:
+        Triangle() except +
+        Triangle(double, double, double, double, double, double) except +
+        double x0, y0, x1, y1, x2, y2
+        double getArea()
+
+
+    cdef cppclass Rectangle:
+        Rectangle() except +
+        Rectangle(double, double, double, double) except +
+        double x0, y0, x1, y1
+        double getArea()
+        void getSize(double* width, double* height)
+        void move(double, double)
+        Triangle get_lower_triangle()
+
+
+
+cdef class PyTriangle:
+    cdef Triangle c_tri
+    def __cinit__(self, double x0, double y0, double x1, double y1, double x2, double y2):
+        self.c_tri = Triangle(x0, y0, x1, y1, x2, y2)
+    def get_area(self):
+        return self.c_tri.getArea()
+
+
+cdef class PyRectangle:
+    cdef Rectangle c_rect      # hold a C++ instance which we&#39;re wrapping
+    def __cinit__(self, double x0, double y0, double x1, double y1):
+        self.c_rect = Rectangle(x0, y0, x1, y1)
+    def get_area(self):
+        return self.c_rect.getArea()
+    def get_size(self):
+        cdef double width, height
+        self.c_rect.getSize(&amp;width, &amp;height)
+        return width, height
+    def move(self, dx, dy):
+        self.c_rect.move(dx, dy)
+    def get_lower_triangle(self):
+        return PyTriangle(self.c_rect.x0, self.c_rect.y0,
+                          self.c_rect.x1, self.c_rect.y0,
+                          self.c_rect.x1, self.c_rect.y1)
+</code></pre>
+<p>rect.pyx文件改动比较大。除了增加了PyTriangle类之外，还在PyRectangle类中中加了一个函数<strong>get_lower_triangle(self)</strong>，这个函数是原本C++类中没有的。从这一点可以更直观的理解我通过前一个例子体会到的三点收获：</p>
+<ol>
+<li>Cython连接C++的函数是是通过Python类的函数-&gt;cppclass-&gt;C++函数实现的。</li>
+<li>Python类的函数名称不一定要和C++函数名称一直，只要接口定义好到底调用哪个函数就行。</li>
+<li>Python类的函数数目也不一定要和C++函数一致，只需要保证Python想调用的C++函数已经定义且能够找到就行。</li>
+</ol>
+<h2 id="setup-py文件"><a href="#setup-py文件" class="headerlink" title="setup.py文件"></a>setup.py文件</h2><p>setup.py:</p>
+<pre><code class="python">from distutils.core import setup
+from Cython.Build import cythonize
+
+setup(ext_modules = cythonize(
+           &quot;rect.pyx&quot;,                 # our Cython source
+           sources=[&quot;Rectangle.cpp&quot;],  # additional source file(s)
+           language=&quot;c++&quot;,             # generate C++ code
+      ))
+</code></pre>
+<p>这个文件的内容没有发生变化。</p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>编译方法和<a href="https://zxkjack123.github.io/cython/cython-hello-world/">Cython调用C++函数例子</a>中一样。</p>
+<h2 id="测试运行"><a href="#测试运行" class="headerlink" title="测试运行"></a>测试运行</h2><p>修改<strong>run.py</strong>脚本：</p>
+<pre><code class="python">import rect
+#print(rect.PyRectangle(0, 0, 1, 2).get_area())
+
+#print(rect.PyTriangle(0, 0, 0, 1, 1, 0).get_area())
+
+rect1 = rect.PyRectangle(0.0, 0.0, 1.0, 2.0)
+tri1 = rect1.get_lower_triangle()
+print(type(tri1))
+print(tri1.get_area())
+</code></pre>
+<p>运行后输出结果：</p>
+<pre><code>&lt;type &#39;rect.PyTriangle&#39;&gt;
+1.0
+</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我想返回的是Python中用的类的对象，不需要在C++类中也写一个一样的函数然后再转换。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Cython </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Cython </tag>
+            
+            <tag> Object </tag>
+            
+            <tag> class </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[日语句子成分的名词化]]></title>
       <url>/Japanese/nonize/</url>
       <content type="html"><![CDATA[<p>日语句子中，名词是很重要的一个成分。日语中存在很多将原本不是名词的成分转化成为可以当作名词使用的表达方式。</p>
