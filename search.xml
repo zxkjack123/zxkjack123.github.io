@@ -3,6 +3,59 @@
   
     
     <entry>
+      <title><![CDATA[安装ALARA]]></title>
+      <url>/neutronics/alara-install/</url>
+      <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>中子活化计算是和中子学分析的重要一环。国际上用的比较多有<a href="http://www.ccfe.ac.uk/fispact.aspx" target="_blank" rel="noopener">FISPACT</a>, <a href="http://www.oecd-nea.org/tools/abstract/detail/nea-1839" target="_blank" rel="noopener">ACAB</a>和<a href="http://www.oecd-nea.org/tools/abstract/detail/nea-1839" target="_blank" rel="noopener">ALARA</a>。</p>
+<p>文献上能看到很多用MCNP + FISPACT或者MCNP + ACAB的组合进行核分析的案例。不过FISPACT是收费软件，ACAB好像更难获取（连官方说明手册都没法下载全文）。</p>
+<p>ALARA也是一款能够计算活化的软件。经常和PyNE, DAGMC配合的软件就是这款ALARA。</p>
+<p>ALARA是开源软件，可以在其<a href="https://github.com/svalinn/ALARA" target="_blank" rel="noopener">Github主页</a>获取,在这里参考<a href="http://alara.engr.wisc.edu/users.guide.html/" target="_blank" rel="noopener">使用说明</a>。</p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>假设我们想把ALARA安装在<code>$HOME/opt/ALARA/</code>文件夹下，我们可以参照下面步骤进行。</p>
+<h3 id="配置安装"><a href="#配置安装" class="headerlink" title="配置安装"></a>配置安装</h3><pre><code class="bash">$ cd opt
+$ mkdir ALARA
+$ cd ALARA
+$ git clone https://github.com/svalinn/ALARA
+# 此时在$HOME/opt/ALARA/下又生成了一个ALARA文件夹
+$ cd ALARA
+# ALARA主页上的使用说明少了这个autoreconf命令
+$ autoreconf -fi
+# 建立bld文件夹用来存放build过程文件
+$ cd ..
+$ mkdir bld
+$ cd bld
+$ ../ALARA/configure --prefix=$HOME/opt/ALARA
+$ make
+$ make install
+</code></pre>
+<h3 id="路径配置"><a href="#路径配置" class="headerlink" title="路径配置"></a>路径配置</h3><p>回到<code>$HOME/opt/ALARA</code>文件夹下，我们可以看到生成了<code>bin</code>,<code>data</code>,<code>doc</code>和<code>sample</code>文件夹。我们已经安装成功。不过要想轻松的使用它，必须要把它的可执行文件路径加到<code>~/.bashrc</code>中：</p>
+<pre><code class="bash">export PATH=$PATH:$HOME/opt/ALARA/bin
+</code></pre>
+<p>保存<code>~/.bashrc</code>并在terminal上运行</p>
+<pre><code class="bash">$ source ~/.bashrc
+</code></pre>
+<p>然后系统就可以找到alara了。</p>
+<pre><code class="bash">$ which alara
+</code></pre>
+<h2 id="小测试"><a href="#小测试" class="headerlink" title="小测试"></a>小测试</h2><p>未完待续</p>
+]]></content>
+      
+        <categories>
+            
+            <category> neutronics </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> neutronics </tag>
+            
+            <tag> ALARA </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Cython返回Python类对象]]></title>
       <url>/cython/cython-return-object/</url>
       <content type="html"><![CDATA[<p>在之前的一篇博客<a href="https://zxkjack123.github.io/cython/cython-hello-world/">Cython调用C++函数例子</a>中，我参照Cython文档练习了用Python通过Cython调用C++库中的函数的例子。不过这个例子中，只有一个C++类，而且所有返回对象都是系统预定义的<strong>int</strong>,<strong>void</strong>之类的。</p>
@@ -1271,9 +1324,9 @@ pyne_build
         
         <tags>
             
-            <tag> PyNE </tag>
-            
             <tag> neutronics </tag>
+            
+            <tag> PyNE </tag>
             
             <tag> developer </tag>
             
