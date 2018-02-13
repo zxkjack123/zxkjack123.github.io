@@ -3,41 +3,6 @@
   
     
     <entry>
-      <title><![CDATA[Volunteering as Chinese tutor]]></title>
-      <url>/English/Volunteering-as-Chinese-tutor/</url>
-      <content type="html"><![CDATA[<p>There is a student organized group providing a Greater University Tutoring Service (GUTS) at University of Wisconsin. GUTS is a service for students who are learning languages other than English. Students learning foreign languages can apply to be a tutor to teach others his or her native language, or apply to be a tutee to learn a new language form a tutor. </p>
-<p>For example, I am a native Chinese speaker, and I am now learning both English and Japanese. I applied to be a tutor to teach another student Chinese. And I also applied to learn Japanese from others. However, I can’t apply for learning English in this program. </p>
-<p>This is a student community similar to Lang-8 in that language learners benefit each other. But the GUTS focus more on oral communications, i.e. listening and speaking, while Lang-8 focus more on written communication. </p>
-<p>Now, they’ve matched me a tutee named Molly who is learning Chinese, but we haven’t met yet. I hope we enjoy the teaching and learning experience this semester. </p>
-<p>However, there are only about 15 Japanese students on campus, and only a few people do volunteer work at GUTS. Unfortunately, I won’t get a tutor because they all already have tutees. </p>
-<p>However, I was told that there is a Japanese student association and they will be having a spring kickoff event this Saturday and that students from other countries are also welcome to attend. I am planning to attend and meet some Japanese friends. It would be great if I had more chances to use Japanese to express myself, but I don’t know whether they have free time to tutor me. </p>
-<p>Even worse, I don’t know whether or not they are willing to make a Chinese friend like me. Nevertheless, but I think I should at least try. So, I need to practice greeting phrases several times before the spring kickoff.</p>
-]]></content>
-      
-        <categories>
-            
-            <category> English </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> English </tag>
-            
-            <tag> volunteering </tag>
-            
-            <tag> tutor </tag>
-            
-            <tag> Chinese </tag>
-            
-            <tag> Japanese </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[使用PyNE进行基于网格的计算停机计量的例子]]></title>
       <url>/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/</url>
       <content type="html"><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本篇文章使用例子来说明使用PyNE来进行基于网格的计算停机剂量率的流程。</p>
@@ -199,7 +164,7 @@ output: source
 tot_phtn_src_intensities : total_photon_source_intensites.txt
 </code></pre>
 <h4 id="修改alara-params-txt"><a href="#修改alara-params-txt" class="headerlink" title="修改alara_params.txt"></a>修改alara_params.txt</h4><pre><code>material_lib alara_matlib
-element_lib data/elelib_std
+element_lib data/nuclib
 data_library alaralib data/truncated_fendl2bin
 
 cooling
@@ -232,17 +197,29 @@ end
 truncation 1e-12
 impurity 5e-6 1e-3
 dump_file dump.file
-</code></pre><p>开头的三行是材料数据库相关的信息。</p>
-<ol>
-<li>material_lib alara_matlib 这个<strong>alara_matlib</strong>是alara需要读取的材料成功定义的文件名。这个文件是会由程序从test1_geometry.h5m (geom.h5m)中读取的，不需要做修改。</li>
-<li>element_lib nuclib 这个文件是定义元素的丰度用的。默认是自然丰度，也可以自己定义修改丰度。自己定义一个元素丰度数据表显然是非常麻烦的，在ALARA的安装文件中$ALARA/data下有一个<strong>elelib.std</strong>，可以把这个文件拷贝到工作文件夹下并重命名为nuclib即可（也可以设置element_lib elelib.std)。</li>
-<li>data_library alaralib fendl3bin （ALARA应该配备fendl3bin)但是并没有，ALARA安装文件中的sample/datam文件夹下只有truncated_fendl2bin数据库。我们可以把这个数据库相关的文件拷贝到工作文件夹。</li>
-</ol>
-<h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><p><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</p>
+</code></pre><h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><p><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</p>
 <p>当我们修改好上面两个文件后，就可以使用r2s.py生成ALARA计算需要的文件了：</p>
 <pre><code class="bash">$ r2s.py step1
 </code></pre>
-<h3 id="alara计算"><a href="#alara计算" class="headerlink" title="alara计算"></a>alara计算</h3><h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
+<h3 id="材料数据库准备"><a href="#材料数据库准备" class="headerlink" title="材料数据库准备"></a>材料数据库准备</h3><p><strong>ALARA输入文件</strong>中有三行是<strong>材料数据库</strong>相关的信息。</p>
+<ol>
+<li>material_lib alara_matlib 这个<strong>alara_matlib</strong>是alara需要读取的材料成功定义的文件名。这个文件是会由程序从test1_geometry.h5m (geom.h5m)中读取的，不需要做修改。</li>
+<li>element_lib data/nuclib 这个文件是定义元素的丰度用的。默认是自然丰度，也可以自己定义修改丰度。自己定义一个元素丰度数据表显然是非常麻烦的，在ALARA的安装文件中$ALARA/data下有一个<strong>elelib.std</strong>，可以把这个文件拷贝到工作文件夹下并重命名为<strong>nucib</strong>即可（也可以设置element_lib elelib.std)。但是这个<strong>elelib.std</strong>只能用于材料定义是按照元素定义的，如果有针对核素的定义，则这个就不能用了。需要将元素扩展成核素，需要后续介的方法单独处理。</li>
+<li>data_library alaralib truncated_fendl2bin （ALARA应该配备fendl3bin)但是并没有，ALARA安装文件中的sample/datam文件夹下只有truncated_fendl2bin数据库。我们可以把这个数据库相关的文件拷贝到工作文件夹。</li>
+</ol>
+<p>当材料定义是针对核素定义了的化，普通的<strong>elelib.std</strong>就没办法使用了，会出现错误：</p>
+<pre><code>310: Could not find element &lt;string&gt; in element library.
+
+The element string was not found in the element library. This could be due to an error in the material library, incorrect user input, or an omission in the element library.
+</code></pre><p>这时我们需要使用工具<strong>elelib_to_nuclib.py</strong>来将元素扩展成核素数据。这个工具是一个python脚本，调用pyne数据模块扩展元素数据。工具的位置在ALARA源文件的tools文件夹下，使用方法：</p>
+<pre><code class="bash">$ cd r2s_run/data
+$ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
+</code></pre>
+<h3 id="alara计算"><a href="#alara计算" class="headerlink" title="alara计算"></a>alara计算</h3><p>当<strong>step1</strong>完成后，程序会给出运行alara的提示，按照提示运行：</p>
+<pre><code class="bash">$ alara alara_geom &gt; output.txt
+</code></pre>
+<p>等待alara运行完成，结果文件就在output.txt中。</p>
+<h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
 ]]></content>
       
         <categories>
@@ -265,6 +242,41 @@ dump_file dump.file
             <tag> shutdown dose rate </tag>
             
             <tag> 停机计量 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Volunteering as Chinese tutor]]></title>
+      <url>/English/Volunteering-as-Chinese-tutor/</url>
+      <content type="html"><![CDATA[<p>There is a student organized group providing a Greater University Tutoring Service (GUTS) at University of Wisconsin. GUTS is a service for students who are learning languages other than English. Students learning foreign languages can apply to be a tutor to teach others his or her native language, or apply to be a tutee to learn a new language form a tutor. </p>
+<p>For example, I am a native Chinese speaker, and I am now learning both English and Japanese. I applied to be a tutor to teach another student Chinese. And I also applied to learn Japanese from others. However, I can’t apply for learning English in this program. </p>
+<p>This is a student community similar to Lang-8 in that language learners benefit each other. But the GUTS focus more on oral communications, i.e. listening and speaking, while Lang-8 focus more on written communication. </p>
+<p>Now, they’ve matched me a tutee named Molly who is learning Chinese, but we haven’t met yet. I hope we enjoy the teaching and learning experience this semester. </p>
+<p>However, there are only about 15 Japanese students on campus, and only a few people do volunteer work at GUTS. Unfortunately, I won’t get a tutor because they all already have tutees. </p>
+<p>However, I was told that there is a Japanese student association and they will be having a spring kickoff event this Saturday and that students from other countries are also welcome to attend. I am planning to attend and meet some Japanese friends. It would be great if I had more chances to use Japanese to express myself, but I don’t know whether they have free time to tutor me. </p>
+<p>Even worse, I don’t know whether or not they are willing to make a Chinese friend like me. Nevertheless, but I think I should at least try. So, I need to practice greeting phrases several times before the spring kickoff.</p>
+]]></content>
+      
+        <categories>
+            
+            <category> English </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> English </tag>
+            
+            <tag> volunteering </tag>
+            
+            <tag> tutor </tag>
+            
+            <tag> Chinese </tag>
+            
+            <tag> Japanese </tag>
             
         </tags>
         
