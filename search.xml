@@ -3,14 +3,15 @@
   
     
     <entry>
-      <title><![CDATA[Expressing Myself]]></title>
-      <url>/English/expressing-myself/</url>
-      <content type="html"><![CDATA[<p>I have been learning English in China since 2005. However, I still don’t have confidence in my English.</p>
-<p>I’m now studying at the University of Wisconsin Madison. I am immersed in an English environment now. It is at this place that I have chances to speak directly to native English speakers. I need to use English to listen to others, to talk with others, to read articles and to write messages. </p>
-<p>As for the listening and reading, I can generally understand others, except some jokes based on local things.</p>
-<p>However, it’s a little hard for me to deliver my message to others. Some sentences confuse my friends. Sometimes it is a grammar problem, I made lots of mistakes on tenses and single/plural. Sometimes it is a vocabulary problem, I misspelled the important words. Well, these are still not the most serious difficulty. It is the phrase, especially the prepositional phrase that causes most misunderstanding. </p>
-<p>Most Chinese have the same difficulties as me. I know the reason behind this phenomenon. The education and test method drive students to focus on reading and listening, to receive messages and to understand others. However, they have limited chance to practice expressing themselves. </p>
-<p>I have to practice expressing myself more and more. I am also writing blog posts about my daily life and work. I think I can post the content on <a href="http://lang-8.com/551925/journals/166174560066022122116559685041472801357" target="_blank" rel="noopener">lang-8</a> first, and then post it to my blog after reviewing.</p>
+      <title><![CDATA[Volunteering as Chinese tutor]]></title>
+      <url>/English/Volunteering-as-Chinese-tutor/</url>
+      <content type="html"><![CDATA[<p>There is a student organized group providing a Greater University Tutoring Service (GUTS) at University of Wisconsin. GUTS is a service for students who are learning languages other than English. Students learning foreign languages can apply to be a tutor to teach others his or her native language, or apply to be a tutee to learn a new language form a tutor. </p>
+<p>For example, I am a native Chinese speaker, and I am now learning both English and Japanese. I applied to be a tutor to teach another student Chinese. And I also applied to learn Japanese from others. However, I can’t apply for learning English in this program. </p>
+<p>This is a student community similar to Lang-8 in that language learners benefit each other. But the GUTS focus more on oral communications, i.e. listening and speaking, while Lang-8 focus more on written communication. </p>
+<p>Now, they’ve matched me a tutee named Molly who is learning Chinese, but we haven’t met yet. I hope we enjoy the teaching and learning experience this semester. </p>
+<p>However, there are only about 15 Japanese students on campus, and only a few people do volunteer work at GUTS. Unfortunately, I won’t get a tutor because they all already have tutees. </p>
+<p>However, I was told that there is a Japanese student association and they will be having a spring kickoff event this Saturday and that students from other countries are also welcome to attend. I am planning to attend and meet some Japanese friends. It would be great if I had more chances to use Japanese to express myself, but I don’t know whether they have free time to tutor me. </p>
+<p>Even worse, I don’t know whether or not they are willing to make a Chinese friend like me. Nevertheless, but I think I should at least try. So, I need to practice greeting phrases several times before the spring kickoff.</p>
 ]]></content>
       
         <categories>
@@ -24,7 +25,13 @@
             
             <tag> English </tag>
             
-            <tag> blog </tag>
+            <tag> volunteering </tag>
+            
+            <tag> tutor </tag>
+            
+            <tag> Chinese </tag>
+            
+            <tag> Japanese </tag>
             
         </tags>
         
@@ -192,8 +199,8 @@ output: source
 tot_phtn_src_intensities : total_photon_source_intensites.txt
 </code></pre>
 <h4 id="修改alara-params-txt"><a href="#修改alara-params-txt" class="headerlink" title="修改alara_params.txt"></a>修改alara_params.txt</h4><pre><code>material_lib alara_matlib
-element_lib nuclib
-data_library alaralib fendl3bin
+element_lib data/elelib_std
+data_library alaralib data/truncated_fendl2bin
 
 cooling
     1 h
@@ -202,7 +209,7 @@ end
 output zone
        integrate_energy
        # Energy group upper bounds. The lower bound is always zero.
-       photon_source  fendl3bin  phtn_src 24 1.00E4 2.00E4 5.00E4 1.00E5
+       photon_source  data/truncated_fendl2bin  phtn_src 24 1.00E4 2.00E4 5.00E4 1.00E5
        2.00E5 3.00E5 4.00E5 6.00E5 8.00E5 1.00E6 1.22E6 1.44E6 1.66E6
        2.00E6 2.50E6 3.00E6 4.00E6 5.00E6 6.50E6 8.00E6 1.00E7 1.20E7
        1.40E7 2.00E7
@@ -213,7 +220,7 @@ flux  my_flux     alara_fluxin  1e10     0      default
 
 # Specify the irradiation schedule below.
 # Syntax is found in the ALARA user manual
-# This example is for a single 3.5 h pulse
+# This example is for a single 1 y pulse
 schedule    my_schedule
     1 y my_flux my_pulse_history 0  s
 end
@@ -229,10 +236,13 @@ dump_file dump.file
 <ol>
 <li>material_lib alara_matlib 这个<strong>alara_matlib</strong>是alara需要读取的材料成功定义的文件名。这个文件是会由程序从test1_geometry.h5m (geom.h5m)中读取的，不需要做修改。</li>
 <li>element_lib nuclib 这个文件是定义元素的丰度用的。默认是自然丰度，也可以自己定义修改丰度。自己定义一个元素丰度数据表显然是非常麻烦的，在ALARA的安装文件中$ALARA/data下有一个<strong>elelib.std</strong>，可以把这个文件拷贝到工作文件夹下并重命名为nuclib即可（也可以设置element_lib elelib.std)。</li>
-<li>data_library alaralib fendl3bin （ALARA应该配备fendl3bin)<h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</li>
+<li>data_library alaralib fendl3bin （ALARA应该配备fendl3bin)但是并没有，ALARA安装文件中的sample/datam文件夹下只有truncated_fendl2bin数据库。我们可以把这个数据库相关的文件拷贝到工作文件夹。</li>
 </ol>
-<p>当我们修改好</p>
-<h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
+<h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><p><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</p>
+<p>当我们修改好上面两个文件后，就可以使用r2s.py生成ALARA计算需要的文件了：</p>
+<pre><code class="bash">$ r2s.py step1
+</code></pre>
+<h3 id="alara计算"><a href="#alara计算" class="headerlink" title="alara计算"></a>alara计算</h3><h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
 ]]></content>
       
         <categories>
@@ -255,6 +265,34 @@ dump_file dump.file
             <tag> shutdown dose rate </tag>
             
             <tag> 停机计量 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Expressing Myself]]></title>
+      <url>/English/expressing-myself/</url>
+      <content type="html"><![CDATA[<p>I have been learning English in China since 2005. However, I still don’t have confidence in my English.</p>
+<p>I’m now studying at the University of Wisconsin Madison. I am immersed in an English environment now. It is at this place that I have chances to speak directly to native English speakers. I need to use English to listen to others, to talk with others, to read articles and to write messages. </p>
+<p>As for the listening and reading, I can generally understand others, except some jokes based on local things.</p>
+<p>However, it’s a little hard for me to deliver my message to others. Some sentences confuse my friends. Sometimes it is a grammar problem, I made lots of mistakes on tenses and single/plural. Sometimes it is a vocabulary problem, I misspelled the important words. Well, these are still not the most serious difficulty. It is the phrase, especially the prepositional phrase that causes most misunderstanding. </p>
+<p>Most Chinese have the same difficulties as me. I know the reason behind this phenomenon. The education and test method drive students to focus on reading and listening, to receive messages and to understand others. However, they have limited chance to practice expressing themselves. </p>
+<p>I have to practice expressing myself more and more. I am also writing blog posts about my daily life and work. I think I can post the content on <a href="http://lang-8.com/551925/journals/166174560066022122116559685041472801357" target="_blank" rel="noopener">lang-8</a> first, and then post it to my blog after reviewing.</p>
+]]></content>
+      
+        <categories>
+            
+            <category> English </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> English </tag>
+            
+            <tag> blog </tag>
             
         </tags>
         

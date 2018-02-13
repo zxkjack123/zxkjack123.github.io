@@ -243,8 +243,8 @@
     <meta property="og:article:tag" content="DAGMC"> <meta property="og:article:tag" content="PyNE"> <meta property="og:article:tag" content="Trelis"> <meta property="og:article:tag" content="R2S"> <meta property="og:article:tag" content="shutdown dose rate"> <meta property="og:article:tag" content="停机计量"> 
 
     
-        <meta property="article:published_time" content="Fri Feb 09 2018 14:30:09 GMT-0600">
-        <meta property="article:modified_time" content="Fri Feb 09 2018 14:30:09 GMT-0600">
+        <meta property="article:published_time" content="Mon Feb 12 2018 13:59:45 GMT-0600">
+        <meta property="article:modified_time" content="Mon Feb 12 2018 13:59:45 GMT-0600">
     
 
     <!-- The Twitter Card protocol -->
@@ -266,8 +266,8 @@
     "@type": "BlogPosting",
     "mainEntityOfPage": "http://zxkjack123.github.io/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/index.html",
     "headline": "使用PyNE进行基于网格的计算停机计量的例子",
-    "datePublished": "Fri Feb 09 2018 14:30:09 GMT-0600",
-    "dateModified": "Fri Feb 09 2018 14:30:09 GMT-0600",
+    "datePublished": "Mon Feb 12 2018 13:59:45 GMT-0600",
+    "dateModified": "Mon Feb 12 2018 13:59:45 GMT-0600",
     "author": {
         "@type": "Person",
         "name": "zxkjack123",
@@ -359,7 +359,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子的重要性"><span class="post-toc-number">2.</span> <span class="post-toc-text">例子的重要性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题描述"><span class="post-toc-number">3.</span> <span class="post-toc-text">例题描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输入文件准备"><span class="post-toc-number">4.</span> <span class="post-toc-text">输入文件准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Trelis建模"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Trelis建模</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#几何体的建立"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">几何体的建立</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分组并赋材料"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">分组并赋材料</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置问题边界"><span class="post-toc-number">4.1.3.</span> <span class="post-toc-text">设置问题边界</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#终止边界：graveyard"><span class="post-toc-number">4.1.3.1.</span> <span class="post-toc-text">终止边界：graveyard</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#反射边界"><span class="post-toc-number">4.1.3.2.</span> <span class="post-toc-text">反射边界</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#imprint-amp-merge"><span class="post-toc-number">4.1.4.</span> <span class="post-toc-text">imprint &amp; merge</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#导出几何文件"><span class="post-toc-number">4.1.5.</span> <span class="post-toc-text">导出几何文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#制作材料"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">制作材料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合几何与材料"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">整合几何与材料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DAGMC-input文件准备"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">DAGMC input文件准备</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中子输运计算"><span class="post-toc-number">5.</span> <span class="post-toc-text">中子输运计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#活化计算"><span class="post-toc-number">6.</span> <span class="post-toc-text">活化计算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化配置-setup"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">初始化配置:setup</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改配置文件"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">修改配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#修改config-ini设置"><span class="post-toc-number">6.2.1.</span> <span class="post-toc-text">修改config.ini设置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#修改alara-params-txt"><span class="post-toc-number">6.2.2.</span> <span class="post-toc-text">修改alara_params.txt</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#r2s-py-step1"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">r2s.py step1</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结果绘图"><span class="post-toc-number">7.</span> <span class="post-toc-text">结果绘图</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子的重要性"><span class="post-toc-number">2.</span> <span class="post-toc-text">例子的重要性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题描述"><span class="post-toc-number">3.</span> <span class="post-toc-text">例题描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输入文件准备"><span class="post-toc-number">4.</span> <span class="post-toc-text">输入文件准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Trelis建模"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Trelis建模</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#几何体的建立"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">几何体的建立</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分组并赋材料"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">分组并赋材料</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置问题边界"><span class="post-toc-number">4.1.3.</span> <span class="post-toc-text">设置问题边界</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#终止边界：graveyard"><span class="post-toc-number">4.1.3.1.</span> <span class="post-toc-text">终止边界：graveyard</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#反射边界"><span class="post-toc-number">4.1.3.2.</span> <span class="post-toc-text">反射边界</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#imprint-amp-merge"><span class="post-toc-number">4.1.4.</span> <span class="post-toc-text">imprint &amp; merge</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#导出几何文件"><span class="post-toc-number">4.1.5.</span> <span class="post-toc-text">导出几何文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#制作材料"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">制作材料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合几何与材料"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">整合几何与材料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DAGMC-input文件准备"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">DAGMC input文件准备</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中子输运计算"><span class="post-toc-number">5.</span> <span class="post-toc-text">中子输运计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#活化计算"><span class="post-toc-number">6.</span> <span class="post-toc-text">活化计算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化配置-setup"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">初始化配置:setup</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改配置文件"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">修改配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#修改config-ini设置"><span class="post-toc-number">6.2.1.</span> <span class="post-toc-text">修改config.ini设置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#修改alara-params-txt"><span class="post-toc-number">6.2.2.</span> <span class="post-toc-text">修改alara_params.txt</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#r2s-py-step1"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">r2s.py step1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#alara计算"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">alara计算</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结果绘图"><span class="post-toc-number">7.</span> <span class="post-toc-text">结果绘图</span></a></li></ol>
     </ul>
     
 
@@ -410,7 +410,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>zxkjack123</strong>
-        <span>Feb 09, 2018</span>
+        <span>Feb 12, 2018</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -662,8 +662,8 @@ output: source
 tot_phtn_src_intensities : total_photon_source_intensites.txt
 </code></pre>
 <h4 id="修改alara-params-txt"><a href="#修改alara-params-txt" class="headerlink" title="修改alara_params.txt"></a>修改alara_params.txt</h4><pre><code>material_lib alara_matlib
-element_lib nuclib
-data_library alaralib fendl3bin
+element_lib data/elelib_std
+data_library alaralib data/truncated_fendl2bin
 
 cooling
     1 h
@@ -672,7 +672,7 @@ end
 output zone
        integrate_energy
        # Energy group upper bounds. The lower bound is always zero.
-       photon_source  fendl3bin  phtn_src 24 1.00E4 2.00E4 5.00E4 1.00E5
+       photon_source  data/truncated_fendl2bin  phtn_src 24 1.00E4 2.00E4 5.00E4 1.00E5
        2.00E5 3.00E5 4.00E5 6.00E5 8.00E5 1.00E6 1.22E6 1.44E6 1.66E6
        2.00E6 2.50E6 3.00E6 4.00E6 5.00E6 6.50E6 8.00E6 1.00E7 1.20E7
        1.40E7 2.00E7
@@ -683,7 +683,7 @@ flux  my_flux     alara_fluxin  1e10     0      default
 
 # Specify the irradiation schedule below.
 # Syntax is found in the ALARA user manual
-# This example is for a single 3.5 h pulse
+# This example is for a single 1 y pulse
 schedule    my_schedule
     1 y my_flux my_pulse_history 0  s
 end
@@ -699,10 +699,13 @@ dump_file dump.file
 <ol>
 <li>material_lib alara_matlib 这个<strong>alara_matlib</strong>是alara需要读取的材料成功定义的文件名。这个文件是会由程序从test1_geometry.h5m (geom.h5m)中读取的，不需要做修改。</li>
 <li>element_lib nuclib 这个文件是定义元素的丰度用的。默认是自然丰度，也可以自己定义修改丰度。自己定义一个元素丰度数据表显然是非常麻烦的，在ALARA的安装文件中$ALARA/data下有一个<strong>elelib.std</strong>，可以把这个文件拷贝到工作文件夹下并重命名为nuclib即可（也可以设置element_lib elelib.std)。</li>
-<li>data_library alaralib fendl3bin （ALARA应该配备fendl3bin)<h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</li>
+<li>data_library alaralib fendl3bin （ALARA应该配备fendl3bin)但是并没有，ALARA安装文件中的sample/datam文件夹下只有truncated_fendl2bin数据库。我们可以把这个数据库相关的文件拷贝到工作文件夹。</li>
 </ol>
-<p>当我们修改好</p>
-<h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
+<h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><p><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</p>
+<p>当我们修改好上面两个文件后，就可以使用r2s.py生成ALARA计算需要的文件了：</p>
+<pre><code class="bash">$ r2s.py step1
+</code></pre>
+<h3 id="alara计算"><a href="#alara计算" class="headerlink" title="alara计算"></a>alara计算</h3><h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
 
         
     
@@ -752,7 +755,7 @@ dump_file dump.file
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/English/expressing-myself/" id="post_nav-newer" class="prev-content">
+        <a href="/English/Volunteering-as-Chinese-tutor/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -766,7 +769,7 @@ dump_file dump.file
 
     <!-- Next Nav -->
     
-        <a href="/neutronics/alara-install/" id="post_nav-older" class="next-content">
+        <a href="/English/expressing-myself/" id="post_nav-older" class="next-content">
             Older
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
@@ -860,7 +863,7 @@ dump_file dump.file
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">10</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">10</span></a>
             </ul>
         </li>
         
@@ -878,7 +881,7 @@ dump_file dump.file
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/Cython/">Cython<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/English/">English<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Japanese/">Japanese<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/career/">career<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/life/">life<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/neutronics/">neutronics<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/ubuntu/">ubuntu<span class="sidebar_archives-count">3</span></a>
+                <a class="sidebar_archives-link" href="/categories/Cython/">Cython<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/English/">English<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/Japanese/">Japanese<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/career/">career<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/life/">life<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/neutronics/">neutronics<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/ubuntu/">ubuntu<span class="sidebar_archives-count">3</span></a>
             </ul>
         </li>
         
