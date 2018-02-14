@@ -54,7 +54,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="None">
-    <meta name="keywords" content="zxkjack123,DAGMC,PyNE,Trelis,R2S,shutdown dose rate,停机计量">
+    <meta name="keywords" content="zxkjack123,Trelis,DAGMC,PyNE,R2S,shutdown dose rate,停机计量">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -240,11 +240,11 @@
     <meta property="og:title" content="使用PyNE进行基于网格的计算停机计量的例子 | zxkjack123&#39;s blog">
     <meta property="og:image" content="/img/favicon.jpg">
     <meta property="og:description" content="None">
-    <meta property="og:article:tag" content="DAGMC"> <meta property="og:article:tag" content="PyNE"> <meta property="og:article:tag" content="Trelis"> <meta property="og:article:tag" content="R2S"> <meta property="og:article:tag" content="shutdown dose rate"> <meta property="og:article:tag" content="停机计量"> 
+    <meta property="og:article:tag" content="Trelis"> <meta property="og:article:tag" content="DAGMC"> <meta property="og:article:tag" content="PyNE"> <meta property="og:article:tag" content="R2S"> <meta property="og:article:tag" content="shutdown dose rate"> <meta property="og:article:tag" content="停机计量"> 
 
     
-        <meta property="article:published_time" content="Wed Feb 14 2018 13:18:22 GMT-0600">
-        <meta property="article:modified_time" content="Wed Feb 14 2018 13:18:22 GMT-0600">
+        <meta property="article:published_time" content="Wed Feb 14 2018 15:09:19 GMT-0600">
+        <meta property="article:modified_time" content="Wed Feb 14 2018 15:09:19 GMT-0600">
     
 
     <!-- The Twitter Card protocol -->
@@ -266,8 +266,8 @@
     "@type": "BlogPosting",
     "mainEntityOfPage": "http://zxkjack123.github.io/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/index.html",
     "headline": "使用PyNE进行基于网格的计算停机计量的例子",
-    "datePublished": "Wed Feb 14 2018 13:18:22 GMT-0600",
-    "dateModified": "Wed Feb 14 2018 13:18:22 GMT-0600",
+    "datePublished": "Wed Feb 14 2018 15:09:19 GMT-0600",
+    "dateModified": "Wed Feb 14 2018 15:09:19 GMT-0600",
     "author": {
         "@type": "Person",
         "name": "zxkjack123",
@@ -285,7 +285,7 @@
             "url": "/img/favicon.jpg"
         }
     },
-    "keywords": ",DAGMC,PyNE,Trelis,R2S,shutdown dose rate,停机计量zxkjack123",
+    "keywords": ",Trelis,DAGMC,PyNE,R2S,shutdown dose rate,停机计量zxkjack123",
     "description": "None",
 }
 </script>
@@ -359,7 +359,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子的重要性"><span class="post-toc-number">2.</span> <span class="post-toc-text">例子的重要性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题描述"><span class="post-toc-number">3.</span> <span class="post-toc-text">例题描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输入文件准备"><span class="post-toc-number">4.</span> <span class="post-toc-text">输入文件准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Trelis建模"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Trelis建模</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#几何体的建立"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">几何体的建立</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分组并赋材料"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">分组并赋材料</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置问题边界"><span class="post-toc-number">4.1.3.</span> <span class="post-toc-text">设置问题边界</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#终止边界：graveyard"><span class="post-toc-number">4.1.3.1.</span> <span class="post-toc-text">终止边界：graveyard</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#反射边界"><span class="post-toc-number">4.1.3.2.</span> <span class="post-toc-text">反射边界</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#imprint-amp-merge"><span class="post-toc-number">4.1.4.</span> <span class="post-toc-text">imprint &amp; merge</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#导出几何文件"><span class="post-toc-number">4.1.5.</span> <span class="post-toc-text">导出几何文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#制作材料"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">制作材料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合几何与材料"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">整合几何与材料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DAGMC-input文件准备"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">DAGMC input文件准备</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中子输运计算"><span class="post-toc-number">5.</span> <span class="post-toc-text">中子输运计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#活化计算"><span class="post-toc-number">6.</span> <span class="post-toc-text">活化计算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化配置-setup"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">初始化配置:setup</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改配置文件"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">修改配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#修改config-ini设置"><span class="post-toc-number">6.2.1.</span> <span class="post-toc-text">修改config.ini设置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#修改alara-params-txt"><span class="post-toc-number">6.2.2.</span> <span class="post-toc-text">修改alara_params.txt</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#r2s-py-step1"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">r2s.py step1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#材料数据库准备"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">材料数据库准备</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#alara计算"><span class="post-toc-number">6.5.</span> <span class="post-toc-text">alara计算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#r2s-step2"><span class="post-toc-number">6.6.</span> <span class="post-toc-text">r2s step2</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#光子输运"><span class="post-toc-number">7.</span> <span class="post-toc-text">光子输运</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件准备"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">文件准备</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结果绘图"><span class="post-toc-number">8.</span> <span class="post-toc-text">结果绘图</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子的重要性"><span class="post-toc-number">2.</span> <span class="post-toc-text">例子的重要性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题描述"><span class="post-toc-number">3.</span> <span class="post-toc-text">例题描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输入文件准备"><span class="post-toc-number">4.</span> <span class="post-toc-text">输入文件准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Trelis建模"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Trelis建模</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#几何体的建立"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">几何体的建立</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分组并赋材料"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">分组并赋材料</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#设置问题边界"><span class="post-toc-number">4.1.3.</span> <span class="post-toc-text">设置问题边界</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#终止边界：graveyard"><span class="post-toc-number">4.1.3.1.</span> <span class="post-toc-text">终止边界：graveyard</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#反射边界"><span class="post-toc-number">4.1.3.2.</span> <span class="post-toc-text">反射边界</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#imprint-amp-merge"><span class="post-toc-number">4.1.4.</span> <span class="post-toc-text">imprint &amp; merge</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#导出几何文件"><span class="post-toc-number">4.1.5.</span> <span class="post-toc-text">导出几何文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#制作材料"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">制作材料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整合几何与材料"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">整合几何与材料</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DAGMC-input文件准备"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">DAGMC input文件准备</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中子输运计算"><span class="post-toc-number">5.</span> <span class="post-toc-text">中子输运计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#活化计算"><span class="post-toc-number">6.</span> <span class="post-toc-text">活化计算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化配置-setup"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">初始化配置:setup</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改配置文件"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">修改配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#修改config-ini设置"><span class="post-toc-number">6.2.1.</span> <span class="post-toc-text">修改config.ini设置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#修改alara-params-txt"><span class="post-toc-number">6.2.2.</span> <span class="post-toc-text">修改alara_params.txt</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#r2s-py-step1"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">r2s.py step1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#材料数据库准备"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">材料数据库准备</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#alara计算"><span class="post-toc-number">6.5.</span> <span class="post-toc-text">alara计算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#r2s-step2"><span class="post-toc-number">6.6.</span> <span class="post-toc-text">r2s step2</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#光子输运"><span class="post-toc-number">7.</span> <span class="post-toc-text">光子输运</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件准备"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">文件准备</span></a></li></ol></li></ol>
     </ul>
     
 
@@ -751,8 +751,8 @@ $ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
 <p>现在这个运行肯定会出现错误，说粒子产生子重要性为0的区域。但是同时这个过程会生成一个可编辑的<strong>lcad</strong>文件，我们可以修改这个<strong>lcad</strong>文件，在重要性部分添加上<strong>imp:p=1</strong>/<strong>imp:p=0</strong>，将这个文件重命名为<strong>lcad_m</strong>，删掉过程文件<strong>fcad, outp, runtpe</strong>后再次运行</p>
 <pre><code class="bash">$ mcnp5.mpi i=input g=geom.h5m l=lcad_m
 </code></pre>
-<p>之后就得到结果啦！</p>
-<h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
+<p>之后就得到结果，至此停机剂量的计算完成。</p>
+<p><strong>备注</strong>：在计算得到结果之后，还可以把几何图形及计算结果的网格数据进行可视化绘图。绘图方法可以参考<a href="https://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/">DAGMC数据绘图</a>。</p>
 
         
     
@@ -802,21 +802,13 @@ $ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/neutronics/dagmc-geom-data-visualization/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Newer
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/neutronics/dagmc-install/" id="post_nav-older" class="next-content">
+        <a href="/neutronics/dagmc-geom-data-visualization/" id="post_nav-older" class="next-content">
             Older
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
