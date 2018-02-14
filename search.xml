@@ -3,136 +3,35 @@
   
     
     <entry>
-      <title><![CDATA[安装DAGMC]]></title>
-      <url>/neutronics/dagmc-install/</url>
-      <content type="html"><![CDATA[<h2 id="DAGMC简介"><a href="#DAGMC简介" class="headerlink" title="DAGMC简介"></a>DAGMC简介</h2><p><a href="https://svalinn.github.io/DAGMC/" target="_blank" rel="noopener">DAGMC</a>是Direct Accelerated Geometry Monte Carlo的缩写，如其名字所示，DAGMC设计了一套方便高效的几何手段，用于蒙特卡罗方法的计算。DAGMC已经有了与MCNP5, MCNP6, Geant4, FLUKA, Tripoli4和Shift结合的相应工具。即使用DAGMC的几何处理部分，配合其他工具的物理计算部分代码，实现蒙特卡罗计算。</p>
-<h2 id="DAGMC依赖软件安装"><a href="#DAGMC依赖软件安装" class="headerlink" title="DAGMC依赖软件安装"></a>DAGMC依赖软件安装</h2><p>DAGMC可以用来和PyNE配合来进行停机剂量计算工作。但是，现在PyNE最高支持MOAB 4.9.1 版，然而DAGMC需要使用MOAB 5.0版。也就是说，使用DAGMC的PyNE开发者需要在电脑上同时安装MOAB 4.9.1 和5.0版本。必须分别安装并设定，使用时还需要指定所使用库的路径。PyNE的安装可以参考<a href="https://zxkjack123.github.io/neutronics/pyne-developer-install/">PyNE的开发版本安装</a>。DAGMC的安装可以参考<a href="https://svalinn.github.io/DAGMC/install/index.html" target="_blank" rel="noopener">官方安装指导</a>。但是官方指导的安装步骤存在几个缺点：</p>
-<ol>
-<li>对于HDF5的安装和库的使用有一处会出现找不到hdf5的情况</li>
-<li>虽然说明了需要安装MOAB5.0,但并没有明确的和MOAB4.9.1做区分，导致使用PyNE的人会面临困扰</li>
-<li>部分系统上，如Ubuntu 16.04，安装MOAB时会出现bug，暂时需要手动解决</li>
-</ol>
-<p>我也正在梳理适合我实际的安装流程，同时争取把官方安装指导完善一下。不过由于PyNE和DAGMC都还在不断的开发和完善过程中，将来对于MOAB的配置问题如果得到解决，那么整个安装流程就又会发生改变。安装流程需要与时俱进。</p>
-<h3 id="安装HDF5"><a href="#安装HDF5" class="headerlink" title="安装HDF5"></a>安装HDF5</h3><p>电脑中可能已经安装了HDF5了，我们可以通过下面的命令来检查它的版本：</p>
-<pre><code class="bash">dpkg -s libhdf5-dev
+      <title><![CDATA[DAGMC几何和数据可视化]]></title>
+      <url>/neutronics/dagmc-geom-data-visualization/</url>
+      <content type="html"><![CDATA[<p>科学计算达到了结果之后，总是希望能够画出酷炫的图来展示自己的成果。比如说展示复杂几何结构的的图，展示数据在空间分布的图，或者两者结合起来的几何和数据匹配的图。</p>
+<p>我们在使用DAGMC的过程中，除了Trelis几何模型处理阶段有图形以外，我们还可以把meshtal的结果和几何一起展示出来。</p>
+<p>要制作这种几何和数据结合的图，我们可以使用<a href="https://wci.llnl.gov/simulation/computer-codes/visit" target="_blank" rel="noopener">visit</a>这款软件。</p>
+<p>我们把几何文件和数据文件都转换为vtk格式，然后用visit就可以画图了。</p>
+<h2 id="几何模型准备"><a href="#几何模型准备" class="headerlink" title="几何模型准备"></a>几何模型准备</h2><p>经过Trelis处理到处的geom.h5m文件可以使用MOAB的工具mbconvert将h5m文件转化为vtk文件。</p>
+<p>不过我们不能直接使用那个用于输运计算的几何文件。因为那个文件中存在一个graveyard，那个是我们添加在原本几何模型外围的中子计算截止区域的几何。我们不需要这个graveyard，需要在Trelis模型中去掉这部分，导出一个没有graveyard的几何文件。</p>
+<h2 id="数据文件准备"><a href="#数据文件准备" class="headerlink" title="数据文件准备"></a>数据文件准备</h2><p>我们得到meshtal文件后，可以通过PyNE这个工具来将其先转化为h5m文件，然后再通过mbconvert转化为vtk文件。</p>
+<h3 id="meshtal数据写入h5m文件"><a href="#meshtal数据写入h5m文件" class="headerlink" title="meshtal数据写入h5m文件"></a>meshtal数据写入h5m文件</h3><p>比如一个包含fmesh4和fmesh14的meshtal文件，可以通过下面的python脚本将这两个tally的数据写入到h5m文件中：</p>
+<pre><code class="python">from pyne.mcnp import Meshtal
+from pyne.mesh import IMeshTag
+#neutron_result neutron_result_rel_error neutron_result_total neutron_result_total_rel_error
+meshtal = Meshtal(&quot;meshtal&quot;)
+meshtal.tally[4].mesh.save(&quot;meshtal4.h5m&quot;)
+meshtal.tally[14].mesh.save(&quot;meshtal14.h5m&quot;)
 </code></pre>
-<p>如果没有安装的话，通过下面的命令安装：</p>
-<pre><code class="bash">sudo apt-get install hdf5-dev
+<h3 id="将h5m文件转化为vtk文件"><a href="#将h5m文件转化为vtk文件" class="headerlink" title="将h5m文件转化为vtk文件"></a>将h5m文件转化为vtk文件</h3><p>使用下面的命令将h5m文件转化为vtk文件：</p>
+<pre><code class="bash">$ mbconvert meshtal4.h5m meshtal4.vtk
+$ mbconvert meshtal14.h5m meshtal14.vtk
 </code></pre>
-<h3 id="安装MOAB5-0"><a href="#安装MOAB5-0" class="headerlink" title="安装MOAB5.0"></a>安装MOAB5.0</h3><p>假定我们将MOAB5.0安装在$HOME/opt/MOAB5.0下，按照以下步骤进行安装。</p>
-<h4 id="获取源代码"><a href="#获取源代码" class="headerlink" title="获取源代码"></a>获取源代码</h4><pre><code class="bash"># 下载源代码
-cd ~/opt
-mkdir MOAB5.0
-cd MOAB5.0
-git clone https://bitbucket.org/fathomteam/moab
-cd moab
-git checkout Version5.0
-autoreconf -fi
-cd ..
-ln -s moab src
-</code></pre>
-<h4 id="配置安装"><a href="#配置安装" class="headerlink" title="配置安装"></a>配置安装</h4><pre><code>mkdir bld
-cd bld
-export MOAB_DIR=$HOME/opt/MOAB5.0
-../src/configure --enable-optimize \
-                   --enable-shared \
-                   --disable-debug \
-                   --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial \
-                   --prefix=$MOAB_DIR
-make
-</code></pre><p>目前由于MOAB的配置文件存在bug,执行到这一步时，会出现下面的报错：</p>
-<pre><code>../../src/src/moab/Matrix3.hpp:62:2: error: #error Need either Eigen3 or BLAS/LAPACK libraries
-</code></pre><p>解决方法：</p>
-<pre><code class="bash">cd $MOAB_DIR/src/src/moab
-</code></pre>
-<p>打开<strong>Matrix3.hpp</strong>,找到下面的一段内容：</p>
-<pre><code class="hpp">// We will rely on LAPACK directly
-#ifndef MOAB_HAVE_LAPACK
-#error Need either Eigen3 or BLAS/LAPACK libraries
-#endif
-</code></pre>
-<p>将<strong>#error Need either Eigen3 or BLAS/LAPACK libraries</strong>注释掉：</p>
-<pre><code class="hpp">// We will rely on LAPACK directly
-#ifndef MOAB_HAVE_LAPACK
-//#error Need either Eigen3 or BLAS/LAPACK libraries
-#endif
-</code></pre>
-<p>然后清空bld文件家下的所有内容，重新配置安装：</p>
-<pre><code class="bash">cd $MOAB_DIR/bld
-rm -rf ./*
-../src/configure --enable-optimize \
-                   --enable-shared \
-                   --disable-debug \
-                   --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial \
-                   --prefix=$MOAB_DIR
-make
-make check
-make install
-</code></pre>
-<p>至此，我们完成了MOAB5.0的安装，但是要调用它，必须让系统能够找到相关的文件。由于系统中可能同时安装了MOAB4.9.1和MOAB5.0，因此我们需要设置好MOAB的路径。</p>
-<h4 id="路径设置"><a href="#路径设置" class="headerlink" title="路径设置"></a>路径设置</h4><p>MOAB路径配置,将下面的内容拷贝至~/.bashrc文件：</p>
-<pre><code># MOAB
-export MOAB_DIR=$HOME/opt/MOAB5.0
-#export MOAB_DIR=$HOME/opt/MOAB4.9.1
-export PATH=$PATH:$MOAB_DIR/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOAB_DIR/lib
-export LIBRARY_PATH=$LIBRARY_PATH:$MOAB_DIR/lib
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$MOAB_DIR/include
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:$MOAB_DIR/include
-</code></pre><p>这样，当需要使用DAGMC的时候，将~/.bashrc中的MOAB4.9.1路径注释掉，保留MOAB5.0，然后打开一个新的terminal（刷新~/.bashrc设置），新terminal中MOAB便是MOAB5.0。</p>
-<pre><code>export MOAB_DIR=$HOME/opt/MOAB5.0
-#export MOAB_DIR=$HOME/opt/MOAB4.9.1
-</code></pre><p>当需要使用PyNE的时候，将~/.bashrc中的MOAB5.0注释掉，保留MOAB4.9.1，然后打开一个新的terminal，新的terminal中MOAB便是MOAB4.9.1。</p>
-<pre><code>#export MOAB_DIR=$HOME/opt/MOAB5.0
-export MOAB_DIR=$HOME/opt/MOAB4.9.1
-</code></pre><h2 id="安装DAGMC"><a href="#安装DAGMC" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h2><p>完成HDF5和MOAB5.0的安装后，我们可以安装DAGMC了。</p>
-<p>假设我们要把DAGMC安装在$HOME/opt/DAGMC文件夹下，可以按照下面的步骤进行。</p>
-<h3 id="获取DAGMC源代码"><a href="#获取DAGMC源代码" class="headerlink" title="获取DAGMC源代码"></a>获取DAGMC源代码</h3><pre><code class="bash">cd $HOME/opt
-mkdir DAGMC
-cd DAGMC
-git clone https://github.com/svalinn/DAGMC
-# 此处会在DAGMC文件夹下再生成一个DAGMC文件夹-&gt; DAGMC/DAGMC
-cd DAGMC
-git checkout develop
-</code></pre>
-<h3 id="安装DAGMC-1"><a href="#安装DAGMC-1" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h3><p><strong>这个步骤需要相应的物理计算部分的源代码</strong>。请参考<a href="https://svalinn.github.io/DAGMC/install/dagmc.html" target="_blank" rel="noopener">官方文档</a>选择相应版本执行后续安装步骤。<br>下面以安装DAG-MCNP v1.xx为例说明安装过程</p>
-<h4 id="patch"><a href="#patch" class="headerlink" title="patch"></a>patch</h4><pre><code class="bash">cd mcnp/mcnp5
-cp -r &lt;path_to_dvd&gt;/MCNP5/Source .
-chmod -R u+rw Source
-patch -p0 &lt; patch/dagmc.5.1.xx.patch
-</code></pre>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="bash">cd $HOME/opt/DAGMC/DAGMC
-mkdir bld
-cd bld
-cmake ../. -DBUILD_MCNP5=ON -DMPI_BUILD=ON -DCMAKE_INSTALL_PREFIX=$HOME/opt/DAGMC -DHDF5_LIBRARIES=/usr/lib/x86_64-linux-gnu/hdf5/serial/lib -DHDF5_INCLUDE_DIRS=/usr/lib/x86_64-linux-gnu/hdf5/serial/include -DMCNP5_DATAPATH=$HOME/opt/MCNPDATA
-make
-make install
-</code></pre>
-<h4 id="添加路径到-bashrc"><a href="#添加路径到-bashrc" class="headerlink" title="添加路径到~/.bashrc"></a>添加路径到~/.bashrc</h4><pre><code>export PATH=$PATH:$HOME/opt/DAGMC/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
-</code></pre><h2 id="编译带用于R2S的源子程序的DAGMC个"><a href="#编译带用于R2S的源子程序的DAGMC个" class="headerlink" title="编译带用于R2S的源子程序的DAGMC个"></a>编译带用于R2S的源子程序的DAGMC个</h2><p>上面的步骤是编译DAGMC的通用流程。但是当我们需要配合PyNE进行R2S计算的DAGMC时，需要修改源子程序，修改及其编译说明可以参考<a href="http://pyne.io/usersguide/source_sampling.html#source-sampling-in-mcnp5" target="_blank" rel="noopener">官方文档</a>。</p>
-<p>如果是第一次安装DAGMC，想直接安装配合PyNE的DAGMC，那么需要上述安装步骤的<strong>patch之后配置之前</strong>加入如下步骤：</p>
-<ol>
-<li>Navigate to the folder MCNP5/Source/src.</li>
-<li>Soft-link the following files into this folder:<ul>
-<li>pyne/src/source_sampling.cpp</li>
-<li>pyne/src/source_sampling.h</li>
-<li>pyne/src/measure.cpp</li>
-<li>pyne/src/measure.h</li>
-</ul>
-</li>
-<li>Remove the pre-existing empty source.F90 file.</li>
-<li>Soft-link pyne/share/source.F90.</li>
-<li>Open the file MCNP/Source/src/FILE.list.</li>
-<li>Edit file, add CXX_SRC under C_SRC to include the additional source files. It should look like “CXX_SRC := measure.cpp source_sampling.cpp”.</li>
-</ol>
-<p>然后接着配置之后的步骤进行即可。</p>
-<p>如果是已经安装过DAGMC，则可以省去patch及patch之前的步骤，直接使用上面的修改，然后进行配置编译即可。</p>
-<p><strong>备注</strong>： 进行上述修改步骤时，必须注意两点：</p>
-<ol>
-<li>确保系统路径中的MOAB是5.0版本</li>
-<li>确保pyne的branch是你需要的branch</li>
-</ol>
+<h2 id="visit绘图"><a href="#visit绘图" class="headerlink" title="visit绘图"></a>visit绘图</h2><h3 id="单独绘制几何"><a href="#单独绘制几何" class="headerlink" title="单独绘制几何"></a>单独绘制几何</h3><p>运行visit -&gt; File -&gt; Open file -&gt; 选择几何vtk文件 -&gt; 在窗口找到Plots子窗口 -&gt; 点击Add下单菜单 -&gt; 选择mesh -&gt; 选择mesh -&gt; 窗口出现一个对象 -&gt; 点击Plots子窗口Draw按钮 </p>
+<p>按照上述流程几何显示出几何文件的网格结构图。</p>
+<p>下图是<a href="https://zxkjack123.github.io/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/">计算停机剂量的例子</a>中的几何图形：<br><img src="https://i.imgur.com/pudCxoD.png" alt="几何图"></p>
+<h3 id="单独绘制数据"><a href="#单独绘制数据" class="headerlink" title="单独绘制数据"></a>单独绘制数据</h3><p>与绘制几何类似：</p>
+<p>运行visit -&gt; File -&gt; Open file -&gt; 选择数据vtk文件 -&gt; 在窗口找到Plots子窗口 -&gt; 点击Add下单菜单 -&gt; 选择pseudocolor -&gt; 选择相应的tally tag -&gt; 窗口出现一个对象 -&gt; 点击Plots子窗口Draw按钮 </p>
+<p><img src="https://i.imgur.com/Wg8jHmn.png" alt="剂量图"></p>
+<h3 id="同时绘制几何和数据"><a href="#同时绘制几何和数据" class="headerlink" title="同时绘制几何和数据"></a>同时绘制几何和数据</h3><p>同时绘制几何和数据的操作其实就是将几何和图像同时话在同一个图上，操作流程就是上述两者的结合。</p>
+<p><img src="https://i.imgur.com/28Ko0SN.png" alt="几何加图"></p>
 ]]></content>
       
         <categories>
@@ -146,7 +45,17 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             
             <tag> DAGMC </tag>
             
-            <tag> install </tag>
+            <tag> PyNE </tag>
+            
+            <tag> Trelis </tag>
+            
+            <tag> visit </tag>
+            
+            <tag> visualization </tag>
+            
+            <tag> geometry </tag>
+            
+            <tag> data </tag>
             
         </tags>
         
@@ -381,8 +290,29 @@ $ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
 <li>e_bounds:光子能群结构。从低能到高能，单位为eV。最低能群能量下限为0.</li>
 <li>phtn_src.h5: HDF5格式的光子源数据，无法直接打开读取，只能程序读。</li>
 <li>source_<strong>i</strong>.h5m: 第<strong>i</strong>个冷却时间点的网格光子源数据。</li>
-<li>total_photon_source_intensites.txt: 里面是各个冷却时间节点的总光子发射率。</li>
+<li>total_photon_source_intensites.txt: 里面是各个冷却时间节点的总光子发射率。<br>你</li>
 </ol>
+<h2 id="光子输运"><a href="#光子输运" class="headerlink" title="光子输运"></a>光子输运</h2><p>获得光子源后，我们就可以进行光子输运计算了。计算前必须确认DAGMC是已经包含了源子程序的版本，如果没有，需要先参考<a href="编译带用于R2S的源子程序的DAGMC">编译带用于R2S的源子程序的DAGMC</a>安装DAGMC。</p>
+<h3 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h3><p>进行光子输运计算，我们需要提供几何文件，材料，光子源，以及需要统计的信息。因此需要准备的文件有：</p>
+<ol>
+<li>geom.h5m: 就是中子输运时用的那个文件，即本例子中的test1_geometry.h5m，它包含了几何和材料信息</li>
+<li>source.h5m:光子源信息文件，源子程序需要从这里读取信息。由于MCNP无法从输入文件中传递字符串，所以这个文件名称不能改变，必须是source.h5m。</li>
+<li>e_bounds: 光子能群结构文件。</li>
+<li>input: 提供tally信息，另外需要在这个文件中定义<strong>idum</strong>，用于控制源子程序过程。</li>
+</ol>
+<p>准备好这些文件后，我们还需要对这些文件进行一些小修改。</p>
+<ol>
+<li>input文件修改：首先，需要加上mode p， 然后修改tally部分。</li>
+<li>e_bounds: 这个文件中的能群单位是eV而不是MeV，需要手动将里面的数据单位除以1e6。（在github上提交该修改建议）</li>
+</ol>
+<p>我们还需要修改栅元的重要性，因为中子输运时的文件里面的重要性是默认为中子的重要性，没有光子的重要性。但是这个重要性信息是写在h5m文件里面的，没法直接修改。</p>
+<p>我们需要先运行一次这个文件：</p>
+<pre><code class="bash">$ mcnp5.mpi i=input g=geom.h5m
+</code></pre>
+<p>现在这个运行肯定会出现错误，说粒子产生子重要性为0的区域。但是同时这个过程会生成一个可编辑的<strong>lcad</strong>文件，我们可以修改这个<strong>lcad</strong>文件，在重要性部分添加上<strong>imp:p=1</strong>/<strong>imp:p=0</strong>，将这个文件重命名为<strong>lcad_m</strong>，删掉过程文件<strong>fcad, outp, runtpe</strong>后再次运行</p>
+<pre><code class="bash">$ mcnp5.mpi i=input g=geom.h5m l=lcad_m
+</code></pre>
+<p>之后就得到结果啦！</p>
 <h2 id="结果绘图"><a href="#结果绘图" class="headerlink" title="结果绘图"></a>结果绘图</h2><p>未完待续……</p>
 ]]></content>
       
@@ -406,6 +336,156 @@ $ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
             <tag> shutdown dose rate </tag>
             
             <tag> 停机计量 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[安装DAGMC]]></title>
+      <url>/neutronics/dagmc-install/</url>
+      <content type="html"><![CDATA[<h2 id="DAGMC简介"><a href="#DAGMC简介" class="headerlink" title="DAGMC简介"></a>DAGMC简介</h2><p><a href="https://svalinn.github.io/DAGMC/" target="_blank" rel="noopener">DAGMC</a>是Direct Accelerated Geometry Monte Carlo的缩写，如其名字所示，DAGMC设计了一套方便高效的几何手段，用于蒙特卡罗方法的计算。DAGMC已经有了与MCNP5, MCNP6, Geant4, FLUKA, Tripoli4和Shift结合的相应工具。即使用DAGMC的几何处理部分，配合其他工具的物理计算部分代码，实现蒙特卡罗计算。</p>
+<h2 id="DAGMC依赖软件安装"><a href="#DAGMC依赖软件安装" class="headerlink" title="DAGMC依赖软件安装"></a>DAGMC依赖软件安装</h2><p>DAGMC可以用来和PyNE配合来进行停机剂量计算工作。但是，现在PyNE最高支持MOAB 4.9.1 版，然而DAGMC需要使用MOAB 5.0版。也就是说，使用DAGMC的PyNE开发者需要在电脑上同时安装MOAB 4.9.1 和5.0版本。必须分别安装并设定，使用时还需要指定所使用库的路径。PyNE的安装可以参考<a href="https://zxkjack123.github.io/neutronics/pyne-developer-install/">PyNE的开发版本安装</a>。DAGMC的安装可以参考<a href="https://svalinn.github.io/DAGMC/install/index.html" target="_blank" rel="noopener">官方安装指导</a>。但是官方指导的安装步骤存在几个缺点：</p>
+<ol>
+<li>对于HDF5的安装和库的使用有一处会出现找不到hdf5的情况</li>
+<li>虽然说明了需要安装MOAB5.0,但并没有明确的和MOAB4.9.1做区分，导致使用PyNE的人会面临困扰</li>
+<li>部分系统上，如Ubuntu 16.04，安装MOAB时会出现bug，暂时需要手动解决</li>
+</ol>
+<p>我也正在梳理适合我实际的安装流程，同时争取把官方安装指导完善一下。不过由于PyNE和DAGMC都还在不断的开发和完善过程中，将来对于MOAB的配置问题如果得到解决，那么整个安装流程就又会发生改变。安装流程需要与时俱进。</p>
+<h3 id="安装HDF5"><a href="#安装HDF5" class="headerlink" title="安装HDF5"></a>安装HDF5</h3><p>电脑中可能已经安装了HDF5了，我们可以通过下面的命令来检查它的版本：</p>
+<pre><code class="bash">dpkg -s libhdf5-dev
+</code></pre>
+<p>如果没有安装的话，通过下面的命令安装：</p>
+<pre><code class="bash">sudo apt-get install hdf5-dev
+</code></pre>
+<h3 id="安装MOAB5-0"><a href="#安装MOAB5-0" class="headerlink" title="安装MOAB5.0"></a>安装MOAB5.0</h3><p>假定我们将MOAB5.0安装在$HOME/opt/MOAB5.0下，按照以下步骤进行安装。</p>
+<h4 id="获取源代码"><a href="#获取源代码" class="headerlink" title="获取源代码"></a>获取源代码</h4><pre><code class="bash"># 下载源代码
+cd ~/opt
+mkdir MOAB5.0
+cd MOAB5.0
+git clone https://bitbucket.org/fathomteam/moab
+cd moab
+git checkout Version5.0
+autoreconf -fi
+cd ..
+ln -s moab src
+</code></pre>
+<h4 id="配置安装"><a href="#配置安装" class="headerlink" title="配置安装"></a>配置安装</h4><pre><code>mkdir bld
+cd bld
+export MOAB_DIR=$HOME/opt/MOAB5.0
+../src/configure --enable-optimize \
+                   --enable-shared \
+                   --disable-debug \
+                   --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial \
+                   --prefix=$MOAB_DIR
+make
+</code></pre><p>目前由于MOAB的配置文件存在bug,执行到这一步时，会出现下面的报错：</p>
+<pre><code>../../src/src/moab/Matrix3.hpp:62:2: error: #error Need either Eigen3 or BLAS/LAPACK libraries
+</code></pre><p>解决方法：</p>
+<pre><code class="bash">cd $MOAB_DIR/src/src/moab
+</code></pre>
+<p>打开<strong>Matrix3.hpp</strong>,找到下面的一段内容：</p>
+<pre><code class="hpp">// We will rely on LAPACK directly
+#ifndef MOAB_HAVE_LAPACK
+#error Need either Eigen3 or BLAS/LAPACK libraries
+#endif
+</code></pre>
+<p>将<strong>#error Need either Eigen3 or BLAS/LAPACK libraries</strong>注释掉：</p>
+<pre><code class="hpp">// We will rely on LAPACK directly
+#ifndef MOAB_HAVE_LAPACK
+//#error Need either Eigen3 or BLAS/LAPACK libraries
+#endif
+</code></pre>
+<p>然后清空bld文件家下的所有内容，重新配置安装：</p>
+<pre><code class="bash">cd $MOAB_DIR/bld
+rm -rf ./*
+../src/configure --enable-optimize \
+                   --enable-shared \
+                   --disable-debug \
+                   --with-hdf5=/usr/lib/x86_64-linux-gnu/hdf5/serial \
+                   --prefix=$MOAB_DIR
+make
+make check
+make install
+</code></pre>
+<p>至此，我们完成了MOAB5.0的安装，但是要调用它，必须让系统能够找到相关的文件。由于系统中可能同时安装了MOAB4.9.1和MOAB5.0，因此我们需要设置好MOAB的路径。</p>
+<h4 id="路径设置"><a href="#路径设置" class="headerlink" title="路径设置"></a>路径设置</h4><p>MOAB路径配置,将下面的内容拷贝至~/.bashrc文件：</p>
+<pre><code># MOAB
+export MOAB_DIR=$HOME/opt/MOAB5.0
+#export MOAB_DIR=$HOME/opt/MOAB4.9.1
+export PATH=$PATH:$MOAB_DIR/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MOAB_DIR/lib
+export LIBRARY_PATH=$LIBRARY_PATH:$MOAB_DIR/lib
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$MOAB_DIR/include
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$MOAB_DIR/include
+</code></pre><p>这样，当需要使用DAGMC的时候，将~/.bashrc中的MOAB4.9.1路径注释掉，保留MOAB5.0，然后打开一个新的terminal（刷新~/.bashrc设置），新terminal中MOAB便是MOAB5.0。</p>
+<pre><code>export MOAB_DIR=$HOME/opt/MOAB5.0
+#export MOAB_DIR=$HOME/opt/MOAB4.9.1
+</code></pre><p>当需要使用PyNE的时候，将~/.bashrc中的MOAB5.0注释掉，保留MOAB4.9.1，然后打开一个新的terminal，新的terminal中MOAB便是MOAB4.9.1。</p>
+<pre><code>#export MOAB_DIR=$HOME/opt/MOAB5.0
+export MOAB_DIR=$HOME/opt/MOAB4.9.1
+</code></pre><h2 id="安装DAGMC"><a href="#安装DAGMC" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h2><p>完成HDF5和MOAB5.0的安装后，我们可以安装DAGMC了。</p>
+<p>假设我们要把DAGMC安装在$HOME/opt/DAGMC文件夹下，可以按照下面的步骤进行。</p>
+<h3 id="获取DAGMC源代码"><a href="#获取DAGMC源代码" class="headerlink" title="获取DAGMC源代码"></a>获取DAGMC源代码</h3><pre><code class="bash">cd $HOME/opt
+mkdir DAGMC
+cd DAGMC
+git clone https://github.com/svalinn/DAGMC
+# 此处会在DAGMC文件夹下再生成一个DAGMC文件夹-&gt; DAGMC/DAGMC
+cd DAGMC
+git checkout develop
+</code></pre>
+<h3 id="安装DAGMC-1"><a href="#安装DAGMC-1" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h3><p><strong>这个步骤需要相应的物理计算部分的源代码</strong>。请参考<a href="https://svalinn.github.io/DAGMC/install/dagmc.html" target="_blank" rel="noopener">官方文档</a>选择相应版本执行后续安装步骤。<br>下面以安装DAG-MCNP v1.xx为例说明安装过程</p>
+<h4 id="patch"><a href="#patch" class="headerlink" title="patch"></a>patch</h4><pre><code class="bash">cd mcnp/mcnp5
+cp -r &lt;path_to_dvd&gt;/MCNP5/Source .
+chmod -R u+rw Source
+patch -p0 &lt; patch/dagmc.5.1.xx.patch
+</code></pre>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="bash">cd $HOME/opt/DAGMC/DAGMC
+mkdir bld
+cd bld
+cmake ../. -DBUILD_MCNP5=ON -DMPI_BUILD=ON -DCMAKE_INSTALL_PREFIX=$HOME/opt/DAGMC -DHDF5_LIBRARIES=/usr/lib/x86_64-linux-gnu/hdf5/serial/lib -DHDF5_INCLUDE_DIRS=/usr/lib/x86_64-linux-gnu/hdf5/serial/include -DMCNP5_DATAPATH=$HOME/opt/MCNPDATA
+make
+make install
+</code></pre>
+<h4 id="添加路径到-bashrc"><a href="#添加路径到-bashrc" class="headerlink" title="添加路径到~/.bashrc"></a>添加路径到~/.bashrc</h4><pre><code>export PATH=$PATH:$HOME/opt/DAGMC/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
+</code></pre><h2 id="编译带用于R2S的源子程序的DAGMC"><a href="#编译带用于R2S的源子程序的DAGMC" class="headerlink" title="编译带用于R2S的源子程序的DAGMC"></a>编译带用于R2S的源子程序的DAGMC</h2><p>上面的步骤是编译DAGMC的通用流程。但是当我们需要配合PyNE进行R2S计算的DAGMC时，需要修改源子程序，修改及其编译说明可以参考<a href="http://pyne.io/usersguide/source_sampling.html#source-sampling-in-mcnp5" target="_blank" rel="noopener">官方文档</a>。</p>
+<p>如果是第一次安装DAGMC，想直接安装配合PyNE的DAGMC，那么需要上述安装步骤的<strong>patch之后配置之前</strong>加入如下步骤：</p>
+<ol>
+<li>Navigate to the folder MCNP5/Source/src.</li>
+<li>Soft-link the following files into this folder:<ul>
+<li>pyne/src/source_sampling.cpp</li>
+<li>pyne/src/source_sampling.h</li>
+<li>pyne/src/measure.cpp</li>
+<li>pyne/src/measure.h</li>
+</ul>
+</li>
+<li>Remove the pre-existing empty source.F90 file.</li>
+<li>Soft-link pyne/share/source.F90.</li>
+<li>Open the file MCNP/Source/src/FILE.list.</li>
+<li>Edit file, add CXX_SRC under C_SRC to include the additional source files. It should look like “CXX_SRC := measure.cpp source_sampling.cpp”.</li>
+</ol>
+<p>然后接着配置之后的步骤进行即可。</p>
+<p>如果是已经安装过DAGMC，则可以省去patch及patch之前的步骤，直接使用上面的修改，然后进行配置编译即可。</p>
+<p><strong>备注</strong>： 进行上述修改步骤时，必须注意两点：</p>
+<ol>
+<li>确保系统路径中的MOAB是5.0版本</li>
+<li>确保pyne的branch是你需要的branch</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> neutronics </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> DAGMC </tag>
+            
+            <tag> install </tag>
             
         </tags>
         
