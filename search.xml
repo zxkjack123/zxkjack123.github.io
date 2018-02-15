@@ -3,6 +3,67 @@
   
     
     <entry>
+      <title><![CDATA[中子输运相关软件]]></title>
+      <url>/neutronics/neutron-transport-code/</url>
+      <content type="html"><![CDATA[<p>我的专业是核能科学与工程，这个专业做实验代价很高，而且现在也有一些比较可靠的模拟计算工具。因此很多时候都要用到模拟计算，不论是单独计算还是作为实验的预分析。</p>
+<p>很多模拟计算的核心，是计算中子通量。这个需要进行中子输运计算。中子输运计算分两类，一类是确定论的计算，就是通过解方程的方法计算，另一类是蒙特卡罗方法计算。</p>
+<p>两种计算方法各有优缺点。我接触比较多的聚变领域，由于几何模型非常复杂，用确定论方法计算不够准确，一般都是用蒙特卡罗方法计算。</p>
+<p>蒙特卡罗中子输运软件中，最出名的就是MCNP了。不过这个软件对中国是封锁的，中国人是没法使用的。（当然也有特例，原子能院可以合法使用MNCP4C，不过MCNP现在的版本是MCNP6了，4C是非常旧的版本了）</p>
+<p>我作为一个平时主要做核分析模拟计算的研究生，非常尴尬，我的博士研究可以受限制很严重。如果不能用其他的可靠的工具代替MCNP，现在我的方向就是一条没有前途的路。国内的确需要这方面的人来做相应的工作，但这些工作难发文章，难以升迁。我现在是博士第三年，现在改变自己的课题或是方向，代价太高。现在在脚镣下跳舞是不得已而为之。但当我博士毕业之后，如果还继续读个博后之类的继续走科研道路的话，绝对不能再在这条路上一条道走到黑了。</p>
+<p>那么，我就需要了解一下现在的一些中子输运软件了。Quora上有一个<a href="https://www.quora.com/What-are-some-nuclear-reactor-simulation-codes" target="_blank" rel="noopener">问题</a>已经给出了非常简洁明了的答案。搬运过来并做一些补充：</p>
+<ul>
+<li>Probabilistic codes<ul>
+<li><a href="https://github.com/mit-crpg/openmc" target="_blank" rel="noopener">OpenMC</a> - An MIT developed open source Monte Carlo code. It is a constructive solid geometry, continuous-energy transport code that uses HDF5 format cross sections.</li>
+<li><a href="https://mcnp.lanl.gov/" target="_blank" rel="noopener">MCNP</a> - A LANL developed Monte Carlo code for general radiation transport</li>
+<li><a href="http://www.oecd-nea.org/tools/abstract/detail/ccc-0436/" target="_blank" rel="noopener">KENO</a> - An ORNL developed Monte Carlo code for criticality analysis</li>
+<li><a href="http://www.answerssoftwareservice.com/mcbend/" target="_blank" rel="noopener">MCBEND</a> - An ANSWERS Software Service developed Monte Carlo code for general radiation transport</li>
+<li><a href="http://montecarlo.vtt.fi/" target="_blank" rel="noopener">Serpent</a> - A Finnish developed Monte Carlo neutron transport code</li>
+<li><a href="http://www.oecd-nea.org/tools/abstract/detail/nea-1716/" target="_blank" rel="noopener">TRIPOLI</a> - 3D general purpose continuous energy Monte Carlo Transport code developed at CEA, France. TRIPOLI-4 solves fixed source as well as eigenvalue problems.</li>
+</ul>
+</li>
+<li>Deterministic codes<ul>
+<li><a href="https://www.vareximaging.com/products/attila-software" target="_blank" rel="noopener">Attila</a> - A commercial transport code</li>
+<li><a href="http://www.polymtl.ca/merlin/downloads/IGE294.pdf" target="_blank" rel="noopener">DRAGON</a> - An open-source lattice physics code</li>
+<li>PHOENIX/ANC - A proprietary lattice-physics and global diffusion code suite from Westinghouse Electric</li>
+<li>PARTISN - A LANL developed transport code based on the discrete ordinates method</li>
+<li>NEWT - An ORNL developed 2-D SN code</li>
+<li>DIF3D/VARIANT - An Argonne National Laboratory developed 3-D code originally developed for fast reactors</li>
+<li>DENOVO - A massively parallel transport code under development by ORNL</li>
+<li>DANTSYS</li>
+<li>RAMA - A proprietary 3D method of characteristics code with arbitrary geometry modeling, developed for EPRI byTransWare Enterprises Inc.</li>
+<li>RAPTOR-M3G - A proprietary parallel radiation transport code developed by Westinghouse Electric Company</li>
+<li>OpenMOC - An MIT developed open source parallel method of characteristics code</li>
+<li>MPACT - A parallel 3D method of characteristics code under development by the University of Michigan</li>
+<li>DORT - Discrete Ordinates Transport</li>
+</ul>
+</li>
+</ul>
+<p>替代软件不一定要计算最准确，但一定要是中国人可以（免费下载后者收费购买）获取的软件。</p>
+<p>首先，开源的软件有OpenMC，</p>
+<p>目前SERPENT的<a href="http://www.oecd-nea.org/dbprog/pretlo.cgi?country=CHINA&amp;submit=Display" target="_blank" rel="noopener">中国获取单位</a>中显示有北京和程度的几家单位，可以尝试通过这个渠道获取。</p>
+<p>未完待续</p>
+]]></content>
+      
+        <categories>
+            
+            <category> neutronics </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> neutron transport </tag>
+            
+            <tag> neutron </tag>
+            
+            <tag> code </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[使用PyNE进行基于网格的计算停机计量的例子]]></title>
       <url>/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/</url>
       <content type="html"><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本篇文章使用例子来说明使用PyNE来进行基于网格的计算停机剂量率的流程。</p>
@@ -512,6 +573,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
         
         <tags>
             
+            <tag> Japanese </tag>
+            
             <tag> English </tag>
             
             <tag> volunteering </tag>
@@ -519,8 +582,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             <tag> tutor </tag>
             
             <tag> Chinese </tag>
-            
-            <tag> Japanese </tag>
             
         </tags>
         
@@ -1559,9 +1620,9 @@ pyne_build
         
         <tags>
             
-            <tag> neutronics </tag>
-            
             <tag> PyNE </tag>
+            
+            <tag> neutronics </tag>
             
             <tag> developer </tag>
             
