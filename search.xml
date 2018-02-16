@@ -39,7 +39,7 @@
 </li>
 </ul>
 <p>替代软件不一定要计算最准确，但一定要是中国人可以（免费下载后者收费购买）获取的软件。</p>
-<p>首先，开源的软件有OpenMC，</p>
+<p>首先，OpenMC是开源软件，现在还在开发完善过程中。这个软件具备计算临界源的能力，是否适用与聚变的固定源屏蔽分析还需要再仔细考察学习。</p>
 <p>目前SERPENT的<a href="http://www.oecd-nea.org/dbprog/pretlo.cgi?country=CHINA&amp;submit=Display" target="_blank" rel="noopener">中国获取单位</a>中显示有北京和程度的几家单位，可以尝试通过这个渠道获取。</p>
 <p>未完待续</p>
 ]]></content>
@@ -573,8 +573,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
         
         <tags>
             
-            <tag> Japanese </tag>
-            
             <tag> English </tag>
             
             <tag> volunteering </tag>
@@ -582,6 +580,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             <tag> tutor </tag>
             
             <tag> Chinese </tag>
+            
+            <tag> Japanese </tag>
             
         </tags>
         
