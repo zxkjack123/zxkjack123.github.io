@@ -3,6 +3,53 @@
   
     
     <entry>
+      <title><![CDATA[安装OpenMC]]></title>
+      <url>/neutronics/openmc-install/</url>
+      <content type="html"><![CDATA[<p>OpenMC的官方<a href="http://openmc.readthedocs.io/en/stable/quickinstall.html" target="_blank" rel="noopener">安装说明</a>中有比较详细的安装流程。</p>
+<p>这里主要记录我在自己的Ubuntu 16.04的电脑上安装OpenMC的过程。因为我之后可能会部分修改源代码，会涉及到重复多次的安装。把安装过程记录下来，一方面是方面以后重新安装时不用再去考虑设置细节，另一方面也是确保了每次安装是都是使用同一种设置和流程，避免设置不同导致软件性能差异。</p>
+<p>我将OpenMC安装在<code>$HOME/opt/OpenMC</code>文件夹下，另外OpenMC的源代码放在<code>$HOME/opt/OpenMC/openmc</code>文件夹下。</p>
+<h2 id="安装流程："><a href="#安装流程：" class="headerlink" title="安装流程："></a>安装流程：</h2><h3 id="依赖软件安装"><a href="#依赖软件安装" class="headerlink" title="依赖软件安装"></a>依赖软件安装</h3><pre><code class="bash">$ sudo apt install gfortran g++ cmake libhdf5-dev
+</code></pre>
+<h3 id="源代码获取"><a href="#源代码获取" class="headerlink" title="源代码获取"></a>源代码获取</h3><p>我已经将OpenMC的源代码fork到自己github，只需要从自己repository下载并将MIT的库设置为upstream。</p>
+<pre><code class="bash">$ cd ~/opt
+$ mkdir OpenMC 
+$ cd OpenMC
+$ git clone git@github.com:zxkjack123/openmc.git
+$ cd openmc
+$ git remote add upstream https://github.com/mit-crpg/openmc.git
+</code></pre>
+<h3 id="配置安装"><a href="#配置安装" class="headerlink" title="配置安装"></a>配置安装</h3><p>OpenMC会默认安装到需要管理员权限的文件夹，但对我来说，安装到不需要管理员权限的目录更方便。我将把软件安装到<code>$HOME/opt/OpenMC</code>文件夹。</p>
+<pre><code class="bash"># cd openmc
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt/OpenMC ..
+$ make
+$ make install
+</code></pre>
+<h3 id="添加路径"><a href="#添加路径" class="headerlink" title="添加路径"></a>添加路径</h3><p>将OpenMC的安装路径添加到<code>$HOME/.bashrc</code>中：</p>
+<pre><code># OpenMC
+export PATH=$PATH:$HOME/opt/OpenMC/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/opt/OpenMC/lib
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> neutronics </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> install </tag>
+            
+            <tag> OpenMC </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[中子输运相关软件]]></title>
       <url>/neutronics/neutron-transport-code/</url>
       <content type="html"><![CDATA[<p>我的专业是核能科学与工程，这个专业做实验代价很高，而且现在也有一些比较可靠的模拟计算工具。因此很多时候都要用到模拟计算，不论是单独计算还是作为实验的预分析。</p>
@@ -333,11 +380,11 @@ $ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
         
         <tags>
             
-            <tag> PyNE </tag>
-            
             <tag> DAGMC </tag>
             
             <tag> Trelis </tag>
+            
+            <tag> PyNE </tag>
             
             <tag> R2S </tag>
             
@@ -390,11 +437,11 @@ $ mbconvert meshtal14.h5m meshtal14.vtk
         
         <tags>
             
-            <tag> PyNE </tag>
-            
             <tag> DAGMC </tag>
             
             <tag> Trelis </tag>
+            
+            <tag> PyNE </tag>
             
             <tag> visit </tag>
             
@@ -581,13 +628,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             
             <tag> English </tag>
             
+            <tag> Japanese </tag>
+            
             <tag> volunteering </tag>
             
             <tag> tutor </tag>
             
             <tag> Chinese </tag>
-            
-            <tag> Japanese </tag>
             
         </tags>
         
