@@ -3,34 +3,92 @@
   
     
     <entry>
-      <title><![CDATA[安装OpenMC]]></title>
-      <url>/neutronics/openmc-install/</url>
-      <content type="html"><![CDATA[<p>OpenMC的官方<a href="http://openmc.readthedocs.io/en/stable/quickinstall.html" target="_blank" rel="noopener">安装说明</a>中有比较详细的安装流程。</p>
-<p>这里主要记录我在自己的Ubuntu 16.04的电脑上安装OpenMC的过程。因为我之后可能会部分修改源代码，会涉及到重复多次的安装。把安装过程记录下来，一方面是方面以后重新安装时不用再去考虑设置细节，另一方面也是确保了每次安装是都是使用同一种设置和流程，避免设置不同导致软件性能差异。</p>
-<p>我将OpenMC安装在<code>$HOME/opt/OpenMC</code>文件夹下，另外OpenMC的源代码放在<code>$HOME/opt/OpenMC/openmc</code>文件夹下。</p>
-<h2 id="安装流程："><a href="#安装流程：" class="headerlink" title="安装流程："></a>安装流程：</h2><h3 id="依赖软件安装"><a href="#依赖软件安装" class="headerlink" title="依赖软件安装"></a>依赖软件安装</h3><pre><code class="bash">$ sudo apt install gfortran g++ cmake libhdf5-dev
+      <title><![CDATA[OpenMC第一个例子]]></title>
+      <url>/neutronics/openmc-first-example/</url>
+      <content type="html"><![CDATA[<p>浏览过一遍OpenMC的<a href="http://openmc.readthedocs.io/en/stable/usersguide/index.html" target="_blank" rel="noopener">User Guide</a>之后，对OpenMC的使用有了大致的初步了解。</p>
+<p>和其他蒙卡程序类似，OpenMC也是需要定义几何，材料，源和tally以及其他信息。OpenMC用不同的xml文件来存放不同的信息。</p>
+<p>OpenMC有一个鲜明的特性：Python API，OpenMC相关的所有内容都有Python API，这样我们可以直接通过python脚步来写相应的信息，然后直接使用导出函数转化成xml文件。这个API的存在对比较小规模的问题，或者几何不是非常复杂的问题是比较方便的。另外，数据后处理部分，OpenMC也有接口，画图和数据处理都很容易。</p>
+<p>本文将通过一个非常简单的小例子来进行一次完整的OpenMC准备和计算流程。</p>
+<h2 id="准备核数据"><a href="#准备核数据" class="headerlink" title="准备核数据"></a>准备核数据</h2><p>OpenMC计算时，会从<code>openmc.Materials</code>或者<code>materials.xml</code>中寻找材料数据库的位置，可以通过这两个方式定义材料库的位置。</p>
+<p>不过如果我们只使用固定的材料库的话，每次都要特别制定材料数据库就太麻烦了。可以通过把材料数据库的路径添加到系统变量<code>OPENMC_CROSS_SECTIONS</code>中去。</p>
+<h3 id="获取数据库"><a href="#获取数据库" class="headerlink" title="获取数据库"></a>获取数据库</h3><p><a href="http://openmc.readthedocs.io/en/stable/usersguide/cross_sections.html" target="_blank" rel="noopener">这里</a>介绍了获取不同数据库的方法。这里我为了简便，使用最简单的NNDC的数据库。根据文档，我需要使用openmc-get-nndc-data这个脚本。</p>
+<p>因为这个数据库完全是为OpenMC计算任务而存在，所以我把这个数据库放在<code>$HOME/opt/OpenMC/NNDC</code>下。</p>
+<pre><code class="bash">$ cd $HOME/opt/OpenMC
+$ mkdir NNDC
+$ cd NNDC
+$ openmc-get-nndc-data
 </code></pre>
-<h3 id="源代码获取"><a href="#源代码获取" class="headerlink" title="源代码获取"></a>源代码获取</h3><p>我已经将OpenMC的源代码fork到自己github，只需要从自己repository下载并将MIT的库设置为upstream。</p>
-<pre><code class="bash">$ cd ~/opt
-$ mkdir OpenMC 
-$ cd OpenMC
-$ git clone git@github.com:zxkjack123/openmc.git
-$ cd openmc
-$ git remote add upstream https://github.com/mit-crpg/openmc.git
+<h3 id="添加路径"><a href="#添加路径" class="headerlink" title="添加路径"></a>添加路径</h3><p>然后把这个<code>OPENMC_CROSS_SECTIONS</code>的路径设为这个并添加到<code>$HOME/.bashrc</code>中去。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>为了简单，这里打算使用一个半径为10里面的球，这个球材质为密度为1.0的水，球外侧区域不考虑。</p>
+<p>中子源就设为在原点的各项同性的1MeV的点源。 </p>
+<h2 id="Python-API文件"><a href="#Python-API文件" class="headerlink" title="Python API文件"></a>Python API文件</h2><pre><code class="python"># input.py
+import openmc
+
+# materials
+materials = openmc.Materials()
+water = openmc.Material()
+water.add_element(&#39;H&#39;, 0.667, &#39;ao&#39;)
+water.add_element(&#39;O&#39;, 0.334, percent_type=&#39;ao&#39;)
+water.set_density(&#39;g/cm3&#39;, 1.0) 
+materials.append(water)
+materials.export_to_xml()
+
+# geometry - surfaces
+sphere = openmc.Sphere(R=10.0)
+sphere.boundary_type = &#39;vacuum&#39;
+inside_sphere = -sphere
+outside_sphere = +sphere
+# geometry cells
+universe = openmc.Universe()
+moderator = openmc.Cell(fill=water, region=inside_sphere)
+universe.add_cell(moderator)
+geometry = openmc.Geometry(universe)
+geometry.export_to_xml(path=&#39;geometry.xml&#39;) 
+
+# run mode
+settings = openmc.Settings()
+settings.run_mode = &#39;fixed source&#39;
+settings.particles = 10000
+settings.batches = 10
+# output
+settings.output = {&#39;tallies&#39;:True, &#39;summary&#39;:True}
+# source distribution
+source = openmc.Source()
+source.space = openmc.stats.Point(xyz=(0., 0., 0.))
+source.angle = openmc.stats.Isotropic()
+source.energy = openmc.stats.Discrete([10.0e6], [1.0])
+settings.source = source
+settings.export_to_xml(path=&#39;settings.xml&#39;)
+
+# tallies
+cell_filter = openmc.CellFilter([moderator])
+tally1 = openmc.Tally()
+tally1.scores = [&#39;flux&#39;]
+tally1.filters.append(cell_filter)
+tallies = openmc.Tallies()
+tallies.add_tally(tally1)
+tallies.export_to_xml()
+
+# plot
+plot1 = openmc.Plot()
+plot1.basis = &#39;xz&#39;
+plot1.origin = (0, 0, 0)
+plot1.width = (20, 20)
+plot1.pixels = (400, 400)
+plot1.color_by = &#39;material&#39;
+plots =openmc.Plots()
+plots.add_plot(plot1)
+plots.export_to_xml()
+
+# run
+openmc.run()
+openmc.plot_geometry(output=True, openmc_exec=&#39;openmc&#39;, cwd=&#39;.&#39;)
 </code></pre>
-<h3 id="配置安装"><a href="#配置安装" class="headerlink" title="配置安装"></a>配置安装</h3><p>OpenMC会默认安装到需要管理员权限的文件夹，但对我来说，安装到不需要管理员权限的目录更方便。我将把软件安装到<code>$HOME/opt/OpenMC</code>文件夹。</p>
-<pre><code class="bash"># cd openmc
-$ mkdir build
-$ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/opt/OpenMC ..
-$ make
-$ make install
+<h2 id="生成的几何图像"><a href="#生成的几何图像" class="headerlink" title="生成的几何图像"></a>生成的几何图像</h2><p>上面的脚本会生成一个叫做plot_10000.ppm，用convert命令转化为png格式。</p>
+<pre><code class="bash">$ convert plot_10000.ppm plot_10000.png
 </code></pre>
-<h3 id="添加路径"><a href="#添加路径" class="headerlink" title="添加路径"></a>添加路径</h3><p>将OpenMC的安装路径添加到<code>$HOME/.bashrc</code>中：</p>
-<pre><code># OpenMC
-export PATH=$PATH:$HOME/opt/OpenMC/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/opt/OpenMC/lib
-</code></pre>]]></content>
+<p>可以看到生成的几何图像的样子：<br><img src="https://i.imgur.com/xMIVxAh.png" alt="图像"></p>
+]]></content>
       
         <categories>
             
@@ -41,9 +99,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/opt/OpenMC/lib
         
         <tags>
             
-            <tag> install </tag>
-            
             <tag> OpenMC </tag>
+            
+            <tag> example </tag>
             
         </tags>
         
@@ -380,9 +438,9 @@ $ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
         
         <tags>
             
-            <tag> DAGMC </tag>
-            
             <tag> Trelis </tag>
+            
+            <tag> DAGMC </tag>
             
             <tag> PyNE </tag>
             
@@ -437,9 +495,9 @@ $ mbconvert meshtal14.h5m meshtal14.vtk
         
         <tags>
             
-            <tag> DAGMC </tag>
-            
             <tag> Trelis </tag>
+            
+            <tag> DAGMC </tag>
             
             <tag> PyNE </tag>
             
@@ -628,13 +686,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             
             <tag> English </tag>
             
-            <tag> Japanese </tag>
-            
             <tag> volunteering </tag>
             
             <tag> tutor </tag>
             
             <tag> Chinese </tag>
+            
+            <tag> Japanese </tag>
             
         </tags>
         

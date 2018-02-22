@@ -43,7 +43,7 @@
     
     <title>
         
-            DAGMC几何和数据可视化 | 
+            OpenMC第一个例子 | 
         
         zxkjack123&#39;s blog
     </title>
@@ -53,8 +53,8 @@
     <link rel="icon" href="/img/favicon.jpg">
 
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="None">
-    <meta name="keywords" content="zxkjack123,Trelis,DAGMC,PyNE,visit,visualization,geometry,data">
+    <meta name="description" itemprop="description" content="OpenMC first example">
+    <meta name="keywords" content="zxkjack123,OpenMC,example">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -220,7 +220,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="zxkjack123&#39;s blog">
-    <meta name="msapplication-starturl" content="http://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/">
+    <meta name="msapplication-starturl" content="http://zxkjack123.github.io/neutronics/openmc-first-example/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="zxkjack123&#39;s blog">
@@ -235,16 +235,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/">
+    <meta property="og:url" content="http://zxkjack123.github.io/neutronics/openmc-first-example/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="DAGMC几何和数据可视化 | zxkjack123&#39;s blog">
+    <meta property="og:title" content="OpenMC第一个例子 | zxkjack123&#39;s blog">
     <meta property="og:image" content="/img/favicon.jpg">
-    <meta property="og:description" content="None">
-    <meta property="og:article:tag" content="Trelis"> <meta property="og:article:tag" content="DAGMC"> <meta property="og:article:tag" content="PyNE"> <meta property="og:article:tag" content="visit"> <meta property="og:article:tag" content="visualization"> <meta property="og:article:tag" content="geometry"> <meta property="og:article:tag" content="data"> 
+    <meta property="og:description" content="OpenMC first example">
+    <meta property="og:article:tag" content="OpenMC"> <meta property="og:article:tag" content="example"> 
 
     
-        <meta property="article:published_time" content="Wed Feb 14 2018 15:03:27 GMT-0600">
-        <meta property="article:modified_time" content="Wed Feb 14 2018 15:03:27 GMT-0600">
+        <meta property="article:published_time" content="Thu Feb 22 2018 15:53:45 GMT-0600">
+        <meta property="article:modified_time" content="Thu Feb 22 2018 15:53:45 GMT-0600">
     
 
     <!-- The Twitter Card protocol -->
@@ -252,7 +252,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/index.html" />
+        <link rel="canonical" href="http://zxkjack123.github.io/neutronics/openmc-first-example/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -264,10 +264,10 @@
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "mainEntityOfPage": "http://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/index.html",
-    "headline": "DAGMC几何和数据可视化",
-    "datePublished": "Wed Feb 14 2018 15:03:27 GMT-0600",
-    "dateModified": "Wed Feb 14 2018 15:03:27 GMT-0600",
+    "mainEntityOfPage": "http://zxkjack123.github.io/neutronics/openmc-first-example/index.html",
+    "headline": "OpenMC第一个例子",
+    "datePublished": "Thu Feb 22 2018 15:53:45 GMT-0600",
+    "dateModified": "Thu Feb 22 2018 15:53:45 GMT-0600",
     "author": {
         "@type": "Person",
         "name": "zxkjack123",
@@ -285,8 +285,8 @@
             "url": "/img/favicon.jpg"
         }
     },
-    "keywords": ",Trelis,DAGMC,PyNE,visit,visualization,geometry,datazxkjack123",
-    "description": "None",
+    "keywords": ",OpenMC,examplezxkjack123",
+    "description": "OpenMC first example",
 }
 </script>
 
@@ -359,7 +359,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#几何模型准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">几何模型准备</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据文件准备"><span class="post-toc-number">2.</span> <span class="post-toc-text">数据文件准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#meshtal数据写入h5m文件"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">meshtal数据写入h5m文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#将h5m文件转化为vtk文件"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">将h5m文件转化为vtk文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#visit绘图"><span class="post-toc-number">3.</span> <span class="post-toc-text">visit绘图</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单独绘制几何"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">单独绘制几何</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单独绘制数据"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">单独绘制数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#同时绘制几何和数据"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">同时绘制几何和数据</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备核数据"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备核数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取数据库"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">获取数据库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加路径"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">添加路径</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题描述"><span class="post-toc-number">2.</span> <span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python-API文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">Python API文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成的几何图像"><span class="post-toc-number">4.</span> <span class="post-toc-text">生成的几何图像</span></a></li></ol>
     </ul>
     
 
@@ -391,7 +391,7 @@
         
     
             <p class="article-headline-p">
-                DAGMC几何和数据可视化
+                OpenMC第一个例子
             </p>
         </div>
 
@@ -410,7 +410,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>zxkjack123</strong>
-        <span>Feb 14, 2018</span>
+        <span>Feb 22, 2018</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -434,7 +434,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/DAGMC/">DAGMC</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/PyNE/">PyNE</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Trelis/">Trelis</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/data/">data</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/geometry/">geometry</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/visit/">visit</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/visualization/">visualization</a>
+        <a class="post_tag-link" href="/tags/OpenMC/">OpenMC</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/example/">example</a>
     </ul>
     
 
@@ -451,7 +451,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=DAGMC几何和数据可视化&url=http://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/index.html&pic=http://zxkjack123.github.io/img/favicon.jpg&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=OpenMC第一个例子&url=http://zxkjack123.github.io/neutronics/openmc-first-example/index.html&pic=http://zxkjack123.github.io/img/favicon.jpg&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 Share to Weibo
             </li>
@@ -460,7 +460,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=DAGMC几何和数据可视化&url=http://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/index.html&via=zxkjack123" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=OpenMC第一个例子&url=http://zxkjack123.github.io/neutronics/openmc-first-example/index.html&via=zxkjack123" target="_blank">
             <li class="mdl-menu__item">
                 Share to Twitter
             </li>
@@ -469,7 +469,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://zxkjack123.github.io/neutronics/openmc-first-example/index.html" target="_blank">
             <li class="mdl-menu__item">
                 Share to Facebook
             </li>
@@ -484,7 +484,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=zxkjack123&#39;s blog&title=DAGMC几何和数据可视化&summary=&pics=http://zxkjack123.github.io/img/favicon.jpg&url=http://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=zxkjack123&#39;s blog&title=OpenMC第一个例子&summary=&pics=http://zxkjack123.github.io/img/favicon.jpg&url=http://zxkjack123.github.io/neutronics/openmc-first-example/index.html" target="_blank">
             <li class="mdl-menu__item">
                 Share to QQ
             </li>
@@ -503,33 +503,89 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>科学计算达到了结果之后，总是希望能够画出酷炫的图来展示自己的成果。比如说展示复杂几何结构的的图，展示数据在空间分布的图，或者两者结合起来的几何和数据匹配的图。</p>
-<p>我们在使用DAGMC的过程中，除了Trelis几何模型处理阶段有图形以外，我们还可以把meshtal的结果和几何一起展示出来。</p>
-<p>要制作这种几何和数据结合的图，我们可以使用<a href="https://wci.llnl.gov/simulation/computer-codes/visit" target="_blank" rel="noopener">visit</a>这款软件。</p>
-<p>我们把几何文件和数据文件都转换为vtk格式，然后用visit就可以画图了。</p>
-<h2 id="几何模型准备"><a href="#几何模型准备" class="headerlink" title="几何模型准备"></a>几何模型准备</h2><p>经过Trelis处理到处的geom.h5m文件可以使用MOAB的工具mbconvert将h5m文件转化为vtk文件。</p>
-<p>不过我们不能直接使用那个用于输运计算的几何文件。因为那个文件中存在一个graveyard，那个是我们添加在原本几何模型外围的中子计算截止区域的几何。我们不需要这个graveyard，需要在Trelis模型中去掉这部分，导出一个没有graveyard的几何文件。</p>
-<h2 id="数据文件准备"><a href="#数据文件准备" class="headerlink" title="数据文件准备"></a>数据文件准备</h2><p>我们得到meshtal文件后，可以通过PyNE这个工具来将其先转化为h5m文件，然后再通过mbconvert转化为vtk文件。</p>
-<h3 id="meshtal数据写入h5m文件"><a href="#meshtal数据写入h5m文件" class="headerlink" title="meshtal数据写入h5m文件"></a>meshtal数据写入h5m文件</h3><p>比如一个包含fmesh4和fmesh14的meshtal文件，可以通过下面的python脚本将这两个tally的数据写入到h5m文件中：</p>
-<pre><code class="python">from pyne.mcnp import Meshtal
-from pyne.mesh import IMeshTag
-#neutron_result neutron_result_rel_error neutron_result_total neutron_result_total_rel_error
-meshtal = Meshtal(&quot;meshtal&quot;)
-meshtal.tally[4].mesh.save(&quot;meshtal4.h5m&quot;)
-meshtal.tally[14].mesh.save(&quot;meshtal14.h5m&quot;)
+        <p>浏览过一遍OpenMC的<a href="http://openmc.readthedocs.io/en/stable/usersguide/index.html" target="_blank" rel="noopener">User Guide</a>之后，对OpenMC的使用有了大致的初步了解。</p>
+<p>和其他蒙卡程序类似，OpenMC也是需要定义几何，材料，源和tally以及其他信息。OpenMC用不同的xml文件来存放不同的信息。</p>
+<p>OpenMC有一个鲜明的特性：Python API，OpenMC相关的所有内容都有Python API，这样我们可以直接通过python脚步来写相应的信息，然后直接使用导出函数转化成xml文件。这个API的存在对比较小规模的问题，或者几何不是非常复杂的问题是比较方便的。另外，数据后处理部分，OpenMC也有接口，画图和数据处理都很容易。</p>
+<p>本文将通过一个非常简单的小例子来进行一次完整的OpenMC准备和计算流程。</p>
+<h2 id="准备核数据"><a href="#准备核数据" class="headerlink" title="准备核数据"></a>准备核数据</h2><p>OpenMC计算时，会从<code>openmc.Materials</code>或者<code>materials.xml</code>中寻找材料数据库的位置，可以通过这两个方式定义材料库的位置。</p>
+<p>不过如果我们只使用固定的材料库的话，每次都要特别制定材料数据库就太麻烦了。可以通过把材料数据库的路径添加到系统变量<code>OPENMC_CROSS_SECTIONS</code>中去。</p>
+<h3 id="获取数据库"><a href="#获取数据库" class="headerlink" title="获取数据库"></a>获取数据库</h3><p><a href="http://openmc.readthedocs.io/en/stable/usersguide/cross_sections.html" target="_blank" rel="noopener">这里</a>介绍了获取不同数据库的方法。这里我为了简便，使用最简单的NNDC的数据库。根据文档，我需要使用openmc-get-nndc-data这个脚本。</p>
+<p>因为这个数据库完全是为OpenMC计算任务而存在，所以我把这个数据库放在<code>$HOME/opt/OpenMC/NNDC</code>下。</p>
+<pre><code class="bash">$ cd $HOME/opt/OpenMC
+$ mkdir NNDC
+$ cd NNDC
+$ openmc-get-nndc-data
 </code></pre>
-<h3 id="将h5m文件转化为vtk文件"><a href="#将h5m文件转化为vtk文件" class="headerlink" title="将h5m文件转化为vtk文件"></a>将h5m文件转化为vtk文件</h3><p>使用下面的命令将h5m文件转化为vtk文件：</p>
-<pre><code class="bash">$ mbconvert meshtal4.h5m meshtal4.vtk
-$ mbconvert meshtal14.h5m meshtal14.vtk
+<h3 id="添加路径"><a href="#添加路径" class="headerlink" title="添加路径"></a>添加路径</h3><p>然后把这个<code>OPENMC_CROSS_SECTIONS</code>的路径设为这个并添加到<code>$HOME/.bashrc</code>中去。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>为了简单，这里打算使用一个半径为10里面的球，这个球材质为密度为1.0的水，球外侧区域不考虑。</p>
+<p>中子源就设为在原点的各项同性的1MeV的点源。 </p>
+<h2 id="Python-API文件"><a href="#Python-API文件" class="headerlink" title="Python API文件"></a>Python API文件</h2><pre><code class="python"># input.py
+import openmc
+
+# materials
+materials = openmc.Materials()
+water = openmc.Material()
+water.add_element(&#39;H&#39;, 0.667, &#39;ao&#39;)
+water.add_element(&#39;O&#39;, 0.334, percent_type=&#39;ao&#39;)
+water.set_density(&#39;g/cm3&#39;, 1.0) 
+materials.append(water)
+materials.export_to_xml()
+
+# geometry - surfaces
+sphere = openmc.Sphere(R=10.0)
+sphere.boundary_type = &#39;vacuum&#39;
+inside_sphere = -sphere
+outside_sphere = +sphere
+# geometry cells
+universe = openmc.Universe()
+moderator = openmc.Cell(fill=water, region=inside_sphere)
+universe.add_cell(moderator)
+geometry = openmc.Geometry(universe)
+geometry.export_to_xml(path=&#39;geometry.xml&#39;) 
+
+# run mode
+settings = openmc.Settings()
+settings.run_mode = &#39;fixed source&#39;
+settings.particles = 10000
+settings.batches = 10
+# output
+settings.output = {&#39;tallies&#39;:True, &#39;summary&#39;:True}
+# source distribution
+source = openmc.Source()
+source.space = openmc.stats.Point(xyz=(0., 0., 0.))
+source.angle = openmc.stats.Isotropic()
+source.energy = openmc.stats.Discrete([10.0e6], [1.0])
+settings.source = source
+settings.export_to_xml(path=&#39;settings.xml&#39;)
+
+# tallies
+cell_filter = openmc.CellFilter([moderator])
+tally1 = openmc.Tally()
+tally1.scores = [&#39;flux&#39;]
+tally1.filters.append(cell_filter)
+tallies = openmc.Tallies()
+tallies.add_tally(tally1)
+tallies.export_to_xml()
+
+# plot
+plot1 = openmc.Plot()
+plot1.basis = &#39;xz&#39;
+plot1.origin = (0, 0, 0)
+plot1.width = (20, 20)
+plot1.pixels = (400, 400)
+plot1.color_by = &#39;material&#39;
+plots =openmc.Plots()
+plots.add_plot(plot1)
+plots.export_to_xml()
+
+# run
+openmc.run()
+openmc.plot_geometry(output=True, openmc_exec=&#39;openmc&#39;, cwd=&#39;.&#39;)
 </code></pre>
-<h2 id="visit绘图"><a href="#visit绘图" class="headerlink" title="visit绘图"></a>visit绘图</h2><h3 id="单独绘制几何"><a href="#单独绘制几何" class="headerlink" title="单独绘制几何"></a>单独绘制几何</h3><p>运行visit -&gt; File -&gt; Open file -&gt; 选择几何vtk文件 -&gt; 在窗口找到Plots子窗口 -&gt; 点击Add下单菜单 -&gt; 选择mesh -&gt; 选择mesh -&gt; 窗口出现一个对象 -&gt; 点击Plots子窗口Draw按钮 </p>
-<p>按照上述流程几何显示出几何文件的网格结构图。</p>
-<p>下图是<a href="https://zxkjack123.github.io/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/">计算停机剂量的例子</a>中的几何图形：<br><img src="https://i.imgur.com/pudCxoD.png" alt="几何图"></p>
-<h3 id="单独绘制数据"><a href="#单独绘制数据" class="headerlink" title="单独绘制数据"></a>单独绘制数据</h3><p>与绘制几何类似：</p>
-<p>运行visit -&gt; File -&gt; Open file -&gt; 选择数据vtk文件 -&gt; 在窗口找到Plots子窗口 -&gt; 点击Add下单菜单 -&gt; 选择pseudocolor -&gt; 选择相应的tally tag -&gt; 窗口出现一个对象 -&gt; 点击Plots子窗口Draw按钮 </p>
-<p><img src="https://i.imgur.com/Wg8jHmn.png" alt="剂量图"></p>
-<h3 id="同时绘制几何和数据"><a href="#同时绘制几何和数据" class="headerlink" title="同时绘制几何和数据"></a>同时绘制几何和数据</h3><p>同时绘制几何和数据的操作其实就是将几何和图像同时话在同一个图上，操作流程就是上述两者的结合。</p>
-<p><img src="https://i.imgur.com/28Ko0SN.png" alt="几何加图"></p>
+<h2 id="生成的几何图像"><a href="#生成的几何图像" class="headerlink" title="生成的几何图像"></a>生成的几何图像</h2><p>上面的脚本会生成一个叫做plot_10000.ppm，用convert命令转化为png格式。</p>
+<pre><code class="bash">$ convert plot_10000.ppm plot_10000.png
+</code></pre>
+<p>可以看到生成的几何图像的样子：<br><img src="https://i.imgur.com/xMIVxAh.png" alt="图像"></p>
 
         
     
@@ -548,8 +604,8 @@ $ mbconvert meshtal14.h5m meshtal14.vtk
     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_config = function () {
-        this.page.url = 'http://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/';  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://zxkjack123.github.io/neutronics/openmc-first-example/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://zxkjack123.github.io/neutronics/openmc-first-example/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 <script type="text/ls-javascript" id="disqus-thread-script">
@@ -579,21 +635,13 @@ $ mbconvert meshtal14.h5m meshtal14.vtk
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Newer
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/neutronics/dagmc-install/" id="post_nav-older" class="next-content">
+        <a href="/neutronics/neutron-transport-code/" id="post_nav-older" class="next-content">
             Older
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
@@ -982,26 +1030,6 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 <!-- MathJax Load-->
-
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
-        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
-        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
-        messageStyle: "none"
-    });
-</script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-    <script src="https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
 
 
 <!-- Bing Background -->
