@@ -3,6 +3,136 @@
   
     
     <entry>
+      <title><![CDATA[Thunderbird接收常用邮箱设置]]></title>
+      <url>/ubuntu/thunderbird-set/</url>
+      <content type="html"><![CDATA[<h2 id="163邮箱"><a href="#163邮箱" class="headerlink" title="163邮箱"></a>163邮箱</h2><p>Thunderbird接收163免费邮箱设置：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">服务器名称</th>
+<th style="text-align:center">服务器地址</th>
+<th style="text-align:center">SSL协议端口号</th>
+<th style="text-align:center">非SSL协议端口号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IMAP</td>
+<td style="text-align:center">imap.163.com</td>
+<td style="text-align:center">993</td>
+<td style="text-align:center">143</td>
+</tr>
+<tr>
+<td style="text-align:center">SMTP</td>
+<td style="text-align:center">smtp.163.com</td>
+<td style="text-align:center">465/994</td>
+<td style="text-align:center">25</td>
+</tr>
+<tr>
+<td style="text-align:center">POP3</td>
+<td style="text-align:center">pop.163.com</td>
+<td style="text-align:center">995</td>
+<td style="text-align:center">110</td>
+</tr>
+</tbody>
+</table>
+<p>163免费邮客户端设置的POP3、SMTP、IMAP设置<a href="http://help.163.com/09/1223/14/5R7P3QI100753VB8.html" target="_blank" rel="noopener">参考链接</a>。</p>
+<p><strong>注意</strong>：SMTP设置推荐为</p>
+<ul>
+<li>Sever Name: smtp.163.com</li>
+<li>Port: 25</li>
+<li>Connection security: None</li>
+<li>Authentication method: Password, transmitted insecurely</li>
+<li>User Name: xxxxxx@163.com</li>
+</ul>
+<p>经过本人实践检验，上面的设置可以接收和发送邮件。而SMTP使用其他设置时就没法发邮件了。</p>
+<h2 id="中科院邮箱"><a href="#中科院邮箱" class="headerlink" title="中科院邮箱"></a>中科院邮箱</h2><p>Thunderbird接收中科院系统邮箱设置：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">服务器名称</th>
+<th style="text-align:center">服务器地址</th>
+<th style="text-align:center">安全链接</th>
+<th style="text-align:center">端口</th>
+<th style="text-align:center">验证方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IMAP</td>
+<td style="text-align:center">imap.cstnet.cn</td>
+<td style="text-align:center">None</td>
+<td style="text-align:center">143</td>
+<td style="text-align:center">用户名与密码</td>
+</tr>
+<tr>
+<td style="text-align:center">SMTP</td>
+<td style="text-align:center">smtp.cstnet.cn</td>
+<td style="text-align:center">None</td>
+<td style="text-align:center">25</td>
+<td style="text-align:center">用户名与密码</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://help.cstnet.cn/changjianwenti/youjianshoufa/Mozilla%20Thunderbird%20imap.html" target="_blank" rel="noopener">参考链接</a></p>
+<h2 id="中科大学生邮箱"><a href="#中科大学生邮箱" class="headerlink" title="中科大学生邮箱"></a>中科大学生邮箱</h2><p>Thunderbird接收中科大学生邮箱设置：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">服务器名称</th>
+<th style="text-align:center">服务器地址</th>
+<th style="text-align:center">加密方式</th>
+<th style="text-align:center">端口</th>
+<th style="text-align:center">Clear text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">IMAP</td>
+<td style="text-align:center">mail.ustc.edu.cn</td>
+<td style="text-align:center">SSL</td>
+<td style="text-align:center">993</td>
+<td style="text-align:center">143</td>
+</tr>
+<tr>
+<td style="text-align:center">SMTP</td>
+<td style="text-align:center">mail.ustc.edu.cn</td>
+<td style="text-align:center">SSL</td>
+<td style="text-align:center">465</td>
+<td style="text-align:center">25</td>
+</tr>
+<tr>
+<td style="text-align:center">POP</td>
+<td style="text-align:center">mail.ustc.edu.cn</td>
+<td style="text-align:center">SSL</td>
+<td style="text-align:center">995</td>
+<td style="text-align:center">110</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://mail.ustc.edu.cn/coremail/help/index.jsp" target="_blank" rel="noopener">参考链接</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> ubuntu </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> thunderbird </tag>
+            
+            <tag> email </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[OpenMC第一个例子]]></title>
       <url>/neutronics/openmc-first-example/</url>
       <content type="html"><![CDATA[<p>浏览过一遍OpenMC的<a href="http://openmc.readthedocs.io/en/stable/usersguide/index.html" target="_blank" rel="noopener">User Guide</a>之后，对OpenMC的使用有了大致的初步了解。</p>
@@ -1530,127 +1660,6 @@ print &quot;All done!&quot;
             <tag> 核心技能 </tag>
             
             <tag> essential skill </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Thunderbird接收常用邮箱设置]]></title>
-      <url>/ubuntu/thunderbird-set/</url>
-      <content type="html"><![CDATA[<h2 id="163邮箱"><a href="#163邮箱" class="headerlink" title="163邮箱"></a>163邮箱</h2><p>Thunderbird接收163免费邮箱设置：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">服务器名称</th>
-<th style="text-align:center">服务器地址</th>
-<th style="text-align:center">SSL协议端口号</th>
-<th style="text-align:center">非SSL协议端口号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">IMAP</td>
-<td style="text-align:center">imap.163.com</td>
-<td style="text-align:center">993</td>
-<td style="text-align:center">143</td>
-</tr>
-<tr>
-<td style="text-align:center">SMTP</td>
-<td style="text-align:center">smtp.163.com</td>
-<td style="text-align:center">465/994</td>
-<td style="text-align:center">25</td>
-</tr>
-<tr>
-<td style="text-align:center">POP3</td>
-<td style="text-align:center">pop.163.com</td>
-<td style="text-align:center">995</td>
-<td style="text-align:center">110</td>
-</tr>
-</tbody>
-</table>
-<p>163免费邮客户端设置的POP3、SMTP、IMAP设置<a href="http://help.163.com/09/1223/14/5R7P3QI100753VB8.html" target="_blank" rel="noopener">参考链接</a>。</p>
-<h2 id="中科院邮箱"><a href="#中科院邮箱" class="headerlink" title="中科院邮箱"></a>中科院邮箱</h2><p>Thunderbird接收中科院系统邮箱设置：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">服务器名称</th>
-<th style="text-align:center">服务器地址</th>
-<th style="text-align:center">安全链接</th>
-<th style="text-align:center">端口</th>
-<th style="text-align:center">验证方式</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">IMAP</td>
-<td style="text-align:center">imap.cstnet.cn</td>
-<td style="text-align:center">None</td>
-<td style="text-align:center">143</td>
-<td style="text-align:center">用户名与密码</td>
-</tr>
-<tr>
-<td style="text-align:center">SMTP</td>
-<td style="text-align:center">smtp.cstnet.cn</td>
-<td style="text-align:center">None</td>
-<td style="text-align:center">25</td>
-<td style="text-align:center">用户名与密码</td>
-</tr>
-</tbody>
-</table>
-<p><a href="http://help.cstnet.cn/changjianwenti/youjianshoufa/Mozilla%20Thunderbird%20imap.html" target="_blank" rel="noopener">参考链接</a></p>
-<h2 id="中科大学生邮箱"><a href="#中科大学生邮箱" class="headerlink" title="中科大学生邮箱"></a>中科大学生邮箱</h2><p>Thunderbird接收中科大学生邮箱设置：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">服务器名称</th>
-<th style="text-align:center">服务器地址</th>
-<th style="text-align:center">加密方式</th>
-<th style="text-align:center">端口</th>
-<th style="text-align:center">Clear text</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">IMAP</td>
-<td style="text-align:center">mail.ustc.edu.cn</td>
-<td style="text-align:center">SSL</td>
-<td style="text-align:center">993</td>
-<td style="text-align:center">143</td>
-</tr>
-<tr>
-<td style="text-align:center">SMTP</td>
-<td style="text-align:center">mail.ustc.edu.cn</td>
-<td style="text-align:center">SSL</td>
-<td style="text-align:center">465</td>
-<td style="text-align:center">25</td>
-</tr>
-<tr>
-<td style="text-align:center">POP</td>
-<td style="text-align:center">mail.ustc.edu.cn</td>
-<td style="text-align:center">SSL</td>
-<td style="text-align:center">995</td>
-<td style="text-align:center">110</td>
-</tr>
-</tbody>
-</table>
-<p><a href="http://mail.ustc.edu.cn/coremail/help/index.jsp" target="_blank" rel="noopener">参考链接</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> ubuntu </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> ubuntu </tag>
-            
-            <tag> thunderbird </tag>
-            
-            <tag> email </tag>
             
         </tags>
         
