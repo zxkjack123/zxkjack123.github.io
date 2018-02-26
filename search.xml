@@ -36,7 +36,7 @@
 <li>[名1]は [名2]ではありません</li>
 <li>[名1]は [名2]ですか</li>
 </ul>
-<p>这是判定句。<strong>~は</strong>是主语部分（注意，主语成分包含は这个助词),<strong>~です</strong>是谓语部分。<strong>です</strong>是判定助动词。</p>
+<p>这是判定句。<strong>~は</strong>是主语部分（注意，主语成分包含<strong>は</strong>这个助词),<strong>~です</strong>是谓语部分。<strong>です</strong>是判定助动词。</p>
 <p>日语语法与现代汉语差别很大，不能用现代这一点与古汉语中的判断句比较类似。现代汉语中的谓语是肯定包含动词的。而日语的谓语则可以由名词，形容词和动词组成。</p>
 <p>这个判断句的的结构其实和古汉语判断句的<strong>~者，~也</strong>比较相似：</p>
 <ul>
@@ -924,6 +924,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
         
         <tags>
             
+            <tag> Japanese </tag>
+            
             <tag> English </tag>
             
             <tag> volunteering </tag>
@@ -931,8 +933,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             <tag> tutor </tag>
             
             <tag> Chinese </tag>
-            
-            <tag> Japanese </tag>
             
         </tags>
         
