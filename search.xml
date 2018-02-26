@@ -3,8 +3,40 @@
   
     
     <entry>
+      <title><![CDATA[日语学习笔记列表]]></title>
+      <url>/Japanese/text-book-list/</url>
+      <content type="html"><![CDATA[<h2 id="新标日"><a href="#新标日" class="headerlink" title="新标日"></a>新标日</h2><h3 id="初级上"><a href="#初级上" class="headerlink" title="初级上"></a>初级上</h3><ol>
+<li><a href="https://zxkjack123.github.io/Japanese/standard/text-book-standard-1st/">第一课学习笔记</a></li>
+</ol>
+<h3 id="初级下"><a href="#初级下" class="headerlink" title="初级下"></a>初级下</h3><p>つづく</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> 学习笔记 </tag>
+            
+            <tag> 列表 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[新标日初级上第一课学习]]></title>
-      <url>/Japanese/text-book-standard-1st/</url>
+      <url>/Japanese/standard/text-book-standard-1st/</url>
       <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
 <li>李さんは中国人です。</li>
 <li>森さんは学生ではありません。</li>
@@ -75,38 +107,6 @@
             <tag> 名词谓语句 </tag>
             
             <tag> 判断句 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[日语学习笔记列表]]></title>
-      <url>/Japanese/text-book-list/</url>
-      <content type="html"><![CDATA[<h2 id="新标日"><a href="#新标日" class="headerlink" title="新标日"></a>新标日</h2><h3 id="初级上"><a href="#初级上" class="headerlink" title="初级上"></a>初级上</h3><ol>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-1st/">第一课学习笔记</a></li>
-</ol>
-<h3 id="初级下"><a href="#初级下" class="headerlink" title="初级下"></a>初级下</h3><p>つづく</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Japanese </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Japanese </tag>
-            
-            <tag> 日语 </tag>
-            
-            <tag> 日本語 </tag>
-            
-            <tag> 学习笔记 </tag>
-            
-            <tag> 列表 </tag>
             
         </tags>
         
@@ -924,8 +924,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
         
         <tags>
             
-            <tag> Japanese </tag>
-            
             <tag> English </tag>
             
             <tag> volunteering </tag>
@@ -933,6 +931,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             <tag> tutor </tag>
             
             <tag> Chinese </tag>
+            
+            <tag> Japanese </tag>
             
         </tags>
         
