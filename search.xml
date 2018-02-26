@@ -3,12 +3,47 @@
   
     
     <entry>
-      <title><![CDATA[日语学习笔记列表]]></title>
-      <url>/Japanese/text-book-list/</url>
-      <content type="html"><![CDATA[<h2 id="新标日"><a href="#新标日" class="headerlink" title="新标日"></a>新标日</h2><h3 id="初级上"><a href="#初级上" class="headerlink" title="初级上"></a>初级上</h3><ol>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-1st/">第一课学习笔记</a></li>
+      <title><![CDATA[新标日初级上第二课学习]]></title>
+      <url>/Japanese/text-book-standard-2nd/</url>
+      <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
+<li>これは本です。</li>
+<li>それは何ですか。</li>
+<li>あれはだれの傘ですか。</li>
+<li>このカメラはスミスさんのです。</li>
 </ol>
-<h3 id="初级下"><a href="#初级下" class="headerlink" title="初级下"></a>初级下</h3><p>つづく</p>
+<ul>
+<li>これはテレビですか。　ーいいえ、それはテレビではありません。パソコンです。</li>
+<li>それは何ですか。　ーこれは日本語の本です。</li>
+<li>もりさんのかばんはどれですか。　ーあのかばんです。</li>
+<li>そのノートはでれのですか。　ーわたしのです。</li>
+</ul>
+<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="家族の写真"><a href="#家族の写真" class="headerlink" title="家族の写真"></a>家族の写真</h3><p>小李计划现在涉谷的某宾馆住一段时间，然后再搬到公寓里。这天，小野来宾馆看望小李。两人在大厅喝茶。</p>
+<p>(小李从包里取记事本时，从记事本里掉出一张照片)</p>
+<p>小野：李さん、それは何ですか。</p>
+<p>李：これですか。家族の写真です。</p>
+<p>小野：(指着其中一个人)この方はどなたですか。</p>
+<p>李：わたしの母です。</p>
+<p>小野：お母さんはおいくつですか。</p>
+<p>李：53歳です。</p>
+<p>(小李从包里取出一个盒子)</p>
+<p>李：小野さん、これ、どうぞ。</p>
+<p>小野：えっ、何ですか。</p>
+<p>李：お土産です。</p>
+<p>(小李打开一看，是一块很漂亮的刺绣手绢)</p>
+<p>小野：わあ、シルクのハンカチですか。</p>
+<p>李：ええ。スワトウのハンカチです。中国の名産品です。</p>
+<p>小野：どうもありがとうございます。</p>
+<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><p>这一课的重点是指带词汇<strong>こ</strong>，<strong>そ</strong>，<strong>あ</strong>，<strong>ど</strong>的部分用法，以及<strong>の</strong>的部分用法。</p>
+<ul>
+<li><strong>こ</strong>用于较近时</li>
+<li><strong>そ</strong>距离稍远或距离听话人较近时</li>
+<li><strong>あ</strong>距离较远时</li>
+<li><strong>ど</strong>（三个以上）多个事物中不确定是哪一个时</li>
+</ul>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><ul>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-list/">学习笔记列表</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/ko-so-a-do"><strong>こそあど</strong>系列词汇用法整理</a></li>
+</ul>
 ]]></content>
       
         <categories>
@@ -26,9 +61,13 @@
             
             <tag> 日本語 </tag>
             
-            <tag> 学习笔记 </tag>
+            <tag> 课文 </tag>
             
-            <tag> 列表 </tag>
+            <tag> 初级上 </tag>
+            
+            <tag> 新标日 </tag>
+            
+            <tag> 第二课 </tag>
             
         </tags>
         
@@ -64,9 +103,9 @@
 <p>李：李秀麗です。こちらこそ、よろしくお願いします。</p>
 <h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><p>这一课的语法内容是名词谓语句。名词谓语句，顾名思义，就是名词做谓语的句子。句子结构分三种：</p>
 <ul>
-<li>[名1]は [名2]です</li>
-<li>[名1]は [名2]ではありません</li>
-<li>[名1]は [名2]ですか</li>
+<li>名<strong>は</strong> 名<strong>です</strong></li>
+<li>名<strong>は</strong> 名<strong>ではありません</strong></li>
+<li>名<strong>は</strong> 名<strong>ですか</strong></li>
 </ul>
 <p>这是判定句。<strong>~は</strong>是主语部分（注意，主语成分包含<strong>は</strong>这个助词),<strong>~です</strong>是谓语部分。<strong>です</strong>是判定助动词。</p>
 <p>日语语法与现代汉语差别很大，不能用现代这一点与古汉语中的判断句比较类似。现代汉语中的谓语是肯定包含动词的。而日语的谓语则可以由名词，形容词和动词组成。</p>
@@ -78,7 +117,9 @@
 <p>与<strong>者</strong>，<strong>也</strong>类似，<strong>は</strong>和<strong>です</strong>本身没有实际意义，他们的功能是像标签一样提示这部分内容的成分。<strong>は</strong>是告诉我们：这是主题。<strong>です</strong>是告诉我们：这是谓语。</p>
 <p><strong>か</strong>同理，用于表示这是一个疑问句。</p>
 <p>注意：这里把日语名词谓语句与古汉语的判断句类比，只是为了方便理解。在日语学习的过程中，最好不要把日语的句子先映射到中文再进行理解。日语和汉语一样，都是可以直接反应现实或抽象的事物的。学习日语时应该训练自己把日语内容直接映射到世界中的事物，而不是先映射到中文。</p>
-<p><a href="https://zxkjack123.github.io/Japanese/text-book-list/">返回学习笔记列表</a></p>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><ul>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-list/">学习笔记列表</a></li>
+</ul>
 ]]></content>
       
         <categories>
@@ -107,6 +148,38 @@
             <tag> 名词谓语句 </tag>
             
             <tag> 判断句 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[日语学习笔记列表]]></title>
+      <url>/Japanese/text-book-list/</url>
+      <content type="html"><![CDATA[<h2 id="新标日"><a href="#新标日" class="headerlink" title="新标日"></a>新标日</h2><h3 id="初级上"><a href="#初级上" class="headerlink" title="初级上"></a>初级上</h3><ol>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-1st/">第一课学习笔记</a></li>
+</ol>
+<h3 id="初级下"><a href="#初级下" class="headerlink" title="初级下"></a>初级下</h3><p>つづく</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> 学习笔记 </tag>
+            
+            <tag> 列表 </tag>
             
         </tags>
         
@@ -1850,9 +1923,9 @@ pyne_build
         
         <tags>
             
-            <tag> neutronics </tag>
-            
             <tag> PyNE </tag>
+            
+            <tag> neutronics </tag>
             
             <tag> developer </tag>
             
