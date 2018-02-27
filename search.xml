@@ -3,28 +3,14 @@
   
     
     <entry>
-      <title><![CDATA[新标日初级上第三课学习]]></title>
-      <url>/Japanese/text-book-standard-3rd/</url>
-      <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
-<li>ここはデパートです。</li>
-<li>食堂はデパートの7階です。</li>
-<li>あそこもJC企画のビルです。</li>
-<li>かばん売り場は１階ですか、２階ですか。</li>
+      <title><![CDATA[日语学习笔记列表]]></title>
+      <url>/Japanese/text-book-list/</url>
+      <content type="html"><![CDATA[<h2 id="新标日"><a href="#新标日" class="headerlink" title="新标日"></a>新标日</h2><h3 id="初级上"><a href="#初级上" class="headerlink" title="初级上"></a>初级上</h3><ol>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-1st/">第一课学习笔记</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-2nd/">第二课学习笔记</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-3rd/">第三课学习笔记</a></li>
 </ol>
-<ul>
-<li>トイレはどこですか。　ーあちらです。</li>
-<li>ここは郵便局ですか、銀行ですか。　ー銀行です。</li>
-<li>これはいくらですか。　ーそれは5800円です。</li>
-<li>あれは？　ーあれも5800円です。</li>
-</ul>
-<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="ホテルの周辺"><a href="#ホテルの周辺" class="headerlink" title="ホテルの周辺"></a>ホテルの周辺</h3><p>小李请小野带自己熟悉宾馆的周边环境。宾馆附近有各种店铺，非常方便。</p>
-<p>(她们走到宾馆附近的便利店前)</p>
-<p>小野：</p>
-<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><ul>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-list/">学习笔记列表</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-2nd/">上一课</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-4th/">下一课</a></li>
-</ul>
+<h3 id="初级下"><a href="#初级下" class="headerlink" title="初级下"></a>初级下</h3><p>つづく</p>
 ]]></content>
       
         <categories>
@@ -42,13 +28,9 @@
             
             <tag> 日本語 </tag>
             
-            <tag> 课文 </tag>
+            <tag> 学习笔记 </tag>
             
-            <tag> 初级上 </tag>
-            
-            <tag> 新标日 </tag>
-            
-            <tag> 第三课 </tag>
+            <tag> 列表 </tag>
             
         </tags>
         
@@ -69,7 +51,7 @@
 <li>もりさんのかばんはどれですか。　ーあのかばんです。</li>
 <li>そのノートはでれのですか。　ーわたしのです。</li>
 </ul>
-<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="家族の写真"><a href="#家族の写真" class="headerlink" title="家族の写真"></a>家族の写真</h3><p>小李计划现在涉谷的某宾馆住一段时间，然后再搬到公寓里。这天，小野来宾馆看望小李。两人在大厅喝茶。</p>
+<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="家族の写真"><a href="#家族の写真" class="headerlink" title="家族の写真"></a>家族の写真</h3><p>小李计划先在涉谷的某宾馆住一段时间，然后再搬到公寓里。这天，小野来宾馆看望小李。两人在大厅喝茶。</p>
 <p>(小李从包里取记事本时，从记事本里掉出一张照片)</p>
 <p>小野：李さん、それは何ですか。</p>
 <p>李：これですか。家族の写真です。</p>
@@ -122,6 +104,58 @@
             <tag> 新标日 </tag>
             
             <tag> 第二课 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[新标日初级上第三课学习]]></title>
+      <url>/Japanese/text-book-standard-3rd/</url>
+      <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
+<li>ここはデパートです。</li>
+<li>食堂はデパートの7階です。</li>
+<li>あそこもJC企画のビルです。</li>
+<li>かばん売り場は１階ですか、２階ですか。</li>
+</ol>
+<ul>
+<li>トイレはどこですか。　ーあちらです。</li>
+<li>ここは郵便局ですか、銀行ですか。　ー銀行です。</li>
+<li>これはいくらですか。　ーそれは5800円です。</li>
+<li>あれは？　ーあれも5800円です。</li>
+</ul>
+<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="ホテルの周辺"><a href="#ホテルの周辺" class="headerlink" title="ホテルの周辺"></a>ホテルの周辺</h3><p>小李请小野带自己熟悉宾馆的周边环境。宾馆附近有各种店铺，非常方便。</p>
+<p>(她们走到宾馆附近的便利店前)</p>
+<p>小野：</p>
+<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><ul>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-list/">学习笔记列表</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-2nd/">上一课</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-4th/">下一课</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> 课文 </tag>
+            
+            <tag> 初级上 </tag>
+            
+            <tag> 新标日 </tag>
+            
+            <tag> 第三课 </tag>
             
         </tags>
         
@@ -241,38 +275,6 @@
             <tag> 日本語 </tag>
             
             <tag> こそあど </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[日语学习笔记列表]]></title>
-      <url>/Japanese/text-book-list/</url>
-      <content type="html"><![CDATA[<h2 id="新标日"><a href="#新标日" class="headerlink" title="新标日"></a>新标日</h2><h3 id="初级上"><a href="#初级上" class="headerlink" title="初级上"></a>初级上</h3><ol>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-1st/">第一课学习笔记</a></li>
-</ol>
-<h3 id="初级下"><a href="#初级下" class="headerlink" title="初级下"></a>初级下</h3><p>つづく</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Japanese </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Japanese </tag>
-            
-            <tag> 日语 </tag>
-            
-            <tag> 日本語 </tag>
-            
-            <tag> 学习笔记 </tag>
-            
-            <tag> 列表 </tag>
             
         </tags>
         
