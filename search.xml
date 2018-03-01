@@ -3,6 +3,78 @@
   
     
     <entry>
+      <title><![CDATA[新标日初级上第四课学习]]></title>
+      <url>/Japanese/text-book-standard-4th/</url>
+      <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
+<li>部屋に机といすがあります。</li>
+<li>机の上に猫がいます。</li>
+<li>売店は駅の外にあります。</li>
+<li>吉田さんは庭にいます。</li>
+</ol>
+<ul>
+<li>その箱の中に何がありますか。　ー時計と眼鏡があります。</li>
+<li>部屋にだれがいますか。　ーだれもいません。</li>
+<li>小野さんの家はどこにありますか。　ー横浜にあります。</li>
+<li>あそこに犬がありますね。　ーええ、わたしの犬です。</li>
+</ul>
+<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="会社の場所"><a href="#会社の場所" class="headerlink" title="会社の場所"></a>会社の場所</h3><p>今天是星期天。从明天开始小李将要到公司本部上班。小野来到小李住的宾馆向她说明公司的地理位置。</p>
+<p>(小李一边打开地图册一边问)</p>
+<p>李：小野さん、会社はどこにありますか。</p>
+<p>小野：(翻了一下地图册) ええと、ここです。</p>
+<p>李：近くに駅がありますか。</p>
+<p>小野：ええ。JRと地下鉄の駅があります。(指着地图册) JRの駅がここです。</p>
+<p>李：地下鉄の駅はここですね。</p>
+<p>小野：　ええ、そうです。JRの駅の隣に地下鉄の駅があります。</p>
+<p>(小李询问小野的家庭情况)</p>
+<p>李：小野さんの家はどちらですか。</p>
+<p>小野：わたしの家は横浜です。</p>
+<p>李：ご家族も横浜ですか。</p>
+<p>小野：いいえ、わたしは一人暮らしです。</p>
+<p>李：ご両親はどちらですか。</p>
+<p>小野：両親は名古屋にいます。</p>
+<p>李：ご兄弟は？</p>
+<p>小野：大阪に妹がいます。</p>
+<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><p>本课依旧围绕场所展开。本课在<a href="https://zxkjack123.github.io/Japanese/text-book-standard-3rd/">上一课</a>的基础上，介绍了<strong>あります</strong>和<strong>います</strong>这两个表达方式。其中<strong>あります</strong>用于花，草，桌子等不具意志的事物，而<strong>います</strong>用于有意志的人，动物或昆虫。</p>
+<p><strong>あります/います</strong>有下面两种句型：</p>
+<ol>
+<li>名[場所]<strong>に</strong>名[物/人]が<strong>あります/います</strong>。 表示存在，相当于汉语的“~有~”。</li>
+<li>名[物/人]は名[場所]<strong>に</strong> <strong>あります/います</strong>。表示位置，相当于汉语的“~在~”。</li>
+</ol>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><ul>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-list/">学习笔记列表</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-3rd/">上一课</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-5th/">下一课</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> 课文 </tag>
+            
+            <tag> 初级上 </tag>
+            
+            <tag> 新标日 </tag>
+            
+            <tag> 第四课 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[新标日初级上第三课学习]]></title>
       <url>/Japanese/text-book-standard-3rd/</url>
       <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
@@ -1118,6 +1190,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
         
         <tags>
             
+            <tag> Japanese </tag>
+            
             <tag> English </tag>
             
             <tag> volunteering </tag>
@@ -1125,8 +1199,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             <tag> tutor </tag>
             
             <tag> Chinese </tag>
-            
-            <tag> Japanese </tag>
             
         </tags>
         
