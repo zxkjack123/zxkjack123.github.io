@@ -3,46 +3,6 @@
   
     
     <entry>
-      <title><![CDATA[日语学习笔记列表]]></title>
-      <url>/Japanese/text-book-list/</url>
-      <content type="html"><![CDATA[<h2 id="新标日"><a href="#新标日" class="headerlink" title="新标日"></a>新标日</h2><h3 id="初级上"><a href="#初级上" class="headerlink" title="初级上"></a>初级上</h3><ol>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-1st/">第1课学习笔记</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-2nd/">第2课学习笔记</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-3rd/">第3课学习笔记</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-4th/">第4课学习笔记</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-5th/">第5课学习笔记</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-6th/">第6课学习笔记</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-7th/">第7课学习笔记</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-8th/">第8课学习笔记</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-9th/">第9课学习笔记</a></li>
-</ol>
-<h3 id="初级下"><a href="#初级下" class="headerlink" title="初级下"></a>初级下</h3><p>つづく</p>
-]]></content>
-      
-        <categories>
-            
-            <category> Japanese </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Japanese </tag>
-            
-            <tag> 日语 </tag>
-            
-            <tag> 日本語 </tag>
-            
-            <tag> 学习笔记 </tag>
-            
-            <tag> 列表 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[新标日初级上第9课学习]]></title>
       <url>/Japanese/text-book-standard-9th/</url>
       <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
@@ -61,7 +21,7 @@
 <li>甲： 北京ダックは食べましたか。</li>
 <li>乙： はい、食べました。とてもおいしかったですよ。</li>
 </ul>
-<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="温泉"><a href="#温泉" class="headerlink" title="温泉"></a>温泉</h3><p>小李和小野来到箱根采访。秋天的箱根层林尽染。住进旅馆以后，两人马上去洗露天浴。露天浴场的一角有能够引用的温泉水。</p>
+<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="温泉"><a href="#温泉" class="headerlink" title="温泉"></a>温泉</h3><p>小李和小野来到箱根采访。秋天的箱根层林尽染。住进旅馆以后，两人马上去洗露天浴。露天浴场的一角有能够饮用的温泉水。</p>
 <p>(去浴场之前在房间里换浴衣)</p>
 <p>李：小野さん、この浴衣はちょっと小さいです。</p>
 <p>小野：あら、それは子供用ですよ。(取出大人用的) これはどうぞ。</p>
@@ -204,6 +164,46 @@
             <tag> 新标日 </tag>
             
             <tag> 第9课 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[日语学习笔记列表]]></title>
+      <url>/Japanese/text-book-list/</url>
+      <content type="html"><![CDATA[<h2 id="新标日"><a href="#新标日" class="headerlink" title="新标日"></a>新标日</h2><h3 id="初级上"><a href="#初级上" class="headerlink" title="初级上"></a>初级上</h3><ol>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-1st/">第1课学习笔记</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-2nd/">第2课学习笔记</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-3rd/">第3课学习笔记</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-4th/">第4课学习笔记</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-5th/">第5课学习笔记</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-6th/">第6课学习笔记</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-7th/">第7课学习笔记</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-8th/">第8课学习笔记</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-9th/">第9课学习笔记</a></li>
+</ol>
+<h3 id="初级下"><a href="#初级下" class="headerlink" title="初级下"></a>初级下</h3><p>つづく</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> 学习笔记 </tag>
+            
+            <tag> 列表 </tag>
             
         </tags>
         
