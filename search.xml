@@ -3,6 +3,50 @@
   
     
     <entry>
+      <title><![CDATA[动词て形用法整理]]></title>
+      <url>/Japanese/te/</url>
+      <content type="html"><![CDATA[<p>新标日<a href="https://zxkjack123.github.io/Japanese/text-book-standard-14th/">第14课</a>首次出现了动词的て形。动词て形可以用于各种各样的表达方式。下面对て形的用法进行汇总：</p>
+<ul>
+<li>动<strong>て</strong> 动：[相继发生1]。 表述两个以上的动作依照时间顺序相继发生时，可以使用「动词<strong>て</strong>形+动词」的形式来表示。语法解释见新标日第14课。<ul>
+<li>〔例」：昨日デパートへ行って、買い物しました。</li>
+</ul>
+</li>
+<li>动<strong>てから</strong> 动: [相继发生2]。表述两个以上的动作依照时间顺序相继发生时，也可以使用「动词<strong>て</strong>形+<strong>から</strong>+动词」的表达方式。其语义和「动词<strong>て</strong>形+动词」基本相同，但<strong>てから</strong>不能在一个句子中反复使用两次以上。另外更加强调时间顺序不可调换。<ul>
+<li>「例」：李さんは毎晩ラジオを聞いてから寝ます。</li>
+</ul>
+</li>
+<li>动<strong>て</strong> <strong>ください</strong>: 请求某人做某事时使用「动词<strong>て</strong>形+<strong>ください</strong>」。<ul>
+<li>「例」： ここに住所と名前を書いてください。</li>
+</ul>
+</li>
+</ul>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><ul>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-list/">笔记列表</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> て形 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[新标日初级上第14课学习]]></title>
       <url>/Japanese/text-book-standard-14th/</url>
       <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
@@ -2079,9 +2123,9 @@ $ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
         
         <tags>
             
-            <tag> DAGMC </tag>
-            
             <tag> Trelis </tag>
+            
+            <tag> DAGMC </tag>
             
             <tag> PyNE </tag>
             
@@ -2136,9 +2180,9 @@ $ mbconvert meshtal14.h5m meshtal14.vtk
         
         <tags>
             
-            <tag> DAGMC </tag>
-            
             <tag> Trelis </tag>
+            
+            <tag> DAGMC </tag>
             
             <tag> PyNE </tag>
             
@@ -2325,9 +2369,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
         
         <tags>
             
-            <tag> Japanese </tag>
-            
             <tag> English </tag>
+            
+            <tag> Japanese </tag>
             
             <tag> volunteering </tag>
             
