@@ -3,6 +3,33 @@
   
     
     <entry>
+      <title><![CDATA[密尔沃基一日游]]></title>
+      <url>/life/Milwaukee-tour-20180311/</url>
+      <content type="html"><![CDATA[<p><img src="/life/Milwaukee-tour-20180311/Milwaukee_tour_motor1_20180311.jpg" alt="飞天摩托"></p>
+]]></content>
+      
+        <categories>
+            
+            <category> life </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> life </tag>
+            
+            <tag> 生活 </tag>
+            
+            <tag> 密尔沃基 </tag>
+            
+            <tag> 旅游 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[留学感悟之科研环境]]></title>
       <url>/neutronics/imporve-aspects-learned-from-studying-abroad/</url>
       <content type="html"><![CDATA[<p>我2017年10月初到的美国，到现在已经5个月了。这里的生活和科研环境都和国内差别很大。国别不同，文化不同，环境差异再所难免，不可能做到国内外一样。文化习惯方面的差异没有优劣之分，各自有其相适应的环境。但在科研方面还是有一些地方，我认为美国这边比国内好，而且国内也可以复制学习的。</p>
@@ -2420,9 +2447,9 @@ $ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
         
         <tags>
             
-            <tag> Trelis </tag>
-            
             <tag> DAGMC </tag>
+            
+            <tag> Trelis </tag>
             
             <tag> PyNE </tag>
             
@@ -2477,9 +2504,9 @@ $ mbconvert meshtal14.h5m meshtal14.vtk
         
         <tags>
             
-            <tag> Trelis </tag>
-            
             <tag> DAGMC </tag>
+            
+            <tag> Trelis </tag>
             
             <tag> PyNE </tag>
             
