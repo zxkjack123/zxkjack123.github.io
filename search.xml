@@ -3,6 +3,88 @@
   
     
     <entry>
+      <title><![CDATA[新标日初级上第17课学习]]></title>
+      <url>/Japanese/text-book-standard-17th/</url>
+      <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
+<li>わたしは新しい洋服が欲しいです。</li>
+<li>わたしは映画を見たいです。</li>
+<li>いっしょにを茶を飲みませんか。</li>
+<li>ちょっと休みましょう。<br><br></li>
+</ol>
+<ul>
+<li>甲： 今何がいちばん欲しいですか。</li>
+<li>乙： 安い車が欲しいです。<br><br></li>
+<li>甲： 今日デパートへ買い物に行きます。李さんもいっしょにどうですか。</li>
+<li>乙： はい、ぜひ行きたいです。<br><br></li>
+<li>甲： 李さん、何を食べたいですか。</li>
+<li>乙： 何でもいいです。<br><br> </li>
+<li>甲： 土曜日の午後、コンサートへ行きませんか。</li>
+<li>乙： いいですね。行きましょう。</li>
+</ul>
+<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="初詣"><a href="#初詣" class="headerlink" title="初詣"></a>初詣</h3><p>(新年。为使自己今年的心愿能够实现，许多人去神社参拜。小李也跟着小野到神社去看一看。）</p>
+<p>(参拜后)</p>
+<p>李：小野さんは何をお願いしましたか。</p>
+<p>小野：健康と恋愛です。</p>
+<p>李：恋愛ですか？</p>
+<p>小野：ええ。今年中に結婚したいです。</p>
+<p>李：相手はいますか。</p>
+<p>小野：いいえ。まず恋人が欲しいですね。</p>
+<p>李：どんな男性がいいですか。</p>
+<p>小野：まじめで優しい人がいいですね。</p>
+<p>李：じゃあ、森さんはどうですか。</p>
+<p>小野：(脸红)ええ？</p>
+<p><br><br>(离开神社)</p>
+<p>小野：ちょっと寒いですね。温かい物を食べませんか。</p>
+<p>李：そうですね。</p>
+<p>小野：何がいいですか。</p>
+<p>李：何でもいいですよ。</p>
+<p>小野：じゃあ、お汁粉はどうですか。いいお店を知っています。そこに行きましょう。</p>
+<p>李：お汁粉？ぜひ食べたいです。</p>
+<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><p>这一课主要学到了愿望的表法方式：</p>
+<ul>
+<li>名 <strong>が</strong> <strong>欲しいです</strong></li>
+<li>名 <strong>を</strong> 动<strong>たいです</strong></li>
+</ul>
+<h2 id="单词"><a href="#单词" class="headerlink" title="单词"></a>单词</h2><ul>
+<li>洋服(ようふく)</li>
+<li>健康(けんこう)</li>
+<li>お汁粉(おしるこ)</li>
+</ul>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-list/">学习笔记列表</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-16th/">上一课</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-18th/">下一课</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> 课文 </tag>
+            
+            <tag> 初级上 </tag>
+            
+            <tag> 新标日 </tag>
+            
+            <tag> 第17课 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[使用PyNE进行基于网格的计算停机计量的例子]]></title>
       <url>/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/</url>
       <content type="html"><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本篇文章使用例子来说明使用PyNE来进行基于网格的计算停机剂量率的流程。</p>
@@ -2813,13 +2895,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             
             <tag> English </tag>
             
-            <tag> Japanese </tag>
-            
             <tag> volunteering </tag>
             
             <tag> tutor </tag>
             
             <tag> Chinese </tag>
+            
+            <tag> Japanese </tag>
             
         </tags>
         
