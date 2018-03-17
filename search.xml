@@ -3,6 +3,116 @@
   
     
     <entry>
+      <title><![CDATA[Code documentation tools]]></title>
+      <url>/programming/code-documentation-tools/</url>
+      <content type="html"><![CDATA[<h2 id="Code-documentation-tool-in-need"><a href="#Code-documentation-tool-in-need" class="headerlink" title="Code documentation tool in need"></a>Code documentation tool in need</h2><p>As a student who writes code very often, I want a perfect tool to make my code well documented. By the word documentation, I mean, not only the comment lines in the source code, but also something like the introduction of the code/program, user manual, tutorial, getting started page, etc.. </p>
+<p>By now, I have tried MS word, LaTeX, Mardown, Github page and even the text file to write documentations for my own code. And also used a Shpinx for an open source program (<a href="https://github.com/pyne/pyne" target="_blank" rel="noopener">pyne</a>) I am working on. </p>
+<p>Technologies are continually being developed, there are several good tools to make code documentation. It’s time to choose one that meets all my requirements:</p>
+<ul>
+<li>System independent. This tool should be available for all operating systems, include Windows, Linux and Mac. </li>
+<li>Open source. Open source means I can access to it without any restriction, and I may also make changes to the source code.</li>
+<li>Multiple programming language support. I am now using python, C++ and fortran. The ideal tool should support all these languages. The more, the better.  </li>
+<li>Multiple language support. As a native Chinese speaker, there will be as much communications in Chinese as in English.</li>
+<li>Git/Github compatibility. The documentation itself should also be recorded and managed on github. </li>
+<li>Multiple output format support. For the documentation, I want at least a local version in text file (such as README.md), a PDF version (should support LaTeX format support), a online HTML version. </li>
+<li>Convenient cross reference. Documentations contain contents highly related to each other, cross reference support enables user to jump to related content at a click. </li>
+</ul>
+<h2 id="Available-choices"><a href="#Available-choices" class="headerlink" title="Available choices"></a>Available choices</h2><p>I have listed the features I want. Now, let’s look at the available tools for code documentation. There are two popular documentation tools: <strong>Doxygen</strong> and <strong>Sphinx</strong>.</p>
+<h3 id="Doxygen"><a href="#Doxygen" class="headerlink" title="Doxygen"></a>Doxygen</h3><p><a href="http://www.stack.nl/~dimitri/doxygen/" target="_blank" rel="noopener">Doxygen</a> is a great tool for generating documentation from source code. The tool is aimed at C++, but it can also be used with PHP, Java, Python, etc. With the help of Doxygen, you can create online HTML documentation. It can also be used to generate output in multiple formats, including Unix man pages, PostScript, etc.</p>
+<p>The biggest advantage of using Doxygen is that you will have consistency throughout your source code documentation. It can also help you to generate code structure using the undocumented source files. All you need to do is configure it accordingly.</p>
+<p>Detail features of Doxygen could be found <a href="http://www.stack.nl/~dimitri/doxygen/manual/features.html" target="_blank" rel="noopener">here</a>.</p>
+<h3 id="Sphinx"><a href="#Sphinx" class="headerlink" title="Sphinx"></a>Sphinx</h3><p><a href="http://www.sphinx-doc.org/en/master/" target="_blank" rel="noopener">Sphinx</a> is a tool that makes it easy to create intelligent and beautiful documentation, written by Georg Brandl and licensed under the BSD license.</p>
+<p>It was originally created for the Python documentation, and it has excellent facilities for the documentation of software projects in a range of languages. </p>
+<p>Sphinx has the following features:</p>
+<ul>
+<li><strong>Output formats</strong>: HTML (including Windows HTML Help), LaTeX (for printable PDF versions), ePub, Texinfo, manual pages, plain text</li>
+<li><strong>Extensive cross-references</strong>: semantic markup and automatic links for functions, classes, citations, glossary terms and similar pieces of information</li>
+<li><strong>Hierarchical structure</strong>: easy definition of a document tree, with automatic links to siblings, parents and children</li>
+<li><strong>Automatic indices</strong>: general index as well as a language-specific module indices</li>
+<li><strong>Code handling</strong>: automatic highlighting using the Pygments highlighter</li>
+<li><strong>Extensions</strong>: automatic testing of code snippets, inclusion of docstrings from Python modules (API docs), and more</li>
+<li><strong>Contributed extensions</strong>: more than 50 extensions contributed by users in a second repository; most of them installable from PyPI</li>
+</ul>
+<h3 id="Compare"><a href="#Compare" class="headerlink" title="Compare"></a>Compare</h3><p>According to my requirement, how do these two documentation tools behave? See the table below:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Tool</th>
+<th style="text-align:center">Doxygen</th>
+<th style="text-align:center">Sphinx</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">System independent</td>
+<td style="text-align:center">Unix, Windows</td>
+<td style="text-align:center">Linux, Windows, Mac</td>
+</tr>
+<tr>
+<td style="text-align:center">Open source</td>
+<td style="text-align:center">Yes. Writen in C++</td>
+<td style="text-align:center">Yes. Written in python</td>
+</tr>
+<tr>
+<td style="text-align:center">Programming language support</td>
+<td style="text-align:center">C, C++, C#, Objective-C, IDL, Java, VHDL, PHP, Python, Tcl, Fortran, and D</td>
+<td style="text-align:center">Python, Javascript, PHP, Java, Go, Erlang, R, .Net</td>
+</tr>
+<tr>
+<td style="text-align:center">Language support</td>
+<td style="text-align:center">en, zh_CN, etc.</td>
+<td style="text-align:center">en, zh_CN, etc.</td>
+</tr>
+<tr>
+<td style="text-align:center">Git/Github compatibility</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+</tr>
+<tr>
+<td style="text-align:center">Output format</td>
+<td style="text-align:center">HTML, LaTeX, RTF, XML, Man page, DocBook</td>
+<td style="text-align:center">HTML, epub, LaTeX, text, manual page, Texinfo</td>
+</tr>
+<tr>
+<td style="text-align:center">Corss reference</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Now we found that both Doxygen and Sphinx meet my need. However, during the research process, I find that I prefer Sphinx for two reasons: </p>
+<ul>
+<li>Sphinx is written in python. </li>
+<li>Documentation is independent of the source code</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> programming </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> code </tag>
+            
+            <tag> programming </tag>
+            
+            <tag> documentation </tag>
+            
+            <tag> tools </tag>
+            
+            <tag> doxygen </tag>
+            
+            <tag> sphinx </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[新标日初级上第20课学习]]></title>
       <url>/Japanese/text-book-standard-20th/</url>
       <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
@@ -3498,9 +3608,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
         
         <tags>
             
-            <tag> Japanese </tag>
-            
             <tag> English </tag>
+            
+            <tag> Japanese </tag>
             
             <tag> volunteering </tag>
             
