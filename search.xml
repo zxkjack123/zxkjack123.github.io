@@ -10,7 +10,8 @@
 <h2 id="例子的重要性"><a href="#例子的重要性" class="headerlink" title="例子的重要性"></a>例子的重要性</h2><p>使用的工具功能越多，那么使用起来一般就越复杂，新手就越难上手，新手总会在各种环节出现各种开发者意想不到的困难。即便软件官网上介绍了软件的各个工具的使用方法，但如果没有一个生动的例子来把这些应用工具的使用方法串起来的话，还是非常难的。</p>
 <p>我自己作为一个PyNE系统的使用者，现在也参与了其中的部分开发工作，对此深有体会。对于新手的教学，告诉他们这个软件的各种功能是远远不够的，必须辅以实例，手把手的教会他们怎么用这个功能。用例子来说明这些问题是比较容易让新手接受的。我作为一个PyNE的使用者，也是一个新手。</p>
 <p>这篇文章介绍了我如何从Trelis开始，一步一步实现计算一个简单模型的停机计量的过程的。</p>
-<h2 id="例题描述"><a href="#例题描述" class="headerlink" title="例题描述"></a>例题描述</h2><p>现有如下形状的几何体：<br><img src="/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/test_case1.png" alt="test_case1"><br>图中每个小快代表着$ 10 \times 10 \times 10 \, \mathrm{cm}^3$的立方体。简单起见，我们把栅元1和3的材料设为密度为$1.0 \, \mathrm{g/cm^3}$的水(Water)，栅元2的材料设为密度为$7.8 \, \mathrm{g/cm^3}$的钢(Steel)。除了这几个栅元外其它区域都是真空。栅元1的正中心有一个点中子源，各项同性的发射能量为14 MeV的中子。</p>
+<h2 id="例题描述"><a href="#例题描述" class="headerlink" title="例题描述"></a>例题描述</h2><p>现有如下形状的几何体：<br><img src="/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/test_case1.png" alt="test_case1"></p>
+<p>&lt; img src=”/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/test_case1.png” width=”70” &gt;<br>图中每个小快代表着$ 10 \times 10 \times 10 \, \mathrm{cm}^3$的立方体。简单起见，我们把栅元1和3的材料设为密度为$1.0 \, \mathrm{g/cm^3}$的水(Water)，栅元2的材料设为密度为$7.8 \, \mathrm{g/cm^3}$的钢(Steel)。除了这几个栅元外其它区域都是真空。栅元1的正中心有一个点中子源，各项同性的发射能量为14 MeV的中子。</p>
 <p>让点中子源以$10^{10}$个中子每秒的中子发射率辐照这几个栅元1年，然后停止辐照，考察停止辐照后1小时的栅元1, 2, 3的停机剂量率。</p>
 <h2 id="输入文件准备"><a href="#输入文件准备" class="headerlink" title="输入文件准备"></a>输入文件准备</h2><p>要进行蒙特卡罗输运计算，我们需要提供以下信息：</p>
 <ol>
