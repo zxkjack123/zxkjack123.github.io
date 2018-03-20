@@ -3,6 +3,46 @@
   
     
     <entry>
+      <title><![CDATA[密尔沃基一日游]]></title>
+      <url>/life/Milwaukee-tour-20180311/</url>
+      <content type="html"><![CDATA[<p>2018年3月11日，我和几个朋友(鲁勇师兄夫妇和韦林)一起去了密尔沃基玩耍。我们首先去了哈雷戴维森摩托博物馆，然后去参加了一趟啤酒厂之旅，最后到密西根湖边的现代艺术博物馆玩耍。</p>
+<p>一路上道路平直，略有起伏，视野非常开阔，自然风光很好。虽然是初春，路上的草木还没有发芽，但依然可以从两边的丛林里展望到夏天郁郁葱葱的景色。</p>
+<p>第一站是哈雷戴维森摩托博物馆。这个博物馆里陈列了从1904年开始的各种型号的摩托。比如1909年产的<strong>自行车</strong>+<strong>发动机</strong>组合而成的摩托：</p>
+<center><br><img src="/life/Milwaukee-tour-20180311/Fancy_motor_1.jpg" width="500"><br><br><br></center>
+
+<p>不过这里给我留下最深印象的还是产于19世纪40年代初期左右的一款军用摩托。它的最大特点是三轮，侧边有一个可以载人的小车厢。这种摩托我小时候在抗日电视剧里面经常见到。</p>
+<center><br><img src="/life/Milwaukee-tour-20180311/Fancy_motor_4.jpg" width="500"><br><br><br></center>
+
+<p>当然，这里也有其他二十一世纪初生产的花里胡哨的摩托：</p>
+<center><br><img src="/life/Milwaukee-tour-20180311/Fancy_motor_2.jpg" width="500"><br><br><br><img src="/life/Milwaukee-tour-20180311/Fancy_motor_3.jpg" width="500"><br><br><br></center>
+
+<p>哈雷戴维森摩托的发展历史一步一个脚印的展现出来，令人印象深刻。然而，现在在街上已经基本看不到摩托的身影了。在麦迪逊，路上绝大部分人都是开车而不是骑摩托。</p>
+<p>逛的其他地方亮点不多，不提。放几张图意思一下：</p>
+<center><br><img src="/life/Milwaukee-tour-20180311/Beside_lake.jpg" width="500"><br>东临碣石<br><br><br><img src="/life/Milwaukee-tour-20180311/Drag_anchor.jpg" width="500"><br>力拔锚兮气盖世<br><br><br><img src="/life/Milwaukee-tour-20180311/Four_group.jpg" width="500"><br>一日游F4<br></center>
+]]></content>
+      
+        <categories>
+            
+            <category> life </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> life </tag>
+            
+            <tag> 生活 </tag>
+            
+            <tag> 密尔沃基 </tag>
+            
+            <tag> 旅游 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[使用PyNE进行基于网格的计算停机计量的例子]]></title>
       <url>/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/</url>
       <content type="html"><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本篇文章使用例子来说明使用PyNE来进行基于网格的计算停机剂量率的流程。</p>
@@ -1092,33 +1132,6 @@ $ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
             <tag> 新标日 </tag>
             
             <tag> 第17课 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[密尔沃基一日游]]></title>
-      <url>/life/Milwaukee-tour-20180311/</url>
-      <content type="html"><![CDATA[<p><img src="/life/Milwaukee-tour-20180311/Milwaukee_tour_motor1_20180311.jpg" alt="飞天摩托"></p>
-]]></content>
-      
-        <categories>
-            
-            <category> life </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> life </tag>
-            
-            <tag> 生活 </tag>
-            
-            <tag> 密尔沃基 </tag>
-            
-            <tag> 旅游 </tag>
             
         </tags>
         
@@ -4434,9 +4447,9 @@ pyne_build
         
         <tags>
             
-            <tag> PyNE </tag>
-            
             <tag> neutronics </tag>
+            
+            <tag> PyNE </tag>
             
             <tag> developer </tag>
             
