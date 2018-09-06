@@ -3,6 +3,83 @@
   
     
     <entry>
+      <title><![CDATA[新标日初级上第2课学习]]></title>
+      <url>/Japanese/text-book-standard-2nd/</url>
+      <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
+<li>これは本です。</li>
+<li>それは何ですか。</li>
+<li>あれはだれの傘ですか。</li>
+<li>このカメラはスミスさんのです。<br><br></li>
+</ol>
+<ul>
+<li>甲： これはテレビですか。</li>
+<li>乙： いいえ、それはテレビではありません。パソコンです<br><br></li>
+<li>甲： それは何ですか。</li>
+<li>乙： これは日本語の本です。<br><br></li>
+<li>甲： もりさんのかばんはどれですか。</li>
+<li>乙： あのかばんです。<br><br></li>
+<li>甲： そのノートはだれのですか。</li>
+<li>乙： わたしのです。</li>
+</ul>
+<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="家族の写真"><a href="#家族の写真" class="headerlink" title="家族の写真"></a>家族の写真</h3><p>小李计划先在涉谷的某宾馆住一段时间，然后再搬到公寓里。这天，小野来宾馆看望小李。两人在大厅喝茶。</p>
+<p>(小李从包里取记事本时，从记事本里掉出一张照片)</p>
+<p>小野：李さん、それは何ですか。</p>
+<p>李：これですか。家族の写真です。</p>
+<p>小野：(指着其中一个人)この方はどなたですか。</p>
+<p>李：わたしの母です。</p>
+<p>小野：お母さんはおいくつですか。</p>
+<p>李：53歳です。</p>
+<p><br><br>(小李从包里取出一个盒子)</p>
+<p>李：小野さん、これ、どうぞ。</p>
+<p>小野：えっ、何ですか。</p>
+<p>李：お土産です。</p>
+<p>(小李打开一看，是一块很漂亮的刺绣手绢)</p>
+<p>小野：わあ、シルクのハンカチですか。</p>
+<p>李：ええ。スワトウのハンカチです。中国の名産品です。</p>
+<p>小野：どうもありがとうございます。</p>
+<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><p>这一课的重点是指带词汇<strong>こ</strong>，<strong>そ</strong>，<strong>あ</strong>，<strong>ど</strong>的部分用法，以及<strong>の</strong>的部分用法。</p>
+<ul>
+<li><strong>こ</strong>用于较近时</li>
+<li><strong>そ</strong>距离稍远或距离听话人较近时</li>
+<li><strong>あ</strong>距离较远时</li>
+<li><strong>ど</strong>（三个以上）多个事物中不确定是哪一个时</li>
+</ul>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-list/">学习笔记列表</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-1st/">上一课</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-3rd/">下一课</a></li>
+<li><a href="https://zxkjack123.github.io/Japanese/ko-so-a-do"><strong>こそあど</strong>系列词汇用法整理</a></li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> Japanese </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Japanese </tag>
+            
+            <tag> 日语 </tag>
+            
+            <tag> 日本語 </tag>
+            
+            <tag> 课文 </tag>
+            
+            <tag> 初级上 </tag>
+            
+            <tag> 新标日 </tag>
+            
+            <tag> 第2课 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[第三次心理咨询有感]]></title>
       <url>/life/counseling-3rd/</url>
       <content type="html"><![CDATA[<p>2018年7月，我来到美国学习已经9个月了。这段时间，经历了刚开始的适应，然后一阵兴奋探索期，之后组建平静，又经历了一段时间的焦虑迷茫与颓废，到现在慢慢走出回归平淡的日常。不同的时间段，对生活和科研的感受差别很大。我现在依然没有回到全盛的状态，还在慢慢调整。</p>
@@ -316,11 +393,11 @@ $ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib
         
         <tags>
             
-            <tag> PyNE </tag>
-            
             <tag> Trelis </tag>
             
             <tag> DAGMC </tag>
+            
+            <tag> PyNE </tag>
             
             <tag> R2S </tag>
             
@@ -3273,83 +3350,6 @@ https://www.zhihu.com/question/26939890/answer/34763273">回答</a>中给出的�
     </entry>
     
     <entry>
-      <title><![CDATA[新标日初级上第2课学习]]></title>
-      <url>/Japanese/text-book-standard-2nd/</url>
-      <content type="html"><![CDATA[<h2 id="基本课文"><a href="#基本课文" class="headerlink" title="基本课文"></a>基本课文</h2><ol>
-<li>これは本です。</li>
-<li>それは何ですか。</li>
-<li>あれはだれの傘ですか。</li>
-<li>このカメラはスミスさんのです。<br><br></li>
-</ol>
-<ul>
-<li>甲： これはテレビですか。</li>
-<li>乙： いいえ、それはテレビではありません。パソコンです<br><br></li>
-<li>甲： それは何ですか。</li>
-<li>乙： これは日本語の本です。<br><br></li>
-<li>甲： もりさんのかばんはどれですか。</li>
-<li>乙： あのかばんです。<br><br></li>
-<li>甲： そのノートはでれのですか。</li>
-<li>乙： わたしのです。</li>
-</ul>
-<h2 id="应用课文"><a href="#应用课文" class="headerlink" title="应用课文"></a>应用课文</h2><h3 id="家族の写真"><a href="#家族の写真" class="headerlink" title="家族の写真"></a>家族の写真</h3><p>小李计划先在涉谷的某宾馆住一段时间，然后再搬到公寓里。这天，小野来宾馆看望小李。两人在大厅喝茶。</p>
-<p>(小李从包里取记事本时，从记事本里掉出一张照片)</p>
-<p>小野：李さん、それは何ですか。</p>
-<p>李：これですか。家族の写真です。</p>
-<p>小野：(指着其中一个人)この方はどなたですか。</p>
-<p>李：わたしの母です。</p>
-<p>小野：お母さんはおいくつですか。</p>
-<p>李：53歳です。</p>
-<p><br><br>(小李从包里取出一个盒子)</p>
-<p>李：小野さん、これ、どうぞ。</p>
-<p>小野：えっ、何ですか。</p>
-<p>李：お土産です。</p>
-<p>(小李打开一看，是一块很漂亮的刺绣手绢)</p>
-<p>小野：わあ、シルクのハンカチですか。</p>
-<p>李：ええ。スワトウのハンカチです。中国の名産品です。</p>
-<p>小野：どうもありがとうございます。</p>
-<h2 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h2><p>这一课的重点是指带词汇<strong>こ</strong>，<strong>そ</strong>，<strong>あ</strong>，<strong>ど</strong>的部分用法，以及<strong>の</strong>的部分用法。</p>
-<ul>
-<li><strong>こ</strong>用于较近时</li>
-<li><strong>そ</strong>距离稍远或距离听话人较近时</li>
-<li><strong>あ</strong>距离较远时</li>
-<li><strong>ど</strong>（三个以上）多个事物中不确定是哪一个时</li>
-</ul>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-list/">学习笔记列表</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-1st/">上一课</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/text-book-standard-3rd/">下一课</a></li>
-<li><a href="https://zxkjack123.github.io/Japanese/ko-so-a-do"><strong>こそあど</strong>系列词汇用法整理</a></li>
-</ul>
-]]></content>
-      
-        <categories>
-            
-            <category> Japanese </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Japanese </tag>
-            
-            <tag> 日语 </tag>
-            
-            <tag> 日本語 </tag>
-            
-            <tag> 课文 </tag>
-            
-            <tag> 初级上 </tag>
-            
-            <tag> 新标日 </tag>
-            
-            <tag> 第2课 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[日语时间表达整理]]></title>
       <url>/Japanese/time/</url>
       <content type="html"><![CDATA[<p>描述事物时，时间，地点，人物，事件是非常基本的要素。时间也表达是日常生活中重要的一部分。因此掌握时间的表达对语言的掌握是非常重要且必要的。日常生活涉及到时间的表达主要有：</p>
@@ -3749,11 +3749,11 @@ $ mbconvert meshtal14.h5m meshtal14.vtk
         
         <tags>
             
-            <tag> PyNE </tag>
-            
             <tag> Trelis </tag>
             
             <tag> DAGMC </tag>
+            
+            <tag> PyNE </tag>
             
             <tag> visit </tag>
             
@@ -3938,9 +3938,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
         
         <tags>
             
-            <tag> English </tag>
-            
             <tag> Japanese </tag>
+            
+            <tag> English </tag>
             
             <tag> volunteering </tag>
             
@@ -4762,9 +4762,9 @@ pyne_build
         
         <tags>
             
-            <tag> neutronics </tag>
-            
             <tag> PyNE </tag>
+            
+            <tag> neutronics </tag>
             
             <tag> developer </tag>
             
