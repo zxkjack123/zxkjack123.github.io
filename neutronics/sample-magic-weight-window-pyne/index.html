@@ -243,8 +243,8 @@
     <meta property="og:article:tag" content="PyNE"> <meta property="og:article:tag" content="MAGIC"> <meta property="og:article:tag" content="权窗"> 
 
     
-        <meta property="article:published_time" content="Sun Sep 16 2018 15:36:21 GMT-0500">
-        <meta property="article:modified_time" content="Sun Sep 16 2018 15:36:21 GMT-0500">
+        <meta property="article:published_time" content="Sun Sep 16 2018 15:40:54 GMT-0500">
+        <meta property="article:modified_time" content="Sun Sep 16 2018 15:40:54 GMT-0500">
     
 
     <!-- The Twitter Card protocol -->
@@ -266,8 +266,8 @@
     "@type": "BlogPosting",
     "mainEntityOfPage": "http://zxkjack123.github.io/neutronics/sample-magic-weight-window-pyne/index.html",
     "headline": "使用PyNE生成MAGIC权窗的例子",
-    "datePublished": "Sun Sep 16 2018 15:36:21 GMT-0500",
-    "dateModified": "Sun Sep 16 2018 15:36:21 GMT-0500",
+    "datePublished": "Sun Sep 16 2018 15:40:54 GMT-0500",
+    "dateModified": "Sun Sep 16 2018 15:40:54 GMT-0500",
     "author": {
         "@type": "Person",
         "name": "zxkjack123",
@@ -359,7 +359,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题描述"><span class="post-toc-number">2.</span> <span class="post-toc-text">例题描述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DAGMC-input文件准备"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">DAGMC input文件准备</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一次中子输运计算"><span class="post-toc-number">3.</span> <span class="post-toc-text">第一次中子输运计算</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#生成权窗"><span class="post-toc-number"></span> <span class="post-toc-text">生成权窗</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用权窗"><span class="post-toc-number"></span> <span class="post-toc-text">使用权窗</span></a>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例子描述"><span class="post-toc-number">2.</span> <span class="post-toc-text">例子描述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DAGMC-input文件准备"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">DAGMC input文件准备</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第一次中子输运计算"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">第一次中子输运计算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#生成权窗"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">生成权窗</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用权窗"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">使用权窗</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最终计算"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">最终计算</span></a></li></ol></li></ol>
     </ul>
     
 
@@ -505,7 +505,7 @@
     
         <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本篇文章使用例子来说明使用PyNE来进行MAGIC的权窗文件的流程。</p>
 <p>本流程需要提前安装PyNE (PyNE的安装参考<a href="https://zxkjack123.github.io/neutronics/pyne-developer-install/">这里</a>)</p>
-<h2 id="例题描述"><a href="#例题描述" class="headerlink" title="例题描述"></a>例题描述</h2><p>这里直接使用用于R2S计算停机剂量的例子。例题几何与材料描述参考<a href="https://zxkjack123.github.io/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/">这里</a>。</p>
+<h2 id="例子描述"><a href="#例子描述" class="headerlink" title="例子描述"></a>例子描述</h2><p>这里直接使用用于R2S计算停机剂量的例子。例题几何与材料描述参考<a href="https://zxkjack123.github.io/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/">这里</a>。</p>
 <h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><p>input文件由于仅用于迭代权窗，而不是为了计算精确的通量数据。因此与普通输入文件有几点不同：</p>
 <ol>
 <li>使用的mesh tally是为了生成权窗，网格voxel的尺寸不要超过材料的平均自由程(mean free path)；</li>
@@ -526,7 +526,7 @@ fmesh4:n geom=xyz origin= -5 -5 -5
          jmesh=5 jints=1
          kmesh=15 kints=2
          emesh 0.1 20
-</code></pre><h2 id="第一次中子输运计算"><a href="#第一次中子输运计算" class="headerlink" title="第一次中子输运计算"></a>第一次中子输运计算</h2><p>使用DAGMC进行输运计算时，需要通过<strong>i=</strong>来指定输入文件，通过<strong>g=</strong>来指定加载了材料的几何文件，详细运行指令可以参考<a href="https://svalinn.github.io/DAGMC/usersguide/uw2.html" target="_blank" rel="noopener">官方文档</a>。</p>
+</code></pre><h3 id="第一次中子输运计算"><a href="#第一次中子输运计算" class="headerlink" title="第一次中子输运计算"></a>第一次中子输运计算</h3><p>使用DAGMC进行输运计算时，需要通过<strong>i=</strong>来指定输入文件，通过<strong>g=</strong>来指定加载了材料的几何文件，详细运行指令可以参考<a href="https://svalinn.github.io/DAGMC/usersguide/uw2.html" target="_blank" rel="noopener">官方文档</a>。</p>
 <p>对于本例题，可以使用下面的方法运行本例子。<br>单线程运行：</p>
 <pre><code># 需要先保障系统能够找到正确的mcnp5.mpi，找不到的话需要给出完整路径
 mcnp5.mpi i=input g=geom.h5m
@@ -534,7 +534,7 @@ mcnp5.mpi i=input g=geom.h5m
 <pre><code>mpirun -np n mcnp5.mpi i=input g=geom.h5m
 </code></pre><p>备注：input文件和几何文件的名称长度都不能超过8个字符，可以使用<strong>ln -sf original_long_name.h5m geom.h5m</strong>把原文件链接到一个较短名字的文件后再运行。</p>
 <p>计算完成之后，我们便得到了一个<strong>meshtal</strong>文件。</p>
-<h1 id="生成权窗"><a href="#生成权窗" class="headerlink" title="生成权窗"></a>生成权窗</h1><p>MAGIC生成权窗的说明可以参考<a href="http://pyne.io/theorymanual/variance_reduction.html" target="_blank" rel="noopener">这里</a>。实际使用时，我们通过PyNE中的工具读取meshtal文件中的内容，生成MAGIC权窗，然后写入到文件中。下面是一个生成权窗的python脚本例子：</p>
+<h3 id="生成权窗"><a href="#生成权窗" class="headerlink" title="生成权窗"></a>生成权窗</h3><p>MAGIC生成权窗的说明可以参考<a href="http://pyne.io/theorymanual/variance_reduction.html" target="_blank" rel="noopener">这里</a>。实际使用时，我们通过PyNE中的工具读取meshtal文件中的内容，生成MAGIC权窗，然后写入到文件中。下面是一个生成权窗的python脚本例子：</p>
 <pre><code class="python">import sys
 from pyne import variancereduction as vr
 from pyne.mcnp import Meshtal, Wwinp
@@ -565,7 +565,7 @@ if __name__ == &quot;__main__&quot;:
 <pre><code class="bash">$ python magic.py meshtal
 </code></pre>
 <p>之后便生成了我们所需要的权窗文件<strong>wwinp-magic</strong>。</p>
-<h1 id="使用权窗"><a href="#使用权窗" class="headerlink" title="使用权窗"></a>使用权窗</h1><p>使用权窗时，使用权窗时，在输入文件中添加合适的WWP参数读取生成的权窗文件中的权窗数据即可。下面是第二轮计算的输入文件例子：</p>
+<h3 id="使用权窗"><a href="#使用权窗" class="headerlink" title="使用权窗"></a>使用权窗</h3><p>使用权窗时，使用权窗时，在输入文件中添加合适的WWP参数读取生成的权窗文件中的权窗数据即可。下面是第二轮计算的输入文件例子：</p>
 <pre><code>C sample input for MAGIC 2nd run
 C neutron source: point source, 14 MeV
 sdef pos=0 0 0  erg=14
@@ -580,8 +580,9 @@ fmesh4:n geom=xyz origin= -5 -5 -5
          jmesh=5 jints=1
          kmesh=15 kints=2
          emesh 0.1 20
-</code></pre><p><strong>备注</strong>： <strong>wwp</strong>和<strong>cut</strong>有变化。<br>使用权窗计算后，会有新一轮的结果。可以通过对比meshtal的变化发现，使用权窗后的结果误差更小(这里的例子规模太小，提升效果并不明显)。</p>
-<p>当迭代出满意的权窗后，就可以使用那个权窗进行真正的通量计算了。那个时候再根据实际情况使用恰当的cut卡，使用真正的tally卡，计算得到想要的结果。</p>
+</code></pre><p><strong>备注</strong>： <strong>wwp</strong>和<strong>cut</strong>有变化。</p>
+<p>使用权窗计算后，会有新一轮的结果。可以通过对比meshtal的变化发现，使用权窗后的结果误差更小(这里的例子规模太小，提升效果并不明显)。</p>
+<h3 id="最终计算"><a href="#最终计算" class="headerlink" title="最终计算"></a>最终计算</h3><p>当迭代出满意的权窗后，就可以使用那个权窗进行真正的通量计算了。那个时候再根据实际情况使用恰当的cut卡，使用真正的tally卡，计算得到想要的结果。</p>
 <p><strong>备注</strong>：在计算得到结果之后，还可以把几何图形及计算结果的网格数据进行可视化绘图。绘图方法可以参考<a href="https://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/">DAGMC数据绘图</a>。</p>
 
         
