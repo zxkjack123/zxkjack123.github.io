@@ -21,7 +21,6 @@ sdef pos=0 0 0  erg=14
 C 
 nps 1e4
 cut:n j 0.01 -0.5 -0.25 1
-C prdmp 1e5 1e6 0 10 0 
 C Tally card
 fmesh4:n geom=xyz origin= -5 -5 -5
          imesh=15 iints=2
@@ -4045,13 +4044,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/DAGMC/lib
             
             <tag> English </tag>
             
+            <tag> Japanese </tag>
+            
             <tag> volunteering </tag>
             
             <tag> tutor </tag>
             
             <tag> Chinese </tag>
-            
-            <tag> Japanese </tag>
             
         </tags>
         
@@ -4867,9 +4866,9 @@ pyne_build
         
         <tags>
             
-            <tag> neutronics </tag>
-            
             <tag> PyNE </tag>
+            
+            <tag> neutronics </tag>
             
             <tag> developer </tag>
             
