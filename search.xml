@@ -3,6 +3,62 @@
   
     
     <entry>
+      <title><![CDATA[Tricks to shave words off of your writing]]></title>
+      <url>/English/shave_words_off_writing/</url>
+      <content type="html"><![CDATA[<p>Writing in English is always harder than reading or listening for me. Sometimes, I need to use a very long complex stenense to express the meaning. Once I have wrote it, then I strugged to shave words off.</p>
+<p>Fortunatelly, I read a <a href="https://twitter.com/ilana_horn/status/1071776519834492928" target="_blank" rel="noopener">twitter</a> sharing tricks about it. So, I just copy it down here.</p>
+<ol>
+<li>Make things plural to omit articles. They can add up.<ul>
+<li>Ex: “The teacher needs to know …” –&gt; “Teachers need to know …”</li>
+</ul>
+</li>
+<li>Turn some prepositional phrases into adjectives. <ul>
+<li>Ex: “Schools in urban communities” –&gt; “Urban schools”</li>
+</ul>
+</li>
+<li>Some multi-word pharses can easily be truned into one word.<ul>
+<li>Ex: “Due to the fact that” –&gt; “because”</li>
+<li>Ex: “In order to” –&gt; “to”</li>
+</ul>
+</li>
+<li>If you are describing something with two adjectives, pick one, maybe a new one.<ul>
+<li>Ex: “Classrooms are blooming and buzzing” –&gt; “Classroom are hectic”</li>
+</ul>
+</li>
+<li>Get rid of passive voice.<ul>
+<li>Ex: “This study is focused on…” –&gt;  “This study focuses on”</li>
+</ul>
+</li>
+<li>Plain(er) language is your friend.<ul>
+<li>Ex: “Consistent with the theoretical perspective that learning is fundamentally situative…” –&gt; “Aligned with your view on the situative learning”</li>
+</ul>
+</li>
+<li>If a multi-word term is going to be repeated a lot, use an acronym. (And this is from somebody woho <em>laothes</em> acronyms! But they help with word count.) </li>
+<li>A common writing quirk: Writing a thick, dense sentence followed by “In other words,” with a lucid explanation. Get rid of the frist sentence and shtart with the second.</li>
+<li>Omit unnecessary intensifiers like “very” or “extremely”.</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> English </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> English </tag>
+            
+            <tag> academic </tag>
+            
+            <tag> writing </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Vim-复制内容到vim外]]></title>
       <url>/ubuntu/vim-copy-to-clipboard/</url>
       <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在笔记本电脑上使用linux系统，经常打开并编辑一些文本文件，我比较喜欢用vim。但有时候遇到要从文件中拷贝几个数据到文件外(比如excel, 或者google spreadsheets)的时候，我就遇到麻烦了。在vim里面用<strong>y</strong>拷贝的东西，没法粘贴到文件外。因此我每次需要拷贝数据的时候，都是换gedit来操作。直到今天，我由于需要从三个文件中拷贝一共十八个数据，忍不了了。</p>
