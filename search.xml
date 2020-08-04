@@ -1838,6 +1838,7 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <li>git:这个东西配合github，可以把其他各类代码放到github管理与同步，很方便。LaTeX文档(没错，论文也能)放上面。</li>
 <li>pycharm: 写python代码用的。最近都用vim在写python代码，基本不怎么用了。</li>
 <li>Nutstore: 这是一个国内开发的跨平台同步盘，很方便。</li>
+<li>VScode: 写代码很好用，需要安装python和C++插件。</li>
 </ul>
 <p>下面是几个常用的工具：</p>
 <ul>
