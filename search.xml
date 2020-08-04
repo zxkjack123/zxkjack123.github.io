@@ -1914,7 +1914,7 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <li>博客浏览数统计工具： LeanCloud</li>
 <li>博客操作手册：<a href="https://hexo.io/docs/commands.html">Commands</a></li>
 </ul>
-<h3 id="博客搭建步骤"><a href="#博客搭建步骤" class="headerlink" title="博客搭建步骤"></a>博客搭建步骤</h3><p><strong>注意</strong>:博客搭建流程需要sudo权限。</p>
+<h3 id="博客搭建步骤"><a href="#博客搭建步骤" class="headerlink" title="博客搭建步骤"></a>博客搭建步骤</h3><p><strong>注意</strong>:博客搭建流程需要sudo权限。推荐使用<a href="https://zealot.top/hexo%E5%BB%BA%E7%AB%99%E5%BF%83%E5%BE%97.html">Zealot的建站心得</a></p>
 <ol>
 <li><a href="https://websiteforstudents.com/install-the-latest-node-js-and-nmp-packages-on-ubuntu-16-04-18-04-lts/">安装Node.js和NPM工具</a></li>
 <li><a href="https://hexo.io/">安装Hexo</a></li>
