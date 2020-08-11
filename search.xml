@@ -2285,7 +2285,7 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
   </entry>
   <entry>
     <title>使用清华镜像源提升python相关软件安装速度</title>
-    <url>/2020/08/11/tsinghua-source/</url>
+    <url>/2020/08/11/programming/tsinghua-source/</url>
     <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在中国下载安装python相关的软件包，由于网络原因，速度非常慢，经常会因为超时或是无法连接而失败。本文记录了使用清华源提升安装速度的方法。<br>我在使用anaconda创建一个包含python3.8及其他一些包的环境时，一直出现软件下载过程失败的问题，比如下面的报错记录：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Downloading and Extracting Packages</span><br><span class="line">python-3.8.5         | 49.3 MB   | 4                                     |   1% </span><br><span class="line"></span><br><span class="line">CondaHTTPError: HTTP 000 CONNECTION FAILED <span class="keyword">for</span> url &lt;https://repo.anaconda.com/pkgs/main/linux-64/python-3.8.5-hcff3b4d_0.conda&gt;</span><br><span class="line">Elapsed: -</span><br><span class="line"></span><br><span class="line">An HTTP error occurred when trying to retrieve this URL.</span><br><span class="line">HTTP errors are often intermittent, and a simple retry will get you on your way.</span><br></pre></td></tr></table></figure>
 
@@ -2303,10 +2303,13 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 
 ]]></content>
       <categories>
-        <category>ubuntu</category>
+        <category>programming</category>
       </categories>
       <tags>
-        <tag>ubuntu, tsinghua, python, mirror</tag>
+        <tag>ubuntu</tag>
+        <tag>tsinghua</tag>
+        <tag>python</tag>
+        <tag>mirror</tag>
       </tags>
   </entry>
 </search>
