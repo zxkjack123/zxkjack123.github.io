@@ -199,7 +199,7 @@
     <div class="posts-collapse">
       <div class="collection-title">
         
-        <span class="collection-header">Nice! 53 posts in total. Keep on posting.</span>
+        <span class="collection-header">Nice! 54 posts in total. Keep on posting.</span>
       </div>
 
       
@@ -219,8 +219,8 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2019/05/16/Japanese/words_modifier/" itemprop="url">
-            <span itemprop="name">日语词汇的修饰方法</span>
+          <a class="post-title-link" href="/2019/05/16/neutronics/alara-install/" itemprop="url">
+            <span itemprop="name">安装ALARA</span>
           </a>
       </div>
 
@@ -319,8 +319,8 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2019/05/16/ubuntu/vim-copy-to-clipboard/" itemprop="url">
-            <span itemprop="name">Vim-复制内容到vim外</span>
+          <a class="post-title-link" href="/2019/05/16/English/expressing-myself/" itemprop="url">
+            <span itemprop="name">Expressing Myself</span>
           </a>
       </div>
 
@@ -339,8 +339,8 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2019/05/16/ubuntu/hexo_blog_setup/" itemprop="url">
-            <span itemprop="name">利用Github pages和Hexo搭建自己的博客</span>
+          <a class="post-title-link" href="/2019/05/16/ubuntu/vim-copy-to-clipboard/" itemprop="url">
+            <span itemprop="name">Vim-复制内容到vim外</span>
           </a>
       </div>
 
@@ -379,8 +379,8 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2019/05/16/ubuntu/github-page-rebuild/" itemprop="url">
-            <span itemprop="name">Rebuild github page bolg</span>
+          <a class="post-title-link" href="/2019/05/16/ubuntu/hexo_blog_setup/" itemprop="url">
+            <span itemprop="name">利用Github pages和Hexo搭建自己的博客</span>
           </a>
       </div>
 
@@ -399,8 +399,8 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2019/05/16/ubuntu/academic-tools/" itemprop="url">
-            <span itemprop="name">我的Ubuntu装机必备软件</span>
+          <a class="post-title-link" href="/2019/05/16/ubuntu/github-page-rebuild/" itemprop="url">
+            <span itemprop="name">Rebuild github page bolg</span>
           </a>
       </div>
 
@@ -482,7 +482,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -495,7 +495,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">127</span>
+        <span class="site-state-item-count">128</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -546,6 +546,92 @@
 
 
 
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"fd9b7WnMckKE9EHCnR8gNoWV-gzGzoHsz","app_key":"fd9b7WnMckKE9EHCnR8gNoWV-gzGzoHsz","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
 
 
       </div>

@@ -2283,4 +2283,30 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
         <tag>停机计量</tag>
       </tags>
   </entry>
+  <entry>
+    <title>使用清华镜像源提升python相关软件安装速度</title>
+    <url>/2020/08/11/tsinghua-source/</url>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在中国下载安装python相关的软件包，由于网络原因，速度非常慢，经常会因为超时或是无法连接而失败。本文记录了使用清华源提升安装速度的方法。<br>我在使用anaconda创建一个包含python3.8及其他一些包的环境时，一直出现软件下载过程失败的问题，比如下面的报错记录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Downloading and Extracting Packages</span><br><span class="line">python-3.8.5         | 49.3 MB   | 4                                     |   1% </span><br><span class="line"></span><br><span class="line">CondaHTTPError: HTTP 000 CONNECTION FAILED <span class="keyword">for</span> url &lt;https://repo.anaconda.com/pkgs/main/linux-64/python-3.8.5-hcff3b4d_0.conda&gt;</span><br><span class="line">Elapsed: -</span><br><span class="line"></span><br><span class="line">An HTTP error occurred when trying to retrieve this URL.</span><br><span class="line">HTTP errors are often intermittent, and a simple retry will get you on your way.</span><br></pre></td></tr></table></figure>
+
+<p>使用pip安装软件包时，也很慢，常出现如下面例子的网络问题：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install --force-reinstall numpy</span><br><span class="line">WARNING: Retrying (Retry(total=4, connect=None, <span class="built_in">read</span>=None, redirect=None, status=None)) after connection broken by <span class="string">&#x27;NewConnectionError(&#x27;</span>&lt;pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f4d65026670&gt;: Failed to establish a new connection: [Errno 101] Network is unreachable<span class="string">&#x27;)&#x27;</span>: /simple/numpy/</span><br></pre></td></tr></table></figure>
+
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>虽然错误提示中说，这个问题只是暂时的网络不好，重新试试就可以解决。但实际上经常试好多次都一直有这个问题。我在网络上按照这个错误提示搜索解决方法，找到的我认为最好的答案是，使用清华的镜像源代替默认的源，从中国的镜像源下载的速度的确要快很多。</p>
+<h4 id="anaconda使用清华源"><a href="#anaconda使用清华源" class="headerlink" title="anaconda使用清华源"></a>anaconda使用清华源</h4><p>清华镜像源提供的<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">anaconda镜像使用帮助</a>提供了anaconda下载和anaconda仓库镜像的使用知道。使用清华anaconda镜像仓库的方法，是通过修改anaconda的.condarc文件实现，参考：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">channels:</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line">channel_alias: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda</span><br><span class="line">default_channels:</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;r</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;pro</span><br><span class="line">  - https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;msys2</span><br><span class="line">custom_channels:</span><br><span class="line">  conda-forge: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  msys2: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  bioconda: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  menpo: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  pytorch: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br><span class="line">  simpleitk: https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;cloud</span><br></pre></td></tr></table></figure>
+<p>修改该文件后，可以运行<code>conda clean -i</code>清除索引缓存，保证用的是镜像站提供的索引。</p>
+<h4 id="pip使用清华源"><a href="#pip使用清华源" class="headerlink" title="pip使用清华源"></a>pip使用清华源</h4><p>安装python包时，还经常使用pip，网速同样很慢。<a href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">pypi 镜像使用帮助</a>给出了解决方案。<br>临时安装一个包时，可以使用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple some-package</span><br></pre></td></tr></table></figure>
+<p>将清华镜像源设为默认：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install pip -U</span><br><span class="line">pip config set global.index-url https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ubuntu</category>
+      </categories>
+      <tags>
+        <tag>ubuntu, tsinghua, python, mirror</tag>
+      </tags>
+  </entry>
 </search>
