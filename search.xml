@@ -2301,6 +2301,8 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <p>将清华镜像源设为默认：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install pip -U</span><br><span class="line">pip config set global.index-url https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br></pre></td></tr></table></figure>
 
+<h4 id="网络超时问题缓解策略"><a href="#网络超时问题缓解策略" class="headerlink" title="网络超时问题缓解策略"></a>网络超时问题缓解策略</h4><p>对于网络超时问题,可以通过<code>conda config --show</code>来查看当前网络连接时间限制，然后使用<code>conda config --set</code>来增大这个限制，比如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">conda config --set remote_connect_timeout_secs 90</span><br><span class="line">conda config --set remote_read_timeout_secs 600</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>programming</category>
