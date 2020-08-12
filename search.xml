@@ -1279,9 +1279,9 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install hdf5-dev</span><br></pre></td></tr></table></figure>
 
 <p>Install MOAB5.1 as described <a href="https://zxkjack123.github.io/neutronics/moab-install/">here</a>.</p>
-<h3 id="安装MPI"><a href="#安装MPI" class="headerlink" title="安装MPI"></a>安装MPI</h3><p>电脑如果还没有安装MPI的话，推荐安装openmpi:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install openmpi-bin libopenmpi-dev</span><br></pre></td></tr></table></figure>
-<p><strong>NOTE</strong>:在服务器上测试发现，OpenMPI 4.0.2和OpenMPI 3.1.4和当前版本的并行DAGMC不兼容，可以编译成功，但运行时会出现Segmentation fault。因此，在服务器上推荐使用MPICH (3.3.1)。</p>
+<h3 id="安装MPI"><a href="#安装MPI" class="headerlink" title="安装MPI"></a>安装MPI</h3><p>电脑如果还没有安装MPI的话，推荐安装mpich:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install mpich libmpich-dev</span><br></pre></td></tr></table></figure>
+<p><strong>NOTE</strong>:在服务器及台式机上测试发现，OpenMPI 4.0.2, 3.1.4, 2.1.1和当前版本的并行DAGMC不兼容，可以编译成功，但运行时会出现Segmentation fault。因此，在推荐使用MPICH (3.3.1)。</p>
 <h2 id="安装DAGMC"><a href="#安装DAGMC" class="headerlink" title="安装DAGMC"></a>安装DAGMC</h2><p>完成HDF5和MOAB5.1的安装后，我们可以安装DAGMC了。</p>
 <p>假设我们要把DAGMC安装在$HOME/opt/DAGMC文件夹下，可以按照下面的步骤进行。</p>
 <h3 id="获取DAGMC源代码"><a href="#获取DAGMC源代码" class="headerlink" title="获取DAGMC源代码"></a>获取DAGMC源代码</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/opt</span><br><span class="line">mkdir DAGMC</span><br><span class="line"><span class="built_in">cd</span> DAGMC</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/svalinn/DAGMC</span><br><span class="line"><span class="comment"># 此处会在DAGMC文件夹下再生成一个DAGMC文件夹-&gt; DAGMC/DAGMC</span></span><br><span class="line"><span class="built_in">cd</span> DAGMC</span><br><span class="line">git checkout develop</span><br></pre></td></tr></table></figure>
