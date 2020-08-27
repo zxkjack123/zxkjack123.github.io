@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://zxkjack123.github.io/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/test_case1.png">
 <meta property="og:image" content="http://zxkjack123.github.io/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/trelis_geom_test_case1.png">
 <meta property="article:published_time" content="2019-05-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-04T13:54:30.000Z">
+<meta property="article:modified_time" content="2020-08-27T07:43:23.000Z">
 <meta property="article:author" content="zxkjack123">
 <meta property="article:tag" content="PyNE">
 <meta property="article:tag" content="DAGMC">
@@ -239,7 +239,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-04 21:54:30" itemprop="dateModified" datetime="2020-08-04T21:54:30+08:00">2020-08-04</time>
+                <time title="Modified: 2020-08-27 15:43:23" itemprop="dateModified" datetime="2020-08-27T15:43:23+08:00">2020-08-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -340,10 +340,10 @@
 
 <p>备注：制作材料的时候会调用PyNE，需要保证此时系统<strong>LD_LIBRARY_PATH</strong>中的MOAB是4.9.1版本的。</p>
 <h3 id="整合几何与材料"><a href="#整合几何与材料" class="headerlink" title="整合几何与材料"></a>整合几何与材料</h3><p>按照UWUW流程制作材料，使用UWUW_preprocessor：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;</span><br></pre></td></tr></table></figure>
 
 <p>假设我们制作了材料库并存放在”material_lib1.h5”中，我们接下来就可以执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ uwuw_preproc geometry1.h5m -v -l material_lib1.h5</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwuw_preproc geometry1.h5m -v -l material_lib1.h5</span><br></pre></td></tr></table></figure>
 
 <h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><p>DAGMC的input文件中需要给定普通MCNP中除了栅元卡和曲面卡以及材料卡的其他部分，包括但不限于：</p>
 <ol>
@@ -392,7 +392,7 @@
 
 <h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><p><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</p>
 <p>当我们修改好上面两个文件后，就可以使用r2s.py生成ALARA计算需要的文件了：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ r2s.py step1</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r2s.py step1</span><br></pre></td></tr></table></figure>
 
 
 <h3 id="材料数据库准备"><a href="#材料数据库准备" class="headerlink" title="材料数据库准备"></a>材料数据库准备</h3><p><strong>ALARA输入文件</strong>中有三行是<strong>材料数据库</strong>相关的信息。</p>
@@ -402,19 +402,19 @@
 <li>data_library alaralib truncated_fendl2bin （ALARA应该配备fendl3bin)但是并没有，ALARA安装文件中的sample/datam文件夹下只有truncated_fendl2bin数据库。我们可以把这个数据库相关的文件拷贝到工作文件夹。</li>
 </ol>
 <p>当材料定义是针对核素定义了的化，普通的<strong>elelib.std</strong>就没办法使用了，会出现错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">310: Could not find element &lt;string&gt; in element library.</span><br><span class="line"></span><br><span class="line">The element string was not found in the element library. This could be due to an error in the material library, incorrect user input, or an omission in the element library.</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">这时我们需要使用工具**elelib_to_nuclib.py**来将元素扩展成核素数据。这个工具是一个python脚本，调用pyne数据模块扩展元素数据。工具的位置在ALARA源文件的tools文件夹下，使用方法：</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">$ cd r2s_run&#x2F;data</span><br><span class="line">$ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">310: Could not find element &lt;string&gt; in element library.</span><br><span class="line"></span><br><span class="line">The element string was not found in the element library. This could be due to an error in the material library, incorrect user input, or an omission in the element library.</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">这时我们需要使用工具**elelib_to_nuclib.py**来将元素扩展成核素数据。这个工具是一个python脚本，调用pyne数据模块扩展元素数据。工具的位置在ALARA源文件的tools文件夹下，使用方法：</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">cd r2s_run&#x2F;data</span><br><span class="line">python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib</span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="alara计算"><a href="#alara计算" class="headerlink" title="alara计算"></a>alara计算</h3><p>当<strong>step1</strong>完成后，程序会给出运行alara的提示，按照提示运行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ alara alara_inp &gt; output.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alara alara_inp &gt; output.txt</span><br></pre></td></tr></table></figure>
 <p>等待alara运行完成，会生成几个文件：</p>
 <ol>
 <li>output.txt: ALARA输出文件，里面有活化后材料的核素组成以及光子发射率数据</li>
 <li>phtn_src: ALARA输出文件，里面有详细的各个各个材料各个核素缠身的各个能群的光子数据</li>
 </ol>
 <h3 id="r2s-step2"><a href="#r2s-step2" class="headerlink" title="r2s step2"></a>r2s step2</h3><p>ALARA计算完成后，运行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ r2s.py step2</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r2s.py step2</span><br></pre></td></tr></table></figure>
 <p>执行完成后，我们可以看到工作文件夹中多了几个文件：</p>
 <ol>
 <li>e_bounds:光子能群结构。从低能到高能，单位为eV。最低能群能量下限为0.</li>
@@ -437,9 +437,9 @@
 </ol>
 <p>我们还需要修改栅元的重要性，因为中子输运时的文件里面的重要性是默认为中子的重要性，没有光子的重要性。但是这个重要性信息是写在h5m文件里面的，没法直接修改。</p>
 <p>我们需要先运行一次这个文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mcnp5.mpi i=input g=geom.h5m</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mcnp5.mpi i=input g=geom.h5m</span><br></pre></td></tr></table></figure>
 <p>现在这个运行肯定会出现错误，说粒子产生子重要性为0的区域。但是同时这个过程会生成一个可编辑的<strong>lcad</strong>文件，我们可以修改这个<strong>lcad</strong>文件，在重要性部分添加上<strong>imp:p=1</strong>/<strong>imp:p=0</strong>，将这个文件重命名为<strong>lcad_m</strong>，删掉过程文件<strong>fcad, outp, runtpe</strong>后再次运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mcnp5.mpi i=input g=geom.h5m l=lcad_m</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mcnp5.mpi i=input g=geom.h5m l=lcad_m</span><br></pre></td></tr></table></figure>
 <p>之后就得到结果，至此停机剂量的计算完成。</p>
 <p><strong>备注</strong>：在计算得到结果之后，还可以把几何图形及计算结果的网格数据进行可视化绘图。绘图方法可以参考<a href="https://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/">DAGMC数据绘图</a>。</p>
 

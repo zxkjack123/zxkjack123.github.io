@@ -975,12 +975,12 @@
 </ul>
 <p>While, maybe the better way to solve the problem is to ask experts to do install anything you want for me. But, I can’t find out a person with enough knowledge in our research group to do that. So, I am going to build a GCC on my own without root permission.</p>
 <h2 id="Setup-GSRC"><a href="#Setup-GSRC" class="headerlink" title="Setup GSRC"></a>Setup GSRC</h2><p>I way I choose to install GCC is use <a href="http://www.gnu.org/software/gsrc/">GSRC</a> (GNU Source Release Collection) to install it.<br><strong>Note</strong>: Do <strong>not</strong> download GSRC package from <a href="http://ftp.gnu.org/gnu/gsrc/">ftp</a>, <strong>use bzr</strong> to download it.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bzr checkout bzr://bzr.savannah.gnu.org/gsrc/trunk/ gsrc</span><br><span class="line">       <span class="comment"># (use &quot;bzr checkout --lightweight&quot; to download the latest revision only)</span></span><br><span class="line">       <span class="comment"># there isn&#x27;t a bzr on the sever, so I download the file from https://ftp.gnu.org/gnu/gsrc/ and scp the file to the server and then extract</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cd</span> gsrc/</span><br><span class="line">$ ./bootstrap                       <span class="comment"># to create the configure script</span></span><br><span class="line">$ ./configure --prefix=<span class="variable">$HOME</span>/opt/GNU    <span class="comment"># --prefix is directory to install the packages</span></span><br><span class="line">                                        <span class="comment"># Pick your --prefix by your wishes.</span></span><br><span class="line">$ . ./setup.sh                      <span class="comment"># This just sets some ENV variables and appends to PATH</span></span><br><span class="line">                                        <span class="comment"># and other variables to allow GSRC to work seamlessly.</span></span><br><span class="line">                                            <span class="comment"># Put this line in your .bashrc.</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bzr checkout bzr://bzr.savannah.gnu.org/gsrc/trunk/ gsrc</span><br><span class="line">     <span class="comment"># (use &quot;bzr checkout --lightweight&quot; to download the latest revision only)</span></span><br><span class="line">     <span class="comment"># there isn&#x27;t a bzr on the sever, so I download the file from https://ftp.gnu.org/gnu/gsrc/ and scp the file to the server and then extract</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> gsrc/</span><br><span class="line">./bootstrap                       <span class="comment"># to create the configure script</span></span><br><span class="line">./configure --prefix=<span class="variable">$HOME</span>/opt/GNU    <span class="comment"># --prefix is directory to install the packages</span></span><br><span class="line">                                      <span class="comment"># Pick your --prefix by your wishes.</span></span><br><span class="line">. ./setup.sh                      <span class="comment"># This just sets some ENV variables and appends to PATH</span></span><br><span class="line">                                      <span class="comment"># and other variables to allow GSRC to work seamlessly.</span></span><br><span class="line">                                          <span class="comment"># Put this line in your .bashrc.</span></span><br></pre></td></tr></table></figure>
 <h3 id="Set-GSRC-environment"><a href="#Set-GSRC-environment" class="headerlink" title="Set GSRC environment"></a>Set GSRC environment</h3><p>Open ~/.bashrc, add the following line in the file:</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> <span class="variable">$PATH_TO_GSRC</span>/setup.sh</span><br></pre></td></tr></table></figure>
 
 <h2 id="Install-dependencies"><a href="#Install-dependencies" class="headerlink" title="Install dependencies"></a>Install dependencies</h2><h3 id="Update-ISL"><a href="#Update-ISL" class="headerlink" title="Update ISL"></a>Update ISL</h3><p>ISL is a required by GCC, but the version of the prebuild one is too lower thant 0.15. So, install ISL.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ make -C pkg/other/isl</span><br><span class="line">$ make -C pkg/other/isl install</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make -C pkg/other/isl</span><br><span class="line">make -C pkg/other/isl install</span><br></pre></td></tr></table></figure>
 
 <h2 id="Install-GCC"><a href="#Install-GCC" class="headerlink" title="Install GCC"></a>Install GCC</h2><p>Now, I want to install GCC-7.4.0 on the sever.</p>
 <h3 id="Modify-config-mk"><a href="#Modify-config-mk" class="headerlink" title="Modify config.mk"></a>Modify config.mk</h3><p>Before install GCC, there are some configure options should be changed. Open the gsrc/pkg/gnu/gcc7/config.mk, edit the following items:</p>
@@ -989,19 +989,19 @@
 <li><code>--disable-multilib</code></li>
 </ul>
 <h3 id="make"><a href="#make" class="headerlink" title="make"></a>make</h3><p>Run the following commands:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># $ cd PATH_TO_GSRC</span></span><br><span class="line">$ make -C pkg/gnu/gcc7</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cd PATH_TO_GSRC</span></span><br><span class="line">make -C pkg/gnu/gcc7</span><br></pre></td></tr></table></figure>
 <h4 id="Catch-problems-and-fix"><a href="#Catch-problems-and-fix" class="headerlink" title="Catch problems and fix"></a>Catch problems and fix</h4><p>When you running perform <code>make</code>, there may be some error like this:</p>
 <ol>
 <li><code>...suspect...32...multilib..., if 64... rerun with --disable-multilib</code>. Just RERUN the same make process.</li>
-<li><code>...vec.h:295:7: error: ‘GATHER_STATISTICS’ was not declared in this scope</code>.<br>Form <a href="https://stackoverflow.com/questions/21685255/how-can-i-understand-these-dreadful-errors-when-building-gcc-4-8-2/24377214#24377214">here</a> I know the solution is unset a bunch of C compiler flags: <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">unset</span> LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE</span><br></pre></td></tr></table></figure>
-And run the <code>make</code> again:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ make -C pkg/gnu/gcc7</span><br></pre></td></tr></table></figure>
+<li><code>...vec.h:295:7: error: ‘GATHER_STATISTICS’ was not declared in this scope</code>.<br>Form <a href="https://stackoverflow.com/questions/21685255/how-can-i-understand-these-dreadful-errors-when-building-gcc-4-8-2/24377214#24377214">here</a> I know the solution is unset a bunch of C compiler flags: <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">unset</span> LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE</span><br></pre></td></tr></table></figure>
+And run the <code>make</code> again:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make -C pkg/gnu/gcc7</span><br></pre></td></tr></table></figure>
 
 </li>
 </ol>
-<h3 id="make-install"><a href="#make-install" class="headerlink" title="make install"></a>make install</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ make -C pkg/gnu/gcc7 check</span><br><span class="line">$ make -C pkg/gnu/gcc7 install</span><br></pre></td></tr></table></figure>
+<h3 id="make-install"><a href="#make-install" class="headerlink" title="make install"></a>make install</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make -C pkg/gnu/gcc7 check</span><br><span class="line">make -C pkg/gnu/gcc7 install</span><br></pre></td></tr></table></figure>
 
 <h2 id="Post-install-env-set"><a href="#Post-install-env-set" class="headerlink" title="Post-install, env set"></a>Post-install, env set</h2><p>The GCC binaries I installed have the suffix of <code>-7</code>. Link them to the name without <code>-7</code>. Acutally, I can modify the <code>pkg/gnu/gcc7/config.mk</code> and change the <code>--program-suffix</code> to none to avoid this suffix.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> <span class="variable">$HOME</span>/opt/GNU/bin</span><br><span class="line">$ ln -sf gcc-7 gcc</span><br><span class="line">$ ln -sf g++-7 g++</span><br><span class="line">$ ln -sf gfortran-7 gfortran</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/opt/GNU/bin</span><br><span class="line">ln -sf gcc-7 gcc</span><br><span class="line">ln -sf g++-7 g++</span><br><span class="line">ln -sf gfortran-7 gfortran</span><br></pre></td></tr></table></figure>
 <p>Done!</p>
 ]]></content>
       <categories>
@@ -1059,14 +1059,14 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <p>ALARA也是一款能够计算活化的软件。经常和PyNE, DAGMC配合的软件就是这款ALARA。</p>
 <p>ALARA是开源软件，可以在其<a href="https://github.com/svalinn/ALARA">Github主页</a>获取,在这里参考<a href="http://alara.engr.wisc.edu/users.guide.html/">使用说明</a>。</p>
 <h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>假设我们想把ALARA安装在<code>$HOME/opt/ALARA/</code>文件夹下，我们可以参照下面步骤进行。</p>
-<h3 id="配置安装"><a href="#配置安装" class="headerlink" title="配置安装"></a>配置安装</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> opt</span><br><span class="line">$ mkdir ALARA</span><br><span class="line">$ <span class="built_in">cd</span> ALARA</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/svalinn/ALARA</span><br><span class="line">$ <span class="built_in">cd</span> ALARA</span><br><span class="line">$ autoreconf -<span class="keyword">fi</span></span><br><span class="line"><span class="comment"># 建立bld文件夹用来存放build过程文件</span></span><br><span class="line">$ <span class="built_in">cd</span> ..</span><br><span class="line">$ mkdir bld</span><br><span class="line">$ <span class="built_in">cd</span> bld</span><br><span class="line">$ ../ALARA/configure --prefix=<span class="variable">$HOME</span>/opt/ALARA</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure>
+<h3 id="配置安装"><a href="#配置安装" class="headerlink" title="配置安装"></a>配置安装</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> opt</span><br><span class="line">mkdir ALARA</span><br><span class="line"><span class="built_in">cd</span> ALARA</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/svalinn/ALARA</span><br><span class="line"><span class="built_in">cd</span> ALARA</span><br><span class="line">autoreconf -<span class="keyword">fi</span></span><br><span class="line"><span class="comment"># 建立bld文件夹用来存放build过程文件</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">mkdir bld</span><br><span class="line"><span class="built_in">cd</span> bld</span><br><span class="line">../ALARA/configure --prefix=<span class="variable">$HOME</span>/opt/ALARA</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
 
 <h3 id="路径配置"><a href="#路径配置" class="headerlink" title="路径配置"></a>路径配置</h3><p>回到<code>$HOME/opt/ALARA</code>文件夹下，我们可以看到生成了<code>bin</code>,<code>data</code>,<code>doc</code>和<code>sample</code>文件夹。我们已经安装成功。不过要想轻松的使用它，必须要把它的可执行文件路径加到<code>~/.bashrc</code>中：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/opt/ALARA/bin</span><br></pre></td></tr></table></figure>
 <p>保存<code>~/.bashrc</code>并在terminal上运行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
 <p>然后系统就可以找到alara了。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">which</span> alara</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">which</span> alara</span><br></pre></td></tr></table></figure>
 
 <h2 id="小测试"><a href="#小测试" class="headerlink" title="小测试"></a>小测试</h2><p>未完待续</p>
 ]]></content>
@@ -1244,7 +1244,7 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pyne.mesh <span class="keyword">import</span> MeshTally</span><br><span class="line"><span class="keyword">from</span> pyne <span class="keyword">import</span> openmc_utils</span><br><span class="line">tags=&#123;<span class="number">4</span>:[<span class="string">&quot;n_result&quot;</span>, <span class="string">&quot;n_rel_error&quot;</span>, <span class="string">&quot;n_total_result&quot;</span>, <span class="string">&quot;n_total_rel_error&quot;</span>]&#125;</span><br><span class="line">sp = <span class="string">&quot;statepoint.xx.h5&quot;</span></span><br><span class="line">meshtally = openmc_utils.create_meshtally(sp, tally_id=<span class="number">4</span>, mesh_id=<span class="number">1</span>, tag_names=tags[<span class="number">4</span>]&#125;</span><br><span class="line">meshtally.write_hdf5(<span class="string">&quot;meshtally4.h5m&quot;</span>, write_mats=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
 
 <h3 id="将h5m文件转化为vtk文件"><a href="#将h5m文件转化为vtk文件" class="headerlink" title="将h5m文件转化为vtk文件"></a>将h5m文件转化为vtk文件</h3><p>使用下面的命令将h5m文件转化为vtk文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mbconvert meshtally4.h5m meshtally4.vtk</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mbconvert meshtally4.h5m meshtally4.vtk</span><br></pre></td></tr></table></figure>
 
 <h2 id="visit绘图"><a href="#visit绘图" class="headerlink" title="visit绘图"></a>visit绘图</h2><h3 id="单独绘制几何"><a href="#单独绘制几何" class="headerlink" title="单独绘制几何"></a>单独绘制几何</h3><p>运行visit -&gt; File -&gt; Open file -&gt; 选择几何vtk文件 -&gt; 在窗口找到Plots子窗口 -&gt; 点击Add下单菜单 -&gt; 选择mesh -&gt; 选择mesh -&gt; 窗口出现一个对象 -&gt; 点击Plots子窗口Draw按钮 </p>
 <p>按照上述流程几何显示出几何文件的网格结构图。</p>
@@ -1587,14 +1587,14 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <p>不过如果我们只使用固定的材料库的话，每次都要特别制定材料数据库就太麻烦了。可以通过把材料数据库的路径添加到系统变量<code>OPENMC_CROSS_SECTIONS</code>中去。</p>
 <h3 id="获取数据库"><a href="#获取数据库" class="headerlink" title="获取数据库"></a>获取数据库</h3><p><a href="http://openmc.readthedocs.io/en/stable/usersguide/cross_sections.html">这里</a>介绍了获取不同数据库的方法。这里我为了简便，使用最简单的NNDC的数据库。根据文档，我需要使用openmc-get-nndc-data这个脚本。</p>
 <p>因为这个数据库完全是为OpenMC计算任务而存在，所以我把这个数据库放在<code>$HOME/opt/OpenMC/NNDC</code>下。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> <span class="variable">$HOME</span>/opt/OpenMC</span><br><span class="line">$ mkdir NNDC</span><br><span class="line">$ <span class="built_in">cd</span> NNDC</span><br><span class="line">$ openmc-get-nndc-data</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/opt/OpenMC</span><br><span class="line">mkdir NNDC</span><br><span class="line"><span class="built_in">cd</span> NNDC</span><br><span class="line">openmc-get-nndc-data</span><br></pre></td></tr></table></figure>
 <h3 id="添加路径"><a href="#添加路径" class="headerlink" title="添加路径"></a>添加路径</h3><p>然后把这个<code>OPENMC_CROSS_SECTIONS</code>的路径设为这个并添加到<code>$HOME/.bashrc</code>中去。</p>
 <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>为了简单，这里打算使用一个半径为10里面的球，这个球材质为密度为1.0的水，球外侧区域不考虑。</p>
 <p>中子源就设为在原点的各项同性的1MeV的点源。 </p>
 <h2 id="Python-API文件"><a href="#Python-API文件" class="headerlink" title="Python API文件"></a>Python API文件</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># input.py</span></span><br><span class="line"><span class="keyword">import</span> openmc</span><br><span class="line"></span><br><span class="line"><span class="comment"># materials</span></span><br><span class="line">materials = openmc.Materials()</span><br><span class="line">water = openmc.Material()</span><br><span class="line">water.add_element(<span class="string">&#x27;H&#x27;</span>, <span class="number">0.667</span>, <span class="string">&#x27;ao&#x27;</span>)</span><br><span class="line">water.add_element(<span class="string">&#x27;O&#x27;</span>, <span class="number">0.334</span>, percent_type=<span class="string">&#x27;ao&#x27;</span>)</span><br><span class="line">water.set_density(<span class="string">&#x27;g/cm3&#x27;</span>, <span class="number">1.0</span>)</span><br><span class="line">materials.append(water)</span><br><span class="line">materials.export_to_xml()</span><br><span class="line"></span><br><span class="line"><span class="comment"># geometry - surfaces</span></span><br><span class="line">sphere = openmc.Sphere(r=<span class="number">10.0</span>)</span><br><span class="line">sphere.boundary_type = <span class="string">&#x27;vacuum&#x27;</span></span><br><span class="line">inside_sphere = -sphere</span><br><span class="line">outside_sphere = +sphere</span><br><span class="line"><span class="comment"># geometry cells</span></span><br><span class="line">universe = openmc.Universe()</span><br><span class="line">moderator = openmc.Cell(fill=water, region=inside_sphere)</span><br><span class="line">universe.add_cell(moderator)</span><br><span class="line">geometry = openmc.Geometry(universe)</span><br><span class="line">geometry.export_to_xml(path=<span class="string">&#x27;geometry.xml&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># run mode</span></span><br><span class="line">settings = openmc.Settings()</span><br><span class="line">settings.run_mode = <span class="string">&#x27;fixed source&#x27;</span></span><br><span class="line">settings.particles = <span class="number">10000</span></span><br><span class="line">settings.batches = <span class="number">10</span></span><br><span class="line"><span class="comment"># output</span></span><br><span class="line">settings.output = &#123;<span class="string">&#x27;tallies&#x27;</span>:<span class="literal">True</span>, <span class="string">&#x27;summary&#x27;</span>:<span class="literal">True</span>&#125;</span><br><span class="line"><span class="comment"># source distribution</span></span><br><span class="line">source = openmc.Source()</span><br><span class="line">source.space = openmc.stats.Point(xyz=(<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>))</span><br><span class="line">source.angle = openmc.stats.Isotropic()</span><br><span class="line">source.energy = openmc.stats.Discrete([<span class="number">10.0e6</span>], [<span class="number">1.0</span>])</span><br><span class="line">settings.source = source</span><br><span class="line">settings.export_to_xml(path=<span class="string">&#x27;settings.xml&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># tallies</span></span><br><span class="line">cell_filter = openmc.CellFilter([moderator])</span><br><span class="line">tally1 = openmc.Tally()</span><br><span class="line">tally1.scores = [<span class="string">&#x27;flux&#x27;</span>]</span><br><span class="line">tally1.filters.append(cell_filter)</span><br><span class="line">tallies = openmc.Tallies()</span><br><span class="line">tallies.append(tally1)</span><br><span class="line">tallies.export_to_xml()</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot</span></span><br><span class="line">plot1 = openmc.Plot()</span><br><span class="line">plot1.basis = <span class="string">&#x27;xz&#x27;</span></span><br><span class="line">plot1.origin = (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">plot1.width = (<span class="number">20</span>, <span class="number">20</span>)</span><br><span class="line">plot1.pixels = (<span class="number">400</span>, <span class="number">400</span>)</span><br><span class="line">plot1.color_by = <span class="string">&#x27;material&#x27;</span></span><br><span class="line">plots=openmc.Plots()</span><br><span class="line">plots.append(plot1)</span><br><span class="line">plots.export_to_xml()</span><br><span class="line"></span><br><span class="line"><span class="comment"># run</span></span><br><span class="line">openmc.run()</span><br><span class="line">openmc.plot_geometry(output=<span class="literal">True</span>, openmc_exec=<span class="string">&#x27;openmc&#x27;</span>, cwd=<span class="string">&#x27;.&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 <h2 id="生成的几何图像"><a href="#生成的几何图像" class="headerlink" title="生成的几何图像"></a>生成的几何图像</h2><p>上面的脚本会生成一个叫做plot_10000.ppm，用convert命令转化为png格式。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ convert plot_10000.ppm plot_10000.png</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">convert plot_10000.ppm plot_10000.png</span><br></pre></td></tr></table></figure>
 <p>可以看到生成的几何图像的样子：<br><img src="https://i.imgur.com/xMIVxAh.png" alt="图像"></p>
 ]]></content>
       <categories>
@@ -1622,7 +1622,7 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>PyNE在开发过程中，功能性函数都配置了unit test进入pyne/tests文件夹下：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./travis-run-tests.sh python2</span><br></pre></td></tr></table></figure>
 
-<h3 id="添加快捷安装方式"><a href="#添加快捷安装方式" class="headerlink" title="添加快捷安装方式"></a>添加快捷安装方式</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;alias pyne_build=&#x27; python setup.py install --user -- --moab <span class="variable">$HOME</span>/opt/MOAB5.1 --dagmc <span class="variable">$HOME</span>/opt/DAGMC&#x27;&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;alias pyne_clean=&#x27;rm -rf <span class="variable">$HOME</span>/opt/pyne/build/ <span class="variable">$HOME</span>/.local/lib/python2.7/site-packages/pyne* <span class="variable">$HOME</span>/.local/lib/libpyne.so <span class="variable">$HOME</span>/opt/pyne/build_nuc_data <span class="variable">$HOME</span>/opt/pyne/scripts/build_nuc_data&#x27;&quot;</span></span><br><span class="line"><span class="comment"># source ~/.bashrc</span></span><br></pre></td></tr></table></figure>
+<h3 id="添加快捷安装方式"><a href="#添加快捷安装方式" class="headerlink" title="添加快捷安装方式"></a>添加快捷安装方式</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;alias pyne_build=&#x27; python setup.py install --user -- --moab <span class="variable">$HOME</span>/opt/MOAB5.1 --dagmc <span class="variable">$HOME</span>/opt/DAGMC&#x27;&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;alias pyne_clean=&#x27;rm -rf <span class="variable">$HOME</span>/opt/pyne/build/ <span class="variable">$HOME</span>/.local/lib/python2.7/site-packages/pyne* <span class="variable">$HOME</span>/.local/lib/libpyne.so <span class="variable">$HOME</span>/opt/pyne/build_nuc_data <span class="variable">$HOME</span>/opt/pyne/scripts/build_nuc_data&#x27;&quot;</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
 <p>之后需要重新编译PyNE的时候，只需要执行下面的命令即可：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pyne_clean</span><br><span class="line">pyne_build</span><br></pre></td></tr></table></figure>
 
@@ -1662,12 +1662,12 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### Build materials</span><br><span class="line"></span><br><span class="line">Write a python script to build materials using PyNE, reference: [define PyNE materials](https:&#x2F;&#x2F;zxkjack123.github.io&#x2F;neutronics&#x2F;make-pyne-material-lib&#x2F;)。</span><br><span class="line"></span><br><span class="line">下面是制作本例子中的&quot;Water&quot;和&quot;Steel&quot;用到的python脚本文件：</span><br></pre></td></tr></table></figure>
 <p>#!/usr/bin/python<br>#<br>from pyne.material import Material,MaterialLibrary<br>print “Welcome!”<br>mat_lib=MaterialLibrary()<br>#<br>mat2 = Material({‘Fe’:0.655,’Cr’:0.170,’Ni’:0.120,’Mo’: 0.025,’Mn’: 0.02, ‘Si’:.01},density=7.92)<br>mat2=mat2.expand_elements()<br>#</p>
 <h1 id="define-a-simple-water-since-O-18-not-in-mcnp-xs-libs"><a href="#define-a-simple-water-since-O-18-not-in-mcnp-xs-libs" class="headerlink" title="define a simple water since O-18 not in mcnp xs libs"></a>define a simple water since O-18 not in mcnp xs libs</h1><p>watervec={10010:2,80160:1} # simple water<br>water = Material()<br>water.density = 1.0<br>water.from_atom_frac(watervec)<br>#<br>mat_lib[“Steel”]=mat2<br>mat_lib[“Water”]=water<br>#<br>mat_lib.write_hdf5(“test_material_lib.h5”)<br>#<br>print “All done!”</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">备注：制作材料的时候会调用PyNE，需要保证此时系统**LD_LIBRARY_PATH**中的MOAB是4.9.1版本的。</span><br><span class="line"></span><br><span class="line">### 整合几何与材料</span><br><span class="line"></span><br><span class="line">按照UWUW流程制作材料，使用UWUW_preprocessor：</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">$ uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 整合几何与材料</span><br><span class="line"></span><br><span class="line">按照UWUW流程制作材料，使用UWUW_preprocessor：</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;</span><br></pre></td></tr></table></figure>
 
 <p>假设我们制作了材料库并存放在”material_lib1.h5”中，我们接下来就可以执行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ uwuw_preproc geometry1.h5m -v -l material_lib1.h5</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">uwuw_preproc geometry1.h5m -v -l material_lib1.h5</span><br></pre></td></tr></table></figure>
 
-<p>备注：整合几何和材料的时候需要调用DAGMC的功能，此时需要保证系统<strong>LD_LIBRARY_PATH</strong>中的MOAB版本是5.0版的。</p>
+
 <h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><p>DAGMC的input文件中需要给定普通MCNP中除了栅元卡和曲面卡以及材料卡的其他部分，包括但不限于：</p>
 <ol>
 <li>中子源定义，必要项</li>
@@ -1697,7 +1697,7 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir r2s_run</span><br><span class="line"><span class="built_in">cd</span> r2s_run</span><br></pre></td></tr></table></figure>
 <h3 id="初始化配置-setup"><a href="#初始化配置-setup" class="headerlink" title="初始化配置:setup"></a>初始化配置:setup</h3><p>初始化配置r2s。执行：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py setup</span><br></pre></td></tr></table></figure>
-<p>备注：检查确认系统<strong>LD_LIBRARY_PATH</strong>中的MOAB为4.9.1版本，并且在安装PyNE时将相应路径加入到~/.bashrc文件中后，r2s.py将能够直接被系统找到(which r2s.py)。</p>
+
 <p>执行之后我们应该能够看到下面的信息：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 一些warning</span><br><span class="line">File &quot;config.ini&quot; has been written</span><br><span class="line">File &quot;alara_params.txt&quot; has been written</span><br><span class="line">Fill out the fields in these filse then run &quot;&gt;&gt; r2s.py step1&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -1715,7 +1715,7 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 
 <h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><p><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</p>
 <p>当我们修改好上面两个文件后，就可以使用r2s.py生成ALARA计算需要的文件了：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ r2s.py step1</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py step1</span><br></pre></td></tr></table></figure>
 
 
 <h3 id="材料数据库准备"><a href="#材料数据库准备" class="headerlink" title="材料数据库准备"></a>材料数据库准备</h3><p><strong>ALARA输入文件</strong>中有三行是<strong>材料数据库</strong>相关的信息。</p>
@@ -1725,19 +1725,19 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <li>data_library alaralib truncated_fendl2bin （ALARA应该配备fendl3bin)但是并没有，ALARA安装文件中的sample/datam文件夹下只有truncated_fendl2bin数据库。我们可以把这个数据库相关的文件拷贝到工作文件夹。</li>
 </ol>
 <p>当材料定义是针对核素定义了的化，普通的<strong>elelib.std</strong>就没办法使用了，会出现错误：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">310: Could not find element &lt;string&gt; in element library.</span><br><span class="line"></span><br><span class="line">The element string was not found in the element library. This could be due to an error in the material library, incorrect user input, or an omission in the element library.</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">这时我们需要使用工具**elelib_to_nuclib.py**来将元素扩展成核素数据。这个工具是一个python脚本，调用pyne数据模块扩展元素数据。工具的位置在ALARA源文件的tools文件夹下，使用方法：</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">$ cd r2s_run&#x2F;data</span><br><span class="line">$ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">310: Could not find element &lt;string&gt; in element library.</span><br><span class="line"></span><br><span class="line">The element string was not found in the element library. This could be due to an error in the material library, incorrect user input, or an omission in the element library.</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">这时我们需要使用工具**elelib_to_nuclib.py**来将元素扩展成核素数据。这个工具是一个python脚本，调用pyne数据模块扩展元素数据。工具的位置在ALARA源文件的tools文件夹下，使用方法：</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">cd r2s_run&#x2F;data</span><br><span class="line">python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib</span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="alara计算"><a href="#alara计算" class="headerlink" title="alara计算"></a>alara计算</h3><p>当<strong>step1</strong>完成后，程序会给出运行alara的提示，按照提示运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ alara alara_inp &gt; output.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">alara alara_inp &gt; output.txt</span><br></pre></td></tr></table></figure>
 <p>等待alara运行完成，会生成几个文件：</p>
 <ol>
 <li>output.txt: ALARA输出文件，里面有活化后材料的核素组成以及光子发射率数据</li>
 <li>phtn_src: ALARA输出文件，里面有详细的各个各个材料各个核素缠身的各个能群的光子数据</li>
 </ol>
 <h3 id="r2s-step2"><a href="#r2s-step2" class="headerlink" title="r2s step2"></a>r2s step2</h3><p>ALARA计算完成后，运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ r2s.py step2</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py step2</span><br></pre></td></tr></table></figure>
 <p>执行完成后，我们可以看到工作文件夹中多了几个文件：</p>
 <ol>
 <li>e_bounds:光子能群结构。从低能到高能，单位为eV。最低能群能量下限为0.</li>
@@ -1760,9 +1760,9 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 </ol>
 <p>我们还需要修改栅元的重要性，因为中子输运时的文件里面的重要性是默认为中子的重要性，没有光子的重要性。但是这个重要性信息是写在h5m文件里面的，没法直接修改。</p>
 <p>我们需要先运行一次这个文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mcnp5.mpi i=input g=geom.h5m</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5.mpi i=input g=geom.h5m</span><br></pre></td></tr></table></figure>
 <p>现在这个运行肯定会出现错误，说粒子产生子重要性为0的区域。但是同时这个过程会生成一个可编辑的<strong>lcad</strong>文件，我们可以修改这个<strong>lcad</strong>文件，在重要性部分添加上<strong>imp:p=1</strong>/<strong>imp:p=0</strong>，将这个文件重命名为<strong>lcad_m</strong>，删掉过程文件<strong>fcad, outp, runtpe</strong>后再次运行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mcnp5.mpi i=input g=geom.h5m l=lcad_m</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5.mpi i=input g=geom.h5m l=lcad_m</span><br></pre></td></tr></table></figure>
 <p>之后就得到结果，至此停机剂量的计算完成。</p>
 <p><strong>备注</strong>：在计算得到结果之后，还可以把几何图形及计算结果的网格数据进行可视化绘图。绘图方法可以参考<a href="https://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/">DAGMC数据绘图</a>。</p>
 ]]></content>
@@ -1801,7 +1801,7 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <h3 id="生成权窗"><a href="#生成权窗" class="headerlink" title="生成权窗"></a>生成权窗</h3><p>MAGIC生成权窗的说明可以参考<a href="http://pyne.io/theorymanual/variance_reduction.html">这里</a>。实际使用时，我们通过PyNE中的工具读取meshtal文件中的内容，生成MAGIC权窗，然后写入到文件中。下面是一个生成权窗的python脚本例子：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> pyne <span class="keyword">import</span> variancereduction <span class="keyword">as</span> vr</span><br><span class="line"><span class="keyword">from</span> pyne.mcnp <span class="keyword">import</span> Meshtal, Wwinp</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line"></span><br><span class="line">    f = sys.argv[<span class="number">1</span>] <span class="comment">#must be a meshtal file</span></span><br><span class="line">    M = Meshtal(f)</span><br><span class="line">    <span class="comment"># User can also define the tally as 4, 14, ...</span></span><br><span class="line">    tally_number = M.tally.keys()[<span class="number">0</span>]</span><br><span class="line">    meshtally = M.tally[tally_number]</span><br><span class="line">    tags = meshtally.tag_names</span><br><span class="line"></span><br><span class="line">    res_tag = tags[<span class="number">0</span>]</span><br><span class="line">    err_tag = tags[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    vr.magic(meshtally, res_tag, err_tag)</span><br><span class="line"></span><br><span class="line">    meshtally.write_hdf5(<span class="string">&quot;mesh-ww-tags.h5m&quot;</span>)</span><br><span class="line"></span><br><span class="line">    wwinp = Wwinp()</span><br><span class="line">    wwinp.read_mesh(meshtally.mesh)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># write out the wwinp file</span></span><br><span class="line">    wwinp.write_wwinp(<span class="string">&quot;wwinp-magic&quot;</span>)</span><br></pre></td></tr></table></figure>
 <p>bash执行下面命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ python magic.py meshtal</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python magic.py meshtal</span><br></pre></td></tr></table></figure>
 <p>之后便生成了我们所需要的权窗文件<strong>wwinp-magic</strong>。</p>
 <h3 id="使用权窗"><a href="#使用权窗" class="headerlink" title="使用权窗"></a>使用权窗</h3><p>使用权窗时，使用权窗时，在输入文件中添加合适的WWP参数读取生成的权窗文件中的权窗数据即可。下面是第二轮计算的输入文件例子：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C sample input for MAGIC 2nd run</span><br><span class="line">C neutron source: point source, 14 MeV</span><br><span class="line">sdef pos&#x3D;0 0 0  erg&#x3D;14</span><br><span class="line">C </span><br><span class="line">nps 1e4</span><br><span class="line">C weight window parameters</span><br><span class="line">wwp:n 5 j 5 0 -0.5</span><br><span class="line">cut:n j 1e-3 -0.5 -0.25 1</span><br><span class="line">C Tally card</span><br><span class="line">fmesh4:n geom&#x3D;xyz origin&#x3D; -5 -5 -5</span><br><span class="line">         imesh&#x3D;15 iints&#x3D;2</span><br><span class="line">         jmesh&#x3D;5 jints&#x3D;1</span><br><span class="line">         kmesh&#x3D;15 kints&#x3D;2</span><br><span class="line">         emesh 0.1 20</span><br></pre></td></tr></table></figure>
@@ -2064,8 +2064,8 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <p>网上查了资料，的确有解决办法。</p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>还好，已经有大佬帮我解决了这个[问题](如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？ - cnlzxin的回答 - 知乎<br><a href="https://www.zhihu.com/question/19863631/answer/182346296)%E3%80%82">https://www.zhihu.com/question/19863631/answer/182346296)。</a></p>
 <ul>
-<li>检查vim是否支持clipboard功能:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim --version | grep clipboard</span><br></pre></td></tr></table></figure></li>
-<li>如果有 <strong>+clipboard</strong> 则跳过这一步; 如果显示的是 <strong>-clipboard</strong> 说明不支持(很遗憾，我的就是 <strong>-clipboard</strong>), 需要<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo apt install vim-gtk</span><br></pre></td></tr></table></figure>
+<li>检查vim是否支持clipboard功能:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim --version | grep clipboard</span><br></pre></td></tr></table></figure></li>
+<li>如果有 <strong>+clipboard</strong> 则跳过这一步; 如果显示的是 <strong>-clipboard</strong> 说明不支持(很遗憾，我的就是 <strong>-clipboard</strong>), 需要<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install vim-gtk</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -2168,10 +2168,10 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 
 <p>备注：制作材料的时候会调用PyNE，需要保证此时系统<strong>LD_LIBRARY_PATH</strong>中的MOAB是4.9.1版本的。</p>
 <h3 id="整合几何与材料"><a href="#整合几何与材料" class="headerlink" title="整合几何与材料"></a>整合几何与材料</h3><p>按照UWUW流程制作材料，使用UWUW_preprocessor：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;</span><br></pre></td></tr></table></figure>
 
 <p>假设我们制作了材料库并存放在”material_lib1.h5”中，我们接下来就可以执行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ uwuw_preproc geometry1.h5m -v -l material_lib1.h5</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">uwuw_preproc geometry1.h5m -v -l material_lib1.h5</span><br></pre></td></tr></table></figure>
 
 <h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><p>DAGMC的input文件中需要给定普通MCNP中除了栅元卡和曲面卡以及材料卡的其他部分，包括但不限于：</p>
 <ol>
@@ -2220,7 +2220,7 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 
 <h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><p><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</p>
 <p>当我们修改好上面两个文件后，就可以使用r2s.py生成ALARA计算需要的文件了：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ r2s.py step1</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py step1</span><br></pre></td></tr></table></figure>
 
 
 <h3 id="材料数据库准备"><a href="#材料数据库准备" class="headerlink" title="材料数据库准备"></a>材料数据库准备</h3><p><strong>ALARA输入文件</strong>中有三行是<strong>材料数据库</strong>相关的信息。</p>
@@ -2230,19 +2230,19 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <li>data_library alaralib truncated_fendl2bin （ALARA应该配备fendl3bin)但是并没有，ALARA安装文件中的sample/datam文件夹下只有truncated_fendl2bin数据库。我们可以把这个数据库相关的文件拷贝到工作文件夹。</li>
 </ol>
 <p>当材料定义是针对核素定义了的化，普通的<strong>elelib.std</strong>就没办法使用了，会出现错误：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">310: Could not find element &lt;string&gt; in element library.</span><br><span class="line"></span><br><span class="line">The element string was not found in the element library. This could be due to an error in the material library, incorrect user input, or an omission in the element library.</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">这时我们需要使用工具**elelib_to_nuclib.py**来将元素扩展成核素数据。这个工具是一个python脚本，调用pyne数据模块扩展元素数据。工具的位置在ALARA源文件的tools文件夹下，使用方法：</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">$ cd r2s_run&#x2F;data</span><br><span class="line">$ python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">310: Could not find element &lt;string&gt; in element library.</span><br><span class="line"></span><br><span class="line">The element string was not found in the element library. This could be due to an error in the material library, incorrect user input, or an omission in the element library.</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">这时我们需要使用工具**elelib_to_nuclib.py**来将元素扩展成核素数据。这个工具是一个python脚本，调用pyne数据模块扩展元素数据。工具的位置在ALARA源文件的tools文件夹下，使用方法：</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">cd r2s_run&#x2F;data</span><br><span class="line">python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib</span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="alara计算"><a href="#alara计算" class="headerlink" title="alara计算"></a>alara计算</h3><p>当<strong>step1</strong>完成后，程序会给出运行alara的提示，按照提示运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ alara alara_inp &gt; output.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">alara alara_inp &gt; output.txt</span><br></pre></td></tr></table></figure>
 <p>等待alara运行完成，会生成几个文件：</p>
 <ol>
 <li>output.txt: ALARA输出文件，里面有活化后材料的核素组成以及光子发射率数据</li>
 <li>phtn_src: ALARA输出文件，里面有详细的各个各个材料各个核素缠身的各个能群的光子数据</li>
 </ol>
 <h3 id="r2s-step2"><a href="#r2s-step2" class="headerlink" title="r2s step2"></a>r2s step2</h3><p>ALARA计算完成后，运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ r2s.py step2</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py step2</span><br></pre></td></tr></table></figure>
 <p>执行完成后，我们可以看到工作文件夹中多了几个文件：</p>
 <ol>
 <li>e_bounds:光子能群结构。从低能到高能，单位为eV。最低能群能量下限为0.</li>
@@ -2265,9 +2265,9 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 </ol>
 <p>我们还需要修改栅元的重要性，因为中子输运时的文件里面的重要性是默认为中子的重要性，没有光子的重要性。但是这个重要性信息是写在h5m文件里面的，没法直接修改。</p>
 <p>我们需要先运行一次这个文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mcnp5.mpi i=input g=geom.h5m</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5.mpi i=input g=geom.h5m</span><br></pre></td></tr></table></figure>
 <p>现在这个运行肯定会出现错误，说粒子产生子重要性为0的区域。但是同时这个过程会生成一个可编辑的<strong>lcad</strong>文件，我们可以修改这个<strong>lcad</strong>文件，在重要性部分添加上<strong>imp:p=1</strong>/<strong>imp:p=0</strong>，将这个文件重命名为<strong>lcad_m</strong>，删掉过程文件<strong>fcad, outp, runtpe</strong>后再次运行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mcnp5.mpi i=input g=geom.h5m l=lcad_m</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5.mpi i=input g=geom.h5m l=lcad_m</span><br></pre></td></tr></table></figure>
 <p>之后就得到结果，至此停机剂量的计算完成。</p>
 <p><strong>备注</strong>：在计算得到结果之后，还可以把几何图形及计算结果的网格数据进行可视化绘图。绘图方法可以参考<a href="https://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/">DAGMC数据绘图</a>。</p>
 ]]></content>

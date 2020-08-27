@@ -29,7 +29,7 @@
 <meta property="og:description" content="Install PyNE as a developer">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-05-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-08-12T12:29:39.000Z">
+<meta property="article:modified_time" content="2020-08-27T07:42:29.000Z">
 <meta property="article:author" content="zxkjack123">
 <meta property="article:tag" content="neutronics">
 <meta property="article:tag" content="PyNE">
@@ -233,7 +233,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-12 20:29:39" itemprop="dateModified" datetime="2020-08-12T20:29:39+08:00">2020-08-12</time>
+                <time title="Modified: 2020-08-27 15:42:29" itemprop="dateModified" datetime="2020-08-27T15:42:29+08:00">2020-08-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -292,7 +292,7 @@
 <h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>PyNE在开发过程中，功能性函数都配置了unit test进入pyne/tests文件夹下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./travis-run-tests.sh python2</span><br></pre></td></tr></table></figure>
 
-<h3 id="添加快捷安装方式"><a href="#添加快捷安装方式" class="headerlink" title="添加快捷安装方式"></a>添加快捷安装方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;alias pyne_build=&#x27; python setup.py install --user -- --moab <span class="variable">$HOME</span>/opt/MOAB5.1 --dagmc <span class="variable">$HOME</span>/opt/DAGMC&#x27;&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;alias pyne_clean=&#x27;rm -rf <span class="variable">$HOME</span>/opt/pyne/build/ <span class="variable">$HOME</span>/.local/lib/python2.7/site-packages/pyne* <span class="variable">$HOME</span>/.local/lib/libpyne.so <span class="variable">$HOME</span>/opt/pyne/build_nuc_data <span class="variable">$HOME</span>/opt/pyne/scripts/build_nuc_data&#x27;&quot;</span></span><br><span class="line"><span class="comment"># source ~/.bashrc</span></span><br></pre></td></tr></table></figure>
+<h3 id="添加快捷安装方式"><a href="#添加快捷安装方式" class="headerlink" title="添加快捷安装方式"></a>添加快捷安装方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;alias pyne_build=&#x27; python setup.py install --user -- --moab <span class="variable">$HOME</span>/opt/MOAB5.1 --dagmc <span class="variable">$HOME</span>/opt/DAGMC&#x27;&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;alias pyne_clean=&#x27;rm -rf <span class="variable">$HOME</span>/opt/pyne/build/ <span class="variable">$HOME</span>/.local/lib/python2.7/site-packages/pyne* <span class="variable">$HOME</span>/.local/lib/libpyne.so <span class="variable">$HOME</span>/opt/pyne/build_nuc_data <span class="variable">$HOME</span>/opt/pyne/scripts/build_nuc_data&#x27;&quot;</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
 <p>之后需要重新编译PyNE的时候，只需要执行下面的命令即可：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pyne_clean</span><br><span class="line">pyne_build</span><br></pre></td></tr></table></figure>
 
