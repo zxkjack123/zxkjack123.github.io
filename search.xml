@@ -1740,7 +1740,6 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py step2</span><br></pre></td></tr></table></figure>
 <p>执行完成后，我们可以看到工作文件夹中多了几个文件：</p>
 <ol>
-<li>e_bounds:光子能群结构。从低能到高能，单位为eV。最低能群能量下限为0.</li>
 <li>phtn_src.h5: HDF5格式的光子源数据，无法直接打开读取，只能程序读。</li>
 <li>source_<strong>i</strong>.h5m: 第<strong>i</strong>个冷却时间点的网格光子源数据。</li>
 <li>total_photon_source_intensites.txt: 里面是各个冷却时间节点的总光子发射率。<br>你</li>
@@ -1750,13 +1749,11 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <ol>
 <li>geom.h5m: 就是中子输运时用的那个文件，即本例子中的test1_geometry.h5m，它包含了几何和材料信息</li>
 <li>source.h5m:光子源信息文件，源子程序需要从这里读取信息。由于MCNP无法从输入文件中传递字符串，所以这个文件名称不能改变，必须是source.h5m。</li>
-<li>e_bounds: 光子能群结构文件。</li>
 <li>input: 提供tally信息，另外需要在这个文件中定义<strong>idum</strong>，用于控制源子程序过程。</li>
 </ol>
 <p>准备好这些文件后，我们还需要对这些文件进行一些小修改。</p>
 <ol>
 <li>input文件修改：首先，需要加上mode p， 然后修改tally部分。</li>
-<li>e_bounds: 这个文件中的能群单位是eV而不是MeV，需要手动将里面的数据单位除以1e6。（在github上提交该修改建议）</li>
 </ol>
 <p>我们还需要修改栅元的重要性，因为中子输运时的文件里面的重要性是默认为中子的重要性，没有光子的重要性。但是这个重要性信息是写在h5m文件里面的，没法直接修改。</p>
 <p>我们需要先运行一次这个文件：</p>
@@ -2245,7 +2242,6 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py step2</span><br></pre></td></tr></table></figure>
 <p>执行完成后，我们可以看到工作文件夹中多了几个文件：</p>
 <ol>
-<li>e_bounds:光子能群结构。从低能到高能，单位为eV。最低能群能量下限为0.</li>
 <li>phtn_src.h5: HDF5格式的光子源数据，无法直接打开读取，只能程序读。</li>
 <li>source_<strong>i</strong>.h5m: 第<strong>i</strong>个冷却时间点的网格光子源数据。</li>
 <li>total_photon_source_intensites.txt: 里面是各个冷却时间节点的总光子发射率。<br>你</li>
@@ -2255,13 +2251,11 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <ol>
 <li>geom.h5m: 就是中子输运时用的那个文件，即本例子中的test1_geometry.h5m，它包含了几何和材料信息</li>
 <li>source.h5m:光子源信息文件，源子程序需要从这里读取信息。由于MCNP无法从输入文件中传递字符串，所以这个文件名称不能改变，必须是source.h5m。</li>
-<li>e_bounds: 光子能群结构文件。</li>
 <li>input: 提供tally信息，另外需要在这个文件中定义<strong>idum</strong>，用于控制源子程序过程。</li>
 </ol>
 <p>准备好这些文件后，我们还需要对这些文件进行一些小修改。</p>
 <ol>
 <li>input文件修改：首先，需要加上mode p， 然后修改tally部分。</li>
-<li>e_bounds: 这个文件中的能群单位是eV而不是MeV，需要手动将里面的数据单位除以1e6。（在github上提交该修改建议）</li>
 </ol>
 <p>我们还需要修改栅元的重要性，因为中子输运时的文件里面的重要性是默认为中子的重要性，没有光子的重要性。但是这个重要性信息是写在h5m文件里面的，没法直接修改。</p>
 <p>我们需要先运行一次这个文件：</p>
