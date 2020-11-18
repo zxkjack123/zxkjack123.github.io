@@ -1560,8 +1560,8 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <li>weightwindow</li>
 </ul>
 <p>这里的<code>weightwindow</code>里面包含的数据，就是我们需要的权窗数据（但不包含权窗头文件）。我们将<code>wwinp1</code>的权窗头文件和<code>weightwindow</code>里的权窗数据组合起来，就是优化后的权窗文件了，命名它为<code>wwinp2</code>。</p>
-<h4 id="实际计算"><a href="#实际计算" class="headerlink" title="实际计算"></a>实际计算</h4><p>在得到优化后的权窗文件后，我们可以使用不带GVR的代码，使用我们实际使用的网格和能群，进行输运计算了。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5.mpi i=input wwinp=wwinp2</span><br></pre></td></tr></table></figure>
+<h4 id="实际计算"><a href="#实际计算" class="headerlink" title="实际计算"></a>实际计算</h4><p>在得到优化后的权窗文件后，我们可以使用带GVR的代码，利用其控制过度分裂的功能，进行输运计算了。此时的输入文件的第一个fmesh，和权窗网格参数一样的那个计数卡需要保留,同时将wwp的第五个参数设置为小于-1的值(这时将不再更新权窗)。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5_gvr.mpi i=input wwinp=wwinp2</span><br></pre></td></tr></table></figure>
 
 <h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>本博客仅用于以例题说明该方法的使用，对该方法的原理，实现过程及其中涉及的其他文件的作用不做任何说明。使用方法最终解释权归代码原作者所有。本博客如有错误，敬请指正。</p>
 <p>[1] Zheng, Yu, Yuefeng Qiu, Peng Lu, Yixue Chen, Ulrich Fischer, and Songlin Liu. “An Improved On-the-Fly Global Variance Reduction Technique by Automatically Updating Weight Window Values for Monte Carlo Shielding Calculation.” Fusion Engineering and Design 147 (October 1, 2019): 111238. <a href="https://doi.org/10.1016/j.fusengdes.2019.06.011">https://doi.org/10.1016/j.fusengdes.2019.06.011</a>.</p>
