@@ -1648,20 +1648,25 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
   <entry>
     <title>PyNE unstructured R2S</title>
     <url>/neutronics/pyne-unstructured-r2s/</url>
-    <content><![CDATA[<p>This article describes the steps for PyNE unstructured R2S.</p>
-<p>The user should intall Trelis, DAGMC, ALARA and PyNE before the following contents.<br>DAGMC install guide see <a href="https://zxkjack123.github.io/neutronics/dagmc-install/">here</a>， PyNE install guide see <a href="https://zxkjack123.github.io/neutronics/pyne-developer-install/">here</a>。ALARA install guide see <a href="https://zxkjack123.github.io/neutronics/alara-install/">here</a>。</p>
-<p>Most of the content is similar to the guide for r2s <a href="https://zxkjack123.github.io/neutronics/sample-trelis-dagmc-pyne-r2s-workflow/">here</a>. Therefore, there is only contents that different from that guide for structured r2s.</p>
-<h2 id="Input-file"><a href="#Input-file" class="headerlink" title="Input file"></a>Input file</h2><p>要进行蒙特卡罗输运计算，我们需要提供以下信息：</p>
-<ol>
-<li>几何信息，包括栅元和曲面。</li>
-<li>材料信息。每个区域（栅元）是什么材料（材料的组成份额）</li>
-<li>中子源信息。</li>
-<li>Tally信息。想统计的东西</li>
-<li>其他信息。如截断卡，权重及权窗，计算终止条件等。</li>
-</ol>
-<p>与普通MCNP计算不同，使用DAGMC计算时这些信息并不是全部都由一个输入文件提供，而是分别通过不同的文件提供。一个加载了几何和材料信息的h5m文件提供几何和材料信息。而其他信息则通过另一个input文本文件提供。</p>
-<h3 id="Build-geometry-file-in-Trelis"><a href="#Build-geometry-file-in-Trelis" class="headerlink" title="Build geometry file in Trelis"></a>Build geometry file in Trelis</h3><p>Build up geometry, make several groups graveyard) (including and assign material for each group.</p>
-<h4 id="生成并导出非结构网格"><a href="#生成并导出非结构网格" class="headerlink" title="生成并导出非结构网格"></a>生成并导出非结构网格</h4><ol>
+    <content><![CDATA[<p>这篇博客描述了使用非结构网格的PyNE R2S流程。首先确保Trelis， 并<a href="https://zxkjack123.github.io/neutronics/dagmc-install/">安装DAGMC</a>， <a href="https://zxkjack123.github.io/neutronics/pyne-developer-install/">安装PyNE</a>, <a href="https://zxkjack123.github.io/neutronics/alara-install/">安装ALARA</a>。</p>
+<h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><pre><code>- 处理CAD文件，生成DAGMC使用的集成材料的几何文件
+- 生成并导出tally用的非结构网格
+- 中子输运计算
+- PyNE R2S计算，中间使用ALARA进行活化计算
+- 光子输运计算</code></pre>
+<h3 id="使用Trelis处理DAGMC用的几何"><a href="#使用Trelis处理DAGMC用的几何" class="headerlink" title="使用Trelis处理DAGMC用的几何"></a>使用Trelis处理DAGMC用的几何</h3><p>Build up geometry, make several groups graveyard) (including and assign material for each group.</p>
+<h4 id="Imprint-and-merge"><a href="#Imprint-and-merge" class="headerlink" title="Imprint and merge"></a>Imprint and merge</h4><p>Use the following command:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">trelis&gt; imprint body all</span><br><span class="line">trelis&gt; merge all</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">#### Export the geometry</span><br><span class="line">The following command will export the geometry file into &#96;geom.h5m&#96;. </span><br></pre></td></tr></table></figure>
+<p>trelis&gt; export dagmc geom.h5m</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### Build materials</span><br><span class="line"></span><br><span class="line">Write a python script to build materials using PyNE, reference: [define PyNE materials](https:&#x2F;&#x2F;zxkjack123.github.io&#x2F;neutronics&#x2F;make-pyne-material-lib&#x2F;)。</span><br><span class="line"></span><br><span class="line">下面是制作本例子中的&quot;Water&quot;和&quot;Steel&quot;用到的python脚本文件：</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line">from pyne.material import Material,MaterialLibrary</span><br><span class="line">print &quot;Welcome!&quot;</span><br><span class="line">mat_lib&#x3D;MaterialLibrary()</span><br><span class="line">mat2 &#x3D; Material(&#123;&#39;Fe&#39;:0.655,&#39;Cr&#39;:0.170,&#39;Ni&#39;:0.120,&#39;Mo&#39;: 0.025,&#39;Mn&#39;: 0.02, &#39;Si&#39;:.01&#125;,density&#x3D;7.92)</span><br><span class="line">mat2&#x3D;mat2.expand_elements()</span><br><span class="line"># define a simple water since O-18 not in mcnp xs libs</span><br><span class="line">watervec&#x3D;&#123;10010:2,80160:1&#125; # simple water</span><br><span class="line">water &#x3D; Material()</span><br><span class="line">water.density &#x3D; 1.0</span><br><span class="line">water.from_atom_frac(watervec)</span><br><span class="line">mat_lib[&quot;Steel&quot;]&#x3D;mat2</span><br><span class="line">mat_lib[&quot;Water&quot;]&#x3D;water</span><br><span class="line">mat_lib.write_hdf5(&quot;test_material_lib.h5&quot;)</span><br><span class="line">print &quot;All done!&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="整合几何与材料"><a href="#整合几何与材料" class="headerlink" title="整合几何与材料"></a>整合几何与材料</h4><p>按照UWUW流程制作材料，使用UWUW_preprocessor：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;</span><br></pre></td></tr></table></figure>
+
+<p>假设我们制作了材料库并存放在”material_lib1.h5”中，我们接下来就可以执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">uwuw_preproc geometry1.h5m -v -l material_lib1.h5</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成并导出Tally用非结构网格"><a href="#生成并导出Tally用非结构网格" class="headerlink" title="生成并导出Tally用非结构网格"></a>生成并导出Tally用非结构网格</h3><ol>
 <li>在”Command Panel”选择”Mode-Mesh” -&gt; “Entity-Volumes” -&gt; “Action-Mesh” -&gt; “Tetmesh”，</li>
 <li>然后选择需要划分网格的体积，可以使用这些方式进行选择：<ul>
 <li>输入体积的id号</li>
@@ -1679,19 +1684,16 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <li>导出文件为”exodus”格式，如”tetmesh.exo”</li>
 <li>使用mbconvert将网格文件转为h5m格式：<code>mbconvert tetmesh.exo tetmesh.h5m</code></li>
 </ol>
-<h4 id="Imprint-and-merge"><a href="#Imprint-and-merge" class="headerlink" title="Imprint and merge"></a>Imprint and merge</h4><p>Use the following command:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">trelis&gt; imprint body all</span><br><span class="line">trelis&gt; merge all</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">#### Export the geometry</span><br><span class="line">The following command will export the geometry file into &#96;geom.h5m&#96;. </span><br></pre></td></tr></table></figure>
-<p>trelis&gt; export dagmc geom.h5m</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### Build materials</span><br><span class="line"></span><br><span class="line">Write a python script to build materials using PyNE, reference: [define PyNE materials](https:&#x2F;&#x2F;zxkjack123.github.io&#x2F;neutronics&#x2F;make-pyne-material-lib&#x2F;)。</span><br><span class="line"></span><br><span class="line">下面是制作本例子中的&quot;Water&quot;和&quot;Steel&quot;用到的python脚本文件：</span><br></pre></td></tr></table></figure>
-<p>#!/usr/bin/python<br>#<br>from pyne.material import Material,MaterialLibrary<br>print “Welcome!”<br>mat_lib=MaterialLibrary()<br>#<br>mat2 = Material({‘Fe’:0.655,’Cr’:0.170,’Ni’:0.120,’Mo’: 0.025,’Mn’: 0.02, ‘Si’:.01},density=7.92)<br>mat2=mat2.expand_elements()<br>#</p>
-<h1 id="define-a-simple-water-since-O-18-not-in-mcnp-xs-libs"><a href="#define-a-simple-water-since-O-18-not-in-mcnp-xs-libs" class="headerlink" title="define a simple water since O-18 not in mcnp xs libs"></a>define a simple water since O-18 not in mcnp xs libs</h1><p>watervec={10010:2,80160:1} # simple water<br>water = Material()<br>water.density = 1.0<br>water.from_atom_frac(watervec)<br>#<br>mat_lib[“Steel”]=mat2<br>mat_lib[“Water”]=water<br>#<br>mat_lib.write_hdf5(“test_material_lib.h5”)<br>#<br>print “All done!”</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 整合几何与材料</span><br><span class="line"></span><br><span class="line">按照UWUW流程制作材料，使用UWUW_preprocessor：</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">uwuw_preproc &lt;dagmc h5m filename&gt; -v -l &lt;path to nuclear data library&gt;</span><br></pre></td></tr></table></figure>
-
-<p>假设我们制作了材料库并存放在”material_lib1.h5”中，我们接下来就可以执行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">uwuw_preproc geometry1.h5m -v -l material_lib1.h5</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><p>DAGMC的input文件中需要给定普通MCNP中除了栅元卡和曲面卡以及材料卡的其他部分，包括但不限于：</p>
+<h3 id="DAGMC-input文件准备"><a href="#DAGMC-input文件准备" class="headerlink" title="DAGMC input文件准备"></a>DAGMC input文件准备</h3><p>要进行蒙特卡罗输运计算，我们需要提供以下信息：</p>
+<ol>
+<li>几何信息，包括栅元和曲面。</li>
+<li>材料信息。每个区域（栅元）是什么材料（材料的组成份额）</li>
+<li>中子源信息。</li>
+<li>Tally信息。想统计的东西</li>
+<li>其他信息。如截断卡，权重及权窗，计算终止条件等。</li>
+</ol>
+<p>与普通MCNP计算不同，使用DAGMC计算时这些信息并不是全部都由一个输入文件提供，而是分别通过不同的文件提供。<br>一个加载了几何和材料信息的h5m文件提供几何和材料信息。而其他信息则通过另一个input文本文件提供。</p>
+<p>DAGMC的input文件中需要给定普通MCNP中除了栅元卡和曲面卡以及材料卡的其他部分，包括但不限于：</p>
 <ol>
 <li>中子源定义，必要项</li>
 <li>计算终止条件，必要项</li>
@@ -1701,60 +1703,50 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <p>对于此例子的一个简单input文件如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C test1 input</span><br><span class="line">C neutron source: point source, 14 MeV</span><br><span class="line">sdef pos&#x3D;0 0 0  erg&#x3D;14  </span><br><span class="line">C </span><br><span class="line">nps 1e5</span><br><span class="line">C normal fmesh tally card</span><br><span class="line">fmesh4:n geom&#x3D;xyz origin&#x3D; -5 -5 -5</span><br><span class="line">         imesh&#x3D;15 iints&#x3D;2</span><br><span class="line">         jmesh&#x3D;5 jints&#x3D;1</span><br><span class="line">         kmesh&#x3D;15 kints&#x3D;2</span><br><span class="line">         emesh 0.1 20</span><br><span class="line">C dagmc tetmesh tally card</span><br><span class="line">fmesh14:n geom&#x3D;dag emesh&#x3D;0.1 20</span><br><span class="line">fc14 dagmc type&#x3D;unstr_track inp&#x3D;tetmesh.h5m out&#x3D;tetmesh_out.h5m</span><br></pre></td></tr></table></figure>
 
-<h2 id="中子输运计算"><a href="#中子输运计算" class="headerlink" title="中子输运计算"></a>中子输运计算</h2><p>使用DAGMC进行输运计算时，需要通过<strong>i=**来指定输入文件，通过</strong>g=**来指定加载了材料的几何文件，详细运行指令可以参考<a href="https://svalinn.github.io/DAGMC/usersguide/uw2.html">官方文档</a>。</p>
+<h3 id="中子输运计算"><a href="#中子输运计算" class="headerlink" title="中子输运计算"></a>中子输运计算</h3><p>使用DAGMC进行输运计算时，需要通过<strong>i=**来指定输入文件，通过</strong>g=**来指定加载了材料的几何文件，详细运行指令可以参考<a href="https://svalinn.github.io/DAGMC/usersguide/uw2.html">官方文档</a>。</p>
 <p>对于本例题，可以使用下面的方法运行本例子。<br>单线程运行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 需要先保障系统能够找到正确的mcnp5.mpi，找不到的话需要给出完整路径</span><br><span class="line">mcnp5.mpi i&#x3D;input g&#x3D;geom.h5m</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 需要先保障系统能够找到正确的mcnp5.mpi，找不到的话需要给出完整路径</span></span><br><span class="line">mcnp5.mpi i=input g=geom.h5m</span><br></pre></td></tr></table></figure>
 
 <p>多线程运行：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mpirun -np n mcnp5.mpi i&#x3D;input g&#x3D;geom.h5m</span><br></pre></td></tr></table></figure>
+
 <p>备注：input文件和几何文件的名称长度都不能超过8个字符，可以使用<strong>ln -sf original_long_name.h5m geom.h5m</strong>把原文件链接到一个较短名字的文件后再运行。</p>
 <p>计算完成之后，我们便得到了一个<strong>meshtal</strong>文件，和一个<strong>tetmesh_out.h5m</strong>文件。</p>
-<h2 id="活化计算"><a href="#活化计算" class="headerlink" title="活化计算"></a>活化计算</h2><p>中子输运完成后，我们开始正式调用PyNE的<a href="http://pyne.io/usersguide/r2s.html?highlight=r2s">R2S计算</a>模块的功能进行停机剂量率计算了。</p>
+<h3 id="PyNE-R2S"><a href="#PyNE-R2S" class="headerlink" title="PyNE R2S"></a>PyNE R2S</h3><p>中子输运完成后，我们开始正式调用<a href="http://pyne.io/usersguide/r2s.html?highlight=r2s">PyNE R2S计算</a>模块的功能进行停机剂量率计算了。</p>
 <p>进行停机剂量率计算，我们需要的主要信息包括：</p>
 <ol>
 <li>每个网格单元的材料成分。必须项。由同时包含了几何和材料的geom.h5m文件提供。（此文件就是进行DAGMC计算的那个）</li>
-<li>每个网格单元的中子通量能谱。必须项。由meshtal文件提供。</li>
-<li>活化计算能力。必须项。由Analytic and Laplacian Adaptive Radioactivity Analysis软件:<a href="https://github.com/svalinn/ALARA">ALARA</a>提供。</li>
+<li>每个网格单元的中子通量能谱。必须项。由<strong>tetmesh_out.h5m</strong>文件提供。</li>
+<li>活化计算能力。使用ALARA。</li>
 <li>辐照及冷却方案。必须项。需要在R2S过程中指定。</li>
 </ol>
 <p>在我们的工作文件夹下新建一个子文件夹用来存放R2S计算相关的文件。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir r2s_run</span><br><span class="line"><span class="built_in">cd</span> r2s_run</span><br></pre></td></tr></table></figure>
-<h3 id="初始化配置-setup"><a href="#初始化配置-setup" class="headerlink" title="初始化配置:setup"></a>初始化配置:setup</h3><p>初始化配置r2s。执行：</p>
+
+<h4 id="初始化配置-setup"><a href="#初始化配置-setup" class="headerlink" title="初始化配置:setup"></a>初始化配置:setup</h4><p>初始化配置r2s。执行：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py setup</span><br></pre></td></tr></table></figure>
 
 <p>执行之后我们应该能够看到下面的信息：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 一些warning</span><br><span class="line">File &quot;config.ini&quot; has been written</span><br><span class="line">File &quot;alara_params.txt&quot; has been written</span><br><span class="line">Fill out the fields in these filse then run &quot;&gt;&gt; r2s.py step1&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 一些warning</span></span><br><span class="line">File <span class="string">&quot;config.ini&quot;</span> has been written</span><br><span class="line">File <span class="string">&quot;alara_params.txt&quot;</span> has been written</span><br><span class="line">Fill out the fields <span class="keyword">in</span> these filse <span class="keyword">then</span> run <span class="string">&quot;&gt;&gt; r2s.py step1&quot;</span></span><br></pre></td></tr></table></figure>
 
 
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p><strong>setup</strong>这一步会生成两个文件：<strong>config.ini</strong>和<strong>alara_params.txt</strong>，我们需要修改这两个文件中的一些设置，包括辐照方案的设置和一些计算细节的设置。</p>
-<h4 id="修改config-ini设置"><a href="#修改config-ini设置" class="headerlink" title="修改config.ini设置"></a>修改<strong>config.ini</strong>设置</h4><p>一般情况下，我们需要注意的几个设置是：</p>
+<h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p><strong>setup</strong>这一步会生成两个文件：<strong>config.ini</strong>和<strong>alara_params.txt</strong>，我们需要修改这两个文件中的一些设置，包括辐照方案的设置和一些计算细节的设置。</p>
+<h5 id="修改config-ini设置"><a href="#修改config-ini设置" class="headerlink" title="修改config.ini设置"></a>修改<strong>config.ini</strong>设置</h5><p>一般情况下，我们需要注意的几个设置是：</p>
 <ol>
-<li>structured: 是否是结构化网格。结构化网格就是指MCNP中用的xyz或cyl网格。我们应该选<strong>True</strong></li>
-<li>sub_voxel: 是否采用sub_voxel模式，sub_voxel模式是我正在添加的代码，还没有完成，暂时不能选用，因此是False</li>
+<li>structured: 是否是结构化网格。结构化网格就是指MCNP中用的xyz或cyl网格。我们应该选<strong>False</strong></li>
 <li>reverse: 反转中子通量顺序。DAGMC输出的中子通量是按照从低能到高能排序，而用ALARA进行活化计算时需要按照从高能到低能读取，因此需要把中子通量逆序排列。这里填True。</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[general]</span><br><span class="line"><span class="comment"># Specify whether this problem uses structured or unstructured mesh</span></span><br><span class="line">structured: <span class="literal">True</span></span><br><span class="line"><span class="comment"># Specify whether this problem uses sub-voxel r2s</span></span><br><span class="line">sub_voxel: <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">[step1]</span><br><span class="line"><span class="comment"># Path to MCNP MESHTAL file containing neutron fluxes or a DAG-MCNP5</span></span><br><span class="line"><span class="comment"># unstructured mesh tally .h5m file.</span></span><br><span class="line">meshtal: tetmesh.h5m</span><br><span class="line"><span class="comment"># Tally number within the meshtal file containing the fluxes for activation.</span></span><br><span class="line">tally_num: <span class="number">4</span></span><br><span class="line"><span class="comment"># The name of the tag used to store flux data on the mesh. For unstructured</span></span><br><span class="line"><span class="comment"># mesh this tag must already exist within the file specified in &lt;meshtal&gt;.</span></span><br><span class="line">flux_tag: n_flux</span><br><span class="line"><span class="comment"># Path to the DAGMC material-laden geometry file (.h5m).</span></span><br><span class="line">geom: geom.h5m</span><br><span class="line"><span class="comment"># If True the fluxes in the fluxin file will be printed in the reverse</span></span><br><span class="line"><span class="comment"># order of how they appear within the flux vector tag. Since MCNP and</span></span><br><span class="line"><span class="comment"># the Meshtal class order fluxes from low energy to high energy, this</span></span><br><span class="line"><span class="comment"># option should be true if the transmutation data being used is</span></span><br><span class="line"><span class="comment"># ordered from high-energy to low-energy.</span></span><br><span class="line">reverse: <span class="literal">True</span></span><br><span class="line"><span class="comment"># Number of rays to fire down each mesh row in each direction to calculate</span></span><br><span class="line"><span class="comment"># cell volume fractions.</span></span><br><span class="line">num_rays: <span class="number">10</span></span><br><span class="line"><span class="comment"># If true, rays will be fired down mesh rows in evenly spaced intervals.</span></span><br><span class="line"><span class="comment"># In this case &lt;num_rays&gt; must be a perfect square. If false, rays are fired</span></span><br><span class="line"><span class="comment"># down mesh rows in random intervals.</span></span><br><span class="line">grid: <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">[step2]</span><br><span class="line"><span class="comment"># List of decays times, seperated by commas. These strings much match exactly</span></span><br><span class="line"><span class="comment"># with their counterparts in the phtn_src file produced in step1. No spaces</span></span><br><span class="line"><span class="comment"># should appear in this line except the space between the time and the time unit</span></span><br><span class="line"><span class="comment"># for each entry.</span></span><br><span class="line">decay_times:<span class="number">1</span> h</span><br><span class="line"><span class="comment"># The prefix of the .h5m files containing the source density distributations for</span></span><br><span class="line"><span class="comment"># each decay time.</span></span><br><span class="line">output: source</span><br><span class="line"><span class="comment"># The name of the output files containing the total photon source intensities for</span></span><br><span class="line"><span class="comment"># each decay time</span></span><br><span class="line">tot_phtn_src_intensities : total_photon_source_intensites.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[general]</span><br><span class="line"># Specify whether this problem uses structured or unstructured mesh</span><br><span class="line">structured: True</span><br><span class="line"># Specify whether this problem uses sub-voxel r2s</span><br><span class="line">sub_voxel: False</span><br><span class="line"></span><br><span class="line">[step1]</span><br><span class="line"># Path to MCNP MESHTAL file containing neutron fluxes or a DAG-MCNP5</span><br><span class="line"># unstructured mesh tally .h5m file.</span><br><span class="line">meshtal: tetmesh.h5m</span><br><span class="line"># Tally number within the meshtal file containing the fluxes for activation.</span><br><span class="line">tally_num: 4</span><br><span class="line"># The name of the tag used to store flux data on the mesh. For unstructured</span><br><span class="line"># mesh this tag must already exist within the file specified in &lt;meshtal&gt;.</span><br><span class="line">flux_tag: n_flux</span><br><span class="line"># Path to the DAGMC material-laden geometry file (.h5m).</span><br><span class="line">geom: geom.h5m</span><br><span class="line"># If True the fluxes in the fluxin file will be printed in the reverse</span><br><span class="line"># order of how they appear within the flux vector tag. Since MCNP and</span><br><span class="line"># the Meshtal class order fluxes from low energy to high energy, this</span><br><span class="line"># option should be true if the transmutation data being used is</span><br><span class="line"># ordered from high-energy to low-energy.</span><br><span class="line">reverse: True</span><br><span class="line"># Number of rays to fire down each mesh row in each direction to calculate</span><br><span class="line"># cell volume fractions.</span><br><span class="line">num_rays: 10</span><br><span class="line"># If true, rays will be fired down mesh rows in evenly spaced intervals.</span><br><span class="line"># In this case &lt;num_rays&gt; must be a perfect square. If false, rays are fired</span><br><span class="line"># down mesh rows in random intervals.</span><br><span class="line">grid: False</span><br><span class="line"></span><br><span class="line">[step2]</span><br><span class="line"># List of decays times, seperated by commas. These strings much match exactly</span><br><span class="line"># with their counterparts in the phtn_src file produced in step1. No spaces</span><br><span class="line"># should appear in this line except the space between the time and the time unit</span><br><span class="line"># for each entry.</span><br><span class="line">decay_times:1 h</span><br><span class="line"># The prefix of the .h5m files containing the source density distributations for</span><br><span class="line"># each decay time.</span><br><span class="line">output: source</span><br><span class="line"># The name of the output files containing the total photon source intensities for</span><br><span class="line"># each decay time</span><br><span class="line">tot_phtn_src_intensities : total_photon_source_intensites.txt</span><br></pre></td></tr></table></figure>
 
-<h4 id="修改alara-params-txt"><a href="#修改alara-params-txt" class="headerlink" title="修改alara_params.txt"></a>修改alara_params.txt</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">material_lib alara_matlib</span><br><span class="line">element_lib data&#x2F;nuclib</span><br><span class="line">data_library alaralib data&#x2F;truncated_fendl2bin</span><br><span class="line"></span><br><span class="line">cooling</span><br><span class="line">    1 h</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">output zone</span><br><span class="line">       integrate_energy</span><br><span class="line">       # Energy group upper bounds. The lower bound is always zero.</span><br><span class="line">       photon_source  data&#x2F;truncated_fendl2bin  phtn_src 24 1.00E4 2.00E4 5.00E4 1.00E5</span><br><span class="line">       2.00E5 3.00E5 4.00E5 6.00E5 8.00E5 1.00E6 1.22E6 1.44E6 1.66E6</span><br><span class="line">       2.00E6 2.50E6 3.00E6 4.00E6 5.00E6 6.50E6 8.00E6 1.00E7 1.20E7</span><br><span class="line">       1.40E7 2.00E7</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">#     flux name    fluxin file   norm   shift   unused</span><br><span class="line">flux  my_flux     alara_fluxin  1e10     0      default</span><br><span class="line"></span><br><span class="line"># Specify the irradiation schedule below.</span><br><span class="line"># Syntax is found in the ALARA user manual</span><br><span class="line"># This example is for a single 1 y pulse</span><br><span class="line">schedule    my_schedule</span><br><span class="line">    1 y my_flux my_pulse_history 0  s</span><br><span class="line">end</span><br><span class="line">pulsehistory  my_pulse_history</span><br><span class="line">    1    0.0    s</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">#other parameters</span><br><span class="line">truncation 1e-12</span><br><span class="line">impurity 5e-6 1e-3</span><br><span class="line">dump_file dump.file</span><br></pre></td></tr></table></figure>
+<h5 id="修改alara-params-txt"><a href="#修改alara-params-txt" class="headerlink" title="修改alara_params.txt"></a>修改alara_params.txt</h5><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">material_lib alara_matlib</span><br><span class="line">element_lib data/nuclib</span><br><span class="line">data_library alaralib data/truncated_fendl2bin</span><br><span class="line"></span><br><span class="line">cooling</span><br><span class="line">    1 h</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">output zone</span><br><span class="line">       integrate_energy</span><br><span class="line">       # Energy group upper bounds. The lower bound is always zero.</span><br><span class="line">       photon_source  data/truncated_fendl2bin  phtn_src 24 1.00E4 2.00E4 5.00E4 1.00E5</span><br><span class="line">       2.00E5 3.00E5 4.00E5 6.00E5 8.00E5 1.00E6 1.22E6 1.44E6 1.66E6</span><br><span class="line">       2.00E6 2.50E6 3.00E6 4.00E6 5.00E6 6.50E6 8.00E6 1.00E7 1.20E7</span><br><span class="line">       1.40E7 2.00E7</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">#     flux name    fluxin file   norm   shift   unused</span><br><span class="line">flux  my_flux     alara_fluxin  1e10     0      default</span><br><span class="line"></span><br><span class="line"># Specify the irradiation schedule below.</span><br><span class="line"># Syntax is found in the ALARA user manual</span><br><span class="line"># This example is for a single 1 y pulse</span><br><span class="line">schedule    my_schedule</span><br><span class="line">    1 y my_flux my_pulse_history 0  s</span><br><span class="line">end</span><br><span class="line">pulsehistory  my_pulse_history</span><br><span class="line">    1    0.0    s</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">#other parameters</span><br><span class="line">truncation 1e-12</span><br><span class="line">impurity 5e-6 1e-3</span><br><span class="line">dump_file dump.file</span><br></pre></td></tr></table></figure>
 
-<h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><p><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</p>
+<h4 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h4><p><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</p>
 <p>当我们修改好上面两个文件后，就可以使用r2s.py生成ALARA计算需要的文件了：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py step1</span><br></pre></td></tr></table></figure>
 
-
-<h3 id="材料数据库准备"><a href="#材料数据库准备" class="headerlink" title="材料数据库准备"></a>材料数据库准备</h3><p><strong>ALARA输入文件</strong>中有三行是<strong>材料数据库</strong>相关的信息。</p>
-<ol>
-<li>material_lib alara_matlib 这个<strong>alara_matlib</strong>是alara需要读取的材料成功定义的文件名。这个文件是会由程序从test1_geometry.h5m (geom.h5m)中读取的，不需要做修改。</li>
-<li>element_lib data/nuclib 这个文件是定义元素的丰度用的。默认是自然丰度，也可以自己定义修改丰度。自己定义一个元素丰度数据表显然是非常麻烦的，在ALARA的安装文件中$ALARA/data下有一个<strong>elelib.std</strong>，可以把这个文件拷贝到工作文件夹下并重命名为<strong>nucib</strong>即可（也可以设置element_lib elelib.std)。但是这个<strong>elelib.std</strong>只能用于材料定义是按照元素定义的，如果有针对核素的定义，则这个就不能用了。需要将元素扩展成核素，需要后续介的方法单独处理。</li>
-<li>data_library alaralib truncated_fendl2bin （ALARA应该配备fendl3bin)但是并没有，ALARA安装文件中的sample/datam文件夹下只有truncated_fendl2bin数据库。我们可以把这个数据库相关的文件拷贝到工作文件夹。</li>
-</ol>
-<p>当材料定义是针对核素定义了的化，普通的<strong>elelib.std</strong>就没办法使用了，会出现错误：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">310: Could not find element &lt;string&gt; in element library.</span><br><span class="line"></span><br><span class="line">The element string was not found in the element library. This could be due to an error in the material library, incorrect user input, or an omission in the element library.</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">这时我们需要使用工具**elelib_to_nuclib.py**来将元素扩展成核素数据。这个工具是一个python脚本，调用pyne数据模块扩展元素数据。工具的位置在ALARA源文件的tools文件夹下，使用方法：</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">cd r2s_run&#x2F;data</span><br><span class="line">python &lt;path_to_elelib_to_nuclib.py&gt; elelib_std -o nuclib</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="alara计算"><a href="#alara计算" class="headerlink" title="alara计算"></a>alara计算</h3><p>当<strong>step1</strong>完成后，程序会给出运行alara的提示，按照提示运行：</p>
+<h4 id="alara计算"><a href="#alara计算" class="headerlink" title="alara计算"></a>alara计算</h4><p>当<strong>step1</strong>完成后，程序会给出运行alara的提示，按照提示运行：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">alara alara_inp &gt; output.txt</span><br></pre></td></tr></table></figure>
+
 <p>等待alara运行完成，会生成几个文件：</p>
 <ol>
 <li>output.txt: ALARA输出文件，里面有活化后材料的核素组成以及光子发射率数据</li>
@@ -1762,14 +1754,15 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 </ol>
 <h3 id="r2s-step2"><a href="#r2s-step2" class="headerlink" title="r2s step2"></a>r2s step2</h3><p>ALARA计算完成后，运行：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py step2</span><br></pre></td></tr></table></figure>
+
 <p>执行完成后，我们可以看到工作文件夹中多了几个文件：</p>
 <ol>
 <li>phtn_src.h5: HDF5格式的光子源数据，无法直接打开读取，只能程序读。</li>
 <li>source_<strong>i</strong>.h5m: 第<strong>i</strong>个冷却时间点的网格光子源数据。</li>
-<li>total_photon_source_intensites.txt: 里面是各个冷却时间节点的总光子发射率。<br>你</li>
+<li>total_photon_source_intensites.txt: 里面是各个冷却时间节点的总光子发射率。</li>
 </ol>
-<h2 id="光子输运"><a href="#光子输运" class="headerlink" title="光子输运"></a>光子输运</h2><p>获得光子源后，我们就可以进行光子输运计算了。计算前必须确认DAGMC是已经包含了源子程序的版本，如果没有，需要先参考<a href="%E7%BC%96%E8%AF%91%E5%B8%A6%E7%94%A8%E4%BA%8ER2S%E7%9A%84%E6%BA%90%E5%AD%90%E7%A8%8B%E5%BA%8F%E7%9A%84DAGMC">编译带用于R2S的源子程序的DAGMC</a>安装DAGMC。</p>
-<h3 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h3><p>进行光子输运计算，我们需要提供几何文件，材料，光子源，以及需要统计的信息。因此需要准备的文件有：</p>
+<h3 id="光子输运"><a href="#光子输运" class="headerlink" title="光子输运"></a>光子输运</h3><p>获得光子源后，我们就可以进行光子输运计算了。计算前必须确认DAGMC是已经包含了源子程序的版本，如果没有，需要先参考<a href="%E7%BC%96%E8%AF%91%E5%B8%A6%E7%94%A8%E4%BA%8ER2S%E7%9A%84%E6%BA%90%E5%AD%90%E7%A8%8B%E5%BA%8F%E7%9A%84DAGMC">编译带用于R2S的源子程序的DAGMC</a>安装DAGMC。</p>
+<h4 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h4><p>进行光子输运计算，我们需要提供几何文件，材料，光子源，以及需要统计的信息。因此需要准备的文件有：</p>
 <ol>
 <li>geom.h5m: 就是中子输运时用的那个文件，即本例子中的test1_geometry.h5m，它包含了几何和材料信息</li>
 <li>source.h5m:光子源信息文件，源子程序需要从这里读取信息。由于MCNP无法从输入文件中传递字符串，所以这个文件名称不能改变，必须是source.h5m。</li>
@@ -1782,10 +1775,12 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <p>我们还需要修改栅元的重要性，因为中子输运时的文件里面的重要性是默认为中子的重要性，没有光子的重要性。但是这个重要性信息是写在h5m文件里面的，没法直接修改。</p>
 <p>我们需要先运行一次这个文件：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5.mpi i=input g=geom.h5m</span><br></pre></td></tr></table></figure>
+
 <p>现在这个运行肯定会出现错误，说粒子产生子重要性为0的区域。但是同时这个过程会生成一个可编辑的<strong>lcad</strong>文件，我们可以修改这个<strong>lcad</strong>文件，在重要性部分添加上<strong>imp:p=1</strong>/<strong>imp:p=0</strong>，将这个文件重命名为<strong>lcad_m</strong>，删掉过程文件<strong>fcad, outp, runtpe</strong>后再次运行</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5.mpi i=input g=geom.h5m l=lcad_m</span><br></pre></td></tr></table></figure>
+
 <p>之后就得到结果，至此停机剂量的计算完成。</p>
-<p><strong>备注</strong>：在计算得到结果之后，还可以把几何图形及计算结果的网格数据进行可视化绘图。绘图方法可以参考<a href="https://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/">DAGMC数据绘图</a>。</p>
+<p><strong>备注</strong>：在计算得到结果之后，还可以把几何图形及计算结果的网格数据进行可视化绘图。<br>绘图方法可以参考<a href="https://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/">DAGMC数据绘图</a>。</p>
 ]]></content>
       <categories>
         <category>neutronics</category>
