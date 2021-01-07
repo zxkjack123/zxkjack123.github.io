@@ -1465,7 +1465,11 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">load_moab51</span><br></pre></td></tr></table></figure>
 
 <h2 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h2><ul>
-<li>I installed MOAB5.1 with pymoab for Python3.6. The pymoab package files are under “…/lib/python3.6/site-packages/“, however, there missed a file “site.py”. It leads to an import error (i.e., python can’t find pymoab module). #My solution: install a MOAB5.1 pymoab for python2, and then copy the <code>site.py</code> to “…/lib/python3.6/site-packages/“#. Then problem fixed. This problem happens only on one of my machine, reason not know yet.</li>
+<li>I installed MOAB5.1 with pymoab for Python3.6. The pymoab package files are under “…/lib/python3.6/site-packages/“, however, there missed a file “site.py”. It leads to an import error (i.e., python can’t find pymoab module). <ul>
+<li>Solution: install a MOAB5.1 pymoab for python2, and then copy the <code>site.py</code> to “…/lib/python3.6/site-packages/“#. Then problem fixed. This problem happens only on one of my machine, reason not know yet.</li>
+</ul>
+</li>
+<li>安装MOAB5.1后，再安装MOAB5.2，可能出现与上一个问题类似的情况，MOAB5.1的PyMOAB没有正确安装，同样是”…/lib/python3.6/site-packages/“下缺少一个”site.py”文件。从其他地方拷贝一个”site.py”文件到MOAB5.2/lib/python3.6/site-packages/“下就可以解决问题了。</li>
 </ul>
 ]]></content>
       <categories>
