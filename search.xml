@@ -1561,19 +1561,23 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <li>将输入文件中的产生权窗的部分注释掉，使用<code>wwp</code></li>
 <li><strong>创建一个和权窗使用的网格对应的fmesh，注意网格和能群需要与权窗一致</strong></li>
 <li>暂时只支持NPS设定history数目，不支持CTME为终止计算条件</li>
+<li>wwp参数支持两种模式：<ul>
+<li>权窗优化模式：wwp第5个参数设置为-0.5，计算时会对权窗进行迭代优化，同时开启长历史控制；</li>
+<li>长历史控制模式：wwp第5个参数设置为非-0.5的值，如-1，计算将使用wwinp读取的权窗，不会进行权窗迭代。同时开启长历史控制。</li>
+</ul>
+</li>
 </ul>
 <p>改造后的输入文件如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C example for on-the-flux GVR</span><br><span class="line">C cell cards</span><br><span class="line">1 1 -1.0 -1 imp:n&#x3D;1</span><br><span class="line">2 0      1 -2 imp:n&#x3D;1</span><br><span class="line">3 0      2 imp:n&#x3D;0</span><br><span class="line"></span><br><span class="line">C surface cards</span><br><span class="line">1 so 10</span><br><span class="line">2 so 20</span><br><span class="line"></span><br><span class="line">C data cards</span><br><span class="line">m1</span><br><span class="line">      1001 -0.11</span><br><span class="line">      8016 -0.89</span><br><span class="line">sdef</span><br><span class="line">nps 1000</span><br><span class="line">C meshtally for GVR WW</span><br><span class="line">fmesh4:n origin&#x3D;-1 -1 -1 geom&#x3D;xyz</span><br><span class="line">         imesh&#x3D;1 iints&#x3D;10</span><br><span class="line">         jmesh&#x3D;1 jints&#x3D;10</span><br><span class="line">         kmesh&#x3D;1 kints&#x3D;10</span><br><span class="line">         emesh 0.1 20</span><br><span class="line">C meshtally for flux</span><br><span class="line">fmesh14:n origin&#x3D;-1 -1 -1 geom&#x3D;xyz</span><br><span class="line">         imesh&#x3D;1 iints&#x3D;20</span><br><span class="line">         jmesh&#x3D;1 jints&#x3D;20</span><br><span class="line">         kmesh&#x3D;1 kints&#x3D;20</span><br><span class="line">         emesh 0.1 20</span><br><span class="line">C wwg   4  0  0  j j j j 0</span><br><span class="line">C wwge:n 0.1 20</span><br><span class="line">C mesh origin&#x3D;-1 -1 -1 geom&#x3D;xyz ref&#x3D;0.0 0.0 0.0</span><br><span class="line">C      imesh&#x3D;1 iints&#x3D;10</span><br><span class="line">C      jmesh&#x3D;1 jints&#x3D;10</span><br><span class="line">C      kmesh&#x3D;1 kints&#x3D;10</span><br><span class="line">C </span><br><span class="line">C 5th parameter use -0.5 if you want to update the WW, otherwise, use a negtive value other than -0.5</span><br><span class="line">C 3rd reverse parameter: number of scored mesh element &#x2F; total mesh element number</span><br><span class="line">C 2nd reverse parameter: number of mesh element with rel_err &lt; 0.1 &#x2F; number of scored mesh element</span><br><span class="line">C 1st reverse parameter: mesh coverage &#x2F; valid geometry</span><br><span class="line">C wwp:n 5.0 J 5 0 -0.5 j j j 0.95 0.95 0.3</span><br><span class="line">C use explicite capture when GVR is on</span><br><span class="line">cut:n j 1e-11 0</span><br><span class="line">print</span><br></pre></td></tr></table></figure>
+
 <p>运行代GVR可执行文件：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5_gvr.mpi i=input wwinp=wwinp1</span><br></pre></td></tr></table></figure>
-<p>运行结束，将会生成下列文件：</p>
-<ul>
-<li>myMeshFlux</li>
-<li>myRelativeError</li>
-<li>originMeshFlux</li>
-<li>weightwindow</li>
-</ul>
+
+<p>运行结束，将会生成<code>weightwindow</code>文件。</p>
 <p>这里的<code>weightwindow</code>里面包含的数据，就是我们需要的权窗数据（但不包含权窗头文件）。我们将<code>wwinp1</code>的权窗头文件和<code>weightwindow</code>里的权窗数据组合起来，就是优化后的权窗文件了，命名它为<code>wwinp2</code>。</p>
+<h4 id="可能的错误"><a href="#可能的错误" class="headerlink" title="可能的错误"></a>可能的错误</h4><h5 id="Recieved-16-but-expected-32"><a href="#Recieved-16-but-expected-32" class="headerlink" title="Recieved 16 but expected 32"></a>Recieved 16 but expected 32</h5><p>在合并<code>wwinp1</code>和<code>weightwindow</code>中信息时，如果表头与内容不匹配，那么可能出现以下错误：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Fatal error in PMPI_Bcast: Other MPI error, error stack:</span><br><span class="line">PMPI_Bcast(448)...............: MPI_Bcast(buf&#x3D;0x55908bd959d0, count&#x3D;4, dtype&#x3D;0x4c000829, root&#x3D;0, comm&#x3D;MPI_COMM_WORLD) failed</span><br><span class="line">PMPI_Bcast(434)...............:</span><br><span class="line">MPIR_Bcast_impl(310)..........:</span><br><span class="line">MPIR_Bcast_intra_auto(189)....:</span><br><span class="line">MPIR_Bcast_intra_smp(105).....:</span><br><span class="line">MPIR_Bcast_impl(310)..........:</span><br><span class="line">MPIR_Bcast_intra_auto(223)....:</span><br><span class="line">MPIR_Bcast_intra_binomial(123): message sizes do not match across processes in the collective routine: Received 16 but expected 32</span><br></pre></td></tr></table></figure>
+<p>出现这个错误的原因，可能是使用mcnp初始生成权窗生成时，运行模式为n, p。此时虽然没有要求生成光子权窗，但GVR会自动生成默认光子权窗(1群，能量上限100MeV,网格与中子网格相同)，此时<code>wwout</code>表头第一行第三个变量为2,第二行第二个变量为1。<br>但是在迭代优化时，如果没有明确要求迭代光子权窗，GVR不会自动生成迭代的光子权窗，此时生成的<code>weightwindow</code>只包含中子权窗信息，不会有光子权窗信息。<br>因此，在将<code>weightwindow</code>中的内容拷贝进入<code>wwinp2</code>时，表头信息和内容信息不匹配，表头中说有光子信息，实际内容没有，导致程序错误的想传递没有的信息，出现错误。<br>解决方法：修改表头使其和内容一致。</p>
 <h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>本博客仅用于以例题说明该方法的使用，对该方法的原理，实现过程及其中涉及的其他文件的作用不做任何说明。使用方法最终解释权归代码原作者所有。本博客如有错误，敬请指正。</p>
 <p>[1] Zheng, Yu, Yuefeng Qiu, Peng Lu, Yixue Chen, Ulrich Fischer, and Songlin Liu. “An Improved On-the-Fly Global Variance Reduction Technique by Automatically Updating Weight Window Values for Monte Carlo Shielding Calculation.” Fusion Engineering and Design 147 (October 1, 2019): 111238. <a href="https://doi.org/10.1016/j.fusengdes.2019.06.011">https://doi.org/10.1016/j.fusengdes.2019.06.011</a>.</p>
 ]]></content>
