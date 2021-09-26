@@ -29,7 +29,7 @@
 <meta property="og:description" content="Install MOAB for both PyNE and DAGMC">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-05-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-08T13:36:35.000Z">
+<meta property="article:modified_time" content="2021-09-26T08:45:29.000Z">
 <meta property="article:author" content="zxkjack123">
 <meta property="article:tag" content="neutronics">
 <meta property="article:tag" content="PyNE">
@@ -234,7 +234,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-08 21:36:35" itemprop="dateModified" datetime="2021-06-08T21:36:35+08:00">2021-06-08</time>
+                <time title="Modified: 2021-09-26 16:45:29" itemprop="dateModified" datetime="2021-09-26T16:45:29+08:00">2021-09-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,7 +280,7 @@
 
       
         <p>当前版本的Trelis dagmc插件使用的是MOAB5.1，混用不同版本的MOAB可能会导致Trelis模型导出失败。因此，MOAB5.1依然是需要的。<br>然而当前版本的PyNE, DAGMC和OpenMC都默认使用MOAB5.2了。因此，这篇博客记录在我工作电脑上同时安装MOAB5.1及MOAB5.2的实践。<br>为了配合非结构网格的转换，我需要使用netCDF支持，netCDF安装方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libnetcdf-dev libnetcdff-dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libnetcdf-dev libnetcdff-dev libeigen3-dev</span><br></pre></td></tr></table></figure>
 
 <h2 id="Install-MOAB5-1"><a href="#Install-MOAB5-1" class="headerlink" title="Install MOAB5.1"></a>Install MOAB5.1</h2><p>当前版本的MOAB5.1，我需要的功能有：<br>    - mbconvert<br>    - 动态链接库<br>    - netcdf配合非结构网格转换功能<br>因此，安装过程中可以不需要并行、pymoab等功能。下面假设将MOAB5.1安装在$HOME/opt/MOAB5.1中。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/opt</span><br><span class="line">mkdir MOAB5.1</span><br><span class="line"><span class="built_in">cd</span> MOAB5.1</span><br><span class="line"><span class="built_in">export</span> MOAB51_DIR=<span class="variable">$HOME</span>/opt/MOAB5.1</span><br><span class="line">git <span class="built_in">clone</span> --branch 5.1.0 --single-branch https://bitbucket.org/fathomteam/moab moab</span><br><span class="line"><span class="built_in">cd</span> moab</span><br><span class="line">autoreconf -<span class="keyword">fi</span></span><br><span class="line">mkdir -p build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake ../moab/ -DENABLE_MPI=OFF -DENABLE_PYMOAB=OFF -DCMAKE_INSTALL_PREFIX=<span class="variable">$MOAB51_DIR</span> -DENABLE_HDF5=ON -DBUILD_SHARED_LIBS=ON -DENABLE_NETCDF=ON</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
@@ -400,7 +400,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -413,7 +413,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">130</span>
+        <span class="site-state-item-count">131</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
