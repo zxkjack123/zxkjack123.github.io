@@ -2368,4 +2368,18 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
         <tag>停机计量</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Things to do after system upgrade</title>
+    <url>/ubuntu/things-todo-after-system-update/</url>
+    <content><![CDATA[<h2 id="Chinese-input"><a href="#Chinese-input" class="headerlink" title="Chinese input"></a>Chinese input</h2><pre><code>- [Sogou pinyin](https://pinyin.sogou.com/linux?r=pinyin) is a very good tool for Chinese input in Ubuntu 20.04, here is the [install guide](https://pinyin.sogou.com/linux/guide).</code></pre>
+<h2 id="Python-environment"><a href="#Python-environment" class="headerlink" title="Python environment"></a>Python environment</h2><pre><code>- Change the Python3 as the default python: sudo apt install python-is-python3</code></pre>
+]]></content>
+      <categories>
+        <category>ubuntu</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>software</tag>
+      </tags>
+  </entry>
 </search>
