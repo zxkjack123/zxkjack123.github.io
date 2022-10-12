@@ -2380,4 +2380,128 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
         <tag>停机计量</tag>
       </tags>
   </entry>
+  <entry>
+    <title>使用NATF进行基于网格的计算停机剂量率流程</title>
+    <url>/neutronics/natf_mesh_r2s/</url>
+    <content><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本篇文章简要介绍使用NATF来进行基于网格的计算停机剂量率的流程。<br>本流程需要提前安装DAGMC, ALARA, PyNE, NATF。</p>
+<ul>
+<li>DAGMC的安装可以参考<a href="https://zxkjack123.github.io/neutronics/dagmc-install/">这里</a>。</li>
+<li>PyNE的安装可以参考<a href="https://zxkjack123.github.io/neutronics/pyne-developer-install/">这里</a>。</li>
+<li>ALARA的安装可以参考<a href="https://zxkjack123.github.io/neutronics/alara-install/">这里</a>。</li>
+<li>NATF可以通过<code>pip install -U natf</code>安装最新版。</li>
+</ul>
+<h2 id="计算步骤"><a href="#计算步骤" class="headerlink" title="计算步骤"></a>计算步骤</h2><p>使用NATF计算基于网格的停机剂量率，其内核是PyNE R2S流程，只是通过ptrac代替DAGMC的Ray tracing获取网格栅元体积份额。<br>这样可以不用DAGMC模型，而是使用已经存在的MCNP模型进行计算。<br>主要步骤包括：</p>
+<ul>
+<li>中子通量计算：计算指定区域的175群中子通量</li>
+<li>ptrac计算：在指定区域均匀抽样粒子，统计粒子的位置及所在栅元信息，用于获取网格栅元体积份额</li>
+<li>活化计算：包括活化文件生成及ALARA活化计算</li>
+<li>光子输运计算：光子输运获取停机剂量率</li>
+</ul>
+<h3 id="中子通量计算"><a href="#中子通量计算" class="headerlink" title="中子通量计算"></a>中子通量计算</h3><p>使用NATF mesh R2S流程，我们需要中子输运计算得到的两个文件：</p>
+<ul>
+<li>outp : MCNP输出文件，里面包含栅元、材料信息</li>
+<li>meshtal : 网格计数输出文件，包含fmesh结果</li>
+</ul>
+<p><strong>注意</strong>:我们需要outp中的栅元、材料信息，因此中子输运输入文件中，需要<strong>使用PRINT关键字</strong></p>
+<h2 id="活化计算"><a href="#活化计算" class="headerlink" title="活化计算"></a>活化计算</h2><p>进行停机剂量率计算，我们需要的主要信息包括：</p>
+<ol>
+<li>每个网格单元的材料成分。必须项。由ptrac及outp计算获取。</li>
+<li>每个网格单元的中子通量能谱。必须项。由meshtal文件提供。</li>
+<li>活化计算能力。必须项。由Analytic and Laplacian Adaptive Radioactivity Analysis软件:<a href="https://github.com/svalinn/ALARA">ALARA</a>提供。</li>
+<li>辐照及冷却方案。必须项。需要在config.ini中指定。</li>
+</ol>
+<p>在我们的工作文件夹下新建一个子文件夹用来存放R2S计算相关的文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir r2s_run</span><br><span class="line"><span class="built_in">cd</span> r2s_run</span><br></pre></td></tr></table></figure>
+<h3 id="初始化配置-setup"><a href="#初始化配置-setup" class="headerlink" title="初始化配置:setup"></a>初始化配置:setup</h3><p>初始化配置r2s。执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">natf_r2s.py setup</span><br></pre></td></tr></table></figure>
+
+<p>执行之后我们应该能够看到下面的信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 一些warning</span><br><span class="line">File &quot;config.ini&quot; has been written</span><br><span class="line">File &quot;alara_params.txt&quot; has been written</span><br><span class="line">Fill out the fields in these filse then run &quot;&gt;&gt; r2s.py step1&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p><strong>setup</strong>这一步会生成两个文件：<strong>config.ini</strong>和<strong>alara_params.txt</strong>，我们需要修改这两个文件中的一些设置，包括辐照方案的设置和一些计算细节的设置。</p>
+<h4 id="修改config-ini设置"><a href="#修改config-ini设置" class="headerlink" title="修改config.ini设置"></a>修改<strong>config.ini</strong>设置</h4><p>一般情况下，我们需要注意的几个设置是：</p>
+<ol>
+<li>structured: 是否是结构化网格。结构化网格就是指MCNP中用的xyz或cyl网格。我们应该选<strong>True</strong></li>
+<li>sub_voxel: 是否采用sub_voxel模式，sub_voxel模式是我正在添加的代码，还没有完成，暂时不能选用，因此是False</li>
+<li>reverse: 反转中子通量顺序。DAGMC输出的中子通量是按照从低能到高能排序，而用ALARA进行活化计算时需要按照从高能到低能读取，因此需要把中子通量逆序排列。这里填True。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[general]</span><br><span class="line"><span class="comment"># Specify whether this problem uses structured or unstructured mesh</span></span><br><span class="line">structured: <span class="literal">True</span></span><br><span class="line"><span class="comment"># Specify whether this problem uses sub-voxel r2s</span></span><br><span class="line">sub_voxel: <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">[step1]</span><br><span class="line"><span class="comment"># Path to MCNP MESHTAL file containing neutron fluxes or a DAG-MCNP5</span></span><br><span class="line"><span class="comment"># unstructured mesh tally .h5m file.</span></span><br><span class="line">meshtal: meshtal</span><br><span class="line"><span class="comment"># Tally number within the meshtal file containing the fluxes for activation.</span></span><br><span class="line">tally_num: <span class="number">4</span></span><br><span class="line"><span class="comment"># The name of the tag used to store flux data on the mesh. For unstructured</span></span><br><span class="line"><span class="comment"># mesh this tag must already exist within the file specified in &lt;meshtal&gt;.</span></span><br><span class="line">flux_tag: n_flux</span><br><span class="line"><span class="comment"># Path to the DAGMC material-laden geometry file (.h5m).</span></span><br><span class="line">geom: geom.h5m</span><br><span class="line"><span class="comment"># If True the fluxes in the fluxin file will be printed in the reverse</span></span><br><span class="line"><span class="comment"># order of how they appear within the flux vector tag. Since MCNP and</span></span><br><span class="line"><span class="comment"># the Meshtal class order fluxes from low energy to high energy, this</span></span><br><span class="line"><span class="comment"># option should be true if the transmutation data being used is</span></span><br><span class="line"><span class="comment"># ordered from high-energy to low-energy.</span></span><br><span class="line">reverse: <span class="literal">True</span></span><br><span class="line"><span class="comment"># Number of rays to fire down each mesh row in each direction to calculate</span></span><br><span class="line"><span class="comment"># cell volume fractions.</span></span><br><span class="line">num_rays: <span class="number">10</span></span><br><span class="line"><span class="comment"># If true, rays will be fired down mesh rows in evenly spaced intervals.</span></span><br><span class="line"><span class="comment"># In this case &lt;num_rays&gt; must be a perfect square. If false, rays are fired</span></span><br><span class="line"><span class="comment"># down mesh rows in random intervals.</span></span><br><span class="line">grid: <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">[step2]</span><br><span class="line"><span class="comment"># List of decays times, seperated by commas. These strings much match exactly</span></span><br><span class="line"><span class="comment"># with their counterparts in the phtn_src file produced in step1. No spaces</span></span><br><span class="line"><span class="comment"># should appear in this line except the space between the time and the time unit</span></span><br><span class="line"><span class="comment"># for each entry.</span></span><br><span class="line">decay_times:<span class="number">1</span> h</span><br><span class="line"><span class="comment"># The prefix of the .h5m files containing the source density distributations for</span></span><br><span class="line"><span class="comment"># each decay time.</span></span><br><span class="line">output: source</span><br><span class="line"><span class="comment"># The name of the output files containing the total photon source intensities for</span></span><br><span class="line"><span class="comment"># each decay time</span></span><br><span class="line">tot_phtn_src_intensities : total_photon_source_intensites.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改alara-params-txt"><a href="#修改alara-params-txt" class="headerlink" title="修改alara_params.txt"></a>修改alara_params.txt</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">material_lib alara_matlib</span><br><span class="line">element_lib data&#x2F;nuclib</span><br><span class="line">data_library alaralib data&#x2F;truncated_fendl2bin</span><br><span class="line"></span><br><span class="line">cooling</span><br><span class="line">    1 h</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">output zone</span><br><span class="line">       integrate_energy</span><br><span class="line">       # Energy group upper bounds. The lower bound is always zero.</span><br><span class="line">       photon_source  data&#x2F;truncated_fendl2bin  phtn_src 24 1.00E4 2.00E4 5.00E4 1.00E5</span><br><span class="line">       2.00E5 3.00E5 4.00E5 6.00E5 8.00E5 1.00E6 1.22E6 1.44E6 1.66E6</span><br><span class="line">       2.00E6 2.50E6 3.00E6 4.00E6 5.00E6 6.50E6 8.00E6 1.00E7 1.20E7</span><br><span class="line">       1.40E7 2.00E7</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">#     flux name    fluxin file   norm   shift   unused</span><br><span class="line">flux  my_flux     alara_fluxin  1e10     0      default</span><br><span class="line"></span><br><span class="line"># Specify the irradiation schedule below.</span><br><span class="line"># Syntax is found in the ALARA user manual</span><br><span class="line"># This example is for a single 1 y pulse</span><br><span class="line">schedule    my_schedule</span><br><span class="line">    1 y my_flux my_pulse_history 0  s</span><br><span class="line">end</span><br><span class="line">pulsehistory  my_pulse_history</span><br><span class="line">    1    0.0    s</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">#other parameters</span><br><span class="line">truncation 1e-12</span><br><span class="line">impurity 5e-6 1e-3</span><br><span class="line">dump_file dump.file</span><br></pre></td></tr></table></figure>
+
+<h3 id="r2s-py-step1"><a href="#r2s-py-step1" class="headerlink" title="r2s.py step1"></a>r2s.py step1</h3><p><strong>r2s.py step1</strong>是用来根据<strong>r2s.py setup</strong>生成的配置文件生成ALARA输入文件，中子通量文件和ALARA材料库文件的。</p>
+<p>当我们修改好上面两个文件后，就可以使用r2s.py生成ALARA计算需要的文件了：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py step1</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="材料数据库处理"><a href="#材料数据库处理" class="headerlink" title="材料数据库处理"></a>材料数据库处理</h3><p><strong>ALARA输入文件</strong>中有三行是<strong>材料数据库</strong>相关的信息。</p>
+<ol>
+<li>material_lib alara_matlib 这个<strong>alara_matlib</strong>是alara需要读取的材料成功定义的文件名。</li>
+<li>element_lib data/nuclib 这个文件是定义元素的丰度用的。</li>
+<li>data_library alaralib data/eaf2010bin </li>
+</ol>
+<p><strong>注意</strong>：生成的alara_matlib文件中，可能包含<strong>数据库中不识别的k:40核素，需要手动去除</strong>。</p>
+<h3 id="alara计算"><a href="#alara计算" class="headerlink" title="alara计算"></a>alara计算</h3><p>当<strong>step1</strong>完成后，程序会给出运行alara的提示，按照提示运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">alara alara_inp &gt; output.txt</span><br></pre></td></tr></table></figure>
+<p>等待alara运行完成，会生成几个文件：</p>
+<ol>
+<li>output.txt: ALARA输出文件，里面有活化后材料的核素组成以及光子发射率数据</li>
+<li>phtn_src: ALARA输出文件，里面有详细的各个各个材料各个核素缠身的各个能群的光子数据</li>
+</ol>
+<h3 id="r2s-step2"><a href="#r2s-step2" class="headerlink" title="r2s step2"></a>r2s step2</h3><p>ALARA计算完成后，运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">r2s.py step2</span><br></pre></td></tr></table></figure>
+<p>执行完成后，我们可以看到工作文件夹中多了几个文件：</p>
+<ol>
+<li>phtn_src.h5: HDF5格式的光子源数据</li>
+<li>source_<strong>i</strong>.h5m: 第<strong>i</strong>个冷却时间点的网格光子源数据。</li>
+<li>total_photon_source_intensites.txt: 里面是各个冷却时间节点的总光子发射率。</li>
+</ol>
+<h2 id="光子输运"><a href="#光子输运" class="headerlink" title="光子输运"></a>光子输运</h2><p>将MCNP输入文件修改为适合光子输运的文件：</p>
+<ul>
+<li>去掉原来的SDEF卡</li>
+<li>添加idum卡，定义光子抽样参数</li>
+<li>添加停机剂量率计数卡</li>
+</ul>
+<p>然后进行光子输运计算得到停机剂量率结果。</p>
+<p><strong>备注</strong>：在计算得到结果之后，还可以把几何图形及计算结果的网格数据进行可视化绘图。<br>绘图方法可以参考<a href="https://zxkjack123.github.io/neutronics/dagmc-geom-data-visualization/">DAGMC数据绘图</a>。</p>
+]]></content>
+      <categories>
+        <category>neutronics</category>
+      </categories>
+      <tags>
+        <tag>PyNE</tag>
+        <tag>NATF</tag>
+        <tag>R2S</tag>
+        <tag>shutdown dose rate</tag>
+        <tag>停机剂量率</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vim-复制内容到vim外</title>
+    <url>/ubuntu/change_screen_input_source/</url>
+    <content><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在笔记本电脑上使用linux系统，经常打开并编辑一些文本文件，我比较喜欢用vim。但有时候遇到要从文件中拷贝几个数据到文件外(比如excel, 或者google spreadsheets)的时候，我就遇到麻烦了。在vim里面用<strong>y</strong>拷贝的东西，没法粘贴到文件外。因此我每次需要拷贝数据的时候，都是换gedit来操作。直到今天，我由于需要从三个文件中拷贝一共十八个数据，忍不了了。</p>
+<p>网上查了资料，的确有解决办法。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>还好，已经有大佬帮我解决了这个[问题](如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？ - cnlzxin的回答 - 知乎<br><a href="https://www.zhihu.com/question/19863631/answer/182346296)%E3%80%82">https://www.zhihu.com/question/19863631/answer/182346296)。</a></p>
+<ul>
+<li>检查vim是否支持clipboard功能:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim --version | grep clipboard</span><br></pre></td></tr></table></figure></li>
+<li>如果有 <strong>+clipboard</strong> 则跳过这一步; 如果显示的是 <strong>-clipboard</strong> 说明不支持(很遗憾，我的就是 <strong>-clipboard</strong>), 需要<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install vim-gtk</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>安装好vim -gtk之后就可以了。复制内容到vim外了。不过在vim内复制内容时，需要制定将内容复制到 <strong>clipboard</strong>，通过 <strong>“+</strong> 来指定特定寄存器。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>当我想复制一个数据到spreadsheets时，使用<strong>v</strong>选中该数据内容，然后 <strong>“+y</strong>，切换到spreadsheets，<strong>ctrl + v</strong> 即可。想把剪切板的内容复制到另一个vim文件时，使用<code>&quot;+p</code>即可。</p>
+<p>其他例子：</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="comment">&quot;+yy  // 复制当前行到剪切板</span></span><br><span class="line"><span class="comment">&quot;+p   // 将剪切板内容粘贴到光标后面</span></span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>ubuntu</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>vim</tag>
+      </tags>
+  </entry>
 </search>
