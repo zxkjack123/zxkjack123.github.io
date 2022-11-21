@@ -2359,6 +2359,7 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <p>准备好这些文件后，我们还需要对这些文件进行一些小修改。</p>
 <ol>
 <li>input文件修改：首先，需要加上mode p， 然后修改tally部分。</li>
+<li>input文件修改：注释掉原本的SDEF卡</li>
 </ol>
 <p>我们还需要修改栅元的重要性，因为中子输运时的文件里面的重要性是默认为中子的重要性，没有光子的重要性。但是这个重要性信息是写在h5m文件里面的，没法直接修改。</p>
 <p>我们需要先运行一次这个文件：</p>
