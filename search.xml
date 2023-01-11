@@ -1327,9 +1327,9 @@
   <entry>
     <title>On-the-flux GVR使用方法</title>
     <url>/neutronics/on-the-flux-gvr/</url>
-    <content><![CDATA[<p>在蒙卡输运计算中，减方差方法对于屏蔽问题时非常重要的。这篇博客介绍了课题组博士生郑俞等开发的一种on-the-flux全局减方差技术[1]的使用方法。</p>
-<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>该方法修改了部分MCNP源代码，并添加了7个源文件，需要重新编译。课题组已经成功在MCNP5及DAG-MCNP5上成功编译该代码。本博客不涉及该代码的获取及编译过程。<br>为了不混淆可执行代码名称，下面我们用mcnp5.mpi指代不带GVR的可执行文件，用mcnp5_gvr.mpi指代GVR版代码。</p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>使用该方法，主要有以下几步：</p>
+    <content><![CDATA[<p>在蒙卡输运计算中，减方差方法对于屏蔽问题时非常重要的。这篇博客介绍了郑俞等开发的一种on-the-flux全局减方差技术[1]的使用方法。</p>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>该方法修改了部分MCNP源代码，添加了一些源文件，需要重新编译。<br>为了不混淆可执行代码名称，下面我们用mcnp.mpi指代不带GVR的可执行文件，用mcnp_gvr.mpi指代GVR版代码。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用该方法，主要有以下几步：</p>
 <ul>
 <li>产生初始权窗</li>
 <li>使用GVR优化权窗</li>
@@ -1337,18 +1337,18 @@
 </ul>
 <p>下面以例题的形式来展示具体过程。我们用一个非常简单的几何，来针对某一个网格区域产生一个初始的(两群）权窗，然后用GVR优化这个权窗，最后使用优化后的全长进行计算。例题的输入文件如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C example for on-the-flux GVR</span><br><span class="line">C cell cards</span><br><span class="line">1 1 -1.0 -1 imp:n&#x3D;1</span><br><span class="line">2 0      1 -2 imp:n&#x3D;1</span><br><span class="line">3 0      2 imp:n&#x3D;0</span><br><span class="line"></span><br><span class="line">C surface cards</span><br><span class="line">1 so 10</span><br><span class="line">2 so 20</span><br><span class="line"></span><br><span class="line">C data crads</span><br><span class="line">m1</span><br><span class="line">      1001 -0.11</span><br><span class="line">      8016 -0.89</span><br><span class="line">sdef</span><br><span class="line">nps 1000</span><br><span class="line">C tally</span><br><span class="line">f4:n 1</span><br><span class="line">wwg   4  0  0  j j j j 0</span><br><span class="line">wwge:n 0.1 20</span><br><span class="line">mesh origin&#x3D;-1 -1 -1 geom&#x3D;xyz ref&#x3D;0.0 0.0 0.0</span><br><span class="line">     imesh&#x3D;1 iints&#x3D;10</span><br><span class="line">     jmesh&#x3D;1 jints&#x3D;10</span><br><span class="line">     kmesh&#x3D;1 kints&#x3D;10</span><br><span class="line">C wwp:n 5.0 J 5 0 -0.5</span><br><span class="line">print</span><br></pre></td></tr></table></figure>
-<h4 id="产生初始权窗"><a href="#产生初始权窗" class="headerlink" title="产生初始权窗"></a>产生初始权窗</h4><p>首先用<strong>不带GVR</strong>的代码进行一次初始计算，产生一个初始化权窗。这个权窗是否精细准确不重要，只需要格式正确即可。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5.mpi i=input</span><br></pre></td></tr></table></figure>
+<h3 id="产生初始权窗"><a href="#产生初始权窗" class="headerlink" title="产生初始权窗"></a>产生初始权窗</h3><p>首先用<strong>不带GVR</strong>的代码进行一次初始计算，产生一个初始化权窗。这个权窗是否精细准确不重要，只需要格式正确即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp.mpi i=input</span><br></pre></td></tr></table></figure>
 <p>这个过程生成的wwout就是我们需要的初始权窗文件，将它重命名为<code>wwinp1</code>备用：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv wwout wwinp1</span><br></pre></td></tr></table></figure>
 
-<h4 id="使用GVR代码优化权窗"><a href="#使用GVR代码优化权窗" class="headerlink" title="使用GVR代码优化权窗"></a>使用GVR代码优化权窗</h4><p>现在，我们使用带GVR的代码对初始权窗进行优化。</p>
+<h3 id="使用GVR代码优化权窗"><a href="#使用GVR代码优化权窗" class="headerlink" title="使用GVR代码优化权窗"></a>使用GVR代码优化权窗</h3><p>现在，我们使用带GVR的代码对初始权窗进行优化。</p>
 <ul>
 <li>将输入文件中的产生权窗的部分注释掉，使用<code>wwp</code></li>
 <li><strong>创建一个和权窗使用的网格对应的fmesh，注意网格和能群需要与权窗一致</strong></li>
 <li>暂时只支持NPS设定history数目，不支持CTME为终止计算条件</li>
 <li>wwp参数支持两种模式：<ul>
-<li>权窗优化模式：wwp第5个参数设置为-0.5，计算时会对权窗进行迭代优化，同时开启长历史控制；</li>
+<li>权窗迭代计算模式：wwp第5个参数设置为-0.5，计算时会对权窗进行迭代优化，同时开启长历史控制；</li>
 <li>长历史控制模式：wwp第5个参数设置为非-0.5的值，如-1，计算将使用wwinp读取的权窗，不会进行权窗迭代。同时开启长历史控制。</li>
 </ul>
 </li>
@@ -1357,14 +1357,34 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C example for on-the-flux GVR</span><br><span class="line">C cell cards</span><br><span class="line">1 1 -1.0 -1 imp:n&#x3D;1</span><br><span class="line">2 0      1 -2 imp:n&#x3D;1</span><br><span class="line">3 0      2 imp:n&#x3D;0</span><br><span class="line"></span><br><span class="line">C surface cards</span><br><span class="line">1 so 10</span><br><span class="line">2 so 20</span><br><span class="line"></span><br><span class="line">C data cards</span><br><span class="line">m1</span><br><span class="line">      1001 -0.11</span><br><span class="line">      8016 -0.89</span><br><span class="line">sdef</span><br><span class="line">nps 1000</span><br><span class="line">C meshtally for GVR WW</span><br><span class="line">fmesh4:n origin&#x3D;-1 -1 -1 geom&#x3D;xyz</span><br><span class="line">         imesh&#x3D;1 iints&#x3D;10</span><br><span class="line">         jmesh&#x3D;1 jints&#x3D;10</span><br><span class="line">         kmesh&#x3D;1 kints&#x3D;10</span><br><span class="line">         emesh 0.1 20</span><br><span class="line">C meshtally for flux</span><br><span class="line">fmesh14:n origin&#x3D;-1 -1 -1 geom&#x3D;xyz</span><br><span class="line">         imesh&#x3D;1 iints&#x3D;20</span><br><span class="line">         jmesh&#x3D;1 jints&#x3D;20</span><br><span class="line">         kmesh&#x3D;1 kints&#x3D;20</span><br><span class="line">         emesh 0.1 20</span><br><span class="line">C wwg   4  0  0  j j j j 0</span><br><span class="line">C wwge:n 0.1 20</span><br><span class="line">C mesh origin&#x3D;-1 -1 -1 geom&#x3D;xyz ref&#x3D;0.0 0.0 0.0</span><br><span class="line">C      imesh&#x3D;1 iints&#x3D;10</span><br><span class="line">C      jmesh&#x3D;1 jints&#x3D;10</span><br><span class="line">C      kmesh&#x3D;1 kints&#x3D;10</span><br><span class="line">C </span><br><span class="line">C 5th parameter use -0.5 if you want to update the WW, otherwise, use a negtive value other than -0.5</span><br><span class="line">C 3rd reverse parameter: number of scored mesh element &#x2F; total mesh element number</span><br><span class="line">C 2nd reverse parameter: number of mesh element with rel_err &lt; 0.1 &#x2F; number of scored mesh element</span><br><span class="line">C 1st reverse parameter: mesh coverage &#x2F; valid geometry</span><br><span class="line">C wwp:n 5.0 J 5 0 -0.5 j j j 0.95 0.95 0.3</span><br><span class="line">C use explicite capture when GVR is on</span><br><span class="line">cut:n j 1e-11 0</span><br><span class="line">print</span><br></pre></td></tr></table></figure>
 
 <p>运行代GVR可执行文件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp5_gvr.mpi i=input wwinp=wwinp1</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp_gvr.mpi i=input wwinp=wwinp1</span><br></pre></td></tr></table></figure>
 
 <p>运行结束，将会生成<code>weightwindow</code>文件。</p>
 <p>这里的<code>weightwindow</code>里面包含的数据，就是我们需要的权窗数据（但不包含权窗头文件）。我们将<code>wwinp1</code>的权窗头文件和<code>weightwindow</code>里的权窗数据组合起来，就是优化后的权窗文件了，命名它为<code>wwinp2</code>。</p>
-<h4 id="可能的错误"><a href="#可能的错误" class="headerlink" title="可能的错误"></a>可能的错误</h4><h5 id="Recieved-16-but-expected-32"><a href="#Recieved-16-but-expected-32" class="headerlink" title="Recieved 16 but expected 32"></a>Recieved 16 but expected 32</h5><p>在合并<code>wwinp1</code>和<code>weightwindow</code>中信息时，如果表头与内容不匹配，那么可能出现以下错误：</p>
+<h3 id="输出信息"><a href="#输出信息" class="headerlink" title="输出信息"></a>输出信息</h3><h4 id="权窗参数复现"><a href="#权窗参数复现" class="headerlink" title="权窗参数复现"></a>权窗参数复现</h4><p>在程序进行粒子输运前，会输出权窗信息，如下所示为一个使用np耦合输运的权窗信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">newtronWWP 5.00000E+00 3.00000E+00 5.00000E+00 1.00000E+00-5.00000E-01 0.00000E+00</span><br><span class="line">newtronWWP 0.00000E+00-1.00000E+00 0.00000E+00 1.00000E+00 1.00000E+33</span><br><span class="line">PHOTONWWP 5.00000E+00 3.00000E+00 5.00000E+00 1.00000E+00-5.00000E-01 0.00000E+00</span><br><span class="line">PHOTONWWP 0.00000E+00-1.00000E+00 0.00000E+00 1.00000E+00 1.00000E+33</span><br><span class="line">stop WW updating parameters 3.00000E-01 1.00000E-01 3.00000E-01</span><br></pre></td></tr></table></figure>
+<p>这6行信息分别是中子、光子的权窗信息，及终止权窗迭代的信息。</p>
+<h4 id="权窗迭代现状"><a href="#权窗迭代现状" class="headerlink" title="权窗迭代现状"></a>权窗迭代现状</h4><p>使用GVR时，在nps输出信息后面，还会跟上一些参数，表明当前权窗的迭代现状信息，以下列2(n_group=2, p_group=2)群的权窗信息为例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> nps &#x3D;       4000          1.84 minutes       445410        7185        5461        4803        3003           0           0</span><br><span class="line"> nps &#x3D;       4000          1.84 minutes       445410        9581       12967        3006        6156           0           0</span><br><span class="line">stop WW updating parameters 1.33623E+05 3.00000E-01 1.00000E-01 5.37707E-02 0.00000E+00</span><br></pre></td></tr></table></figure>
+<p>其中第1行信息的含义为：</p>
+<pre><code>- 第一个参数：总网格数目，数据量1。 此处为445410，即网格共445410个网格单元。
+- 第二组参数：有计数的网格数目, 数据量n_group。此处为7185 5461.即当nps=4000时，中子计数的第1群有7185个网格单元有计数，第2群有5461个网格有计数。
+- 第三组参数：统计误差小于等于0.7的网格数目。此处为4803 3003，即中子计数的第1群有4803个网格统计误差小于0.7，中子计数的第2群有3003个网格统计误差小于0.7。
+- 第四组参数：统计误差小于0.7的网格数目。此处为0 0，即中子计数的第1、2群都没有网格计数误差小于0.1。</code></pre>
+<p>第二行信息的含义与第一行一样，只是粒子为光子。</p>
+<p>第三行信息的含义为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nertron split      168025      922530     1090555                 79979   1.00000E+00 7.57956E+00 1.24783E+08 1.06568E+10 0.00000E+00</span><br><span class="line"> photon split      639081       26141      665222                 79979   1.00000E+00 7.57956E+00</span><br></pre></td></tr></table></figure>
+<h4 id="信息提示"><a href="#信息提示" class="headerlink" title="信息提示"></a>信息提示</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x2F;&#x2F;&#x2F;First clean for removing the badflux\\\\\&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
+
+<p>出现以下信息，表明权窗已经达到设定的条件，终止迭代。后续计算将使用当前权窗信息。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x2F;&#x2F;&#x2F;From Now On weightwindow Is not update anymore\\\\\&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><h3 id="Recieved-16-but-expected-32"><a href="#Recieved-16-but-expected-32" class="headerlink" title="Recieved 16 but expected 32"></a>Recieved 16 but expected 32</h3><p>在合并<code>wwinp1</code>和<code>weightwindow</code>中信息时，如果表头与内容不匹配，那么可能出现以下错误：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Fatal error in PMPI_Bcast: Other MPI error, error stack:</span><br><span class="line">PMPI_Bcast(448)...............: MPI_Bcast(buf&#x3D;0x55908bd959d0, count&#x3D;4, dtype&#x3D;0x4c000829, root&#x3D;0, comm&#x3D;MPI_COMM_WORLD) failed</span><br><span class="line">PMPI_Bcast(434)...............:</span><br><span class="line">MPIR_Bcast_impl(310)..........:</span><br><span class="line">MPIR_Bcast_intra_auto(189)....:</span><br><span class="line">MPIR_Bcast_intra_smp(105).....:</span><br><span class="line">MPIR_Bcast_impl(310)..........:</span><br><span class="line">MPIR_Bcast_intra_auto(223)....:</span><br><span class="line">MPIR_Bcast_intra_binomial(123): message sizes do not match across processes in the collective routine: Received 16 but expected 32</span><br></pre></td></tr></table></figure>
 <p>出现这个错误的原因，可能是使用mcnp初始生成权窗生成时，运行模式为n, p。此时虽然没有要求生成光子权窗，但GVR会自动生成默认光子权窗(1群，能量上限100MeV,网格与中子网格相同)，此时<code>wwout</code>表头第一行第三个变量为2,第二行第二个变量为1。<br>但是在迭代优化时，如果没有明确要求迭代光子权窗，GVR不会自动生成迭代的光子权窗，此时生成的<code>weightwindow</code>只包含中子权窗信息，不会有光子权窗信息。<br>因此，在将<code>weightwindow</code>中的内容拷贝进入<code>wwinp2</code>时，表头信息和内容信息不匹配，表头中说有光子信息，实际内容没有，导致程序错误的想传递没有的信息，出现错误。<br>解决方法：修改表头使其和内容一致。</p>
-<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>本博客仅用于以例题说明该方法的使用，对该方法的原理，实现过程及其中涉及的其他文件的作用不做任何说明。使用方法最终解释权归代码原作者所有。本博客如有错误，敬请指正。</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>本博客仅用于以例题说明该方法的使用，对该方法的原理，实现过程及其中涉及的其他文件的作用不做任何说明。使用方法最终解释权归代码原作者所有。本博客如有错误，敬请指正。</p>
 <p>[1] Zheng, Yu, Yuefeng Qiu, Peng Lu, Yixue Chen, Ulrich Fischer, and Songlin Liu. “An Improved On-the-Fly Global Variance Reduction Technique by Automatically Updating Weight Window Values for Monte Carlo Shielding Calculation.” Fusion Engineering and Design 147 (October 1, 2019): 111238. <a href="https://doi.org/10.1016/j.fusengdes.2019.06.011">https://doi.org/10.1016/j.fusengdes.2019.06.011</a>.</p>
 ]]></content>
       <categories>
