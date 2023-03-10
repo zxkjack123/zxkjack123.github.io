@@ -23,7 +23,7 @@
 
   <meta name="description" content="Paraview">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Paraview对比两组数据">
+<meta property="og:title" content="Paraview操作两组数据">
 <meta property="og:url" content="http://zxkjack123.github.io/neutronics/paraview-compare-data/index.html">
 <meta property="og:site_name" content="zxkjack123&#39;s blog">
 <meta property="og:description" content="Paraview">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>Paraview对比两组数据 | zxkjack123's blog</title>
+  <title>Paraview操作两组数据 | zxkjack123's blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113129784-1"></script>
     <script>
@@ -214,7 +214,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Paraview对比两组数据
+          Paraview操作两组数据
         </h1>
 
         <div class="post-meta">
@@ -238,7 +238,7 @@
             </span>
 
           
-            <span id="/neutronics/paraview-compare-data/" class="post-meta-item leancloud_visitors" data-flag-title="Paraview对比两组数据" title="Views">
+            <span id="/neutronics/paraview-compare-data/" class="post-meta-item leancloud_visitors" data-flag-title="Paraview操作两组数据" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -273,9 +273,14 @@
         <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>聚变核分析中常用结构体网格统计通量或其他核响应信息。<br>经常需要对比控制变量的两组网格数据，并将其展示出来。<br>Paraview中，可以通过programmable filter来实现。</p>
 <h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><pre><code>- 导入两个vtk数据
 - 同时选中两个数据文件
-- </code></pre>
-<p>该方法修改了部分MCNP源代码，并添加了7个源文件，需要重新编译。课题组已经成功在MCNP5及DAG-MCNP5上成功编译该代码。本博客不涉及该代码的获取及编译过程。<br>为了不混淆可执行代码名称，下面我们用mcnp5.mpi指代不带GVR的可执行文件，用mcnp5_gvr.mpi指代GVR版代码。</p>
-<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><h3 id="Possible-errors"><a href="#Possible-errors" class="headerlink" title="Possible errors"></a>Possible errors</h3><h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3>
+- Filters -&gt; Programmable Filter
+- 在出现的编辑框中，输入脚本进行操作</code></pre>
+<p>下面是将两个网格数据进行相减操作的例子，结果被存在名为’difference’的数组中。本例子参考了此篇<a target="_blank" rel="noopener" href="https://scicomp.stackexchange.com/questions/8989/how-do-i-calculate-the-numerical-difference-between-two-fields-stored-in-two-dif#:~:text=The%20easiest%20way%20I%20could%20find%20to%20subtract,arrays%20and%20write%20to%20output%20with%20the%20code%3A">博客</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">phi_0 &#x3D; inputs[0].CellData[&#39;Phi&#39;]</span><br><span class="line">phi_1 &#x3D; inputs[1].CellData[&#39;Phi&#39;]</span><br><span class="line">output.CellData.append(phi_1 - phi_0, &#39;difference&#39;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><pre><code>- 可以通过选中文件 -&gt; Information -&gt; Data Arrays -&gt; Name 查看文件中包含的数据名称
+- 如果是PointData类型，把脚本中&quot;CellData&quot;改为&quot;PointData&quot;即可</code></pre>
+
     </div>
 
     
@@ -359,7 +364,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage"><span class="nav-number">3.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">4.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Possible-errors"><span class="nav-number">5.</span> <span class="nav-text">Possible errors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Others"><span class="nav-number">6.</span> <span class="nav-text">Others</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">3.</span> <span class="nav-text">注意</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
