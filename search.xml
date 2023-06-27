@@ -1789,8 +1789,9 @@
 </ul>
 <h2 id="工具列表"><a href="#工具列表" class="headerlink" title="工具列表"></a>工具列表</h2><p>下面是几个常用的工具：</p>
 <ul>
-<li><a href="https://convertio.co/zh/">Convertio</a> 各种文件格式转换，写论文的时候用这个把图片转pdf,pdf转图片什么的。</li>
+<li><a href="https://convertio.co/zh/">Convertio</a> 各种文件格式转换，写论文的时候用这个把图片转pdf,pdf转图片。</li>
 <li><a href="http://detexify.kirelabs.org/classify.html">Detexify</a> LaTeX符合检测与转换。手画一个LaTeX符号，Detexify输出LaTeX代码，对那些都叫不出名字的符号，用这个比自己在列表里找方便多了</li>
+<li><a href="https://homepages.inf.ed.ac.uk/cheunen/freetikz/">Freetikz</a> 将手绘图形转换为Tikz代码的工具，可以辅助化一些简单流程图。</li>
 <li><a href="http://linggle.com/">Linggle</a> 写论文的时候时常纠结某个词用的对不对，这里是接to还是for，用a还是the还是不要。这些常用的搭配，用linggle的推荐基本就没错了，减少很多烦恼</li>
 <li><a href="http://www.gingersoftware.com/">Ginger</a> 身为中国人，对自己说的英语没自信，对自己写的英语也没自信。现在在国外访学，用这个工具来帮助检查自己的英语书写的语法错误，很方便。</li>
 <li><a href="http://digitizer.sourceforge.net/">Engauge Digitizer</a> 从图片中提取数据的免费、开源工具</li>
