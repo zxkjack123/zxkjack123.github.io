@@ -1774,9 +1774,21 @@
 <li>Unblock boundary: 翻回国内看番剧的神器（需要购买会员），妈妈再也不用担心我在国外看不了bilibili了！</li>
 <li>Thunderbird: 收发邮件。即便是重装系统时本地文件全部清除后也不会丢失自己对邮件的处理记录，比如存档的邮件。点击<a href="https://zxkjack123.github.io/2018/01/25/ubuntu-thunderbird.html">这里</a>查看Thunderbird接收我常用邮箱的设置。</li>
 <li>Zotero: 科研文献管理软件，跨平台，开源，方便同步。<ul>
-<li>配合Nutstore WebDAV进行文件同步</li>
+<li>使用Nutstore WebDAV进行文件同步</li>
 <li>使用ZotFile插件进行文件重命名</li>
-<li>使用Zotero Word插件，添加GB/T7714-2015引用参考文献，并<a href="https://blog.csdn.net/qq_40678163/article/details/110091063">配合deng2etal宏</a></li>
+<li>使用Zotero Word插件，添加GB/T7714-2015引用参考文献样式，如China National Standard GB/T 7714-2015-numeric-AuLower-Bilan</li>
+<li>使用Jasminum处理中文文献抓取和管理</li>
+<li>使用zoter-scihub自动从Sci-Hub下载PDF(若有的话)</li>
+<li>使用zotero-doi-manager来自动更新管理DOI</li>
+<li>使用zotero-better-notes管理笔记</li>
+<li>使用zotero-pdf-preview在点击文献时预览pdf内容</li>
+<li>使用zotero-gpt辅助加速阅读与总结</li>
+<li>使用zotero-tag帮助管理文献标签</li>
+</ul>
+</li>
+<li>Libre Office<ul>
+<li>配合Zotero插件处理参考文献引用问题</li>
+<li>配合TexMaths处理公式编辑</li>
 </ul>
 </li>
 <li>Tex live &amp; Texstudio: 很好用的LaTeX书写软件,配合GitHub保存一切书写记录和版本控制。LaTeX + GitHub写论文，版本控制很轻松，修改记录一直记录着。</li>
