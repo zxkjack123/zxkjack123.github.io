@@ -1789,6 +1789,7 @@
 <li>Libre Office<ul>
 <li>配合Zotero插件处理参考文献引用问题</li>
 <li>配合TexMaths处理公式编辑</li>
+<li>Alternative Find &amp; Replace for Writer</li>
 </ul>
 </li>
 <li>Tex live &amp; Texstudio: 很好用的LaTeX书写软件,配合GitHub保存一切书写记录和版本控制。LaTeX + GitHub写论文，版本控制很轻松，修改记录一直记录着。</li>
@@ -1798,6 +1799,7 @@
 <li>Nutstore: 这是一个国内开发的跨平台同步盘，很方便。</li>
 <li>VScode: 写代码很好用，需要安装python和C++插件。</li>
 <li>Worktile: 任务管理软件</li>
+<li>CalmAV: 杀毒</li>
 </ul>
 <h2 id="工具列表"><a href="#工具列表" class="headerlink" title="工具列表"></a>工具列表</h2><p>下面是几个常用的工具：</p>
 <ul>
@@ -2423,8 +2425,35 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
       </tags>
   </entry>
   <entry>
+    <title>Vim-复制内容到vim外</title>
+    <url>/ubuntu/change_screen_input_source/</url>
+    <content><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在笔记本电脑上使用linux系统，经常打开并编辑一些文本文件，我比较喜欢用vim。但有时候遇到要从文件中拷贝几个数据到文件外(比如excel, 或者google spreadsheets)的时候，我就遇到麻烦了。在vim里面用<strong>y</strong>拷贝的东西，没法粘贴到文件外。因此我每次需要拷贝数据的时候，都是换gedit来操作。直到今天，我由于需要从三个文件中拷贝一共十八个数据，忍不了了。</p>
+<p>网上查了资料，的确有解决办法。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>还好，已经有大佬帮我解决了这个[问题](如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？ - cnlzxin的回答 - 知乎<br><a href="https://www.zhihu.com/question/19863631/answer/182346296)%E3%80%82">https://www.zhihu.com/question/19863631/answer/182346296)。</a></p>
+<ul>
+<li>检查vim是否支持clipboard功能:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim --version | grep clipboard</span><br></pre></td></tr></table></figure></li>
+<li>如果有 <strong>+clipboard</strong> 则跳过这一步; 如果显示的是 <strong>-clipboard</strong> 说明不支持(很遗憾，我的就是 <strong>-clipboard</strong>), 需要<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install vim-gtk</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>安装好vim -gtk之后就可以了。复制内容到vim外了。不过在vim内复制内容时，需要制定将内容复制到 <strong>clipboard</strong>，通过 <strong>“+</strong> 来指定特定寄存器。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>当我想复制一个数据到spreadsheets时，使用<strong>v</strong>选中该数据内容，然后 <strong>“+y</strong>，切换到spreadsheets，<strong>ctrl + v</strong> 即可。想把剪切板的内容复制到另一个vim文件时，使用<code>&quot;+p</code>即可。</p>
+<p>其他例子：</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="comment">&quot;+yy  // 复制当前行到剪切板</span></span><br><span class="line"><span class="comment">&quot;+p   // 将剪切板内容粘贴到光标后面</span></span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>ubuntu</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用NATF进行基于网格的计算停机剂量率流程</title>
-    <url>/neutronics/natf_mesh_r2s/</url>
+    <url>/neutronics/natf-mesh-r2s/</url>
     <content><![CDATA[<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本篇文章简要介绍使用NATF来进行基于网格的计算停机剂量率的流程。本流程需要提前安装DAGMC, ALARA, PyNE, NATF。</p>
 <ul>
 <li>DAGMC的安装可以参考<a href="https://zxkjack123.github.io/neutronics/dagmc-install/">这里</a>。</li>
@@ -2474,8 +2503,9 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
 <li>reverse: 反转中子通量顺序。MCNP输出的中子通量是按照从低能到高能排序，而用ALARA进行活化计算时需要按照从高能到低能读取，因此需要把中子通量逆序排列。这里填True。</li>
 <li>outp: MCNP outp文件</li>
 <li>ptrac: MCNP ptrac文件</li>
+<li>geom: DAGMC加载材料后的几何文件。<strong>如果使用MCNP几何文件，则此处空着。</strong></li>
 </ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[general]</span><br><span class="line"><span class="comment"># Specify whether this problem uses structured or unstructured mesh</span></span><br><span class="line">structured: <span class="literal">True</span></span><br><span class="line"><span class="comment"># Specify whether this problem uses sub-voxel r2s</span></span><br><span class="line">sub_voxel: <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">[step1]</span><br><span class="line"><span class="comment"># Path to MCNP MESHTAL file containing neutron fluxes or a DAG-MCNP5</span></span><br><span class="line"><span class="comment"># unstructured mesh tally .h5m file.</span></span><br><span class="line">meshtal: meshtal</span><br><span class="line"><span class="comment"># Tally number within the meshtal file containing the fluxes for activation.</span></span><br><span class="line">tally_num: <span class="number">4</span></span><br><span class="line"><span class="comment"># The name of the tag used to store flux data on the mesh. For unstructured</span></span><br><span class="line"><span class="comment"># mesh this tag must already exist within the file specified in &lt;meshtal&gt;.</span></span><br><span class="line">flux_tag: n_flux</span><br><span class="line"><span class="comment"># Path to the DAGMC material-laden geometry file (.h5m).</span></span><br><span class="line">geom: geom.h5m</span><br><span class="line"><span class="comment"># If True the fluxes in the fluxin file will be printed in the reverse</span></span><br><span class="line"><span class="comment"># order of how they appear within the flux vector tag. Since MCNP and</span></span><br><span class="line"><span class="comment"># the Meshtal class order fluxes from low energy to high energy, this</span></span><br><span class="line"><span class="comment"># option should be true if the transmutation data being used is</span></span><br><span class="line"><span class="comment"># ordered from high-energy to low-energy.</span></span><br><span class="line">reverse: <span class="literal">True</span></span><br><span class="line"><span class="comment"># Number of rays to fire down each mesh row in each direction to calculate</span></span><br><span class="line"><span class="comment"># cell volume fractions.</span></span><br><span class="line">num_rays: <span class="number">10</span></span><br><span class="line"><span class="comment"># If true, rays will be fired down mesh rows in evenly spaced intervals.</span></span><br><span class="line"><span class="comment"># In this case &lt;num_rays&gt; must be a perfect square. If false, rays are fired</span></span><br><span class="line"><span class="comment"># down mesh rows in random intervals.</span></span><br><span class="line">grid: <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">[step2]</span><br><span class="line"><span class="comment"># List of decays times, seperated by commas. These strings much match exactly</span></span><br><span class="line"><span class="comment"># with their counterparts in the phtn_src file produced in step1. No spaces</span></span><br><span class="line"><span class="comment"># should appear in this line except the space between the time and the time unit</span></span><br><span class="line"><span class="comment"># for each entry.</span></span><br><span class="line">decay_times:<span class="number">1</span> h</span><br><span class="line"><span class="comment"># The prefix of the .h5m files containing the source density distributations for</span></span><br><span class="line"><span class="comment"># each decay time.</span></span><br><span class="line">output: source</span><br><span class="line"><span class="comment"># The name of the output files containing the total photon source intensities for</span></span><br><span class="line"><span class="comment"># each decay time</span></span><br><span class="line">tot_phtn_src_intensities : total_photon_source_intensites.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[general]</span><br><span class="line"><span class="comment"># Specify whether this problem uses structured or unstructured mesh</span></span><br><span class="line">structured: <span class="literal">True</span></span><br><span class="line"><span class="comment"># Specify whether this problem uses sub-voxel r2s</span></span><br><span class="line">sub_voxel: <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">[step1]</span><br><span class="line"><span class="comment"># Path to MCNP MESHTAL file containing neutron fluxes or a DAG-MCNP5</span></span><br><span class="line"><span class="comment"># unstructured mesh tally .h5m file.</span></span><br><span class="line">meshtal: meshtal</span><br><span class="line"><span class="comment"># Tally number within the meshtal file containing the fluxes for activation.</span></span><br><span class="line">tally_num: <span class="number">4</span></span><br><span class="line"><span class="comment"># The name of the tag used to store flux data on the mesh. For unstructured</span></span><br><span class="line"><span class="comment"># mesh this tag must already exist within the file specified in &lt;meshtal&gt;.</span></span><br><span class="line">flux_tag: n_flux</span><br><span class="line"><span class="comment"># Path to the DAGMC material-laden geometry file (.h5m).</span></span><br><span class="line">geom:</span><br><span class="line"><span class="comment"># If True the fluxes in the fluxin file will be printed in the reverse</span></span><br><span class="line"><span class="comment"># order of how they appear within the flux vector tag. Since MCNP and</span></span><br><span class="line"><span class="comment"># the Meshtal class order fluxes from low energy to high energy, this</span></span><br><span class="line"><span class="comment"># option should be true if the transmutation data being used is</span></span><br><span class="line"><span class="comment"># ordered from high-energy to low-energy.</span></span><br><span class="line">reverse: <span class="literal">True</span></span><br><span class="line"><span class="comment"># Number of rays to fire down each mesh row in each direction to calculate</span></span><br><span class="line"><span class="comment"># cell volume fractions.</span></span><br><span class="line">num_rays: <span class="number">10</span></span><br><span class="line"><span class="comment"># If true, rays will be fired down mesh rows in evenly spaced intervals.</span></span><br><span class="line"><span class="comment"># In this case &lt;num_rays&gt; must be a perfect square. If false, rays are fired</span></span><br><span class="line"><span class="comment"># down mesh rows in random intervals.</span></span><br><span class="line">grid: <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">[step2]</span><br><span class="line"><span class="comment"># List of decays times, seperated by commas. These strings much match exactly</span></span><br><span class="line"><span class="comment"># with their counterparts in the phtn_src file produced in step1. No spaces</span></span><br><span class="line"><span class="comment"># should appear in this line except the space between the time and the time unit</span></span><br><span class="line"><span class="comment"># for each entry.</span></span><br><span class="line">decay_times:<span class="number">1</span> h</span><br><span class="line"><span class="comment"># The prefix of the .h5m files containing the source density distributations for</span></span><br><span class="line"><span class="comment"># each decay time.</span></span><br><span class="line">output: source</span><br><span class="line"><span class="comment"># The name of the output files containing the total photon source intensities for</span></span><br><span class="line"><span class="comment"># each decay time</span></span><br><span class="line">tot_phtn_src_intensities : total_photon_source_intensites.txt</span><br></pre></td></tr></table></figure>
 
 <h4 id="修改alara-params-txt"><a href="#修改alara-params-txt" class="headerlink" title="修改alara_params.txt"></a>修改alara_params.txt</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">material_lib alara_matlib</span><br><span class="line">element_lib data&#x2F;nuclib</span><br><span class="line">data_library alaralib data&#x2F;truncated_fendl2bin</span><br><span class="line"></span><br><span class="line">cooling</span><br><span class="line">    1 h</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">output zone</span><br><span class="line">       integrate_energy</span><br><span class="line">       # Energy group upper bounds. The lower bound is always zero.</span><br><span class="line">       photon_source  data&#x2F;truncated_fendl2bin  phtn_src 24 1.00E4 2.00E4 5.00E4 1.00E5</span><br><span class="line">       2.00E5 3.00E5 4.00E5 6.00E5 8.00E5 1.00E6 1.22E6 1.44E6 1.66E6</span><br><span class="line">       2.00E6 2.50E6 3.00E6 4.00E6 5.00E6 6.50E6 8.00E6 1.00E7 1.20E7</span><br><span class="line">       1.40E7 2.00E7</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">#     flux name    fluxin file   norm   shift   unused</span><br><span class="line">flux  my_flux     alara_fluxin  1e10     0      default</span><br><span class="line"></span><br><span class="line"># Specify the irradiation schedule below.</span><br><span class="line"># Syntax is found in the ALARA user manual</span><br><span class="line"># This example is for a single 1 y pulse</span><br><span class="line">schedule    my_schedule</span><br><span class="line">    1 y my_flux my_pulse_history 0  s</span><br><span class="line">end</span><br><span class="line">pulsehistory  my_pulse_history</span><br><span class="line">    1    0.0    s</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">#other parameters</span><br><span class="line">truncation 1e-12</span><br><span class="line">impurity 5e-6 1e-3</span><br><span class="line">dump_file dump.file</span><br></pre></td></tr></table></figure>
 
@@ -2524,33 +2554,6 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
         <tag>R2S</tag>
         <tag>shutdown dose rate</tag>
         <tag>停机剂量率</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Vim-复制内容到vim外</title>
-    <url>/ubuntu/change_screen_input_source/</url>
-    <content><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在笔记本电脑上使用linux系统，经常打开并编辑一些文本文件，我比较喜欢用vim。但有时候遇到要从文件中拷贝几个数据到文件外(比如excel, 或者google spreadsheets)的时候，我就遇到麻烦了。在vim里面用<strong>y</strong>拷贝的东西，没法粘贴到文件外。因此我每次需要拷贝数据的时候，都是换gedit来操作。直到今天，我由于需要从三个文件中拷贝一共十八个数据，忍不了了。</p>
-<p>网上查了资料，的确有解决办法。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>还好，已经有大佬帮我解决了这个[问题](如何将 Vim 剪贴板里面的东西粘贴到 Vim 之外的地方？ - cnlzxin的回答 - 知乎<br><a href="https://www.zhihu.com/question/19863631/answer/182346296)%E3%80%82">https://www.zhihu.com/question/19863631/answer/182346296)。</a></p>
-<ul>
-<li>检查vim是否支持clipboard功能:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim --version | grep clipboard</span><br></pre></td></tr></table></figure></li>
-<li>如果有 <strong>+clipboard</strong> 则跳过这一步; 如果显示的是 <strong>-clipboard</strong> 说明不支持(很遗憾，我的就是 <strong>-clipboard</strong>), 需要<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt install vim-gtk</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>安装好vim -gtk之后就可以了。复制内容到vim外了。不过在vim内复制内容时，需要制定将内容复制到 <strong>clipboard</strong>，通过 <strong>“+</strong> 来指定特定寄存器。</p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>当我想复制一个数据到spreadsheets时，使用<strong>v</strong>选中该数据内容，然后 <strong>“+y</strong>，切换到spreadsheets，<strong>ctrl + v</strong> 即可。想把剪切板的内容复制到另一个vim文件时，使用<code>&quot;+p</code>即可。</p>
-<p>其他例子：</p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="comment">&quot;+yy  // 复制当前行到剪切板</span></span><br><span class="line"><span class="comment">&quot;+p   // 将剪切板内容粘贴到光标后面</span></span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>ubuntu</category>
-      </categories>
-      <tags>
-        <tag>ubuntu</tag>
-        <tag>vim</tag>
       </tags>
   </entry>
 </search>
