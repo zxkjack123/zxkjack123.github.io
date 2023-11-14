@@ -1356,7 +1356,7 @@
 </li>
 </ul>
 <p>改造后的输入文件如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C example for on-the-flux GVR</span><br><span class="line">C cell cards</span><br><span class="line">1 1 -1.0 -1 imp:n&#x3D;1</span><br><span class="line">2 0      1 -2 imp:n&#x3D;1</span><br><span class="line">3 0      2 imp:n&#x3D;0</span><br><span class="line"></span><br><span class="line">C surface cards</span><br><span class="line">1 so 10</span><br><span class="line">2 so 20</span><br><span class="line"></span><br><span class="line">C data cards</span><br><span class="line">m1</span><br><span class="line">      1001 -0.11</span><br><span class="line">      8016 -0.89</span><br><span class="line">sdef</span><br><span class="line">nps 1000</span><br><span class="line">C meshtally for GVR WW</span><br><span class="line">fmesh4:n origin&#x3D;-1 -1 -1 geom&#x3D;xyz</span><br><span class="line">         imesh&#x3D;1 iints&#x3D;10</span><br><span class="line">         jmesh&#x3D;1 jints&#x3D;10</span><br><span class="line">         kmesh&#x3D;1 kints&#x3D;10</span><br><span class="line">         emesh 0.1 20</span><br><span class="line">C meshtally for flux</span><br><span class="line">fmesh14:n origin&#x3D;-1 -1 -1 geom&#x3D;xyz</span><br><span class="line">         imesh&#x3D;1 iints&#x3D;20</span><br><span class="line">         jmesh&#x3D;1 jints&#x3D;20</span><br><span class="line">         kmesh&#x3D;1 kints&#x3D;20</span><br><span class="line">         emesh 0.1 20</span><br><span class="line">C wwg   4  0  0  j j j j 0</span><br><span class="line">C wwge:n 0.1 20</span><br><span class="line">C mesh origin&#x3D;-1 -1 -1 geom&#x3D;xyz ref&#x3D;0.0 0.0 0.0</span><br><span class="line">C      imesh&#x3D;1 iints&#x3D;10</span><br><span class="line">C      jmesh&#x3D;1 jints&#x3D;10</span><br><span class="line">C      kmesh&#x3D;1 kints&#x3D;10</span><br><span class="line">C </span><br><span class="line">C 5th parameter use -0.5 if you want to update the WW, otherwise, use a negtive value other than -0.5</span><br><span class="line">C 3rd reverse parameter: number of scored mesh element &#x2F; total mesh element number</span><br><span class="line">C 2nd reverse parameter: number of mesh element with rel_err &lt; 0.1 &#x2F; number of scored mesh element</span><br><span class="line">C 1st reverse parameter: mesh coverage &#x2F; valid geometry</span><br><span class="line">C wwp:n 5.0 J 5 0 -0.5 j j j 0.95 0.95 0.3</span><br><span class="line">C use explicite capture when GVR is on</span><br><span class="line">cut:n j 1e-11 0</span><br><span class="line">print</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C example for on-the-flux GVR</span><br><span class="line">C cell cards</span><br><span class="line">1 1 -1.0 -1 imp:n&#x3D;1</span><br><span class="line">2 0      1 -2 imp:n&#x3D;1</span><br><span class="line">3 0      2 imp:n&#x3D;0</span><br><span class="line"></span><br><span class="line">C surface cards</span><br><span class="line">1 so 10</span><br><span class="line">2 so 20</span><br><span class="line"></span><br><span class="line">C data cards</span><br><span class="line">m1</span><br><span class="line">      1001 -0.11</span><br><span class="line">      8016 -0.89</span><br><span class="line">sdef</span><br><span class="line">nps 1000</span><br><span class="line">C meshtally for GVR WW</span><br><span class="line">fmesh4:n origin&#x3D;-1 -1 -1 geom&#x3D;xyz</span><br><span class="line">         imesh&#x3D;1 iints&#x3D;10</span><br><span class="line">         jmesh&#x3D;1 jints&#x3D;10</span><br><span class="line">         kmesh&#x3D;1 kints&#x3D;10</span><br><span class="line">         emesh 0.1 20</span><br><span class="line">C meshtally for flux</span><br><span class="line">fmesh14:n origin&#x3D;-1 -1 -1 geom&#x3D;xyz</span><br><span class="line">         imesh&#x3D;1 iints&#x3D;20</span><br><span class="line">         jmesh&#x3D;1 jints&#x3D;20</span><br><span class="line">         kmesh&#x3D;1 kints&#x3D;20</span><br><span class="line">         emesh 0.1 20</span><br><span class="line">C wwg   4  0  0  j j j j 0</span><br><span class="line">C wwge:n 0.1 20</span><br><span class="line">C mesh origin&#x3D;-1 -1 -1 geom&#x3D;xyz ref&#x3D;0.0 0.0 0.0</span><br><span class="line">C      imesh&#x3D;1 iints&#x3D;10</span><br><span class="line">C      jmesh&#x3D;1 jints&#x3D;10</span><br><span class="line">C      kmesh&#x3D;1 kints&#x3D;10</span><br><span class="line">C </span><br><span class="line">C 5th parameter use -0.5 if you want to update the WW, otherwise, use a negtive value other than -0.5</span><br><span class="line">C 3rd reverse parameter: number of scored mesh element &#x2F; total mesh element number</span><br><span class="line">C 2nd reverse parameter: number of mesh element with rel_err &lt; 0.1 &#x2F; number of scored mesh element</span><br><span class="line">C 1st reverse parameter: mesh coverage &#x2F; valid geometry</span><br><span class="line">wwp:n 5.0 J 5 0 -0.5 j j j 0.95 0.95 0.3</span><br><span class="line">C use explicite capture when GVR is on</span><br><span class="line">cut:n j 1e-11 0</span><br><span class="line">print</span><br></pre></td></tr></table></figure>
 
 <p>运行代GVR可执行文件：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mcnp_gvr.mpi i=input wwinp=wwinp1</span><br></pre></td></tr></table></figure>
@@ -2554,6 +2554,47 @@ And run the <code>make</code> again:<figure class="highlight bash"><table><tr><t
         <tag>R2S</tag>
         <tag>shutdown dose rate</tag>
         <tag>停机剂量率</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>远程登录曙光服务器用于mcplot画图</title>
+    <url>/programming/remote-login-sugon/</url>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>对于不用Linux的mcnp用户，画较大的模型时，vised可能出现困难。本文提供一种Windows电脑远程登录曙光服务器，并进行mcplot画图的方法。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ol>
+<li>MobaXterm Xserver with SSH, telnet, RDP, VNC and X11 - <a href="https://mobaxterm.mobatek.net/download.html">Download</a><br>下载免费版，解压安装</li>
+</ol>
+<p>2.使用SSH新建session，Sessions-new session</p>
+<center>
+<img src="/programming/remote-login-sugon/new_session.png" width="500">
+<br>
+</center>
+
+<p>3.设置session<br>在网页端右上角点击密钥，可以复制主机、用户名、端口号，分别填入session settings中，再下载密钥，并在advanced SSH settings中勾选Use private key，导入密钥文件</p>
+<center>
+<img src="/programming/remote-login-sugon/session_settings.png" width="500">
+<br>
+</center>
+<center>
+<img src="/programming/remote-login-sugon/sugon_key.png" width="500">
+<br>
+</center>
+
+
+<p>4.设置完毕后，打开该session即可登录服务器，界面如下</p>
+<center>
+<img src="/programming/remote-login-sugon/final.png" width="500">
+<br>
+</center>
+
+]]></content>
+      <categories>
+        <category>programming</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+        <tag>Sugon</tag>
+        <tag>mcplot</tag>
+        <tag>remote</tag>
       </tags>
   </entry>
 </search>
